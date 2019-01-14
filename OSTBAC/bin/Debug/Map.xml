@@ -1,0 +1,8 @@
+<MapTiles>
+	<Tile>
+		<XCoord>100</XCoord>
+		<YCoord>15</YCoord>
+		<Message>15</Message>
+		<EventID>85</EventID>
+	</Tile>
+</MapTiles>

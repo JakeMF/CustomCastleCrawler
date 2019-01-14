@@ -1,0 +1,85 @@
+<Items>
+	<Weapon>
+		<Name>Longsword</Name>
+		<GoldValue>5</GoldValue>
+		<BaseDMG>5</BaseDMG>
+		<APDMG>2</APDMG>
+		<Evasion>0</Evasion>
+		<Rarity>1</Rarity>
+		<Description>This is a default item description</Description>
+	</Weapon>
+	<Weapon>
+		<Name>Claymore</Name>
+		<GoldValue>18</GoldValue>
+		<BaseDMG>10</BaseDMG>
+		<APDMG>2</APDMG>
+		<Evasion>-5</Evasion>
+		<Rarity>1</Rarity>
+		<Description>This is a default item description</Description>
+	</Weapon>
+	<Weapon>
+		<Name>Longbow</Name>
+		<GoldValue>15</GoldValue>
+		<BaseDMG>0</BaseDMG>
+		<APDMG>6</APDMG>
+		<Evasion>25</Evasion>
+		<Rarity>1</Rarity>
+		<Description>This is a default item description</Description>
+	</Weapon>
+	<Weapon>
+		<Name>Great Club</Name>
+		<GoldValue>20</GoldValue>
+		<BaseDMG>6</BaseDMG>
+		<APDMG>8</APDMG>
+		<Evasion>0</Evasion>
+		<Rarity>1</Rarity>
+		<Description>This is a default item description</Description>
+	</Weapon>
+	<Armor>
+		<Name>Hard Leather Armor</Name>
+		<GoldValue>5</GoldValue>
+		<ArmorVal>5</ArmorVal>
+		<Evasion>5</Evasion>
+		<Rarity>1</Rarity>
+		<Description>This is a default item description</Description>
+	</Armor>
+	<Armor>
+		<Name>Silver Knight Armor</Name>
+		<GoldValue>10</GoldValue>
+		<ArmorVal>8</ArmorVal>
+		<Evasion>-5</Evasion>
+		<Rarity>1</Rarity>
+		<Description>This is a default item description</Description>
+	</Armor>
+	<Armor>
+		<Name>Leather Armor</Name>
+		<GoldValue>3</GoldValue>
+		<ArmorVal>3</ArmorVal>
+		<Evasion>10</Evasion>
+		<Rarity>1</Rarity>
+		<Description>This is a default item description</Description>
+	</Armor>
+	<Armor>
+		<Name>Giant Armor</Name>
+		<GoldValue>15</GoldValue>
+		<ArmorVal>10</ArmorVal>
+		<Evasion>-10</Evasion>
+		<Rarity>-1</Rarity>
+		<Description>This is a default item description</Description>
+	</Armor>
+	<Item>
+		<Name>Silver Spoon</Name>
+		<GoldValue>2</GoldValue>
+		<Description>This is a default item description</Description>
+	</Item>
+	<Item>
+		<Name>Silver Goblet</Name>
+		<GoldValue>3</GoldValue>
+		<Description>This is a default item description</Description>
+	</Item>
+	<Item>
+		<Name>Gold Goblet</Name>
+		<GoldValue>5</GoldValue>
+		<Description>This is a default item description</Description>
+	</Item>
+</Items>

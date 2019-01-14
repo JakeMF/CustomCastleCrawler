@@ -1,0 +1,42 @@
+<Enemies>
+	<Enemy>
+		<Name>Skeleton Warrior</Name>
+		<Health>100</Health>
+		<BaseDMG>15</BaseDMG>
+		<APDMG>15</APDMG>
+		<Defence>85</Defence>
+		<Evasion>85</Evasion>
+		<Points>20</Points>
+		<SpawnZone>0</SpawnZone>
+	</Enemy>
+	<Enemy id="Zombie">
+		<Name>Zombie</Name>
+		<Health>100</Health>
+		<BaseDMG>15</BaseDMG>
+		<APDMG>15</APDMG>
+		<Defence>85</Defence>
+		<Evasion>85</Evasion>
+		<Points>20</Points>
+		<SpawnZone>0</SpawnZone>
+	</Enemy>
+	<Enemy id="Orc">
+		<Name>Orc</Name>
+		<Health>175</Health>
+		<BaseDMG>15</BaseDMG>
+		<APDMG>15</APDMG>
+		<Defence>85</Defence>
+		<Evasion>85</Evasion>
+		<Points>20</Points>
+		<SpawnZone>0</SpawnZone>
+	</Enemy>
+	<Enemy id="Goblin">
+		<Name>Goblin</Name>
+		<Health>90</Health>
+		<BaseDMG>15</BaseDMG>
+		<APDMG>15</APDMG>
+		<Defence>85</Defence>
+		<Evasion>85</Evasion>
+		<Points>20</Points>
+		<SpawnZone>0</SpawnZone>
+	</Enemy>
+</Enemies>
