@@ -1,0 +1,21 @@
+<Event>
+	<EventID>1</EventID>
+	<Description>This is the Flavor text that will be displayed to the user when this event is triggered.</Description>
+	<!--EnemySpawn, ItemSpawn, and NothingSpawn MUST add up to 100 for your game to work properly.-->
+	<EnemySpawn>25</EnemySpawn>
+		<!--This is a percentage chance for an enemy to spawn here. This number should be 1-100. -->
+		<!--If no enemy exists with a SpawnZone that maches the curent tile's, a generic enemy will be generated.-->
+	<ItemSpawn>25</ItemSpawn>
+		<!--This is a percentage chance for an item to be found (without combat). This number should be 1-100.-->
+	<NothingSpawn>25</NothingSpawn>
+		<!--This is a percentage chance for nothing to happen, no item found nor enemy encountered. This number should be 1-100.-->
+		
+	<!--WeaponChance, ArmorChance, and ScoreItemChance: These values control what items are more likely to be found ..>
+	<!-- Items are generated using a value of 1-100. These values are the maximum value in the range.-->
+	<!-- Ex: if WeaponChance='30', ArmorChance='60', and ScoreItemChance='100' -->
+	<!-- then values 1-30 will generate a weapons (30%), values 31--60 will generate armor(30%), and 61-100 will generate score items(40%).-->
+	<WeaponChance>30</WeaponChance>
+	<ArmorChance>60</ArmorChance>
+	<!-- ScoreItemChance should always be 100, if ScoreItemChance is less than 100, there will be a chance to get no item. -->
+	<ScoreItemChance>100</ScoreItemChance>
+</Event>

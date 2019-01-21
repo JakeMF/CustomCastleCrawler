@@ -1,0 +1,12 @@
+C:\Users\jacob\Documents\GitHub\CustomCastleCrawler\CustomCastleCrawler\bin\Debug\CustomCastleCrawler.exe
+C:\Users\jacob\Documents\GitHub\CustomCastleCrawler\CustomCastleCrawler\bin\Debug\CustomCastleCrawler.pdb
+C:\Users\jacob\Documents\GitHub\CustomCastleCrawler\CustomCastleCrawler\obj\Debug\CustomCastleCrawler.csprojAssemblyReference.cache
+C:\Users\jacob\Documents\GitHub\CustomCastleCrawler\CustomCastleCrawler\obj\Debug\CustomCastleCrawler.Images.frmCombat.resources
+C:\Users\jacob\Documents\GitHub\CustomCastleCrawler\CustomCastleCrawler\obj\Debug\CustomCastleCrawler.Properties.Resources.resources
+C:\Users\jacob\Documents\GitHub\CustomCastleCrawler\CustomCastleCrawler\obj\Debug\CustomCastleCrawler.frmStartup.resources
+C:\Users\jacob\Documents\GitHub\CustomCastleCrawler\CustomCastleCrawler\obj\Debug\CustomCastleCrawler.csproj.GenerateResource.cache
+C:\Users\jacob\Documents\GitHub\CustomCastleCrawler\CustomCastleCrawler\obj\Debug\CustomCastleCrawler.csproj.CoreCompileInputs.cache
+C:\Users\jacob\Documents\GitHub\CustomCastleCrawler\CustomCastleCrawler\obj\Debug\CustomCastleCrawler.exe
+C:\Users\jacob\Documents\GitHub\CustomCastleCrawler\CustomCastleCrawler\obj\Debug\CustomCastleCrawler.pdb
+C:\Users\jacob\Documents\GitHub\CustomCastleCrawler\CustomCastleCrawler\obj\Debug\CustomCastleCrawler.frmClassSelection.resources
+C:\Users\jacob\Documents\GitHub\CustomCastleCrawler\CustomCastleCrawler\obj\Debug\CustomCastleCrawler.Images.frmMain.resources
