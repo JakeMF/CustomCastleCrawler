@@ -1,4 +1,4 @@
-﻿namespace CustomCastleCrawler.Images
+﻿namespace CustomCastleCrawler
 {
     partial class frmCombat
     {
@@ -229,12 +229,13 @@
             // 
             // richTextBox2
             // 
-            this.richTextBox2.Font = new System.Drawing.Font("Britannic Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.richTextBox2.Font = new System.Drawing.Font("Britannic Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.richTextBox2.Location = new System.Drawing.Point(15, 153);
             this.richTextBox2.Name = "richTextBox2";
             this.richTextBox2.Size = new System.Drawing.Size(578, 284);
             this.richTextBox2.TabIndex = 29;
             this.richTextBox2.Text = "";
+            this.richTextBox2.TextChanged += new System.EventHandler(this.richTextBox2_TextChanged);
             // 
             // frmCombat
             // 
@@ -253,7 +254,7 @@
             this.Controls.Add(this.btnAttack);
             this.Controls.Add(this.richTextBox2);
             this.Font = new System.Drawing.Font("Britannic Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "frmCombat";
             this.Text = "Combat";
             this.grpEnemy.ResumeLayout(false);

@@ -170,7 +170,6 @@
             // 
             this.richTextBox2.Location = new System.Drawing.Point(130, 332);
             this.richTextBox2.Name = "richTextBox2";
-            this.richTextBox2.ReadOnly = true;
             this.richTextBox2.Size = new System.Drawing.Size(170, 96);
             this.richTextBox2.TabIndex = 48;
             this.richTextBox2.Text = "An archery focused class. Dodges easily, but does little damage.";

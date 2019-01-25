@@ -1,4 +1,4 @@
-﻿namespace CustomCastleCrawler.Images
+﻿namespace CustomCastleCrawler
 {
     partial class frmMain
     {
@@ -6,20 +6,7 @@
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
-
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (components != null))
-            {
-                components.Dispose();
-            }
-            base.Dispose(disposing);
-        }
-
+        
         #region Windows Form Designer generated code
 
         /// <summary>
@@ -94,7 +81,8 @@
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(249, 138);
             this.richTextBox1.TabIndex = 20;
-            this.richTextBox1.Text = "";
+            this.richTextBox1.Text = "Lots of zombies west - low dmg, high health. Skeletons further east - med dmg, me" +
+    "d health. When heading east, remember to watch out for necromancers.";
             // 
             // btn_Equip
             // 
