@@ -98,6 +98,7 @@ namespace CustomCastleCrawler
         public string GameName { get; set; }
         public string GameFlavorText { get; set; }
         public Coords StartingPosition { get; set; }
+        public List<StartingClass> Classes { get; set; }
         public void LoadGameData()
         {
             var retList = new List<int>();
@@ -108,7 +109,7 @@ namespace CustomCastleCrawler
                 XMax = Convert.ToInt16(elem.Element("XMax").Value);
                 YMax = Convert.ToInt16(elem.Element("YMax").Value);
                 GameName = elem.Element("GameName").Value;
-                GameFlavorText = elem.Element("GameName").Value;
+                GameFlavorText = elem.Element("GameFlavorText").Value;
             }
 
             foreach(var elem in xdoc.Root.Elements("StartingPosition"))
@@ -117,6 +118,29 @@ namespace CustomCastleCrawler
                 StartingPosition.y = Convert.ToInt16(elem.Element("DefaultY").Value);
             }
             
+            foreach(var elem in xdoc.Root.Elements("Classes"))
+            {
+                Classes.Add(new StartingClass(elem.Element("Name").Value, elem.Element("Armor").Value, elem.Element("Weapon").Value, elem.Element("ClassDescription").Value));
+            }
+        }
+    }
+    //Simple class to store the attributes of a starting class.
+    public sealed class StartingClass
+    {
+        public string ClassWeapon;
+        public string ClassArmor;
+        public string ClassName;
+        public string ClassDescription;
+        private string value1;
+        private string value2;
+        private string value3;
+        
+        public StartingClass(string name, string armor, string weapon, string Description)
+        {
+            ClassName = name;
+            ClassWeapon = weapon;
+            ClassArmor = armor;
+            ClassDescription = Description;
         }
     }
 
@@ -376,7 +400,7 @@ namespace CustomCastleCrawler
 
         //Constructor that will be used for new players
         //ToDo: Use dynamic classes
-        public Player(string Name, string chosenClass)
+        public Player(string Name, Weapon StartingWeapon, Armor StartingArmor)
         {
             this.Name = Name;
             MaxHealth = 1200;
@@ -384,30 +408,8 @@ namespace CustomCastleCrawler
             MaxEstus = 5;
             Estus = MaxEstus;
 
-            switch (chosenClass.ToLower())
-            {
-                case "solder":
-                    Armor = new Armor("Hard Leather Armor", 5, 5, 5);
-                    Weapon = new Weapon("Longsword", 5, 5, 2, 0);
-                    break;
-                case "knight":
-                    Armor = new Armor("Silver Knight Armor", 10, 8, -5);
-                    Weapon = new Weapon("Claymore", 18, 8, 4, -5);
-                    break;
-                case "archer":
-                    Armor = new Armor("Leather Armor", 3, 3, 10);
-                    Weapon = new Weapon("Longbow", 15, 0, 6, 25);
-                    break;
-                case "giant":
-                    Armor = new Armor("Giant Armor", 15, 10, -10);
-                    Weapon = new Weapon("Great Club", 25, 14, 2, -10);
-                    break;
-                default:
-                    //Default to Soldier
-                    Armor = new Armor("Hard Leather Armor", 5, 5, 5);
-                    Weapon = new Weapon("Longsword", 5, 5, 2, 0);
-                    break;
-            }
+            Weapon = StartingWeapon;
+            Armor = StartingArmor;
         }
 
         //Constructor that will be used to load a saved game
@@ -630,6 +632,7 @@ namespace CustomCastleCrawler
         private static List<Item> Items = new List<Item>();
         private static List<Enemy> Enemies = new List<Enemy>();
         private static List<Event> Events = new List<Event>();
+
         private static MyRandom RandomGen = new MyRandom();
         private static bool PlayerDied = false;
 
@@ -667,40 +670,43 @@ namespace CustomCastleCrawler
 
         //ToDo rework to fit new load methods
         //Function that starts your first run of the game
-        public static string StartGame(string playerName, bool newGame)
+        public static void StartGame(string playerName, bool newGame)
         {
             PlayerName = playerName;
-            StringBuilder returnString = new StringBuilder();
+            StringBuilder introMessage = new StringBuilder();
             if (newGame)
             {
+                //Show User Introduction text.
+                introMessage.AppendLine("Welcome to " + GameName + " " + playerName + ".");
+
+                //Add Custom Flavor Text
+                introMessage.AppendLine(GameConfigurations.GameFlavorText);
+
+                //Add Instructions
+                introMessage.AppendLine("You can move around the map by using the four arrow buttons 'north', 'south', 'east', and 'west'.");
+                //ToDo: Add good instructions
+                introMessage.AppendLine("If you encounter an enemy, attack them by pressing the Sword icon, or surrender yourself to the enemy by pressing the Flag icon.");
+                introMessage.AppendLine("If you wish to quit the game, type 'StopPlayingArtoria'");
+                introMessage.AppendLine("If you wish to view more detailed information about Game mechanics, type 'help'.");
+
                 //Open Class Choice Form
                 Form currentForm = Form.ActiveForm;
                 currentForm.Hide();
 
-                using (frmClassSelection classSelection = new frmClassSelection(playerName))
+                using (frmClassSelection classSelection = new frmClassSelection(playerName, introMessage.ToString()))
                     classSelection.ShowDialog();
                 currentForm.Show();
-
-                //Show User Introduction text.
-                returnString.AppendLine("Welcome to " + GameName + " " + playerName + ".");
-
-                //Add Custom Flavor Text
-                returnString.AppendLine(GameConfigurations.GameFlavorText);
-
-                //Add Instructions
-                returnString.AppendLine("You can move around the map by using the four arrow buttons 'north', 'south', 'east', and 'west'.");
-                //ToDo: Add good instructions
-                returnString.AppendLine("If you encounter an enemy, attack them by pressing the Sword icon, or surrender yourself to the enemy by pressing the Flag icon.");
-                returnString.AppendLine("If you wish to quit the game, type 'StopPlayingArtoria'");
-                returnString.AppendLine("If you wish to view more detailed information about Game mechanics, type 'help'.");
-
                 
-
-                return returnString.ToString();
             }
             else
             {
-                return "";
+                //Open Main Form
+                Form currentForm = Form.ActiveForm;
+                currentForm.Hide();
+
+                using (frmMain mainScreen = new frmMain("Welcome back to " + GameName + " " + playerName + ". Good Luck."))
+                    mainScreen.ShowDialog();
+                currentForm.Show();
             }
         }
 
@@ -888,48 +894,65 @@ namespace CustomCastleCrawler
                         var splat = line.Split(',');
                         if (splat[0] == name)
                         {
-                            //name, health, weapon name, armor name, score, x, y
-
-                            int cHealth;
-
-                            if (!int.TryParse(splat[1], out cHealth))
+                            if (splat.Count() == 7)
                             {
-                                cHealth = 100;
+
+                                //name, health, weapon name, armor name, score, x, y
+
+                                int cHealth;
+
+                                if (!int.TryParse(splat[1], out cHealth))
+                                {
+                                    cHealth = 100;
+                                    MessageBox.Show("Your save data has been corrupted, your health was not properly loaded.");
+                                }
+
+                                string weapon = splat[2];
+                                string armor = splat[3];
+
+                                int score;
+                                if (!int.TryParse(splat[4], out score))
+                                {
+                                    score = 0;
+                                    MessageBox.Show("Your save data has been corrupted, your score was not properly loaded.");
+                                }
+
+                                //Check if user's location was properly loaded, if not inform them that their save has been corrupted, but still let them play with partial load.
+                                int x;
+                                if (!int.TryParse(splat[5], out x))
+                                {
+                                    x = 7;
+                                    MessageBox.Show("Your save data has been corrupted, your location was not properly loaded.");
+                                }
+
+                                int y;
+                                if (!int.TryParse(splat[6], out y))
+                                {
+                                    y = 7;
+                                    MessageBox.Show("Your save data has been corrupted, your location was not properly loaded.");
+                                }
+
+                                Weapon wep = FindWeapon(weapon);
+                                Armor arm = FindArmor(armor);
+                                Player p = new Player(name, 100, cHealth, wep, arm, score);
+
+                                //Set player attributes built from load data.
+                                Player = p;
+                                Coordinates.x = x;
+                                Coordinates.y = y;
+
+                                //Should never need to set/use this variable, but set for sanity.
+                                found = true;
+
+                                return true;
                             }
-
-                            string weapon = splat[2];
-                            string armor = splat[3];
-
-                            int score;
-                            if (!int.TryParse(splat[4], out score))
+                            else
                             {
-                                score = 0;
+                                //if there are not enough values in the array, the data is either from a version with different save data or has been manually modified.
+                                MessageBox.Show("Your save data has been corrupted, your data cannot be loaded.");
+
+                                return false;
                             }
-
-                            int x;
-                            if (!int.TryParse(splat[5], out x))
-                            {
-                                x = 7;
-                                Console.WriteLine("Your save data has been corrupted.");
-                            }
-
-                            int y;
-                            if (!int.TryParse(splat[6], out y))
-                            {
-                                y = 7;
-                                Console.WriteLine("Your save data has been corrupted.");
-                            }
-                            
-                            Weapon wep = FindWeapon(weapon);
-                            Armor arm = FindArmor(armor);
-                            Player p = new Player(name, 100, cHealth, wep, arm, score);
-                            Player = p;
-                            Coordinates.x = x;
-                            Coordinates.y = y;
-
-                            found = true;
-
-                            return true;
                         }
                     }
                     if (!found)
@@ -965,13 +988,25 @@ namespace CustomCastleCrawler
             }
             else
             {
-                Console.WriteLine("Error: The file could not be loaded.");
+                MessageBox.Show("Your save file could not be located. Make sure it is located in [AppDirectory]\\SaveData\\[CharacterName].txt");
             }
             return false;
         }
 
+        public static string SelectClass(string playerName, string playerClass)
+        {
+            StartingClass selectedClass = GameConfigurations.Classes.First(s => s.ClassName == playerClass);
+
+            Weapon selectedWeapon = FindWeapon(selectedClass.ClassWeapon);
+            Armor selectedArmor = FindArmor(selectedClass.ClassArmor);
+
+            Player = new Player(playerName, selectedWeapon, selectedArmor);
+
+            return "You have selected the " + selectedClass.ClassName + " class.";
+        }
+
         //Function to evaluate user's input
-        static public string EvaluateInput(string userInput)
+        public static string EvaluateInput(string userInput)
         {
             userInput = userInput.ToLower();
             if (userInput == "north")
@@ -1081,7 +1116,7 @@ namespace CustomCastleCrawler
         }
 
         //Function to generate the message output to the console.
-        static public string genMessage()
+        public static string genMessage()
         {
             //get the current map tile from the map container
             //!!IMPORTANT!! Map was created (Y,X) not (X,Y) I'm dumb but remember. 5/30/18

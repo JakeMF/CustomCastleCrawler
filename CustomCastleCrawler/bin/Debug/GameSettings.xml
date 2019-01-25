@@ -1,0 +1,36 @@
+<Settings>
+	<MapSize>
+		<XMax>25</XMax>
+		<YMax>55</YMax>
+	</MapSize>
+	<StartingPosition>
+		<DefaultX>1</DefaultX>
+		<DefaultY>1</DefaultY>
+	</StartingPosition>
+	<GameName>Lordran</GameName>
+	<GameFlavorText>Welcome to Lordran hollow, may your stay be...pleasant.</GameFlavorText>
+	<!--There MUST BE 4 classes here, additional classes will be ignored. Having less than 4 classes will cause the game to be unplayable.-->
+	<Classes>
+		<Class>
+			<Name>Soldier</Name>
+			<Armor>Hard Leather Armor</Armor>
+			<Weapon>Longsword</Weapon>
+			<ClassDescription>A medium,</ClassDescription>
+		</Class>
+		<Class>
+			<Name>Knight</Name>
+			<Armor>Silver Knight Armor</Armor>
+			<Weapon>Claymore</Weapon>
+		</Class>
+		<Class>
+			<Name>Archer</Name>
+			<Armor>Leather Armor</Armor>
+			<Weapon>Longbow</Weapon>
+		</Class>
+		<Class>
+			<Name>Giant</Name>
+			<Armor>Giant Armor</Armor>
+			<Weapon>Great Club</Weapon>
+		</Class>
+	</Classes>
+</Settings>

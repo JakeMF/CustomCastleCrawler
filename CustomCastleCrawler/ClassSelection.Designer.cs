@@ -31,16 +31,16 @@
             this.btnSoldier = new System.Windows.Forms.Button();
             this.lblChooseClass = new System.Windows.Forms.Label();
             this.lblKnight = new System.Windows.Forms.Label();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.txtKnight = new System.Windows.Forms.RichTextBox();
             this.btnKnight = new System.Windows.Forms.Button();
             this.btnArcher = new System.Windows.Forms.Button();
             this.btnGiant = new System.Windows.Forms.Button();
             this.lblSoldier = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.lblArcher = new System.Windows.Forms.Label();
             this.lblGiant = new System.Windows.Forms.Label();
-            this.richTextBox4 = new System.Windows.Forms.RichTextBox();
-            this.richTextBox2 = new System.Windows.Forms.RichTextBox();
-            this.richTextBox3 = new System.Windows.Forms.RichTextBox();
+            this.txtSoldier = new System.Windows.Forms.RichTextBox();
+            this.txtArcher = new System.Windows.Forms.RichTextBox();
+            this.txtGiant = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
             // 
             // btnSoldier
@@ -78,13 +78,13 @@
             this.lblKnight.Text = "Knight";
             this.lblKnight.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
-            // richTextBox1
+            // txtKnight
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(129, 78);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(170, 96);
-            this.richTextBox1.TabIndex = 47;
-            this.richTextBox1.Text = "A medium melee focused class. Dodges with difficulty, but does good damage.";
+            this.txtKnight.Location = new System.Drawing.Point(129, 78);
+            this.txtKnight.Name = "txtKnight";
+            this.txtKnight.Size = new System.Drawing.Size(170, 96);
+            this.txtKnight.TabIndex = 47;
+            this.txtKnight.Text = "A medium melee focused class. Dodges with difficulty, but does good damage.";
             // 
             // btnKnight
             // 
@@ -136,16 +136,16 @@
             this.lblSoldier.Text = "Soldier";
             this.lblSoldier.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
-            // label2
+            // lblArcher
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Britannic Bold", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(10, 365);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(71, 23);
-            this.label2.TabIndex = 42;
-            this.label2.Text = "Archer";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.lblArcher.AutoSize = true;
+            this.lblArcher.Font = new System.Drawing.Font("Britannic Bold", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblArcher.Location = new System.Drawing.Point(10, 365);
+            this.lblArcher.Name = "lblArcher";
+            this.lblArcher.Size = new System.Drawing.Size(71, 23);
+            this.lblArcher.TabIndex = 42;
+            this.lblArcher.Text = "Archer";
+            this.lblArcher.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // lblGiant
             // 
@@ -158,41 +158,41 @@
             this.lblGiant.Text = "Giant";
             this.lblGiant.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
-            // richTextBox4
+            // txtSoldier
             // 
-            this.richTextBox4.Location = new System.Drawing.Point(129, 205);
-            this.richTextBox4.Name = "richTextBox4";
-            this.richTextBox4.Size = new System.Drawing.Size(170, 96);
-            this.richTextBox4.TabIndex = 46;
-            this.richTextBox4.Text = "A light melee focused class. Capable of dodging, but does moderate damage.";
+            this.txtSoldier.Location = new System.Drawing.Point(129, 205);
+            this.txtSoldier.Name = "txtSoldier";
+            this.txtSoldier.Size = new System.Drawing.Size(170, 96);
+            this.txtSoldier.TabIndex = 46;
+            this.txtSoldier.Text = "A light melee focused class. Capable of dodging, but does moderate damage.";
             // 
-            // richTextBox2
+            // txtArcher
             // 
-            this.richTextBox2.Location = new System.Drawing.Point(130, 332);
-            this.richTextBox2.Name = "richTextBox2";
-            this.richTextBox2.Size = new System.Drawing.Size(170, 96);
-            this.richTextBox2.TabIndex = 48;
-            this.richTextBox2.Text = "An archery focused class. Dodges easily, but does little damage.";
+            this.txtArcher.Location = new System.Drawing.Point(130, 332);
+            this.txtArcher.Name = "txtArcher";
+            this.txtArcher.Size = new System.Drawing.Size(170, 96);
+            this.txtArcher.TabIndex = 48;
+            this.txtArcher.Text = "An archery focused class. Dodges easily, but does little damage.";
             // 
-            // richTextBox3
+            // txtGiant
             // 
-            this.richTextBox3.Location = new System.Drawing.Point(129, 459);
-            this.richTextBox3.Name = "richTextBox3";
-            this.richTextBox3.Size = new System.Drawing.Size(170, 96);
-            this.richTextBox3.TabIndex = 49;
-            this.richTextBox3.Text = "A very heavy melee focused class. Never dodges, but does lots of damage.";
+            this.txtGiant.Location = new System.Drawing.Point(129, 459);
+            this.txtGiant.Name = "txtGiant";
+            this.txtGiant.Size = new System.Drawing.Size(170, 96);
+            this.txtGiant.TabIndex = 49;
+            this.txtGiant.Text = "A very heavy melee focused class. Never dodges, but does lots of damage.";
             // 
             // frmClassSelection
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(484, 611);
-            this.Controls.Add(this.richTextBox3);
-            this.Controls.Add(this.richTextBox2);
-            this.Controls.Add(this.richTextBox1);
-            this.Controls.Add(this.richTextBox4);
+            this.Controls.Add(this.txtGiant);
+            this.Controls.Add(this.txtArcher);
+            this.Controls.Add(this.txtKnight);
+            this.Controls.Add(this.txtSoldier);
             this.Controls.Add(this.lblGiant);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.lblArcher);
             this.Controls.Add(this.lblSoldier);
             this.Controls.Add(this.lblKnight);
             this.Controls.Add(this.lblChooseClass);
@@ -213,15 +213,15 @@
         private System.Windows.Forms.Button btnSoldier;
         private System.Windows.Forms.Label lblChooseClass;
         private System.Windows.Forms.Label lblKnight;
-        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.RichTextBox txtKnight;
         private System.Windows.Forms.Button btnKnight;
         private System.Windows.Forms.Button btnArcher;
         private System.Windows.Forms.Button btnGiant;
         private System.Windows.Forms.Label lblSoldier;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lblArcher;
         private System.Windows.Forms.Label lblGiant;
-        private System.Windows.Forms.RichTextBox richTextBox4;
-        private System.Windows.Forms.RichTextBox richTextBox2;
-        private System.Windows.Forms.RichTextBox richTextBox3;
+        private System.Windows.Forms.RichTextBox txtSoldier;
+        private System.Windows.Forms.RichTextBox txtArcher;
+        private System.Windows.Forms.RichTextBox txtGiant;
     }
 }

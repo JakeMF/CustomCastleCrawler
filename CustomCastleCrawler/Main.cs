@@ -11,7 +11,7 @@ namespace CustomCastleCrawler
 {
     public partial class frmMain : Form
     {
-        public frmMain()
+        public frmMain(string introMessage)
         {
             InitializeComponent();
             richTextBox2.SelectionAlignment = HorizontalAlignment.Center;
