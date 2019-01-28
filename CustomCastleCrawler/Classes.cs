@@ -81,46 +81,54 @@ namespace CustomCastleCrawler
             return UTF8Encoding.UTF8.GetString(resultArray);
         }
     }
-
-    #region MapClasses
+    
     //OLD Map Code: enum mapSize { Rows = 20, Columns = 20 };
 
     //Class to load and store the maximum size of the map.
     //ToDo: Ensure XML file is setup properly.
     public sealed class GameData
     {
-        public GameData()
-        {
-            LoadGameData();
-        }
         public int XMax { get; set; }
         public int YMax { get; set; }
         public string GameName { get; set; }
         public string GameFlavorText { get; set; }
-        public Coords StartingPosition { get; set; }
-        public List<StartingClass> Classes { get; set; }
-        public void LoadGameData()
+        public int StartingX { get; set; }
+        public int StartingY { get; set; }
+        public List<StartingClass> Classes = new List<StartingClass>();
+        public GameData()
         {
-            var retList = new List<int>();
+            LoadGameData();
+        }
+        private void LoadGameData()
+        {
             XDocument xdoc = XDocument.Load("GameSettings.xml");
             //Populate list with tile objects to store in array later
+
+            //Map Size Settings
             foreach (var elem in xdoc.Root.Elements("MapSize"))
             {
                 XMax = Convert.ToInt16(elem.Element("XMax").Value);
                 YMax = Convert.ToInt16(elem.Element("YMax").Value);
+            }
+            //Starting Position
+            foreach (var elem in xdoc.Root.Elements("StartingPosition"))
+            {
+                StartingX = Convert.ToInt16(elem.Element("DefaultX").Value);
+                StartingY = Convert.ToInt16(elem.Element("DefaultY").Value);
+            }
+            //Basic Settings
+            foreach (var elem in xdoc.Root.Elements("FlavorSettings"))
+            {
                 GameName = elem.Element("GameName").Value;
                 GameFlavorText = elem.Element("GameFlavorText").Value;
             }
-
-            foreach(var elem in xdoc.Root.Elements("StartingPosition"))
+            //Class Settings
+            foreach (var elem in xdoc.Root.Elements("Classes"))
             {
-                StartingPosition.x = Convert.ToInt16(elem.Element("DefaultX").Value);
-                StartingPosition.y = Convert.ToInt16(elem.Element("DefaultY").Value);
-            }
-            
-            foreach(var elem in xdoc.Root.Elements("Classes"))
-            {
-                Classes.Add(new StartingClass(elem.Element("Name").Value, elem.Element("Armor").Value, elem.Element("Weapon").Value, elem.Element("ClassDescription").Value));
+                foreach (var childElem in elem.Elements("Class"))
+                {
+                    Classes.Add(new StartingClass(childElem.Element("Name").Value, childElem.Element("Armor").Value, childElem.Element("Weapon").Value, childElem.Element("ClassDescription").Value));
+                }
             }
         }
     }
@@ -131,9 +139,6 @@ namespace CustomCastleCrawler
         public string ClassArmor;
         public string ClassName;
         public string ClassDescription;
-        private string value1;
-        private string value2;
-        private string value3;
         
         public StartingClass(string name, string armor, string weapon, string Description)
         {
@@ -147,9 +152,16 @@ namespace CustomCastleCrawler
     //Class to represent a pair of (X,Y) coordinates
     public sealed class Coords
     {
-        public int x = 0;
-        public int y = 0;
-        private GameData MapDimensions = new GameData();
+        public int x;
+        public int y;
+        private GameData MapDimensions;
+
+        public Coords()
+        {
+            x = 0;
+            y = 0;
+            MapDimensions = new GameData();
+        }
         //Go West
         public bool west()
         {
@@ -262,7 +274,6 @@ namespace CustomCastleCrawler
             ScoreItemChance = 0;
         }
     }
-    #endregion
 
     //Class that extends C# Random()
     public sealed class MyRandom
@@ -386,16 +397,13 @@ namespace CustomCastleCrawler
         private Weapon Weapon = new Weapon();
         private Armor Armor = new Armor();
         public int Score = 0;
-        private int Estus;
-        private int MaxEstus;
+        public int EnemiesKilled = 0;
         //Default constructor
         public Player()
         {
             Name = "Nameless Hollow";
             MaxHealth = 1200;
             Health = MaxHealth;
-            MaxEstus = 5;
-            Estus = MaxEstus;
         }
 
         //Constructor that will be used for new players
@@ -405,8 +413,6 @@ namespace CustomCastleCrawler
             this.Name = Name;
             MaxHealth = 1200;
             Health = MaxHealth;
-            MaxEstus = 5;
-            Estus = MaxEstus;
 
             Weapon = StartingWeapon;
             Armor = StartingArmor;
@@ -532,34 +538,13 @@ namespace CustomCastleCrawler
                 }
             }
         }
-        
-        //Function to rest at bonfire
-        public void BonfireRest()
-        {
-            //Reset player's health to max
-            Health = MaxHealth;
-
-            //Do anything else that should happen at bonfire.
-            Estus = MaxEstus;
-        }
-
-        public void DrinkEstus()
-        {
-            Estus--;
-            Health += 600;
-
-            if (Health > MaxHealth)
-            {
-                Health = MaxHealth;
-            }
-        }
     }
 
     //Class for enemies
     public sealed class Enemy
     {
         public string Name { get; set; }
-        public int Health { get; set; }
+        public int MaxHealth { get; set; }
         public int CurrentHealth { get; set; }
         //Damage
         public int Damage { get; set; }
@@ -575,8 +560,8 @@ namespace CustomCastleCrawler
         public Enemy()
         {
             Name = "Hollow Soldier";
-            Health = 125;
-            CurrentHealth = Health;
+            MaxHealth = 125;
+            CurrentHealth = MaxHealth;
             //Damage
             Damage = 5;
             ApDamage = 2;
@@ -586,11 +571,11 @@ namespace CustomCastleCrawler
             Evasion = 5;
         }
         //Constructor that takes parameters for all attributes
-        public Enemy(string Name, int Health, int Score, int Damage, int ApDamage, double Defence, int Evasion = 2)
+        public Enemy(string Name, int MaxHealth, int Score, int Damage, int ApDamage, double Defence, int Evasion = 2)
         {
             this.Name = Name;
-            this.Health = Health;
-            CurrentHealth = Health;
+            this.MaxHealth = MaxHealth;
+            CurrentHealth = MaxHealth;
 
             this.Damage = Damage;
             this.ApDamage = ApDamage;
@@ -609,35 +594,35 @@ namespace CustomCastleCrawler
     }
 
     //Class that is the game object itself, is implemented in the main "runner" 
-    public static class MainGame
+    public class MainGame
     {
-        private static string GameName;
-        private static string PlayerName;
+        private string GameName;
+        public string PlayerName { get; set; }
         //Key 24 Bytes long
-        private static string EncryptionKey = "ART0R1A_ISNT_4_CH33T3RS!";
-        private static Coords LastCoordinates = new Coords();
-        private static Coords Coordinates = new Coords();
+        private string EncryptionKey = "ART0R1A_ISNT_4_CH33T3RS!";
+        private Coords LastCoordinates = new Coords();
+        private Coords Coordinates = new Coords();
 
-        private static Player Player;
-        private static Enemy CurrentEnemy = null;
-        private static bool ActiveEnemy = false;
+        private Player Player;
+        public Enemy CurrentEnemy { get; set; }
+        public bool ActiveEnemy { get; set; }
 
         //Load map size
-        private static GameData GameConfigurations = new GameData();
+        private GameData GameConfigurations = new GameData();
         //multi_array of MapTiles for the map
-        private static MapTile[,] Map;
+        private MapTile[,] Map;
 
-        private static List<Weapon> Weapons = new List<Weapon>();
-        private static List<Armor> Armors = new List<Armor>();
-        private static List<Item> Items = new List<Item>();
-        private static List<Enemy> Enemies = new List<Enemy>();
-        private static List<Event> Events = new List<Event>();
+        private List<Weapon> Weapons = new List<Weapon>();
+        private List<Armor> Armors = new List<Armor>();
+        private List<Item> Items = new List<Item>();
+        private List<Enemy> Enemies = new List<Enemy>();
+        private List<Event> Events = new List<Event>();
 
-        private static MyRandom RandomGen = new MyRandom();
-        private static bool PlayerDied = false;
+        private MyRandom RandomGen = new MyRandom();
+        private bool PlayerDied;
 
         //Default Constructor
-        static MainGame()
+        public MainGame()
         {
             //Set Default Values
 
@@ -651,8 +636,8 @@ namespace CustomCastleCrawler
             ActiveEnemy = false;
 
             //Setup Coords at Starting Position
-            Coordinates.x = GameConfigurations.StartingPosition.x;
-            Coordinates.y = GameConfigurations.StartingPosition.y;
+            Coordinates.x = GameConfigurations.StartingX;
+            Coordinates.y = GameConfigurations.StartingY;
 
             //ToDo:Check if need to x and y
             LastCoordinates.x = Coordinates.x;
@@ -669,11 +654,12 @@ namespace CustomCastleCrawler
         }
 
         //ToDo rework to fit new load methods
-        //Function that starts your first run of the game
-        public static void StartGame(string playerName, bool newGame)
+        //Function that creates introduction string.
+        public string StartGame(string playerName, bool newGame)
         {
             PlayerName = playerName;
             StringBuilder introMessage = new StringBuilder();
+
             if (newGame)
             {
                 //Show User Introduction text.
@@ -689,29 +675,20 @@ namespace CustomCastleCrawler
                 introMessage.AppendLine("If you wish to quit the game, type 'StopPlayingArtoria'");
                 introMessage.AppendLine("If you wish to view more detailed information about Game mechanics, type 'help'.");
 
-                //Open Class Choice Form
-                Form currentForm = Form.ActiveForm;
-                currentForm.Hide();
-
-                using (frmClassSelection classSelection = new frmClassSelection(playerName, introMessage.ToString()))
-                    classSelection.ShowDialog();
-                currentForm.Show();
-                
             }
             else
             {
-                //Open Main Form
-                Form currentForm = Form.ActiveForm;
-                currentForm.Hide();
+                //Show User Introduction text.
+                introMessage.AppendLine("Welcome back to " + GameName + " " + playerName + ".");
+                introMessage.AppendLine("You are at X:" + Coordinates.x + " Y:" + Coordinates.y + ".");
+                introMessage.AppendLine("Good luck, adventurer.'");
 
-                using (frmMain mainScreen = new frmMain("Welcome back to " + GameName + " " + playerName + ". Good Luck."))
-                    mainScreen.ShowDialog();
-                currentForm.Show();
             }
+            return introMessage.ToString();
         }
 
         //Function load the game's map from XML and store it in the array of MapTile objects
-        static void PopulateMap()
+        void PopulateMap()
         {
             //Load XML document containing items.
             XDocument xdoc = XDocument.Load("Map.xml");
@@ -735,31 +712,35 @@ namespace CustomCastleCrawler
         }
 
         //Function to load the game's Events from XML and store it in a list of Event objects.
-        static void PopulateEvents()
+        void PopulateEvents()
         {
             //Load XML document containing items.
             XDocument xdoc = XDocument.Load("Events.xml");
 
-            //Populate list with tile objects to store in array later
-            List<Event> events =
+            //Populate list with event objects to store in array later
+            foreach (var elem in xdoc.Root.Elements("Events"))
+            {
+                List<Event> events =
                 (
-                    from elem in xdoc.Root.Elements("Event")
+                    from childElem in xdoc.Root.Elements("Event")
                     select new Event
                     {
-                        EventID = (int)elem.Element("EventID"),
-                        Description = (string)elem.Element("Description"),
-                        EnemySpawn = (int)elem.Element("XCoord"),
-                        ItemSpawn = (int)elem.Element("YCoord"),
-                        NothingSpawn = (int)elem.Element("XCoord"),
-                        WeaponChance = (int)elem.Element("YCoord"),
-                        ArmorChance = (int)elem.Element("XCoord"),
-                        ScoreItemChance = (int)elem.Element("YCoord")
+                        EventID = (int)childElem.Element("EventID"),
+                        Description = (string)childElem.Element("Description"),
+                        EnemySpawn = (int)childElem.Element("XCoord"),
+                        ItemSpawn = (int)childElem.Element("YCoord"),
+                        NothingSpawn = (int)childElem.Element("XCoord"),
+                        WeaponChance = (int)childElem.Element("YCoord"),
+                        ArmorChance = (int)childElem.Element("XCoord"),
+                        ScoreItemChance = (int)childElem.Element("YCoord")
                     }).ToList();
-            Events = events;
+                Events = events;
+            }
+                
         }
 
         //Function load the game's items from XML and store them in the appropriate lists
-        static void PopulateItems()
+        void PopulateItems()
         {
             //Load XML document containing items.
             XDocument xdoc = XDocument.Load("Items.xml");
@@ -809,7 +790,7 @@ namespace CustomCastleCrawler
         }
 
         //Function load the game's enemies from XML and store them in a List of Enemy objects
-        static void PopulateEnemies()
+        void PopulateEnemies()
         {
             //Load XML document containing enemies.
             XDocument xdoc = XDocument.Load("Enemies.xml");
@@ -821,7 +802,7 @@ namespace CustomCastleCrawler
                     select new Enemy
                     {
                         Name = (string)elem.Element("Name"),
-                        Health = (int)elem.Element("Health"),
+                        MaxHealth = (int)elem.Element("Health"),
                         Damage = (int)elem.Element("BaseDMG"),
                         ApDamage = (int)elem.Element("APDMG"),
                         Defence = (int)elem.Element("Defence"),
@@ -834,7 +815,7 @@ namespace CustomCastleCrawler
 
         //ToDo: TESTING
         //Function that will save a player's progress in a text file.
-        static void SaveProgress()
+        public void SaveProgress()
         {
             //TODO:
             //Change to this 
@@ -873,7 +854,7 @@ namespace CustomCastleCrawler
 
         //ToDo: Test Load Funcitonality
         //Function that will load a player's save from a text file.
-        public static bool LoadProgress(string name, bool secondPass)
+        public bool LoadProgress(string name, bool secondPass)
         {
             //NEEDS TESTING
             Crypter cryptic = new Crypter(EncryptionKey);
@@ -993,7 +974,7 @@ namespace CustomCastleCrawler
             return false;
         }
 
-        public static string SelectClass(string playerName, string playerClass)
+        public string SelectClass(string playerName, string playerClass)
         {
             StartingClass selectedClass = GameConfigurations.Classes.First(s => s.ClassName == playerClass);
 
@@ -1006,20 +987,30 @@ namespace CustomCastleCrawler
         }
 
         //Function to evaluate user's input
-        public static string EvaluateInput(string userInput)
+        public string EvaluateInput(string userInput)
         {
+            var returnString = new StringBuilder();
+
             userInput = userInput.ToLower();
             if (userInput == "north")
             {
                 if (!ActiveEnemy)
                 {
                     //moving north
-                    Coordinates.north();
+                    if(Coordinates.north())
+                    {
+                        //Moved successfully
+                        returnString.AppendLine(genMessage());
+                    }
+                    else
+                    {
+                        //Cannot go that way
+                        returnString.AppendLine("You cannot move this way.");
+                    }
                 }
                 else
                 {
-                    Console.WriteLine("You cannot move when there is an enemy attacking you!\nType 'Attack' to attack the enemy. Type 'help_me' for detailed instructions.");
-                    return "false";
+                    returnString.AppendLine("You cannot move when there is an enemy attacking you!");
                 }
             }
             else if (userInput == "south")
@@ -1027,12 +1018,20 @@ namespace CustomCastleCrawler
                 if (!ActiveEnemy)
                 {
                     //moving south
-                    Coordinates.south();
+                    if(Coordinates.south())
+                    {
+                        //Moved successfully
+                        returnString.AppendLine(genMessage());
+                    }
+                    else
+                    {
+                        //Cannot go that way
+                        returnString.AppendLine("You cannot move this way.");
+                    }
                 }
                 else
                 {
-                    Console.WriteLine("You cannot move when there is an enemy attacking you!\nType 'Attack' to attack the enemy. Type 'help_me' for detailed instructions.");
-                    return "false";
+                    returnString.AppendLine("You cannot move when there is an enemy attacking you!");
                 }
             }
             else if (userInput == "east")
@@ -1040,12 +1039,20 @@ namespace CustomCastleCrawler
                 if (!ActiveEnemy)
                 {
                     //moving east
-                    Coordinates.east();
+                    if(Coordinates.east())
+                    {
+                        //Moved successfully
+                        returnString.AppendLine(genMessage());
+                    }
+                    else
+                    {
+                        //Cannot go that way
+                        returnString.AppendLine("You cannot move this way.");
+                    }
                 }
                 else
                 {
-                    Console.WriteLine("You cannot move when there is an enemy attacking you!\nType 'Attack' to attack the enemy. Type 'help_me' for detailed instructions.");
-                    return "false";
+                    returnString.AppendLine("You cannot move when there is an enemy attacking you!");
                 }
             }
             else if (userInput == "west")
@@ -1053,70 +1060,34 @@ namespace CustomCastleCrawler
                 if (!ActiveEnemy)
                 {
                     //moving west
-                    Coordinates.west();
+                    if(Coordinates.west())
+                    {
+                        //Moved successfully
+                        returnString.AppendLine(genMessage());
+                    }
+                    else
+                    {
+                        //Cannot go that way
+                        returnString.AppendLine("You cannot move this way.");
+                    }
                 }
                 else
                 {
-                    Console.WriteLine("You cannot move when there is an enemy attacking you!\nType 'Attack' to attack the enemy. Type 'help_me' for detailed instructions.");
-                    return "false";
-                }
-            }
-            else if (userInput == "attack")
-            {
-                if (ActiveEnemy)
-                {
-                    BattleEnemy();
-                }
-                else
-                {
-                    Console.WriteLine("There is no enemy attacking you, move around to find enemies.\nType 'help_me' for detailed instructions.");
-                }
-
-                if (PlayerDied)
-                {
-                    Console.WriteLine("You have been killed by " + CurrentEnemy.Name);
-                    return "QUIT";
-                }
-                return "battle";
-            }
-            else if (userInput == "estus")
-            {
-                //Drink Estus
-                Player.DrinkEstus();
-            }
-            else if (userInput == "stopplayingartoria")
-            {
-                string ret = QuitGame();
-                return ret;
-            }
-            else if (userInput == "help_me")
-            {
-                Console.WriteLine("You can move around the map typing the following commands: 'north', 'south', 'east', and 'west'\nIf you encounter an enemy, attack them by typing 'attack' If you wish to quit the game, type 'StopPlayingArtoria'");
-                return "helped";
-            }
-            else if (userInput == "surrender")
-            {
-                if (ActiveEnemy)
-                {
-                    Console.WriteLine("You have surrendered your life to the " + CurrentEnemy.Name);
-                    PlayerDied = true;
-                    return "QUIT";
-                }
-                else
-                {
-                    Console.WriteLine("There is no enemy to surrender to.");
-                    return "failedsurrender";
+                    returnString.AppendLine("You cannot move when there is an enemy attacking you!");
                 }
             }
             else
             {
-                return "false";
+                MessageBox.Show("ERROR: Unknown Input. | Method: EvaluateInput | Line: 1105");
+
+                returnString.AppendLine("Error Evaluating Input. Please restart application.");
             }
-            return "true";
+
+            return returnString.ToString();
         }
 
         //Function to generate the message output to the console.
-        public static string genMessage()
+        string genMessage()
         {
             //get the current map tile from the map container
             //!!IMPORTANT!! Map was created (Y,X) not (X,Y) I'm dumb but remember. 5/30/18
@@ -1145,7 +1116,7 @@ namespace CustomCastleCrawler
                     var index = RandomGen.rollDie(enemyQuery.Count() - 1);
                     CurrentEnemy = enemyQuery.ElementAt(index);
                     
-                    returnString = CurrentEnemy.Name + " has attacked you!" + "\n" + "Type 'attack' to attack.";
+                    returnString = CurrentEnemy.Name + " has attacked you!";
                     return returnString;
                 }
                 else if (currentEvent.ItemSpawn > RandomGen.rollDie(100))
@@ -1185,7 +1156,7 @@ namespace CustomCastleCrawler
         }
 
         //function to generate a weapon
-        static void GetWeapon()
+        void GetWeapon()
         {
             //Declare variables for weapon generation
             IEnumerable<Weapon> weapons;
@@ -1223,7 +1194,7 @@ namespace CustomCastleCrawler
         }
 
         //function to generate armor
-        static void GetArmor()
+        void GetArmor()
         {
             //Declare variables for armor generation
             IEnumerable<Armor> armors;
@@ -1260,7 +1231,7 @@ namespace CustomCastleCrawler
             }
         }
 
-        static string GetScoreItem()
+        string GetScoreItem()
         {
             //Get random value to determine what item was found
             var index = RandomGen.rollDie(Items.Count() - 1);
@@ -1274,7 +1245,7 @@ namespace CustomCastleCrawler
         }
 
         //function to initiate a round of combat with the current enemy.
-        static void BattleEnemy()
+        void BattleEnemy()
         {
             //Get Data for player and enemy: Attack Ratings, Defense Ratings, Evasion.
             #region Get Values
@@ -1348,51 +1319,17 @@ namespace CustomCastleCrawler
             }
             else
             {
+                //Add to player's score and kill count
+                Player.Score += CurrentEnemy.Score;
+                Player.EnemiesKilled++;
+
                 Console.WriteLine("You have defeated the " + CurrentEnemy.Name + ", " + CurrentEnemy.Score + " was added to your kill score.");
                 ActiveEnemy = false;
             }
         }
 
-        //function to quit the game
-        static string QuitGame()
-        {
-            string input;
-            Console.WriteLine("Are you sure you want to Quit?(Y/N)");
-            input = Console.ReadLine();
-            if (input.ToLower() == "y")
-            {
-                bool keepRunning = true;
-                do
-                {
-                    Console.WriteLine("Do you want to save your game?(Y/N)");
-                    input = Console.ReadLine();
-                    if (input.ToLower() == "y")
-                    {
-                        SaveProgress();
-                        Console.WriteLine("Thank you for playing Artoria, created by Jake Farley.");
-                        keepRunning = false;
-                    }
-                    else if (input.ToLower() == "n")
-                    {
-                        Console.WriteLine("Thank you for playing Artoria, created by Jake Farley.");
-                        keepRunning = false;
-                    }
-                    else
-                    {
-                        Console.WriteLine("Please enter a valid response.");
-                    }
-                } while (keepRunning);
-            }
-            else if (input.ToLower() == "n")
-            {
-                Console.WriteLine("You are no longer quitting the game.");
-                return "true"; //true because evalUserInput returns true
-            }
-            return "QUIT";
-        }
-
         //function to find a weapon based on its name
-        static Weapon FindWeapon(string weaponText)
+        Weapon FindWeapon(string weaponText)
         {
             var name = weaponText;
             Weapon weapon = new Weapon();
@@ -1408,7 +1345,7 @@ namespace CustomCastleCrawler
         }
 
         //Function to find a set of armor based on its name
-        static Armor FindArmor(string name)
+        Armor FindArmor(string name)
         {
             Armor armor = new Armor();
             foreach (Armor arm in Armors)
@@ -1421,5 +1358,49 @@ namespace CustomCastleCrawler
             return armor;
         }
 
+        //Function to get the player's current equipment as a printable string
+        public string GenerateEquipmentList()
+        {
+            var returnString = new StringBuilder();
+            Weapon currentWeapon = Player.GetWeapon();
+            Armor currentArmor = Player.GetArmor();
+            
+            //Weapon
+            returnString.AppendLine("Weapon");
+            returnString.AppendLine(currentWeapon.Name);
+            returnString.AppendLine(" Rarity: " + currentWeapon.Rarity);
+            returnString.AppendLine(currentWeapon.Description);
+            returnString.AppendLine("DMG: " + currentWeapon.BDamage + "    APDMG: " + currentWeapon.APDamage);
+
+            //Whitespace is important too
+            returnString.AppendLine();
+            returnString.AppendLine();
+
+            //Armor
+            returnString.AppendLine("Armor");
+            returnString.AppendLine(currentArmor.Name);
+            returnString.AppendLine("Rarity: " + currentArmor.Rarity);
+            returnString.AppendLine(currentArmor.Description);
+            returnString.AppendLine("Armor Value: " + currentArmor.ArmorVal);
+
+
+            return returnString.ToString();
+        }
+
+        public string GenerateStatistics()
+        {
+            var returnString = new StringBuilder();
+
+            returnString.AppendLine(Player.Name);
+            returnString.AppendLine();
+            returnString.AppendLine("Final Weapon: " + Player.GetWeapon().Name + " Rarity " + Player.GetWeapon().Rarity);
+            returnString.AppendLine("Final Armor: " + Player.GetArmor().Name + " Rarity " + Player.GetArmor().Rarity);
+            returnString.AppendLine();
+            returnString.AppendLine("Enemies Defeated: " + Player.EnemiesKilled);
+            returnString.AppendLine("Points earned: " + Player.Score);
+
+            return returnString.ToString();
+
+        }
     }
 }

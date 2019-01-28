@@ -11,11 +11,15 @@ namespace CustomCastleCrawler
 {
     public partial class frmClassSelection : Form
     {
-        public string PlayerName;
+        public frmStartup startupForm { get; set; }
+        public MainGame MainGame;
         public string IntroMessage;
-        public frmClassSelection(string playerName, string introMessage)
+        public frmClassSelection(MainGame MainGame, string introMessage)
         {
-            PlayerName = playerName;
+            this.MainGame = MainGame;
+
+            InitializeComponent();
+            
             IntroMessage = introMessage;
 
             //Load class names and descriptions from XML.
@@ -32,62 +36,65 @@ namespace CustomCastleCrawler
 
             lblGiant.Text = gameData.Classes[3].ClassName;
             txtGiant.Text = gameData.Classes[3].ClassDescription;
-
-            InitializeComponent();
         }
 
         //Class Selection Buttons
         private void btnKnight_Click(object sender, EventArgs e)
         {
-            var classDescription = MainGame.SelectClass(PlayerName, lblKnight.Text);
+            string classDescription = MainGame.SelectClass(MainGame.PlayerName, lblKnight.Text);
             
-            //Open Class Choice Form
-            Form currentForm = Form.ActiveForm;
-            currentForm.Hide();
+            //Open Main Form
+            this.Hide();
 
-            using (frmMain mainScren = new frmMain(classDescription + Environment.NewLine + IntroMessage))
+            using (frmMain mainScren = new frmMain(MainGame, classDescription + Environment.NewLine + IntroMessage))
+            {
                 mainScren.ShowDialog();
-            currentForm.Show();
+            }
+            this.Close();
         }
 
         private void btnSoldier_Click(object sender, EventArgs e)
         {
             //Change player class and get class specific intro part to append to beginning of intro text.
-            var classDescription = MainGame.SelectClass(PlayerName, lblSoldier.Text);
+            string classDescription = MainGame.SelectClass(MainGame.PlayerName, lblSoldier.Text);
 
-            //Open Class Choice Form
-            Form currentForm = Form.ActiveForm;
-            currentForm.Hide();
+            //Open Main Form
+            this.Hide();
 
-            using (frmMain mainScren = new frmMain(classDescription + Environment.NewLine + IntroMessage))
+            using (frmMain mainScren = new frmMain(MainGame, classDescription + Environment.NewLine + IntroMessage))
+            {
                 mainScren.ShowDialog();
-            currentForm.Show();
+            }
+            this.Close();
+
         }
 
         private void btnArcher_Click(object sender, EventArgs e)
         {
-            var classDescription = MainGame.SelectClass(PlayerName, lblArcher.Text);
+            string classDescription = MainGame.SelectClass(MainGame.PlayerName, lblArcher.Text);
 
             //Open Class Choice Form
-            Form currentForm = Form.ActiveForm;
-            currentForm.Hide();
+            this.Hide();
 
-            using (frmMain mainScren = new frmMain(classDescription + Environment.NewLine + IntroMessage))
+            using (frmMain mainScren = new frmMain(MainGame, classDescription + Environment.NewLine + IntroMessage))
+            {
                 mainScren.ShowDialog();
-            currentForm.Show();
+            }
+            this.Close();
         }
 
         private void btnGiant_Click(object sender, EventArgs e)
         {
-            var classDescription = MainGame.SelectClass(PlayerName, lblGiant.Text);
+            string classDescription = MainGame.SelectClass(MainGame.PlayerName, lblGiant.Text);
 
             //Open Class Choice Form
-            Form currentForm = Form.ActiveForm;
-            currentForm.Hide();
+            this.Hide();
 
-            using (frmMain mainScren = new frmMain(classDescription + Environment.NewLine + IntroMessage))
+            using (frmMain mainScren = new frmMain(MainGame, classDescription + Environment.NewLine + IntroMessage))
+            {
                 mainScren.ShowDialog();
-            currentForm.Show();
+            }
+            this.Close();
         }
     }
 }

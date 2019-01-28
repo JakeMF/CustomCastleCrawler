@@ -11,6 +11,9 @@ namespace CustomCastleCrawler
 {
     public partial class frmStartup : Form
     {
+        //Initialize MainGame class 
+        public MainGame MainGame = new MainGame();
+
         public frmStartup()
         {
             InitializeComponent();
@@ -23,7 +26,16 @@ namespace CustomCastleCrawler
 
             if (!string.IsNullOrEmpty(playerName) && !string.IsNullOrWhiteSpace(playerName))
             {
-                MainGame.StartGame(playerName, true);
+                var introString = MainGame.StartGame(playerName, true);
+
+                //Open Class Choice Form
+                this.Hide();
+
+                using (frmClassSelection classSelection = new frmClassSelection(MainGame, introString))
+                {
+                    classSelection.ShowDialog();
+                }
+                this.Close();
             }
             else
             {
@@ -33,21 +45,30 @@ namespace CustomCastleCrawler
 
         private void btnLoad_Click(object sender, EventArgs e)
         {
-            var playerName = txtName.Text;
-
+            string playerName = txtName.Text;
+            string introString;
             if (!string.IsNullOrEmpty(playerName) && !string.IsNullOrWhiteSpace(playerName))
             {
                 //Run Load Game method. This will in turn build the game.
                 if(MainGame.LoadProgress(playerName, false))
                 {
                     //Save successfully loaded
-                    MainGame.StartGame(playerName, false);
+                    introString = MainGame.StartGame(playerName, false);
                 }
                 else
                 {
                     //Save was not loaded
-                    MainGame.StartGame(playerName, true);
+                    introString = MainGame.StartGame(playerName, true);
                 }
+
+                //Open Class Choice Form
+                this.Hide();
+
+                using (frmClassSelection classSelection = new frmClassSelection(MainGame, introString))
+                {
+                    classSelection.ShowDialog();
+                }
+                this.Close();
             }
             else
             {

@@ -19,8 +19,8 @@
             this.lblNotes = new System.Windows.Forms.Label();
             this.lblStats = new System.Windows.Forms.Label();
             this.lblEquipment = new System.Windows.Forms.Label();
-            this.richTextBox2 = new System.Windows.Forms.RichTextBox();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.txtMainOutput = new System.Windows.Forms.RichTextBox();
+            this.txtNotes = new System.Windows.Forms.RichTextBox();
             this.btn_Equip = new System.Windows.Forms.Button();
             this.btnStats = new System.Windows.Forms.Button();
             this.btnWest = new System.Windows.Forms.Button();
@@ -30,8 +30,11 @@
             this.menuBar = new System.Windows.Forms.MenuStrip();
             this.mnuMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuSave = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuLoad = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuExit = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuClearConsole = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuHelp = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuExploration = new System.Windows.Forms.ToolStripMenuItem();
+            this.combatToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuBar.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -65,24 +68,23 @@
             this.lblEquipment.TabIndex = 23;
             this.lblEquipment.Text = "Equipment";
             // 
-            // richTextBox2
+            // txtMainOutput
             // 
-            this.richTextBox2.Font = new System.Drawing.Font("Britannic Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.richTextBox2.Location = new System.Drawing.Point(13, 59);
-            this.richTextBox2.Name = "richTextBox2";
-            this.richTextBox2.Size = new System.Drawing.Size(578, 284);
-            this.richTextBox2.TabIndex = 21;
-            this.richTextBox2.Text = "";
+            this.txtMainOutput.Font = new System.Drawing.Font("Britannic Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtMainOutput.Location = new System.Drawing.Point(13, 59);
+            this.txtMainOutput.Name = "txtMainOutput";
+            this.txtMainOutput.Size = new System.Drawing.Size(578, 284);
+            this.txtMainOutput.TabIndex = 21;
+            this.txtMainOutput.Text = "";
             // 
-            // richTextBox1
+            // txtNotes
             // 
-            this.richTextBox1.Font = new System.Drawing.Font("Britannic Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.richTextBox1.Location = new System.Drawing.Point(342, 500);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(249, 138);
-            this.richTextBox1.TabIndex = 20;
-            this.richTextBox1.Text = "Lots of zombies west - low dmg, high health. Skeletons further east - med dmg, me" +
-    "d health. When heading east, remember to watch out for necromancers.";
+            this.txtNotes.Font = new System.Drawing.Font("Britannic Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtNotes.Location = new System.Drawing.Point(342, 500);
+            this.txtNotes.Name = "txtNotes";
+            this.txtNotes.Size = new System.Drawing.Size(249, 138);
+            this.txtNotes.TabIndex = 20;
+            this.txtNotes.Text = "";
             // 
             // btn_Equip
             // 
@@ -95,6 +97,7 @@
             this.btn_Equip.Size = new System.Drawing.Size(75, 75);
             this.btn_Equip.TabIndex = 19;
             this.btn_Equip.UseVisualStyleBackColor = true;
+            this.btn_Equip.Click += new System.EventHandler(this.btn_Equip_Click);
             // 
             // btnStats
             // 
@@ -107,6 +110,7 @@
             this.btnStats.Size = new System.Drawing.Size(75, 75);
             this.btnStats.TabIndex = 18;
             this.btnStats.UseVisualStyleBackColor = true;
+            this.btnStats.Click += new System.EventHandler(this.btnStats_Click);
             // 
             // btnWest
             // 
@@ -117,6 +121,7 @@
             this.btnWest.Size = new System.Drawing.Size(75, 75);
             this.btnWest.TabIndex = 17;
             this.btnWest.UseVisualStyleBackColor = true;
+            this.btnWest.Click += new System.EventHandler(this.btnWest_Click);
             // 
             // btnSouth
             // 
@@ -127,6 +132,7 @@
             this.btnSouth.Size = new System.Drawing.Size(75, 75);
             this.btnSouth.TabIndex = 16;
             this.btnSouth.UseVisualStyleBackColor = true;
+            this.btnSouth.Click += new System.EventHandler(this.btnSouth_Click);
             // 
             // btnEast
             // 
@@ -137,6 +143,7 @@
             this.btnEast.Size = new System.Drawing.Size(75, 75);
             this.btnEast.TabIndex = 15;
             this.btnEast.UseVisualStyleBackColor = true;
+            this.btnEast.Click += new System.EventHandler(this.btnEast_Click);
             // 
             // btnNorth
             // 
@@ -147,11 +154,14 @@
             this.btnNorth.Size = new System.Drawing.Size(75, 75);
             this.btnNorth.TabIndex = 14;
             this.btnNorth.UseVisualStyleBackColor = true;
+            this.btnNorth.Click += new System.EventHandler(this.btnNorth_Click);
             // 
             // menuBar
             // 
             this.menuBar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuMenu});
+            this.mnuMenu,
+            this.mnuClearConsole,
+            this.mnuHelp});
             this.menuBar.Location = new System.Drawing.Point(0, 0);
             this.menuBar.Name = "menuBar";
             this.menuBar.Size = new System.Drawing.Size(609, 24);
@@ -162,7 +172,6 @@
             // 
             this.mnuMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnuSave,
-            this.mnuLoad,
             this.mnuExit});
             this.mnuMenu.Font = new System.Drawing.Font("Britannic Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.mnuMenu.Name = "mnuMenu";
@@ -172,20 +181,48 @@
             // mnuSave
             // 
             this.mnuSave.Name = "mnuSave";
-            this.mnuSave.Size = new System.Drawing.Size(102, 22);
+            this.mnuSave.Size = new System.Drawing.Size(180, 22);
             this.mnuSave.Text = "&Save";
-            // 
-            // mnuLoad
-            // 
-            this.mnuLoad.Name = "mnuLoad";
-            this.mnuLoad.Size = new System.Drawing.Size(102, 22);
-            this.mnuLoad.Text = "&Load";
+            this.mnuSave.Click += new System.EventHandler(this.mnuSave_Click);
             // 
             // mnuExit
             // 
             this.mnuExit.Name = "mnuExit";
-            this.mnuExit.Size = new System.Drawing.Size(102, 22);
+            this.mnuExit.Size = new System.Drawing.Size(180, 22);
             this.mnuExit.Text = "E&xit";
+            this.mnuExit.Click += new System.EventHandler(this.mnuExit_Click);
+            // 
+            // mnuClearConsole
+            // 
+            this.mnuClearConsole.Font = new System.Drawing.Font("Britannic Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.mnuClearConsole.Name = "mnuClearConsole";
+            this.mnuClearConsole.Size = new System.Drawing.Size(99, 20);
+            this.mnuClearConsole.Text = "&Clear Console";
+            this.mnuClearConsole.Click += new System.EventHandler(this.clearConsoleToolStripMenuItem_Click_1);
+            // 
+            // mnuHelp
+            // 
+            this.mnuHelp.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnuExploration,
+            this.combatToolStripMenuItem});
+            this.mnuHelp.Font = new System.Drawing.Font("Britannic Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.mnuHelp.Name = "mnuHelp";
+            this.mnuHelp.Size = new System.Drawing.Size(45, 20);
+            this.mnuHelp.Text = "&Help";
+            // 
+            // mnuExploration
+            // 
+            this.mnuExploration.Name = "mnuExploration";
+            this.mnuExploration.Size = new System.Drawing.Size(180, 22);
+            this.mnuExploration.Text = "&Exploration";
+            this.mnuExploration.Click += new System.EventHandler(this.mnuExploration_Click);
+            // 
+            // combatToolStripMenuItem
+            // 
+            this.combatToolStripMenuItem.Name = "combatToolStripMenuItem";
+            this.combatToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.combatToolStripMenuItem.Text = "&Combat";
+            this.combatToolStripMenuItem.Click += new System.EventHandler(this.combatToolStripMenuItem_Click);
             // 
             // frmMain
             // 
@@ -195,8 +232,8 @@
             this.Controls.Add(this.lblNotes);
             this.Controls.Add(this.lblStats);
             this.Controls.Add(this.lblEquipment);
-            this.Controls.Add(this.richTextBox2);
-            this.Controls.Add(this.richTextBox1);
+            this.Controls.Add(this.txtMainOutput);
+            this.Controls.Add(this.txtNotes);
             this.Controls.Add(this.btn_Equip);
             this.Controls.Add(this.btnStats);
             this.Controls.Add(this.btnWest);
@@ -220,8 +257,8 @@
         private System.Windows.Forms.Label lblNotes;
         private System.Windows.Forms.Label lblStats;
         private System.Windows.Forms.Label lblEquipment;
-        private System.Windows.Forms.RichTextBox richTextBox2;
-        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.RichTextBox txtMainOutput;
+        private System.Windows.Forms.RichTextBox txtNotes;
         private System.Windows.Forms.Button btn_Equip;
         private System.Windows.Forms.Button btnStats;
         private System.Windows.Forms.Button btnWest;
@@ -231,7 +268,10 @@
         private System.Windows.Forms.MenuStrip menuBar;
         private System.Windows.Forms.ToolStripMenuItem mnuMenu;
         private System.Windows.Forms.ToolStripMenuItem mnuSave;
-        private System.Windows.Forms.ToolStripMenuItem mnuLoad;
         private System.Windows.Forms.ToolStripMenuItem mnuExit;
+        private System.Windows.Forms.ToolStripMenuItem mnuClearConsole;
+        private System.Windows.Forms.ToolStripMenuItem mnuHelp;
+        private System.Windows.Forms.ToolStripMenuItem mnuExploration;
+        private System.Windows.Forms.ToolStripMenuItem combatToolStripMenuItem;
     }
 }

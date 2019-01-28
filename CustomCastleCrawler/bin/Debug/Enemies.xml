@@ -9,7 +9,7 @@
 		<Points>20</Points>
 		<SpawnZone>0</SpawnZone>
 	</Enemy>
-	<Enemy id="Zombie">
+	<Enemy>
 		<Name>Zombie</Name>
 		<Health>100</Health>
 		<BaseDMG>15</BaseDMG>
@@ -19,7 +19,7 @@
 		<Points>20</Points>
 		<SpawnZone>0</SpawnZone>
 	</Enemy>
-	<Enemy id="Orc">
+	<Enemy>
 		<Name>Orc</Name>
 		<Health>175</Health>
 		<BaseDMG>15</BaseDMG>
@@ -27,9 +27,9 @@
 		<Defence>85</Defence>
 		<Evasion>85</Evasion>
 		<Points>20</Points>
-		<SpawnZone>0</SpawnZone>
+		<SpawnZone>1</SpawnZone>
 	</Enemy>
-	<Enemy id="Goblin">
+	<Enemy>
 		<Name>Goblin</Name>
 		<Health>90</Health>
 		<BaseDMG>15</BaseDMG>
@@ -37,6 +37,6 @@
 		<Defence>85</Defence>
 		<Evasion>85</Evasion>
 		<Points>20</Points>
-		<SpawnZone>0</SpawnZone>
+		<SpawnZone>1</SpawnZone>
 	</Enemy>
 </Enemies>

@@ -1,14 +1,17 @@
 <Settings>
-	<MapSize>
-		<XMax>25</XMax>
-		<YMax>55</YMax>
-	</MapSize>
 	<StartingPosition>
-		<DefaultX>1</DefaultX>
-		<DefaultY>1</DefaultY>
+		<DefaultX>3</DefaultX>
+		<DefaultY>3</DefaultY>
 	</StartingPosition>
-	<GameName>Lordran</GameName>
-	<GameFlavorText>Welcome to Lordran hollow, may your stay be...pleasant.</GameFlavorText>
+	<MapSize>
+		<XMax>5</XMax>
+		<YMax>5</YMax>
+	</MapSize>
+	<FlavorSettings>
+		<GameName>Iscandal</GameName>
+		<!--If this is long, you may wish to insert line feeds. To start a new line, use '\n'.-->
+		<GameFlavorText>Welcome to the land of Iscandal Adventurer You can use the four arrows to move North, South, East, and West. You may encounter enemies, find treasure, or discover secrets. If you encounter an enemy, you will be taken into another menu for the combat phase. Explore, fight, and gain power; it is all that will keep you alive.</GameFlavorText>
+	</FlavorSettings>
 	<!--There MUST BE 4 classes here, additional classes will be ignored. Having less than 4 classes will cause the game to be unplayable.-->
 	<Classes>
 		<Class>
@@ -21,16 +24,19 @@
 			<Name>Knight</Name>
 			<Armor>Silver Knight Armor</Armor>
 			<Weapon>Claymore</Weapon>
+			<ClassDescription>A medium,</ClassDescription>
 		</Class>
 		<Class>
 			<Name>Archer</Name>
 			<Armor>Leather Armor</Armor>
 			<Weapon>Longbow</Weapon>
+			<ClassDescription>A medium,</ClassDescription>
 		</Class>
 		<Class>
 			<Name>Giant</Name>
 			<Armor>Giant Armor</Armor>
 			<Weapon>Great Club</Weapon>
+			<ClassDescription>A medium,</ClassDescription>
 		</Class>
 	</Classes>
 </Settings>
