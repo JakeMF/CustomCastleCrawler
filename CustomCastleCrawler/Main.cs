@@ -85,37 +85,62 @@ namespace CustomCastleCrawler
         #region Movement Buttons 
         private void btnNorth_Click(object sender, EventArgs e)
         {
-            var output = MainGame.EvaluateInput("north");
-
-            txtMainOutput.SelectionAlignment = HorizontalAlignment.Center;
-            txtMainOutput.SelectedText = output;
+            popTextbox(MainGame.EvaluateInput("north"));
         }
 
         private void btnSouth_Click(object sender, EventArgs e)
         {
-            var output = MainGame.EvaluateInput("south");
-
-            txtMainOutput.SelectionAlignment = HorizontalAlignment.Center;
-            txtMainOutput.SelectedText = output;
-
+            popTextbox(MainGame.EvaluateInput("south"));
         }
 
         private void btnEast_Click(object sender, EventArgs e)
         {
-            var output = MainGame.EvaluateInput("east");
-
-            txtMainOutput.SelectionAlignment = HorizontalAlignment.Center;
-            txtMainOutput.SelectedText = output;
-
+            popTextbox(MainGame.EvaluateInput("east"));
         }
 
         private void btnWest_Click(object sender, EventArgs e)
         {
-            var output = MainGame.EvaluateInput("west");
+            popTextbox(MainGame.EvaluateInput("west"));
+        }
+
+        private void popTextbox(string output)
+        {
+            if (output.Contains("|"))
+            {
+                //split output
+                var outArray = output.Split('|');
+                var type = outArray.Length > 0 ? outArray[0] : "";
+                var outputMessage = outArray.Length > 1 ? outArray[1] : "";
+
+                if(type == "NewWeapon")
+                {
+                    this.Hide();
+
+                    using (frmSwapEquipment frmSwapEquipment = new frmSwapEquipment(MainGame, MainGame.GetPlayerWeapon(), MainGame.TempWeapon))
+                    {
+                        frmSwapEquipment.ShowDialog();
+                    }
+                    this.Show();
+                }
+                else if (type == "NewArmor")
+                {
+                    this.Hide();
+
+                    using (frmSwapEquipment frmSwapEquipment = new frmSwapEquipment(MainGame, MainGame.GetPlayerArmor(), MainGame.TempArmor))
+                    {
+                        frmSwapEquipment.ShowDialog();
+                    }
+                    this.Show();
+                }
+                else
+                {
+                    //type unknown
+                    MessageBox.Show("Error loading equipment found. Please restart the game WITHOUT SAVING");
+                }
+            }
 
             txtMainOutput.SelectionAlignment = HorizontalAlignment.Center;
             txtMainOutput.SelectedText = output;
-
         }
         #endregion
 

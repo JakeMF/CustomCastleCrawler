@@ -17,18 +17,65 @@ namespace CustomCastleCrawler
             this.MainGame = MainGame;
 
             InitializeComponent();
-            richTextBox2.SelectionAlignment = HorizontalAlignment.Center;
-
-            grpPlayer.Text = this.MainGame.PlayerName;
+            txtCombatLog.SelectionAlignment = HorizontalAlignment.Center;
+            //Ensure that the name is not too long to fit the control
+            grpPlayer.Text = this.MainGame.PlayerName.Length <= 21 ? this.MainGame.PlayerName : this.MainGame.PlayerName.Substring(0, 18) + "...";
 
             if (this.MainGame.ActiveEnemy)
             {
                 Enemy currentEnemy = this.MainGame.CurrentEnemy;
 
-                grpEnemy.Text = currentEnemy.Name;
+                //Ensure that the name is not too long to fit the control
+                grpEnemy.Text = currentEnemy.Name.Length <= 21 ? currentEnemy.Name : currentEnemy.Name.Substring(0, 18) + "...";
                 lblEnemyHealth.Text = currentEnemy.CurrentHealth + "/" + currentEnemy.MaxHealth;
             }
             
         }
+
+        private void btnAttack_Click(object sender, EventArgs e)
+        {
+            //Call attack function
+            string combatResults = MainGame.BattleEnemy("attack");
+
+            var resArray = combatResults.Split('|');
+
+            lblPlayerHealth.Text = resArray.Length > 0 ? resArray[0] : "Er/Er";
+            lblPlayerStamina.Text = resArray.Length > 1 ? resArray[1] : "Er/Er";
+            txtCombatLog.Text = resArray.Length > 2 ? resArray[2] : "Error retrieving combat information. Please restart game WITHOUT SAVING.";
+        }
+
+        private void btnBlock_Click(object sender, EventArgs e)
+        {
+            //call block function
+            string combatResults = MainGame.BattleEnemy("block");
+
+            var resArray = combatResults.Split('|');
+
+            lblPlayerHealth.Text = resArray.Length > 0 ? resArray[0] : "Er/Er";
+            lblPlayerStamina.Text = resArray.Length > 1 ? resArray[1] : "Er/Er";
+            txtCombatLog.Text = resArray.Length > 2 ? resArray[2] : "Error retrieving combat information. Please restart game WITHOUT SAVING.";
+        }
+
+        private void btnHeal_Click(object sender, EventArgs e)
+        {
+            string healResults = MainGame.healPlayer();
+            var resArray = healResults.Split('|');
+
+            lblPlayerHealth.Text = resArray.Length > 0 ? resArray[0] : "Er/Er";
+            lblPlayerStamina.Text = resArray.Length > 1 ? resArray[1] : "Er/Er";
+            txtCombatLog.Text = resArray.Length > 2 ? resArray[2] : "Error retrieving combat information. Please restart game WITHOUT SAVING.";
+        }
+
+        private void btnEscape_Click(object sender, EventArgs e)
+        {
+            string escapeResults = MainGame.EscapeAttempt();
+
+            var resArray = escapeResults.Split('|');
+
+            lblPlayerHealth.Text = resArray.Length > 0 ? resArray[0] : "Er/Er";
+            lblPlayerStamina.Text = resArray.Length > 1 ? resArray[1] : "Er/Er";
+            txtCombatLog.Text = resArray.Length > 2 ? resArray[2] : "Error retrieving combat information. Please restart game WITHOUT SAVING.";
+        }
+
     }
 }

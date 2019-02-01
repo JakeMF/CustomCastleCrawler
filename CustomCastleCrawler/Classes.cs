@@ -94,7 +94,9 @@ namespace CustomCastleCrawler
         public string GameFlavorText { get; set; }
         public int StartingX { get; set; }
         public int StartingY { get; set; }
+        public int MaxEstus { get; set; }
         public List<StartingClass> Classes = new List<StartingClass>();
+        
         public GameData()
         {
             LoadGameData();
@@ -261,6 +263,7 @@ namespace CustomCastleCrawler
         public int WeaponChance;
         public int ArmorChance;
         public int ScoreItemChance;
+        public int RestLocation;
 
         public Event()
         {
@@ -272,6 +275,7 @@ namespace CustomCastleCrawler
             WeaponChance = 0;
             ArmorChance = 0;
             ScoreItemChance = 0;
+            RestLocation = 0;
         }
     }
 
@@ -353,10 +357,11 @@ namespace CustomCastleCrawler
             Evasion = 0;
         }
         //Constructor with all values
-        public Weapon(string Name, int Value, int BDamage, int APDamage, int Evasion)
+        public Weapon(string Name, int Value, string Description, int BDamage, int APDamage, int Evasion)
         {
             this.Name = Name;
             this.Value = Value;
+            this.Description = Description;
             this.BDamage = BDamage;
             this.APDamage = APDamage;
             this.Evasion = Evasion;
@@ -379,10 +384,11 @@ namespace CustomCastleCrawler
             Evasion = 0;
         }
         //Constructor with all values, no default constructor because gear would be useless otherwise.
-        public Armor(string Name, int Value, int ArmorVal, int Evasion)
+        public Armor(string Name, int Value, string Description, int ArmorVal, int Evasion)
         {
             this.Name = Name;
             this.Value = Value;
+            this.Description = Description;
             this.ArmorVal = ArmorVal;
             this.Evasion = Evasion;
         }
@@ -394,16 +400,21 @@ namespace CustomCastleCrawler
         public string Name { get; }
         private int MaxHealth;
         private int Health;
-        private Weapon Weapon = new Weapon();
-        private Armor Armor = new Armor();
-        public int Score = 0;
+        private int MaxStamina;
+        private int Stamina;
+        public Weapon Weapon { get; set; }
+        public Armor Armor { get; set; }
+        public int Score { get; set; }
         public int EnemiesKilled = 0;
+        public int Estus;
+        public int MaxEstus;
         //Default constructor
         public Player()
         {
             Name = "Nameless Hollow";
             MaxHealth = 1200;
             Health = MaxHealth;
+            Score = 0;
         }
 
         //Constructor that will be used for new players
@@ -416,14 +427,17 @@ namespace CustomCastleCrawler
 
             Weapon = StartingWeapon;
             Armor = StartingArmor;
+            Score = 0;
         }
 
         //Constructor that will be used to load a saved game
-        public Player(string Name, int MaxHealth, int Health, Weapon Weapon, Armor Armor, int Score)
+        public Player(string Name, int MaxHealth, int Health, int MaxStamina, int Stamina, Weapon Weapon, Armor Armor, int Score)
         {
             this.Name = Name;
             this.MaxHealth = MaxHealth;
             this.Health = Health;
+            this.MaxStamina = MaxStamina;
+            this.Stamina = Stamina;
             this.Weapon = Weapon;
             this.Armor = Armor;
             this.Score = Score;
@@ -438,19 +452,7 @@ namespace CustomCastleCrawler
             data = Name + delim + MaxHealth + delim + Health + delim + Weapon.getName() + delim + Armor.getName() + delim + Score;
             return data;
         }
-
-        //function to get the players weapon
-        public Weapon GetWeapon()
-        {
-            return Weapon;
-        }
-
-        //function to get the players armor
-        public Armor GetArmor()
-        {
-            return Armor;
-        }
-
+        
         //function to get the players evasion
         public int GetEvasion()
         {
@@ -465,78 +467,67 @@ namespace CustomCastleCrawler
             }
         }
 
-        //function that causes the player to take damage
+        //function that causes the player to take damage. Can be used to simply return health if 0 is passed.
         public int Injure(int dmg)
         {
             Health -= dmg;
             return Health;
         }
 
-        //function to replace players weapon
-        public void SwapWeapon(Weapon newWeapon)
+        public string DrinkEstus()
         {
-            string response;
-
-            Console.WriteLine("You have found a(n) " + newWeapon.getName() + " here is how it compares to your " + Weapon.getName() + ":");
-            Console.WriteLine();
-            Console.WriteLine("Standard   " + Weapon.BDamage + " -> " + newWeapon.BDamage);
-            Console.WriteLine("Armor Piercing     " + Weapon.APDamage + " -> " + newWeapon.APDamage);
-            Console.WriteLine();
-            Console.WriteLine("Do you want to swap weapons?(Y/N)");
-
-            response = Console.ReadLine();
-            if (response.ToLower() == "y")
+            if(Estus > 0 && Estus < MaxEstus)
             {
-                Weapon = newWeapon;
-                Console.WriteLine("You are now using the " + newWeapon.getName());
+                Estus--;
+                Health = MaxHealth;
+                return "You drank from your health flask, you have been healed. " + Estus + " sips remaining.";
             }
             else
             {
-                Console.WriteLine("Are you sure? The weapon will be lost forever.");
-                response = Console.ReadLine();
-                if (response.ToLower() == "y")
-                {
-                    Weapon = newWeapon;
-                    Console.WriteLine("You are now using the " + newWeapon.getName());
-                }
-                else
-                {
-                    Console.WriteLine("You left the " + newWeapon.getName() + " behind.");
-                }
+                return "Your health flask is empty. You need to find a rest location to heal again.";
+            }
+
+            
+        }
+
+        public string RefillEstus()
+        {
+            Estus = MaxEstus;
+            return "Your healing flask has been filled. " + Estus + " sips remaining.";
+        }
+        
+        //Function to perform a stamin draining action. Returns true if action could be completed with current stam, false if not enough stam.
+        public bool PerformAction(int StaminaCost)
+        {
+            int tempStam = Stamina;
+            Stamina -= StaminaCost;
+
+            if(Stamina > 0)
+            {
+                return true;
+            }
+            else
+            {
+                Stamina = tempStam;
+                return false;
             }
         }
 
-        //function to replace players weapon
-        public void SwapArmor(Armor newArmor)
+        public int RegenStamina(int Regen)
         {
-            string response;
+            Stamina += Regen;
 
-            Console.WriteLine("You have found a(n) " + newArmor.getName() + " here is how it compares to your " + Weapon.getName() + ":");
-            Console.WriteLine();
-            Console.WriteLine("Physical   " + Armor.ArmorVal + " -> " + newArmor.ArmorVal);
-            Console.WriteLine();
-            Console.WriteLine("Would you like to swap armor sets?(Y/N)");
+            if(Stamina > MaxStamina)
+            {
+                Stamina = MaxStamina;
+            }
 
-            response = Console.ReadLine();
-            if (response.ToLower() == "y")
-            {
-                Armor = newArmor;
-                Console.WriteLine("You are now wearing the " + newArmor.getName());
-            }
-            else
-            {
-                Console.WriteLine("Are you sure? The armor will be lost forever.");
-                response = Console.ReadLine();
-                if (response.ToLower() == "y")
-                {
-                    Armor = newArmor;
-                    Console.WriteLine("You are now wearing the " + newArmor.getName());
-                }
-                else
-                {
-                    Console.WriteLine("You left the " + newArmor.getName() + " behind.");
-                }
-            }
+            return Stamina;
+        }
+
+        public string GetHealthAndStamina()
+        {
+            return Health + "/" + MaxHealth + "|" + Stamina + "/" + MaxStamina;
         }
     }
 
@@ -607,6 +598,9 @@ namespace CustomCastleCrawler
         public Enemy CurrentEnemy { get; set; }
         public bool ActiveEnemy { get; set; }
 
+        public Weapon TempWeapon;
+        public Armor TempArmor;
+
         //Load map size
         private GameData GameConfigurations = new GameData();
         //multi_array of MapTiles for the map
@@ -667,13 +661,15 @@ namespace CustomCastleCrawler
 
                 //Add Custom Flavor Text
                 introMessage.AppendLine(GameConfigurations.GameFlavorText);
+                introMessage.AppendLine();
+                introMessage.AppendLine();
 
                 //Add Instructions
-                introMessage.AppendLine("You can move around the map by using the four arrow buttons 'north', 'south', 'east', and 'west'.");
+                introMessage.Append("You can move around the map by using the four arrow buttons 'north', 'south', 'east', and 'west'.");
                 //ToDo: Add good instructions
-                introMessage.AppendLine("If you encounter an enemy, attack them by pressing the Sword icon, or surrender yourself to the enemy by pressing the Flag icon.");
-                introMessage.AppendLine("If you wish to quit the game, type 'StopPlayingArtoria'");
-                introMessage.AppendLine("If you wish to view more detailed information about Game mechanics, type 'help'.");
+                introMessage.Append("If you encounter an enemy, attack them by pressing the Sword icon, or surrender yourself to the enemy by pressing the Flag icon.");
+                introMessage.Append("If you wish to quit the game, use the 'Quit' button located in the Menu Bar. You can also simply click the 'X' to close the window.'");
+                introMessage.Append("If you wish to view more detailed information about Game mechanics, click the 'help' buttons located in the Menu Bar.");
 
             }
             else
@@ -727,12 +723,13 @@ namespace CustomCastleCrawler
                     {
                         EventID = (int)childElem.Element("EventID"),
                         Description = (string)childElem.Element("Description"),
-                        EnemySpawn = (int)childElem.Element("XCoord"),
-                        ItemSpawn = (int)childElem.Element("YCoord"),
-                        NothingSpawn = (int)childElem.Element("XCoord"),
-                        WeaponChance = (int)childElem.Element("YCoord"),
-                        ArmorChance = (int)childElem.Element("XCoord"),
-                        ScoreItemChance = (int)childElem.Element("YCoord")
+                        RestLocation = (int)childElem.Element("RestLocation"),
+                        EnemySpawn = (int)childElem.Element("EnemySpawn"),
+                        ItemSpawn = (int)childElem.Element("ItemSpawn"),
+                        NothingSpawn = (int)childElem.Element("NothingSpawn"),
+                        WeaponChance = (int)childElem.Element("WeaponChance"),
+                        ArmorChance = (int)childElem.Element("ArmorChance"),
+                        ScoreItemChance = (int)childElem.Element("ScoreItemChance")
                     }).ToList();
                 Events = events;
             }
@@ -852,7 +849,7 @@ namespace CustomCastleCrawler
 
         }
 
-        //ToDo: Test Load Funcitonality
+        //ToDo: Test Load Funcitonality or rewrite method entirely
         //Function that will load a player's save from a text file.
         public bool LoadProgress(string name, bool secondPass)
         {
@@ -1101,62 +1098,70 @@ namespace CustomCastleCrawler
                 var eventQuery = from eve in Events where eve.EventID == currentTile.EventID select eve;
                 //If the user followed setup instructions correctly, there should only ever be one Event for each EventID
                 Event currentEvent = eventQuery.First();
-
-                //Check for enemy encounter first.
-                //If EnemySpawn is greater than a random val 1-100 then an enemy was encountered.
-                if (currentEvent.EnemySpawn > RandomGen.rollDie(100))
+                if (currentEvent.RestLocation != 1)
                 {
-                    //An Enemy was encountered
-                    ActiveEnemy = true;
+                    //Check for enemy encounter first.
+                    //If EnemySpawn is greater than a random val 1-100 then an enemy was encountered.
+                    if (currentEvent.EnemySpawn > RandomGen.rollDie(100))
+                    {
+                        //An Enemy was encountered
+                        ActiveEnemy = true;
 
-                    //LINQ Query to grab all enemies that can spawn in this zone.
-                    var enemyQuery = from enem in Enemies where enem.SpawnZone == currentEvent.EnemySpawn select enem;
+                        //LINQ Query to grab all enemies that can spawn in this zone.
+                        var enemyQuery = from enem in Enemies where enem.SpawnZone == currentEvent.EnemySpawn select enem;
 
-                    //Randomly pick an enemy from that list.
-                    var index = RandomGen.rollDie(enemyQuery.Count() - 1);
-                    CurrentEnemy = enemyQuery.ElementAt(index);
-                    
-                    returnString = CurrentEnemy.Name + " has attacked you!";
-                    return returnString;
-                }
-                else if (currentEvent.ItemSpawn > RandomGen.rollDie(100))
-                {
-                    //An item was found, determine what type of item.
-                    var itemGenIndex = RandomGen.rollDie(100);
-                    if(itemGenIndex <= currentEvent.WeaponChance)
-                    {
-                        //Index was between 0 and weapon max, a weapon was found.
-                        GetWeapon();
+                        //Randomly pick an enemy from that list.
+                        var index = RandomGen.rollDie(enemyQuery.Count() - 1);
+                        CurrentEnemy = enemyQuery.ElementAt(index);
+
+                        returnString = CurrentEnemy.Name + " has attacked you!";
+                        return returnString;
                     }
-                    else if (itemGenIndex >currentEvent.WeaponChance && itemGenIndex <= currentEvent.ArmorChance)
+                    else if (currentEvent.ItemSpawn > RandomGen.rollDie(100))
                     {
-                        //index was between weapon max and armor max, armor was found.
-                        GetArmor();
+                        //An item was found, determine what type of item.
+                        var itemGenIndex = RandomGen.rollDie(100);
+                        if (itemGenIndex <= currentEvent.WeaponChance)
+                        {
+                            //Index was between 0 and weapon max, a weapon was found.
+                            TempWeapon = GetNewWeapon();
+                            return "NewWep" + '|' + returnString.ToString();
+                        }
+                        else if (itemGenIndex > currentEvent.WeaponChance && itemGenIndex <= currentEvent.ArmorChance)
+                        {
+                            //index was between weapon max and armor max, armor was found.
+                            TempArmor = GetNewArmor();
+                            return "NewArm" + '|' + returnString.ToString();
+                        }
+                        else if (itemGenIndex > currentEvent.ArmorChance && itemGenIndex <= currentEvent.ScoreItemChance)
+                        {
+                            //index was between armor max and score item max, a score item was found.
+                            returnString += GetNewScoreItem();
+                        }
                     }
-                    else if(itemGenIndex > currentEvent.ArmorChance && itemGenIndex <= currentEvent.ScoreItemChance)
+                    else
                     {
-                        //index was between armor max and score item max, a score item was found.
-                        returnString += GetScoreItem();
+                        //Nothing Happened, return default tile message
+                        return returnString;
                     }
                 }
                 else
                 {
-                    //Nothing Happened, return default tile message
-                    return returnString;
+                    returnString = Player.RefillEstus();
                 }
-
                 //set tempCoords to keep track of last tile.
                 LastCoordinates = Coordinates;
                 LastCoordinates.x = Coordinates.x;
                 LastCoordinates.y = Coordinates.y;
                 return returnString;
             }
+
             //If the method didn't return for a normal reason, just return the tile message.
             return currentTile.Message;
         }
 
         //function to generate a weapon
-        void GetWeapon()
+        Weapon GetNewWeapon()
         {
             //Declare variables for weapon generation
             IEnumerable<Weapon> weapons;
@@ -1171,30 +1176,27 @@ namespace CustomCastleCrawler
                     //a common weapon was found
                     weapons = from wep in Weapons where wep.Rarity == 1 select wep;
                     index = RandomGen.rollDie(weapons.Count() - 1);
-                    Player.SwapWeapon(Weapons[index]);
-                    break;
+                    return Weapons[index];
                 case 3:
                 case 4:
                     //An uncommon weapon was found
                     weapons = from wep in Weapons where wep.Rarity == 2 select wep;
                     index = RandomGen.rollDie(weapons.Count() - 1);
-                    Player.SwapWeapon(Weapons[index]);
-                    break;
+                    return Weapons[index];
                 case 5:
                 case 6:
                     //A rare weapon was found.
                     weapons = from wep in Weapons where wep.Rarity == 3 select wep;
                     index = RandomGen.rollDie(weapons.Count() - 1);
-                    Player.SwapWeapon(Weapons[index]);
-                    break;
+                    return Weapons[index];
                 default:
                     //Should never reach this point...
-                    break;
+                    return new Weapon();
             }
         }
 
         //function to generate armor
-        void GetArmor()
+        Armor GetNewArmor()
         {
             //Declare variables for armor generation
             IEnumerable<Armor> armors;
@@ -1209,29 +1211,26 @@ namespace CustomCastleCrawler
                     //Common armor was found
                     armors = from arm in Armors where arm.Rarity == 1 select arm;
                     index = RandomGen.rollDie(armors.Count() - 1);
-                    Player.SwapArmor(Armors[index]);
-                    break;
+                    return Armors[index];
                 case 3:
                 case 4:
                     //Uncommon armor was found
                     armors = from arm in Armors where arm.Rarity == 2 select arm;
                     index = RandomGen.rollDie(armors.Count() - 1);
-                    Player.SwapArmor(Armors[index]);
-                    break;
+                    return Armors[index];
                 case 5:
                 case 6:
                     //Rare armor was found.
                     armors = from arm in Armors where arm.Rarity == 3 select arm;
                     index = RandomGen.rollDie(armors.Count() - 1);
-                    Player.SwapArmor(Armors[index]);
-                    break;
+                    return Armors[index];
                 default:
                     //Should never reach this point...
-                    break;
+                    return new Armor();
             }
         }
 
-        string GetScoreItem()
+        string GetNewScoreItem()
         {
             //Get random value to determine what item was found
             var index = RandomGen.rollDie(Items.Count() - 1);
@@ -1245,33 +1244,52 @@ namespace CustomCastleCrawler
         }
 
         //function to initiate a round of combat with the current enemy.
-        void BattleEnemy()
+        public string BattleEnemy(string action)
         {
+            //Stringbuilder to return
+            var returnString = new StringBuilder();
+
             //Get Data for player and enemy: Attack Ratings, Defense Ratings, Evasion.
-            #region Get Values
+
             //enemy data
             int enemyBaseDamage = CurrentEnemy.Damage;
             int enemyAPDamage = CurrentEnemy.ApDamage;
 
             //Turn values into doubles for multiplication
-            double enemyPhysicalDef = CurrentEnemy.Defence;
+            double enemyPhysicalDef = CurrentEnemy.Defence / 100;
 
             int enemyDodgeChance = CurrentEnemy.Evasion;
 
             //player data
-            int playerBaseDamage = Player.GetWeapon().BDamage;
-            int playerAPDamage = Player.GetWeapon().APDamage;
+            int playerBaseDamage = Player.Weapon.BDamage;
+            int playerAPDamage = Player.Weapon.APDamage;
 
             //Turn values into doubles for multiplication
-            double playerDefence = Player.GetWeapon().BDamage;
+            double playerDefence = Player.Armor.ArmorVal / 100;
 
             int playerEvasion = Player.GetEvasion();
-            
-            #endregion
 
             int playerDamageTaken = 0;
             int enemyDamageTaken = 0;
 
+            if (action == "block")
+            {
+                enemyBaseDamage /= 2;
+                enemyAPDamage /= 2;
+                returnString.AppendLine("You have blocked the enemy's attack, you will take half damage and regain some stamina.");
+                Player.RegenStamina(10);
+            }
+            else
+            {
+                if(!Player.PerformAction(10))
+                {
+                    returnString.AppendLine("You do not have enough stamin to attack. Block to regen some stamina.");
+
+                    //return pipe separated value to populate controls.
+                    return Player.GetHealthAndStamina() + "|" + returnString.ToString();
+                }
+            }
+            
             //Calculate damage enemy deals
             playerDamageTaken += (enemyBaseDamage - Convert.ToInt32(Math.Ceiling((enemyBaseDamage * playerDefence))));
             playerDamageTaken += enemyAPDamage;
@@ -1284,48 +1302,46 @@ namespace CustomCastleCrawler
 
             if (playerEvasion > RandomGen.rollDie(100))
             {
-                Console.WriteLine("You dodged the " + CurrentEnemy.Name + "'s attack!");
+                //The player dodged the attack
+                returnString.AppendLine("You dodged the " + CurrentEnemy.Name + "'s attack!");
             }
             else
             {
-                if (enemyDodgeChance > RandomGen.rollDie(100))
+                //Check if player died
+                int playerHealthLeft = Player.Injure(playerDamageTaken);
+                if (playerHealthLeft < 1)
                 {
-                    Console.WriteLine("The" + CurrentEnemy.Name + " has dodged your attack!");
+                    PlayerDied = true;
+                    //EXIT GAME
+                }
+                
+            }
+
+            if (enemyDodgeChance > RandomGen.rollDie(100))
+            {
+                returnString.AppendLine("The" + CurrentEnemy.Name + " has dodged your attack!");
+            }
+            else
+            {
+                //Check if enemy died
+                int enemyHP = 0;
+                enemyHP = CurrentEnemy.Injure(enemyDamageTaken);
+                if (!(enemyHP < 1))
+                {
+                    returnString.AppendLine("The enemy remains with " + enemyHP + " health.");
                 }
                 else
                 {
-                    Console.WriteLine("You have traded blows with the " + CurrentEnemy.Name + "." + Environment.NewLine + "You have taken " + playerDamageTaken + " damage and dealt " + enemyDamageTaken + " damage.");
+                    //Add to player's score and kill count
+                    Player.Score += CurrentEnemy.Score;
+                    Player.EnemiesKilled++;
+
+                    returnString.AppendLine("You have defeated the " + CurrentEnemy.Name + ", " + CurrentEnemy.Score + " was added to your kill score.");
+                    ActiveEnemy = false;
                 }
             }
 
-            //Check if player died
-            int playerHealthLeft = Player.Injure(playerDamageTaken);
-            if (playerHealthLeft < 1)
-            {
-                PlayerDied = true;
-                //EXIT GAME
-            }
-            else
-            {
-                Console.WriteLine("You have " + playerHealthLeft + " health left.");
-            }
-
-            //Check if enemy died
-            int enemyHP = 0;
-            enemyHP = CurrentEnemy.Injure(enemyDamageTaken);
-            if (!(enemyHP < 1))
-            {
-                Console.WriteLine("The enemy remains with " + enemyHP + " health.");
-            }
-            else
-            {
-                //Add to player's score and kill count
-                Player.Score += CurrentEnemy.Score;
-                Player.EnemiesKilled++;
-
-                Console.WriteLine("You have defeated the " + CurrentEnemy.Name + ", " + CurrentEnemy.Score + " was added to your kill score.");
-                ActiveEnemy = false;
-            }
+            return Player.GetHealthAndStamina() + "|" + returnString.ToString();
         }
 
         //function to find a weapon based on its name
@@ -1362,8 +1378,8 @@ namespace CustomCastleCrawler
         public string GenerateEquipmentList()
         {
             var returnString = new StringBuilder();
-            Weapon currentWeapon = Player.GetWeapon();
-            Armor currentArmor = Player.GetArmor();
+            Weapon currentWeapon = Player.Weapon;
+            Armor currentArmor = Player.Armor;
             
             //Weapon
             returnString.AppendLine("Weapon");
@@ -1393,14 +1409,76 @@ namespace CustomCastleCrawler
 
             returnString.AppendLine(Player.Name);
             returnString.AppendLine();
-            returnString.AppendLine("Final Weapon: " + Player.GetWeapon().Name + " Rarity " + Player.GetWeapon().Rarity);
-            returnString.AppendLine("Final Armor: " + Player.GetArmor().Name + " Rarity " + Player.GetArmor().Rarity);
+            returnString.AppendLine("Final Weapon: " + Player.Weapon.Name + " Rarity " + Player.Weapon.Rarity);
+            returnString.AppendLine("Final Armor: " + Player.Armor.Name + " Rarity " + Player.Armor.Rarity);
             returnString.AppendLine();
             returnString.AppendLine("Enemies Defeated: " + Player.EnemiesKilled);
             returnString.AppendLine("Points earned: " + Player.Score);
 
             return returnString.ToString();
 
+        }
+
+        public void SwapWeapon(Weapon newWeapon)
+        {
+            Player.Weapon = newWeapon;
+        }
+
+        public void SwapArmor(Armor newArmor)
+        {
+            Player.Armor = newArmor;
+        }
+
+        public string healPlayer()
+        {
+            return Player.GetHealthAndStamina() + "|" + Player.DrinkEstus();
+        }
+
+        public string EscapeAttempt()
+        {
+            var returnString = new StringBuilder();
+
+            //Get player's evasion to factor into escape chance.
+            decimal playerEvasion = Player.GetEvasion();
+
+            //Player's evasion factors into escape chance on a factor of 0.5 with a base 50% chance to escape. 
+            //If palyer has negative evasion (meaning they never evade attacks), this will lower their overall escape change.
+            //If player has 50 evasion (meaning they evade half of all attacks), they will have a 75% chance to evade.
+            //If player has -50 evasion, they will have a 25% chance to evade.
+            var escapeChance = 50 - Math.Ceiling(playerEvasion / 2);
+
+            if (playerEvasion > RandomGen.rollDie(100))
+            {
+                //The player dodged the attack
+                returnString.AppendLine("You dodged the " + CurrentEnemy.Name + "'s attack!");
+            }
+            else
+            {
+                returnString.AppendLine("You failed to dodge the enemy's attack!");
+                //If player failed to dodge, then they took damage.
+                var playerDamageTaken = (CurrentEnemy.Damage - Convert.ToInt32(Math.Ceiling((decimal)(CurrentEnemy.Damage * (Player.Armor.ArmorVal / 100)))));
+                playerDamageTaken += CurrentEnemy.ApDamage;
+
+                //Check if player died
+                int playerHealthLeft = Player.Injure(playerDamageTaken);
+                if (playerHealthLeft < 1)
+                {
+                    PlayerDied = true;
+                    //EXIT GAME
+                }
+            }
+            
+            return Player.GetHealthAndStamina() + "|" + returnString.ToString();
+        }
+
+        public Weapon GetPlayerWeapon()
+        {
+            return Player.Weapon;
+        }
+
+        public Armor GetPlayerArmor()
+        {
+            return Player.Armor;
         }
     }
 }

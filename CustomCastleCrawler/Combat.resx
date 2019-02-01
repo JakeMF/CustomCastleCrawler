@@ -986,7 +986,7 @@
         Cn70VX83BEAAAABQO9LlsQ+Ffw43L/7WubMMAKDPzDLL/wfgwlnqOk5k2QAAAABJRU5ErkJggg==
 </value>
   </data>
-  <data name="btnItems.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="btnHeal.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAlgAAALQCAYAAABMhQ5pAAAABGdBTUEAALGPC/xhBQAArVlJREFUeF7t
         nQeYFFX6vf8bFBBJEkRhRTCBaTErJsyCrjknzHlNgDnsijmza845YE6Yc1ZUFHPAACgGwETS3V/9v3Pt

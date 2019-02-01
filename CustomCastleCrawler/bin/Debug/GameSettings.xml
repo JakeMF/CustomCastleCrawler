@@ -1,4 +1,6 @@
 <Settings>
+		<!--You may have a predetermined number of heals per run. It's like an unfilling estus from dark souls.-->
+	<BaseMaxHeals>5</BaseMaxHeals>
 	<StartingPosition>
 		<DefaultX>3</DefaultX>
 		<DefaultY>3</DefaultY>
@@ -9,8 +11,8 @@
 	</MapSize>
 	<FlavorSettings>
 		<GameName>Iscandal</GameName>
-		<!--If this is long, you may wish to insert line feeds. To start a new line, use '\n'.-->
-		<GameFlavorText>Welcome to the land of Iscandal Adventurer You can use the four arrows to move North, South, East, and West. You may encounter enemies, find treasure, or discover secrets. If you encounter an enemy, you will be taken into another menu for the combat phase. Explore, fight, and gain power; it is all that will keep you alive.</GameFlavorText>
+		<!--The game automaticall adds 'Welcome to [Game Name] [Player Name].-->
+		<GameFlavorText>You can use the four arrows to move North, South, East, and West. You may encounter enemies, find treasure, or discover secrets. If you encounter an enemy, you will be taken into another menu for the combat phase. Explore, fight, and gain power; it is all that will keep you alive.</GameFlavorText>
 	</FlavorSettings>
 	<!--There MUST BE 4 classes here, additional classes will be ignored. Having less than 4 classes will cause the game to be unplayable.-->
 	<Classes>
@@ -18,25 +20,25 @@
 			<Name>Soldier</Name>
 			<Armor>Hard Leather Armor</Armor>
 			<Weapon>Longsword</Weapon>
-			<ClassDescription>A medium,</ClassDescription>
+			<ClassDescription>A light melee focused class. Dodges easily, but does little damage.</ClassDescription>
 		</Class>
 		<Class>
 			<Name>Knight</Name>
 			<Armor>Silver Knight Armor</Armor>
 			<Weapon>Claymore</Weapon>
-			<ClassDescription>A medium,</ClassDescription>
+			<ClassDescription>A medium melee focused class. Dodges with difficulty, but does good damage.</ClassDescription>
 		</Class>
 		<Class>
 			<Name>Archer</Name>
 			<Armor>Leather Armor</Armor>
 			<Weapon>Longbow</Weapon>
-			<ClassDescription>A medium,</ClassDescription>
+			<ClassDescription>An archery focused class. Dodges extremely easily, but does very little damage.</ClassDescription>
 		</Class>
 		<Class>
 			<Name>Giant</Name>
 			<Armor>Giant Armor</Armor>
 			<Weapon>Great Club</Weapon>
-			<ClassDescription>A medium,</ClassDescription>
+			<ClassDescription>A very heavy melee focused class. Almost never dodges, but does lots of damage.</ClassDescription>
 		</Class>
 	</Classes>
 </Settings>

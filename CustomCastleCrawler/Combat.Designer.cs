@@ -42,10 +42,10 @@
             this.lblBlock = new System.Windows.Forms.Label();
             this.btnEscape = new System.Windows.Forms.Button();
             this.btnBlock = new System.Windows.Forms.Button();
-            this.btnItems = new System.Windows.Forms.Button();
+            this.btnHeal = new System.Windows.Forms.Button();
             this.lblAttack = new System.Windows.Forms.Label();
             this.btnAttack = new System.Windows.Forms.Button();
-            this.richTextBox2 = new System.Windows.Forms.RichTextBox();
+            this.txtCombatLog = new System.Windows.Forms.RichTextBox();
             this.grpEnemy.SuspendLayout();
             this.grpPlayer.SuspendLayout();
             this.SuspendLayout();
@@ -55,12 +55,12 @@
             this.grpEnemy.Controls.Add(this.lblEHLabel);
             this.grpEnemy.Controls.Add(this.lblEnemyHealth);
             this.grpEnemy.Font = new System.Drawing.Font("Britannic Bold", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.grpEnemy.Location = new System.Drawing.Point(392, 24);
+            this.grpEnemy.Location = new System.Drawing.Point(386, 24);
             this.grpEnemy.Name = "grpEnemy";
-            this.grpEnemy.Size = new System.Drawing.Size(200, 115);
+            this.grpEnemy.Size = new System.Drawing.Size(211, 123);
             this.grpEnemy.TabIndex = 39;
             this.grpEnemy.TabStop = false;
-            this.grpEnemy.Text = "Enemy";
+            this.grpEnemy.Text = "Seath the Scaleless";
             // 
             // lblEHLabel
             // 
@@ -79,9 +79,9 @@
             this.lblEnemyHealth.ForeColor = System.Drawing.Color.ForestGreen;
             this.lblEnemyHealth.Location = new System.Drawing.Point(92, 30);
             this.lblEnemyHealth.Name = "lblEnemyHealth";
-            this.lblEnemyHealth.Size = new System.Drawing.Size(65, 17);
+            this.lblEnemyHealth.Size = new System.Drawing.Size(85, 17);
             this.lblEnemyHealth.TabIndex = 22;
-            this.lblEnemyHealth.Text = "90/100";
+            this.lblEnemyHealth.Text = "900/1000";
             // 
             // grpPlayer
             // 
@@ -92,7 +92,7 @@
             this.grpPlayer.Font = new System.Drawing.Font("Britannic Bold", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.grpPlayer.Location = new System.Drawing.Point(15, 24);
             this.grpPlayer.Name = "grpPlayer";
-            this.grpPlayer.Size = new System.Drawing.Size(166, 115);
+            this.grpPlayer.Size = new System.Drawing.Size(211, 123);
             this.grpPlayer.TabIndex = 38;
             this.grpPlayer.TabStop = false;
             this.grpPlayer.Text = "Player";
@@ -114,9 +114,9 @@
             this.lblPlayerHealth.ForeColor = System.Drawing.Color.ForestGreen;
             this.lblPlayerHealth.Location = new System.Drawing.Point(95, 30);
             this.lblPlayerHealth.Name = "lblPlayerHealth";
-            this.lblPlayerHealth.Size = new System.Drawing.Size(65, 17);
+            this.lblPlayerHealth.Size = new System.Drawing.Size(85, 17);
             this.lblPlayerHealth.TabIndex = 22;
-            this.lblPlayerHealth.Text = "90/100";
+            this.lblPlayerHealth.Text = "900/1000";
             // 
             // lblPHStam
             // 
@@ -180,6 +180,7 @@
             this.btnEscape.Size = new System.Drawing.Size(100, 100);
             this.btnEscape.TabIndex = 34;
             this.btnEscape.UseVisualStyleBackColor = true;
+            this.btnEscape.Click += new System.EventHandler(this.btnEscape_Click);
             // 
             // btnBlock
             // 
@@ -192,18 +193,20 @@
             this.btnBlock.Size = new System.Drawing.Size(100, 100);
             this.btnBlock.TabIndex = 33;
             this.btnBlock.UseVisualStyleBackColor = true;
+            this.btnBlock.Click += new System.EventHandler(this.btnBlock_Click);
             // 
-            // btnItems
+            // btnHeal
             // 
-            this.btnItems.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnItems.BackgroundImage")));
-            this.btnItems.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnItems.FlatAppearance.BorderSize = 0;
-            this.btnItems.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnItems.Location = new System.Drawing.Point(333, 498);
-            this.btnItems.Name = "btnItems";
-            this.btnItems.Size = new System.Drawing.Size(100, 100);
-            this.btnItems.TabIndex = 32;
-            this.btnItems.UseVisualStyleBackColor = true;
+            this.btnHeal.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnHeal.BackgroundImage")));
+            this.btnHeal.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnHeal.FlatAppearance.BorderSize = 0;
+            this.btnHeal.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnHeal.Location = new System.Drawing.Point(333, 498);
+            this.btnHeal.Name = "btnHeal";
+            this.btnHeal.Size = new System.Drawing.Size(100, 100);
+            this.btnHeal.TabIndex = 32;
+            this.btnHeal.UseVisualStyleBackColor = true;
+            this.btnHeal.Click += new System.EventHandler(this.btnHeal_Click);
             // 
             // lblAttack
             // 
@@ -226,15 +229,16 @@
             this.btnAttack.Size = new System.Drawing.Size(100, 100);
             this.btnAttack.TabIndex = 30;
             this.btnAttack.UseVisualStyleBackColor = true;
+            this.btnAttack.Click += new System.EventHandler(this.btnAttack_Click);
             // 
-            // richTextBox2
+            // txtCombatLog
             // 
-            this.richTextBox2.Font = new System.Drawing.Font("Britannic Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.richTextBox2.Location = new System.Drawing.Point(15, 153);
-            this.richTextBox2.Name = "richTextBox2";
-            this.richTextBox2.Size = new System.Drawing.Size(578, 284);
-            this.richTextBox2.TabIndex = 29;
-            this.richTextBox2.Text = "";
+            this.txtCombatLog.Font = new System.Drawing.Font("Britannic Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtCombatLog.Location = new System.Drawing.Point(15, 153);
+            this.txtCombatLog.Name = "txtCombatLog";
+            this.txtCombatLog.Size = new System.Drawing.Size(578, 284);
+            this.txtCombatLog.TabIndex = 29;
+            this.txtCombatLog.Text = "";
             // 
             // frmCombat
             // 
@@ -248,10 +252,10 @@
             this.Controls.Add(this.lblBlock);
             this.Controls.Add(this.btnEscape);
             this.Controls.Add(this.btnBlock);
-            this.Controls.Add(this.btnItems);
+            this.Controls.Add(this.btnHeal);
             this.Controls.Add(this.lblAttack);
             this.Controls.Add(this.btnAttack);
-            this.Controls.Add(this.richTextBox2);
+            this.Controls.Add(this.txtCombatLog);
             this.Font = new System.Drawing.Font("Britannic Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "frmCombat";
@@ -280,9 +284,9 @@
         private System.Windows.Forms.Label lblBlock;
         private System.Windows.Forms.Button btnEscape;
         private System.Windows.Forms.Button btnBlock;
-        private System.Windows.Forms.Button btnItems;
+        private System.Windows.Forms.Button btnHeal;
         private System.Windows.Forms.Label lblAttack;
         private System.Windows.Forms.Button btnAttack;
-        private System.Windows.Forms.RichTextBox richTextBox2;
+        private System.Windows.Forms.RichTextBox txtCombatLog;
     }
 }

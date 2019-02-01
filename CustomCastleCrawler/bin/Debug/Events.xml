@@ -2,6 +2,9 @@
 	<Event>
 		<EventID>1</EventID>
 		<Description>This is the Flavor text that will be displayed to the user when this event is triggered.</Description>
+		<!--This is a flag to determine whether or not this is a "rest" location. Your healing flask is refilled when at a rest location. This should be 0 if it's a normal tile, or 1 if it's a rest tile.-->
+		<!--If this is a rest tile, no enemies or items will be generated.-->
+		<RestLocation>0</RestLocation>
 		<!--EnemySpawn, ItemSpawn, and NothingSpawn MUST add up to 100 for your game to work properly.-->
 		<EnemySpawn>25</EnemySpawn>
 			<!--This is a percentage chance for an enemy to spawn here. This number should be 1-100. -->
@@ -23,6 +26,7 @@
 	<Event>
 		<EventID>2</EventID>
 		<Description>This is the second event's flavor text.</Description>
+		<RestLocation>1</RestLocation>
 		<EnemySpawn>75</EnemySpawn>
 		<ItemSpawn>0</ItemSpawn>
 		<NothingSpawn>25</NothingSpawn>

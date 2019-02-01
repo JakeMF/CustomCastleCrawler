@@ -77,6 +77,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SwapEquipment.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SwapEquipment.Designer.cs">
+      <DependentUpon>SwapEquipment.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="ClassSelection.resx">
       <DependentUpon>ClassSelection.cs</DependentUpon>
     </EmbeddedResource>
@@ -100,6 +106,9 @@
     </Compile>
     <EmbeddedResource Include="Startup.resx">
       <DependentUpon>Startup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SwapEquipment.resx">
+      <DependentUpon>SwapEquipment.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -125,6 +134,8 @@
     <Content Include="Images\Potion_Items.png" />
     <Content Include="Images\Shield_Block.png" />
     <Content Include="Images\Swords_Attack.png" />
+    <Content Include="Images\Thumbs_Down.png" />
+    <Content Include="Images\Thumbs_Up.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

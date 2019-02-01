@@ -46,7 +46,7 @@ namespace CustomCastleCrawler
             //Open Main Form
             this.Hide();
 
-            using (frmMain mainScren = new frmMain(MainGame, classDescription + Environment.NewLine + IntroMessage))
+            using (frmMain mainScren = new frmMain(MainGame, IntroMessage))
             {
                 mainScren.ShowDialog();
             }
@@ -61,7 +61,7 @@ namespace CustomCastleCrawler
             //Open Main Form
             this.Hide();
 
-            using (frmMain mainScren = new frmMain(MainGame, classDescription + Environment.NewLine + IntroMessage))
+            using (frmMain mainScren = new frmMain(MainGame, IntroMessage))
             {
                 mainScren.ShowDialog();
             }
@@ -76,7 +76,7 @@ namespace CustomCastleCrawler
             //Open Class Choice Form
             this.Hide();
 
-            using (frmMain mainScren = new frmMain(MainGame, classDescription + Environment.NewLine + IntroMessage))
+            using (frmMain mainScren = new frmMain(MainGame, IntroMessage))
             {
                 mainScren.ShowDialog();
             }
@@ -90,7 +90,7 @@ namespace CustomCastleCrawler
             //Open Class Choice Form
             this.Hide();
 
-            using (frmMain mainScren = new frmMain(MainGame, classDescription + Environment.NewLine + IntroMessage))
+            using (frmMain mainScren = new frmMain(MainGame, IntroMessage))
             {
                 mainScren.ShowDialog();
             }

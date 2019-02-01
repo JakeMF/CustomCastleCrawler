@@ -11,3 +11,4 @@ C:\Users\jacob\Documents\GitHub\CustomCastleCrawler\CustomCastleCrawler\obj\Debu
 C:\Users\jacob\Documents\GitHub\CustomCastleCrawler\CustomCastleCrawler\obj\Debug\CustomCastleCrawler.frmCombat.resources
 C:\Users\jacob\Documents\GitHub\CustomCastleCrawler\CustomCastleCrawler\obj\Debug\CustomCastleCrawler.frmMain.resources
 C:\Users\jacob\Documents\GitHub\CustomCastleCrawler\CustomCastleCrawler\obj\Debug\CustomCastleCrawler.frmHelp.resources
+C:\Users\jacob\Documents\GitHub\CustomCastleCrawler\CustomCastleCrawler\obj\Debug\CustomCastleCrawler.frmSwapEquipment.resources
