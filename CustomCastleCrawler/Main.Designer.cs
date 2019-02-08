@@ -70,6 +70,7 @@
             // 
             // txtMainOutput
             // 
+            this.txtMainOutput.Enabled = false;
             this.txtMainOutput.Font = new System.Drawing.Font("Britannic Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtMainOutput.Location = new System.Drawing.Point(13, 59);
             this.txtMainOutput.Name = "txtMainOutput";
@@ -181,14 +182,14 @@
             // mnuSave
             // 
             this.mnuSave.Name = "mnuSave";
-            this.mnuSave.Size = new System.Drawing.Size(180, 22);
+            this.mnuSave.Size = new System.Drawing.Size(100, 22);
             this.mnuSave.Text = "&Save";
             this.mnuSave.Click += new System.EventHandler(this.mnuSave_Click);
             // 
             // mnuExit
             // 
             this.mnuExit.Name = "mnuExit";
-            this.mnuExit.Size = new System.Drawing.Size(180, 22);
+            this.mnuExit.Size = new System.Drawing.Size(100, 22);
             this.mnuExit.Text = "E&xit";
             this.mnuExit.Click += new System.EventHandler(this.mnuExit_Click);
             // 
@@ -213,14 +214,14 @@
             // mnuExploration
             // 
             this.mnuExploration.Name = "mnuExploration";
-            this.mnuExploration.Size = new System.Drawing.Size(180, 22);
+            this.mnuExploration.Size = new System.Drawing.Size(140, 22);
             this.mnuExploration.Text = "&Exploration";
             this.mnuExploration.Click += new System.EventHandler(this.mnuExploration_Click);
             // 
             // combatToolStripMenuItem
             // 
             this.combatToolStripMenuItem.Name = "combatToolStripMenuItem";
-            this.combatToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.combatToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
             this.combatToolStripMenuItem.Text = "&Combat";
             this.combatToolStripMenuItem.Click += new System.EventHandler(this.combatToolStripMenuItem_Click);
             // 

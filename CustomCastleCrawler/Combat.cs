@@ -18,6 +18,18 @@ namespace CustomCastleCrawler
 
             InitializeComponent();
             txtCombatLog.SelectionAlignment = HorizontalAlignment.Center;
+            txtCombatLog.SelectionColor = Color.Black;
+
+            //Populate default player health and stamina values
+            string results = MainGame.GetPlayerHealthAndStamina();
+            var resArray = results.Split('|');
+
+            lblPlayerHealth.Text = resArray.Length > 0 ? resArray[0] : "Er/Er";
+            lblPlayerStamina.Text = resArray.Length > 1 ? resArray[1] : "Er/Er";
+            
+            //Populate default enemy health value.
+            lblEnemyHealth.Text = MainGame.CurrentEnemy.GetHealth();
+
             //Ensure that the name is not too long to fit the control
             grpPlayer.Text = this.MainGame.PlayerName.Length <= 21 ? this.MainGame.PlayerName : this.MainGame.PlayerName.Substring(0, 18) + "...";
 
@@ -27,7 +39,7 @@ namespace CustomCastleCrawler
 
                 //Ensure that the name is not too long to fit the control
                 grpEnemy.Text = currentEnemy.Name.Length <= 21 ? currentEnemy.Name : currentEnemy.Name.Substring(0, 18) + "...";
-                lblEnemyHealth.Text = currentEnemy.CurrentHealth + "/" + currentEnemy.MaxHealth;
+                lblEnemyHealth.Text = MainGame.CurrentEnemy.GetHealth();
             }
             
         }
@@ -37,45 +49,43 @@ namespace CustomCastleCrawler
             //Call attack function
             string combatResults = MainGame.BattleEnemy("attack");
 
-            var resArray = combatResults.Split('|');
-
-            lblPlayerHealth.Text = resArray.Length > 0 ? resArray[0] : "Er/Er";
-            lblPlayerStamina.Text = resArray.Length > 1 ? resArray[1] : "Er/Er";
-            txtCombatLog.Text = resArray.Length > 2 ? resArray[2] : "Error retrieving combat information. Please restart game WITHOUT SAVING.";
+            popCombatResults(combatResults);
         }
 
         private void btnBlock_Click(object sender, EventArgs e)
         {
             //call block function
             string combatResults = MainGame.BattleEnemy("block");
-
-            var resArray = combatResults.Split('|');
-
-            lblPlayerHealth.Text = resArray.Length > 0 ? resArray[0] : "Er/Er";
-            lblPlayerStamina.Text = resArray.Length > 1 ? resArray[1] : "Er/Er";
-            txtCombatLog.Text = resArray.Length > 2 ? resArray[2] : "Error retrieving combat information. Please restart game WITHOUT SAVING.";
+            
+            popCombatResults(combatResults);
         }
 
         private void btnHeal_Click(object sender, EventArgs e)
         {
             string healResults = MainGame.healPlayer();
-            var resArray = healResults.Split('|');
 
-            lblPlayerHealth.Text = resArray.Length > 0 ? resArray[0] : "Er/Er";
-            lblPlayerStamina.Text = resArray.Length > 1 ? resArray[1] : "Er/Er";
-            txtCombatLog.Text = resArray.Length > 2 ? resArray[2] : "Error retrieving combat information. Please restart game WITHOUT SAVING.";
+            popCombatResults(healResults);
         }
 
         private void btnEscape_Click(object sender, EventArgs e)
         {
             string escapeResults = MainGame.EscapeAttempt();
 
-            var resArray = escapeResults.Split('|');
+            popCombatResults(escapeResults);
+        }
+
+        private void popCombatResults(string results)
+        {
+            var resArray = results.Split('|');
 
             lblPlayerHealth.Text = resArray.Length > 0 ? resArray[0] : "Er/Er";
             lblPlayerStamina.Text = resArray.Length > 1 ? resArray[1] : "Er/Er";
-            txtCombatLog.Text = resArray.Length > 2 ? resArray[2] : "Error retrieving combat information. Please restart game WITHOUT SAVING.";
-        }
+            lblEnemyHealth.Text = resArray.Length > 2 ? resArray[2] : "Er/Er";
+            txtCombatLog.Text = resArray.Length > 3 ? resArray[3] : "Error retrieving combat information. Please restart game WITHOUT SAVING.";
 
+            txtCombatLog.SelectionAlignment = HorizontalAlignment.Center;
+            txtCombatLog.SelectionColor = Color.Black;
+            txtCombatLog.ScrollToCaret();
+        }
     }
 }

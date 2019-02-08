@@ -16,7 +16,7 @@ namespace CustomCastleCrawler
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            Application.Run(new frmSwapEquipment(new MainGame(), new Weapon("Claymore", 20, "", 10, 5, 0), new Weapon("Great Club", 10, "", 20, 5, -10)));
+            Application.Run(new frmStartup());
 
             //Application.Run(new frmSwapEquipment(new MainGame(), new Armor("Iron Chestpiece", 5, "", 5, 5), new Armor("Steel Plate Mail", 10, "", 10, -5)));
         }

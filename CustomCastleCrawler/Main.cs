@@ -18,22 +18,7 @@ namespace CustomCastleCrawler
         {
             this.MainGame = MainGame;
             InitializeComponent();
-            txtMainOutput.SelectionAlignment = HorizontalAlignment.Center;
-            txtMainOutput.SelectedText = introMessage;
-
-            if(this.MainGame.ActiveEnemy)
-            {
-                System.Threading.Thread.Sleep(750);
-
-                //Open Combat Form
-                this.Hide();
-
-                using (frmCombat combatScreen = new frmCombat(MainGame))
-                {
-                    combatScreen.ShowDialog();
-                }
-                this.Show();
-            }
+            popTextbox(introMessage);
         }
 
         #region Menu Buttons
@@ -105,6 +90,10 @@ namespace CustomCastleCrawler
 
         private void popTextbox(string output)
         {
+            if(txtMainOutput.Lines.Count() >= 15)
+            {
+                txtMainOutput.Clear();
+            }
             if (output.Contains("|"))
             {
                 //split output
@@ -140,7 +129,24 @@ namespace CustomCastleCrawler
             }
 
             txtMainOutput.SelectionAlignment = HorizontalAlignment.Center;
+            txtMainOutput.SelectionColor = Color.Black;
             txtMainOutput.SelectedText = output;
+            txtMainOutput.ScrollToCaret();
+
+            //Check to see if there is an active enemy. If so, open the combat form.
+            if (this.MainGame.ActiveEnemy)
+            {
+                System.Threading.Thread.Sleep(1000);
+
+                //Open Combat Form
+                this.Hide();
+
+                using (frmCombat combatScreen = new frmCombat(MainGame))
+                {
+                    combatScreen.ShowDialog();
+                }
+                this.Show();
+            }
         }
         #endregion
 

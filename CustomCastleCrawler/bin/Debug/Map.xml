@@ -2,176 +2,176 @@
 	<Tile>
 		<XCoord>0</XCoord>
 		<YCoord>0</YCoord>
-		<Message>1</Message>
+		<Message>This is the Flavor text that will be displayed to the user when they land on this tile.</Message>
 		<EventID>1</EventID>
 		<SpawnZone>0</SpawnZone>
 	</Tile>
 	<Tile>
 		<XCoord>0</XCoord>
 		<YCoord>1</YCoord>
-		<Message>1</Message>
+		<Message>Default Message (0,1)</Message>
 		<EventID>3</EventID>
 		<SpawnZone>0</SpawnZone>
 	</Tile>
 	<Tile>
 		<XCoord>0</XCoord>
 		<YCoord>2</YCoord>
-		<Message>1</Message>
-		<EventID>1</EventID>
+		<Message>Default Message SAFE ZONE(0,2)</Message>
+		<EventID>2</EventID>
 		<SpawnZone>0</SpawnZone>
 	</Tile>
 	<Tile>
 		<XCoord>0</XCoord>
 		<YCoord>3</YCoord>
-		<Message>1</Message>
+		<Message>Default Message SAFE ZONE(0,3)</Message>
 		<EventID>2</EventID>
 		<SpawnZone>0</SpawnZone>
 	</Tile>
 	<Tile>
 		<XCoord>0</XCoord>
 		<YCoord>4</YCoord>
-		<Message>1</Message>
+		<Message>Default Message (0,4)</Message>
 		<EventID>1</EventID>
 		<SpawnZone>0</SpawnZone>
 	</Tile>
 	<Tile>
 		<XCoord>1</XCoord>
 		<YCoord>0</YCoord>
-		<Message>1</Message>
+		<Message>Default Message (1,0)</Message>
 		<EventID>1</EventID>
 		<SpawnZone>0</SpawnZone>
 	</Tile>
 	<Tile>
 		<XCoord>1</XCoord>
 		<YCoord>1</YCoord>
-		<Message>1</Message>
+		<Message>Default Message (1, 1)</Message>
 		<EventID>1</EventID>
 		<SpawnZone>0</SpawnZone>
 	</Tile>
 	<Tile>
 		<XCoord>1</XCoord>
 		<YCoord>2</YCoord>
-		<Message>1</Message>
+		<Message>Default Message (1, 2)</Message>
 		<EventID>2</EventID>
 		<SpawnZone>0</SpawnZone>
 	</Tile>
 	<Tile>
 		<XCoord>1</XCoord>
 		<YCoord>3</YCoord>
-		<Message>1</Message>
+		<Message>Default Message (1, 3)</Message>
 		<EventID>1</EventID>
 		<SpawnZone>0</SpawnZone>
 	</Tile>
 	<Tile>
 		<XCoord>1</XCoord>
 		<YCoord>4</YCoord>
-		<Message>1</Message>
+		<Message>Default Message (1, 4)</Message>
 		<EventID>3</EventID>
 		<SpawnZone>0</SpawnZone>
 	</Tile>
 	<Tile>
 		<XCoord>2</XCoord>
 		<YCoord>0</YCoord>
-		<Message>1</Message>
+		<Message>Default Message (2, 0)</Message>
 		<EventID>1</EventID>
 		<SpawnZone>0</SpawnZone>
 	</Tile>
 	<Tile>
 		<XCoord>2</XCoord>
 		<YCoord>1</YCoord>
-		<Message>1</Message>
+		<Message>Default Message (2, 1)</Message>
 		<EventID>1</EventID>
 		<SpawnZone>0</SpawnZone>
 	</Tile>
 	<Tile>
 		<XCoord>2</XCoord>
 		<YCoord>2</YCoord>
-		<Message>1</Message>
+		<Message>Default Message (2, 2)</Message>
 		<EventID>1</EventID>
 		<SpawnZone>0</SpawnZone>
 	</Tile>
 	<Tile>
 		<XCoord>2</XCoord>
 		<YCoord>3</YCoord>
-		<Message>1</Message>
-		<EventID>2</EventID>
+		<Message>Default Message (2, 3)</Message>
+		<EventID>1</EventID>
 		<SpawnZone>1</SpawnZone>
 	</Tile>
 	<Tile>
 		<XCoord>2</XCoord>
 		<YCoord>4</YCoord>
-		<Message>1</Message>
+		<Message>Default Message (2, 4)</Message>
 		<EventID>1</EventID>
 		<SpawnZone>1</SpawnZone>
 	</Tile>
 	<Tile>
 		<XCoord>3</XCoord>
 		<YCoord>0</YCoord>
-		<Message>1</Message>
+		<Message>Default Message (3, 0)</Message>
 		<EventID>1</EventID>
 		<SpawnZone>1</SpawnZone>
 	</Tile>
 	<Tile>
 		<XCoord>3</XCoord>
 		<YCoord>1</YCoord>
-		<Message>1</Message>
+		<Message>Default Message (3,1)</Message>
 		<EventID>1</EventID>
 		<SpawnZone>1</SpawnZone>
 	</Tile>
 	<Tile>
 		<XCoord>3</XCoord>
 		<YCoord>2</YCoord>
-		<Message>1</Message>
+		<Message>Default Message (3,2)</Message>
 		<EventID>1</EventID>
 		<SpawnZone>1</SpawnZone>
 	</Tile>
 	<Tile>
 		<XCoord>3</XCoord>
 		<YCoord>3</YCoord>
-		<Message>1</Message>
+		<Message>Default Message (3,3)</Message>
 		<EventID>1</EventID>
 		<SpawnZone>1</SpawnZone>
 	</Tile>
 	<Tile>
 		<XCoord>3</XCoord>
 		<YCoord>4</YCoord>
-		<Message>1</Message>
-		<EventID>2</EventID>
+		<Message>Default Message (3, 4)</Message>
+		<EventID>1</EventID>
 		<SpawnZone>1</SpawnZone>
 	</Tile>
 	<Tile>
 		<XCoord>4</XCoord>
 		<YCoord>0</YCoord>
-		<Message>1</Message>
+		<Message>Default Message (4, 0)</Message>
 		<EventID>1</EventID>
 		<SpawnZone>1</SpawnZone>
 	</Tile>
 	<Tile>
 		<XCoord>4</XCoord>
 		<YCoord>1</YCoord>
-		<Message>1</Message>
+		<Message>Default Message (4,1)</Message>
 		<EventID>1</EventID>
 		<SpawnZone>1</SpawnZone>
 	</Tile>
 	<Tile>
 		<XCoord>4</XCoord>
 		<YCoord>2</YCoord>
-		<Message>1</Message>
-		<EventID>2</EventID>
+		<Message>Default Message (4,2)</Message>
+		<EventID>1</EventID>
 		<SpawnZone>1</SpawnZone>
 	</Tile>
 	<Tile>
 		<XCoord>4</XCoord>
 		<YCoord>3</YCoord>
-		<Message>1</Message>
+		<Message>Default Message (4,3)</Message>
 		<EventID>1</EventID>
 		<SpawnZone>1</SpawnZone>
 	</Tile>
 	<Tile>
 		<XCoord>4</XCoord>
 		<YCoord>4</YCoord>
-		<Message>1</Message>
-		<EventID>2</EventID>
+		<Message>Default Message (4, 4)</Message>
+		<EventID>1</EventID>
 		<SpawnZone>1</SpawnZone>
 	</Tile>
 </MapTiles>

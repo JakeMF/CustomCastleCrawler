@@ -4,8 +4,10 @@
 		<Health>100</Health>
 		<BaseDMG>15</BaseDMG>
 		<APDMG>15</APDMG>
-		<Defence>85</Defence>
-		<Evasion>85</Evasion>
+		<Defence>10</Defence>
+		<!--Defence is a flat % of damage reduction. Ex: 10 Defence will cause an attack that normally dealt 10 damage to deal 9.-->
+		<Evasion>5</Evasion>
+		<!--Evasion is a flat % chance to avoid all damage from an attack.-->
 		<Points>20</Points>
 		<SpawnZone>0</SpawnZone>
 	</Enemy>
@@ -14,8 +16,8 @@
 		<Health>100</Health>
 		<BaseDMG>15</BaseDMG>
 		<APDMG>15</APDMG>
-		<Defence>85</Defence>
-		<Evasion>85</Evasion>
+		<Defence>0</Defence>
+		<Evasion>0</Evasion>
 		<Points>20</Points>
 		<SpawnZone>0</SpawnZone>
 	</Enemy>
@@ -24,8 +26,8 @@
 		<Health>175</Health>
 		<BaseDMG>15</BaseDMG>
 		<APDMG>15</APDMG>
-		<Defence>85</Defence>
-		<Evasion>85</Evasion>
+		<Defence>20</Defence>
+		<Evasion>5</Evasion>
 		<Points>20</Points>
 		<SpawnZone>1</SpawnZone>
 	</Enemy>
@@ -34,8 +36,8 @@
 		<Health>90</Health>
 		<BaseDMG>15</BaseDMG>
 		<APDMG>15</APDMG>
-		<Defence>85</Defence>
-		<Evasion>85</Evasion>
+		<Defence>0</Defence>
+		<Evasion>20</Evasion>
 		<Points>20</Points>
 		<SpawnZone>1</SpawnZone>
 	</Enemy>

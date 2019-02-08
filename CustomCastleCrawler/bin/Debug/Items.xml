@@ -14,7 +14,7 @@
 		<BaseDMG>10</BaseDMG>
 		<APDMG>2</APDMG>
 		<Evasion>-5</Evasion>
-		<Rarity>1</Rarity>
+		<Rarity>2</Rarity>
 		<Description>This is a default item description</Description>
 	</Weapon>
 	<Weapon>
@@ -32,7 +32,7 @@
 		<BaseDMG>6</BaseDMG>
 		<APDMG>8</APDMG>
 		<Evasion>0</Evasion>
-		<Rarity>1</Rarity>
+		<Rarity>3</Rarity>
 		<Description>This is a default item description</Description>
 	</Weapon>
 	<Armor>
@@ -48,7 +48,7 @@
 		<GoldValue>10</GoldValue>
 		<ArmorVal>8</ArmorVal>
 		<Evasion>-5</Evasion>
-		<Rarity>1</Rarity>
+		<Rarity>2</Rarity>
 		<Description>This is a default item description</Description>
 	</Armor>
 	<Armor>
@@ -64,7 +64,7 @@
 		<GoldValue>15</GoldValue>
 		<ArmorVal>10</ArmorVal>
 		<Evasion>-10</Evasion>
-		<Rarity>-1</Rarity>
+		<Rarity>3</Rarity>
 		<Description>This is a default item description</Description>
 	</Armor>
 	<Item>
