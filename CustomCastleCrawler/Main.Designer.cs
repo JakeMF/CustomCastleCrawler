@@ -77,6 +77,7 @@
             this.txtMainOutput.Size = new System.Drawing.Size(578, 284);
             this.txtMainOutput.TabIndex = 21;
             this.txtMainOutput.Text = "";
+            this.txtMainOutput.TextChanged += new System.EventHandler(this.txtMainOutput_TextChanged);
             // 
             // txtNotes
             // 

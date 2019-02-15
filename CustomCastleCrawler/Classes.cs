@@ -516,7 +516,7 @@ namespace CustomCastleCrawler
             int tempStam = Stamina;
             Stamina -= StaminaCost;
 
-            if(Stamina > 0)
+            if(Stamina >= 0)
             {
                 return true;
             }
@@ -589,6 +589,20 @@ namespace CustomCastleCrawler
             this.Evasion = Evasion;
             this.Score = Score;
         }
+        //Constructor to create a new enemy based on an enemy object.
+        public Enemy(Enemy ene)
+        {
+            Name = ene.Name;
+            MaxHealth = ene.MaxHealth;
+            CurrentHealth = MaxHealth;
+
+            Damage = ene.Damage;
+            ApDamage = ene.ApDamage;
+
+            Defence = ene.Defence;
+            Evasion = ene.Evasion;
+            Score = ene.Score;
+        }
 
         //function to damage the enemy
         public int Injure(int dmg)
@@ -617,8 +631,10 @@ namespace CustomCastleCrawler
         public Enemy CurrentEnemy { get; set; }
         public bool ActiveEnemy { get; set; }
 
+        //Variables to store data that needs to go from child to parent forms.
         public Weapon TempWeapon;
         public Armor TempArmor;
+        public string TempMiscData;
 
         //Load map size
         private GameData GameConfigurations = new GameData();
@@ -680,14 +696,14 @@ namespace CustomCastleCrawler
 
                 //Add Custom Flavor Text
                 introMessage.AppendLine(GameConfigurations.GameFlavorText);
-                introMessage.AppendLine(System.Environment.NewLine);
+                introMessage.AppendLine(Environment.NewLine);
 
                 //Add Instructions
                 introMessage.Append("You can move around the map by using the four arrow buttons 'north', 'south', 'east', and 'west'.");
                 introMessage.Append("If you encounter an enemy, attack them by pressing the Sword icon, or surrender yourself to the enemy by pressing the Flag icon.");
                 introMessage.Append("If you wish to quit the game, use the 'Quit' button located in the Menu Bar. You can also simply click the 'X' to close the window.'");
                 introMessage.Append("If you wish to view more detailed information about Game mechanics, click the 'help' buttons located in the Menu Bar.");
-                introMessage.AppendLine(System.Environment.NewLine);
+                introMessage.AppendLine(Environment.NewLine);
             }
             else
             {
@@ -695,6 +711,7 @@ namespace CustomCastleCrawler
                 introMessage.AppendLine("Welcome back to " + GameName + " " + playerName + ".");
                 introMessage.AppendLine("You are at X:" + Coordinates.x + " Y:" + Coordinates.y + ".");
                 introMessage.AppendLine("Good luck, adventurer.'");
+                introMessage.AppendLine(Environment.NewLine);
 
             }
             return introMessage.ToString();
@@ -847,7 +864,7 @@ namespace CustomCastleCrawler
                     string saveDataEncrypted = string.Empty;
                     saveDataEncrypted = cryptic.Encrypt(saveData);
                     sw.WriteLine(saveDataEncrypted);
-                    Console.WriteLine("Saved successfully.");
+                    MessageBox.Show("Game saved successfully.", "Save", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             catch (Exception ex)
@@ -859,14 +876,14 @@ namespace CustomCastleCrawler
                 {
                     sw.WriteLine(logTitle + Environment.NewLine + ex.Message + Environment.NewLine + "Stack Trace:" + Environment.NewLine + ex.StackTrace + Environment.NewLine);
                 }
-                Console.WriteLine("Save could not be Completed, error notes saved to log file.");
+                MessageBox.Show("Save could not be Completed, error notes saved to log file.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
         }
 
         //ToDo: Test Load Funcitonality 
         //Function that will load a player's save from a text file.
-        public bool LoadProgress(string name, bool secondPass)
+        public string LoadProgress(string name, bool secondPass)
         {
             //NEEDS TESTING
             Crypter cryptic = new Crypter(EncryptionKey);
@@ -952,49 +969,20 @@ namespace CustomCastleCrawler
 
                                 if(missingVals)
                                 {
-                                    MessageBox.Show("Your save data has been corrupted, please start a new game.");
+                                    MessageBox.Show("Your save data has been corrupted, please start a new game.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                 }
 
                                 //Should never need to set/use this variable, but set for sanity.
                                 found = true;
 
-                                return true;
+                                return "success";
                             }
                             else
                             {
                                 //if there are not enough values in the array, the data is either from a version with different save data or has been manually modified.
-                                MessageBox.Show("Your save data has been corrupted, your data cannot be loaded.");
+                                MessageBox.Show("Your save data has been corrupted, your data cannot be loaded.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-                                return false;
-                            }
-                        }
-                    }
-                    if (!found)
-                    {
-                        if (!secondPass)
-                        {
-                            DialogResult result1 = MessageBox.Show("Your save could not be found, would you like to try again?", GameName, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
-
-                            if (result1 == DialogResult.Yes)
-                            {
-                                //User wants to try again, allow for one more try.
-                                LoadProgress(name, true);
-                            }
-                            else if (result1 == DialogResult.No)
-                            {
-                                //If game could not be loaded ask if they want to start a new game.
-                                DialogResult result2 = MessageBox.Show("Would you like to start a new game?", GameName, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
-
-                                //If they don't want to start a new game, close the program.
-                                if (result2 == DialogResult.No)
-                                {
-                                    Form currentForm = Form.ActiveForm;
-                                    currentForm.Close();
-                                }
-                                else
-                                {
-                                    return false;
-                                }
+                                return "fail";
                             }
                         }
                     }
@@ -1002,9 +990,37 @@ namespace CustomCastleCrawler
             }
             else
             {
-                MessageBox.Show("Your save file could not be located. Make sure it is located in [AppDirectory]\\SaveData\\[CharacterName].txt");
+                MessageBox.Show("Your save file could not be located. Make sure it is located in [AppDirectory]\\SaveData\\[CharacterName].txt", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                
+                if (!secondPass)
+                {
+                    DialogResult result1 = MessageBox.Show("Your save could not be found, would you like to try again?", GameName, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
+
+                    if (result1 == DialogResult.Yes)
+                    {
+                        //User wants to try again, allow for one more try.
+                        return "tryagain";
+                    }
+                    else if (result1 == DialogResult.No)
+                    {
+                        //If game could not be loaded ask if they want to start a new game.
+                        DialogResult result2 = MessageBox.Show("Would you like to start a new game?", GameName, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
+
+                        //If they don't want to start a new game, close the program.
+                        if (result2 == DialogResult.No)
+                        {
+                            Form currentForm = Form.ActiveForm;
+                            currentForm.Close();
+                        }
+                        else
+                        {
+                            return "fail";
+                        }
+                    }
+                }
+                
             }
-            return false;
+            return "fail";
         }
 
         public string SelectClass(string playerName, string playerClass)
@@ -1112,7 +1128,7 @@ namespace CustomCastleCrawler
             }
             else
             {
-                MessageBox.Show("ERROR: Unknown Input. | Method: EvaluateInput | Line: 1105");
+                MessageBox.Show("ERROR: Unknown Input. | Method: EvaluateInput | Line: 1105", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                 returnString.AppendLine("Error Evaluating Input. Please restart application.");
             }
@@ -1149,7 +1165,7 @@ namespace CustomCastleCrawler
 
                         //Randomly pick an enemy from that list.
                         var index = RandomGen.rollDie(enemyQuery.Count() - 1);
-                        CurrentEnemy = enemyQuery.ElementAt(index);
+                        CurrentEnemy = new Enemy(enemyQuery.ElementAt(index));
 
                         returnString.AppendLine(CurrentEnemy.Name + " has attacked you!");
                     }
@@ -1316,8 +1332,12 @@ namespace CustomCastleCrawler
             int playerDamageTaken = 0;
             int enemyDamageTaken = 0;
 
+            //Boolean to store whether or not this attack was a block.
+            bool playerBlocking = false;
+
             if (action == "block")
             {
+                playerBlocking = true;
                 enemyBaseDamage /= 2;
                 enemyAPDamage /= 2;
                 returnString.AppendLine("You have blocked the enemy's attack, you will take half damage and regain some stamina.");
@@ -1327,10 +1347,10 @@ namespace CustomCastleCrawler
             {
                 if(!Player.PerformAction(10))
                 {
-                    returnString.AppendLine("You do not have enough stamin to attack. Block to regen some stamina.");
+                    returnString.AppendLine("You do not have enough stamina to attack. Block to regen some stamina.");
 
                     //return pipe separated value to populate controls.
-                    return Player.GetHealthAndStamina() + "|" + returnString.ToString();
+                    return Player.GetHealthAndStamina() + "|" + CurrentEnemy.GetHealth() + "|" + returnString.ToString();
                 }
             }
             
@@ -1361,28 +1381,33 @@ namespace CustomCastleCrawler
                 
             }
 
-            if (enemyDodgeChance > RandomGen.rollDie(100))
+            //Do not perform any enemy dodge checks or damaging if the player was blocking.
+            if (!playerBlocking)
             {
-                returnString.AppendLine("The" + CurrentEnemy.Name + " has dodged your attack!");
-            }
-            else
-            {
-                //Check if enemy died
-                int enemyHP = 0;
-                enemyHP = CurrentEnemy.Injure(enemyDamageTaken);
-                if (!(enemyHP < 1))
+                if (enemyDodgeChance > RandomGen.rollDie(100))
                 {
-                    returnString.AppendLine("You have traded blows with the enemy.");
-                    returnString.AppendLine("The enemy remains with " + enemyHP + " health.");
+                    returnString.AppendLine("The " + CurrentEnemy.Name + " has dodged your attack!");
                 }
                 else
                 {
-                    //Add to player's score and kill count
-                    Player.Score += CurrentEnemy.Score;
-                    Player.EnemiesKilled++;
+                    //Check if enemy died
+                    int enemyHP = 0;
+                    enemyHP = CurrentEnemy.Injure(enemyDamageTaken);
+                    if (!(enemyHP < 1))
+                    {
+                        returnString.AppendLine("You have traded blows with the enemy.");
+                        returnString.AppendLine("The enemy remains with " + enemyHP + " health.");
+                    }
+                    else
+                    {
+                        //Add to player's score and kill count
+                        Player.Score += CurrentEnemy.Score;
+                        Player.EnemiesKilled++;
 
-                    returnString.AppendLine("You have defeated the " + CurrentEnemy.Name + ", " + CurrentEnemy.Score + " was added to your kill score.");
-                    ActiveEnemy = false;
+                        //Set temp data for population on main screen. 
+                        TempMiscData = "You have defeated the " + CurrentEnemy.Name + ", " + CurrentEnemy.Score + " was added to your kill score." + Environment.NewLine;
+                        ActiveEnemy = false;
+                    }
                 }
             }
 
@@ -1475,7 +1500,7 @@ namespace CustomCastleCrawler
 
         public string healPlayer()
         {
-            return Player.GetHealthAndStamina() + "|" + Player.DrinkEstus();
+            return Player.GetHealthAndStamina() + "|" + CurrentEnemy.GetHealth() + "|" + Player.DrinkEstus();
         }
 
         public string EscapeAttempt()
@@ -1494,11 +1519,13 @@ namespace CustomCastleCrawler
             if (playerEvasion > RandomGen.rollDie(100))
             {
                 //The player dodged the attack
-                returnString.AppendLine("You dodged the " + CurrentEnemy.Name + "'s attack!");
+                returnString.AppendLine("You escaped the enemy!");
+                TempMiscData = "You have encountered a(n) " + CurrentEnemy.Name + " and successfully escaped.";
+                ActiveEnemy = false;
             }
             else
             {
-                returnString.AppendLine("You failed to dodge the enemy's attack!");
+                returnString.AppendLine("You failed to escape the enemy!");
                 //If player failed to dodge, then they took damage.
                 var playerDamageTaken = (CurrentEnemy.Damage - Convert.ToInt32(Math.Ceiling((decimal)(CurrentEnemy.Damage * (Player.Armor.ArmorVal / 100)))));
                 playerDamageTaken += CurrentEnemy.ApDamage;
@@ -1511,8 +1538,8 @@ namespace CustomCastleCrawler
                     //EXIT GAME
                 }
             }
-            
-            return Player.GetHealthAndStamina() + "|" + returnString.ToString();
+
+            return Player.GetHealthAndStamina() + "|" + CurrentEnemy.GetHealth() + "|" + returnString.ToString();
         }
 
         public Weapon GetPlayerWeapon()

@@ -90,18 +90,16 @@ namespace CustomCastleCrawler
 
         private void popTextbox(string output)
         {
-            if(txtMainOutput.Lines.Count() >= 15)
-            {
-                txtMainOutput.Clear();
-            }
             if (output.Contains("|"))
             {
                 //split output
                 var outArray = output.Split('|');
                 var type = outArray.Length > 0 ? outArray[0] : "";
                 var outputMessage = outArray.Length > 1 ? outArray[1] : "";
+                //set output to the message portion only 
+                output = outputMessage;
 
-                if(type == "NewWeapon")
+                if (type == "NewWeapon")
                 {
                     this.Hide();
 
@@ -110,6 +108,8 @@ namespace CustomCastleCrawler
                         frmSwapEquipment.ShowDialog();
                     }
                     this.Show();
+
+                    popTextbox(MainGame.TempMiscData);
                 }
                 else if (type == "NewArmor")
                 {
@@ -120,11 +120,13 @@ namespace CustomCastleCrawler
                         frmSwapEquipment.ShowDialog();
                     }
                     this.Show();
+
+                    popTextbox(MainGame.TempMiscData);
                 }
                 else
                 {
                     //type unknown
-                    MessageBox.Show("Error loading equipment found. Please restart the game WITHOUT SAVING");
+                    MessageBox.Show("Error loading equipment found. Please restart the game WITHOUT SAVING. Check XML data integrity if modified.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
 
@@ -134,7 +136,7 @@ namespace CustomCastleCrawler
             txtMainOutput.ScrollToCaret();
 
             //Check to see if there is an active enemy. If so, open the combat form.
-            if (this.MainGame.ActiveEnemy)
+            if (MainGame.ActiveEnemy)
             {
                 System.Threading.Thread.Sleep(1000);
 
@@ -145,7 +147,35 @@ namespace CustomCastleCrawler
                 {
                     combatScreen.ShowDialog();
                 }
-                this.Show();
+                //DO NOT show and re-hide here, this bugs the "ScrollToCaret" function causing the final line to be partially obscured. I believe this is related to form and texbox focus at the time.
+                //After removing the Show() from here and the Hide() from Line #160, the ScrollToCaret is working as intended.
+
+
+                //Check if the user prematurely closed the combat form.
+                if (MainGame.ActiveEnemy)
+                {
+
+                    //User closed the combat screen when they should not have inform them and re-open it.
+                    MessageBox.Show("You are still in combat, you must finish combat before performing other actions. Additional attempts to close the combat window early will result in the game closing.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                    using (frmCombat combatScreen = new frmCombat(MainGame))
+                    {
+                        combatScreen.ShowDialog();
+                    }
+                    this.Show();
+
+                    //Rather than have a loop to allow the user to infinitely close the window for it to automatically re-open,
+                    //I assume that if the user closes the window twice in a row without completing the combat that they are attempting to force quit the game. I ablige them.
+                    MessageBox.Show("You have closed the combat window prematurely twice in a row. It is assumed you are trying to force quit the game. The game will now close.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    Application.Exit();
+                }
+                else
+                {
+                    //the combat was successfully completed.
+                    //Populate the textbox with the results from the combat form.
+                    this.Show();
+                    popTextbox(MainGame.TempMiscData);
+                }
             }
         }
         #endregion
@@ -170,8 +200,15 @@ namespace CustomCastleCrawler
             txtMainOutput.SelectionAlignment = HorizontalAlignment.Center;
             txtMainOutput.SelectedText = output;
         }
-
+        
         #endregion
 
+        private void txtMainOutput_TextChanged(object sender, EventArgs e)
+        {
+            txtMainOutput.Focus();
+            txtMainOutput.SelectionStart = txtMainOutput.TextLength;
+            txtMainOutput.ScrollToCaret();
+            txtMainOutput.Refresh();
+        }
     }
 }

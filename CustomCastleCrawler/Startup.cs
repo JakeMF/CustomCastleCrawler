@@ -50,23 +50,27 @@ namespace CustomCastleCrawler
             if (!string.IsNullOrEmpty(playerName) && !string.IsNullOrWhiteSpace(playerName))
             {
                 //Run Load Game method. This will in turn build the game.
-                if(MainGame.LoadProgress(playerName, false))
+                var results = MainGame.LoadProgress(playerName, false);
+                if (results == "success")
                 {
                     //Save successfully loaded
                     introString = MainGame.StartGame(playerName, false);
                 }
+                else if (results == "tryagain")
+                {
+                    return;
+                }
                 else
                 {
-                    //Save was not loaded
                     introString = MainGame.StartGame(playerName, true);
                 }
 
                 //Open Class Choice Form
                 this.Hide();
 
-                using (frmClassSelection classSelection = new frmClassSelection(MainGame, introString))
+                using (frmMain frmMain = new frmMain(MainGame, introString))
                 {
-                    classSelection.ShowDialog();
+                    frmMain.ShowDialog();
                 }
                 this.Close();
             }

@@ -81,11 +81,17 @@ namespace CustomCastleCrawler
             lblPlayerHealth.Text = resArray.Length > 0 ? resArray[0] : "Er/Er";
             lblPlayerStamina.Text = resArray.Length > 1 ? resArray[1] : "Er/Er";
             lblEnemyHealth.Text = resArray.Length > 2 ? resArray[2] : "Er/Er";
-            txtCombatLog.Text = resArray.Length > 3 ? resArray[3] : "Error retrieving combat information. Please restart game WITHOUT SAVING.";
+            txtCombatLog.SelectedText = resArray.Length > 3 ? resArray[3] + Environment.NewLine: "Error retrieving combat information. Please restart game WITHOUT SAVING.";
 
             txtCombatLog.SelectionAlignment = HorizontalAlignment.Center;
             txtCombatLog.SelectionColor = Color.Black;
             txtCombatLog.ScrollToCaret();
+
+            //The enemy was defeated, close the combat window
+            if (!MainGame.ActiveEnemy)
+            {
+                Close();
+            }
         }
     }
 }
