@@ -1,5 +1,4 @@
 <Settings>
-		<!--You may have a predetermined number of heals per run. It's like an unfilling estus from dark souls.-->
 	<BaseMaxHeals>5</BaseMaxHeals>
 	<StartingPosition>
 		<DefaultX>3</DefaultX>
@@ -10,8 +9,8 @@
 		<YMax>5</YMax>
 	</MapSize>
 	<FlavorSettings>
-		<GameName>Iscandal</GameName>
-		<!--The game automaticall adds 'Welcome to [Game Name] [Player Name].-->
+		<GameName>Oolacile Adventures</GameName>
+		<!--The game automatically adds 'Welcome to [Game Name] [Player Name].-->
 		<GameFlavorText>You can use the four arrows to move North, South, East, and West. You may encounter enemies, find treasure, or discover secrets. If you encounter an enemy, you will be taken into another menu for the combat phase. Explore, fight, and gain power; it is all that will keep you alive.</GameFlavorText>
 	</FlavorSettings>
 	<!--There MUST BE 4 classes here, additional classes will be ignored. Having less than 4 classes will cause the game to be unplayable.-->

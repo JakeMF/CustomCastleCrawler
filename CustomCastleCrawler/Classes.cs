@@ -470,7 +470,7 @@ namespace CustomCastleCrawler
         //function to get the players evasion
         public int GetEvasion()
         {
-            int Evasion = Weapon.Evasion + Armor.Evasion;
+            int Evasion = Weapon.Evasion + Armor.Evasion + 20;
             if (Evasion > 0)
             {
                 return Evasion;
@@ -499,9 +499,7 @@ namespace CustomCastleCrawler
             else
             {
                 return "Your health flask is empty. You need to find a rest location to heal again.";
-            }
-
-            
+            } 
         }
 
         public string RefillEstus()
@@ -1151,6 +1149,13 @@ namespace CustomCastleCrawler
                 var eventQuery = from eve in Events where eve.EventID == currentTile.EventID select eve;
                 //If the user followed setup instructions correctly, there should only ever be one Event for each EventID
                 Event currentEvent = eventQuery.First();
+
+                //The EventID -1 is used to mark an unpassable location.
+                if(currentEvent.EventID == -1)
+                {
+                    Coordinates = LastCoordinates;
+                    return returnString.ToString();
+                }
                 if (currentEvent.RestLocation != 1)
                 {
                     //Check for enemy encounter first.
@@ -1341,7 +1346,7 @@ namespace CustomCastleCrawler
                 enemyBaseDamage /= 2;
                 enemyAPDamage /= 2;
                 returnString.AppendLine("You have blocked the enemy's attack, you will take half damage and regain some stamina.");
-                Player.RegenStamina(10);
+                Player.RegenStamina(20);
             }
             else
             {
@@ -1410,6 +1415,9 @@ namespace CustomCastleCrawler
                     }
                 }
             }
+
+            //Regen 5 stam per turn.
+            Player.RegenStamina(5);
 
             return Player.GetHealthAndStamina() + "|"  + CurrentEnemy.GetHealth() + "|" + returnString.ToString();
         }

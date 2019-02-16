@@ -1,44 +1,65 @@
 <Enemies>
+		<!--Crypt: 1, Hall: 2, Lab: 3-->
 	<Enemy>
 		<Name>Skeleton Warrior</Name>
-		<Health>100</Health>
-		<BaseDMG>15</BaseDMG>
-		<APDMG>15</APDMG>
+		<Health>600</Health>
+		<BaseDMG>100</BaseDMG>
+		<APDMG>25</APDMG>
 		<Defence>10</Defence>
 		<!--Defence is a flat % of damage reduction. Ex: 10 Defence will cause an attack that normally dealt 10 damage to deal 9.-->
 		<Evasion>5</Evasion>
 		<!--Evasion is a flat % chance to avoid all damage from an attack.-->
 		<Points>20</Points>
-		<SpawnZone>0</SpawnZone>
+		<SpawnZone>1</SpawnZone>
 	</Enemy>
 	<Enemy>
 		<Name>Zombie</Name>
-		<Health>100</Health>
-		<BaseDMG>15</BaseDMG>
-		<APDMG>15</APDMG>
+		<Health>800</Health>
+		<BaseDMG>50</BaseDMG>
+		<APDMG>0</APDMG>
 		<Defence>0</Defence>
 		<Evasion>0</Evasion>
-		<Points>20</Points>
-		<SpawnZone>0</SpawnZone>
+		<Points>5</Points>
+		<SpawnZone>1</SpawnZone>
 	</Enemy>
 	<Enemy>
 		<Name>Orc</Name>
-		<Health>175</Health>
-		<BaseDMG>15</BaseDMG>
-		<APDMG>15</APDMG>
+		<Health>1750</Health>
+		<BaseDMG>100</BaseDMG>
+		<APDMG>50</APDMG>
 		<Defence>20</Defence>
 		<Evasion>5</Evasion>
-		<Points>20</Points>
-		<SpawnZone>1</SpawnZone>
+		<Points>35</Points>
+		<SpawnZone>2</SpawnZone>
 	</Enemy>
 	<Enemy>
 		<Name>Goblin</Name>
-		<Health>90</Health>
-		<BaseDMG>15</BaseDMG>
-		<APDMG>15</APDMG>
+		<Health>200</Health>
+		<BaseDMG>40</BaseDMG>
+		<APDMG>20</APDMG>
 		<Defence>0</Defence>
 		<Evasion>20</Evasion>
-		<Points>20</Points>
-		<SpawnZone>1</SpawnZone>
+		<Points>15</Points>
+		<SpawnZone>2</SpawnZone>
+	</Enemy>
+	<Enemy>
+		<Name>Alchemist</Name>
+		<Health>400</Health>
+		<BaseDMG>20</BaseDMG>
+		<APDMG>30</APDMG>
+		<Defence>0</Defence>
+		<Evasion>25</Evasion>
+		<Points>40</Points>
+		<SpawnZone>3</SpawnZone>
+	</Enemy>
+	<Enemy>
+		<Name>Abomination of the Flesh</Name>
+		<Health>1000</Health>
+		<BaseDMG>40</BaseDMG>
+		<APDMG>60</APDMG>
+		<Defence>10</Defence>
+		<Evasion>00</Evasion>
+		<Points>100</Points>
+		<SpawnZone>3</SpawnZone>
 	</Enemy>
 </Enemies>
