@@ -2,176 +2,701 @@
 	<Tile>
 		<XCoord>0</XCoord>
 		<YCoord>0</YCoord>
-		<Message>This is the Flavor text that will be displayed to the user when they land on this tile.</Message>
+		<Message>You are in a forgotten crypt. (0,0)</Message>
 		<EventID>1</EventID>
 		<SpawnZone>0</SpawnZone>
 	</Tile>
 	<Tile>
 		<XCoord>0</XCoord>
 		<YCoord>1</YCoord>
-		<Message>Default Message (0,1)</Message>
+		<Message>You are in a forgotten crypt. (0,1)</Message>
+		<EventID>1</EventID>
+		<SpawnZone>0</SpawnZone>
+	</Tile>
+	<Tile>
+		<XCoord>0</XCoord>
+		<YCoord>2</YCoord>
+		<Message>You are in a forgotten crypt. (0,2)</Message>
+		<EventID>1</EventID>
+		<SpawnZone>0</SpawnZone>
+	</Tile>
+	<Tile>
+		<XCoord>0</XCoord>
+		<YCoord>3</YCoord>
+		<Message>You are in a forgotten crypt. (0,3)</Message>
+		<EventID>1</EventID>
+		<SpawnZone>0</SpawnZone>
+	</Tile>
+	<Tile>
+		<XCoord>0</XCoord>
+		<YCoord>4</YCoord>
+		<Message>You are in a forgotten crypt. (0,4)</Message>
+		<EventID>1</EventID>
+		<SpawnZone>0</SpawnZone>
+	</Tile>
+	<Tile>
+		<XCoord>0</XCoord>
+		<YCoord>5</YCoord>
+		<Message>You are in the Dungeon Hall. (0,5)</Message>
+		<EventID>2</EventID>
+		<SpawnZone>0</SpawnZone>
+	</Tile>
+	<Tile>
+		<XCoord>0</XCoord>
+		<YCoord>6</YCoord>
+		<Message>You cannot go here. (0,6)</Message>
+		<EventID>-1</EventID>
+		<SpawnZone>0</SpawnZone>
+	</Tile>
+	<Tile>
+		<XCoord>0</XCoord>
+		<YCoord>7</YCoord>
+		<Message>You have reached a lamp,it appears the area is clear. You have time to rest. (Heals Restored) (0,7)</Message>
+		<EventID>5</EventID>
+		<SpawnZone>0</SpawnZone>
+	</Tile>
+	<Tile>
+		<XCoord>0</XCoord>
+		<YCoord>8</YCoord>
+		<Message>You are in the Dungeon Hall. (0,8)</Message>
+		<EventID>1</EventID>
+		<SpawnZone>0</SpawnZone>
+	</Tile>
+	<Tile>
+		<XCoord>0</XCoord>
+		<YCoord>9</YCoord>
+		<Message>You are in the Dungeon Hall. (0,9)</Message>
+		<EventID>1</EventID>
+		<SpawnZone>0</SpawnZone>
+	</Tile>
+	<Tile>
+		<XCoord>1</XCoord>
+		<YCoord>0</YCoord>
+		<Message>You are in a forgotten crypt. (1,0)</Message>
+		<EventID>1</EventID>
+		<SpawnZone>0</SpawnZone>
+	</Tile>
+	<Tile>
+		<XCoord>1</XCoord>
+		<YCoord>1</YCoord>
+		<Message>You are in a forgotten crypt. (1,1)</Message>
+		<EventID>1</EventID>
+		<SpawnZone>0</SpawnZone>
+	</Tile>
+	<Tile>
+		<XCoord>1</XCoord>
+		<YCoord>2</YCoord>
+		<Message>You are in a forgotten crypt. (1,2)</Message>
+		<EventID>1</EventID>
+		<SpawnZone>0</SpawnZone>
+	</Tile>
+	<Tile>
+		<XCoord>1</XCoord>
+		<YCoord>3</YCoord>
+		<Message>You are in a forgotten crypt. (1,3)</Message>
+		<EventID>1</EventID>
+		<SpawnZone>0</SpawnZone>
+	</Tile>
+	<Tile>
+		<XCoord>1</XCoord>
+		<YCoord>4</YCoord>
+		<Message>You are in a Dungeon Hall. (1,4)</Message>
+		<EventID>2</EventID>
+		<SpawnZone>0</SpawnZone>
+	</Tile>
+	
+	<Tile>
+		<XCoord>1</XCoord>
+		<YCoord>5</YCoord>
+		<Message>You are in a Dungeon Hall. (1,5)</Message>
+		<EventID>2</EventID>
+		<SpawnZone>0</SpawnZone>
+	</Tile>
+	<Tile>
+		<XCoord>1</XCoord>
+		<YCoord>6</YCoord>
+		<Message>You are in a Dungeon Hall. (1,6)</Message>
+		<EventID>1</EventID>
+		<SpawnZone>0</SpawnZone>
+	</Tile>
+	<Tile>
+		<XCoord>1</XCoord>
+		<YCoord>7</YCoord>
+		<Message>You are in a Dungeon Hall. (1,7)</Message>
+		<EventID>2</EventID>
+		<SpawnZone>0</SpawnZone>
+	</Tile>
+	<Tile>
+		<XCoord>1</XCoord>
+		<YCoord>8</YCoord>
+		<Message>You are in a Dungeon Hall. (1,8)</Message>
+		<EventID>2</EventID>
+		<SpawnZone>0</SpawnZone>
+	</Tile>
+	<Tile>
+		<XCoord>1</XCoord>
+		<YCoord>9</YCoord>
+		<Message>You are in a Dungeon Hall. (1,9)</Message>
+		<EventID>2</EventID>
+		<SpawnZone>0</SpawnZone>
+	</Tile>
+	<Tile>
+		<XCoord>2</XCoord>
+		<YCoord>0</YCoord>
+		<Message>You are in a forgotten crypt. (2,0)</Message>
+		<EventID>1</EventID>
+		<SpawnZone>0</SpawnZone>
+	</Tile>
+	<Tile>
+		<XCoord>2</XCoord>
+		<YCoord>1</YCoord>
+		<Message>You are in a forgotten crypt. (2,1)</Message>
+		<EventID>1</EventID>
+		<SpawnZone>0</SpawnZone>
+	</Tile>
+	<Tile>
+		<XCoord>2</XCoord>
+		<YCoord>2</YCoord>
+		<Message>You cannot go here. (2,2)</Message>
+		<EventID>-1</EventID>
+		<SpawnZone>0</SpawnZone>
+	</Tile>
+	<Tile>
+		<XCoord>2</XCoord>
+		<YCoord>3</YCoord>
+		<Message>You are in a forgotten crypt. (2,3)</Message>
+		<EventID>1</EventID>
+		<SpawnZone>1</SpawnZone>
+	</Tile>
+	<Tile>
+		<XCoord>2</XCoord>
+		<YCoord>4</YCoord>
+		<Message>You are in the Dungeon Hall. (2,4)</Message>
+		<EventID>2</EventID>
+		<SpawnZone>1</SpawnZone>
+	</Tile>
+	<Tile>
+		<XCoord>2</XCoord>
+		<YCoord>5s</YCoord>
+		<Message>You are in the Dungeon Hall. (2,5)</Message>
+		<EventID>2</EventID>
+		<SpawnZone>1</SpawnZone>
+	</Tile>
+	<Tile>
+		<XCoord>2</XCoord>
+		<YCoord>6</YCoord>
+		<Message>You cannot go here. (2,6)</Message>
+		<EventID>-1</EventID>
+		<SpawnZone>1</SpawnZone>
+	</Tile>
+	<Tile>
+		<XCoord>2</XCoord>
+		<YCoord>7</YCoord>
+		<Message>You cannot go here. (2,7)</Message>
+		<EventID>-1</EventID>
+		<SpawnZone>1</SpawnZone>
+	</Tile>
+	<Tile>
+		<XCoord>2</XCoord>
+		<YCoord>8</YCoord>
+		<Message>You are in the Dungeon Hall. (2,8)</Message>
+		<EventID>2</EventID>
+		<SpawnZone>1</SpawnZone>
+	</Tile>
+	<Tile>
+		<XCoord>2</XCoord>
+		<YCoord>9</YCoord>
+		<Message>You are in the Dungeon Hall. (2,9)</Message>
+		<EventID>2</EventID>
+		<SpawnZone>1</SpawnZone>
+	</Tile>
+	<Tile>
+		<XCoord>3</XCoord>
+		<YCoord>0</YCoord>
+		<Message>You are in a forgotten crypt. (3,0)</Message>
+		<EventID>1</EventID>
+		<SpawnZone>1</SpawnZone>
+	</Tile>
+	<Tile>
+		<XCoord>3</XCoord>
+		<YCoord>1</YCoord>
+		<Message>You are in a forgotten crypt. (3,1)</Message>
+		<EventID>1</EventID>
+		<SpawnZone>1</SpawnZone>
+	</Tile>
+	<Tile>
+		<XCoord>3</XCoord>
+		<YCoord>2</YCoord>
+		<Message>You cannot go here. (3,2)</Message>
+		<EventID>-1</EventID>
+		<SpawnZone>1</SpawnZone>
+	</Tile>
+	<Tile>
+		<XCoord>3</XCoord>
+		<YCoord>3</YCoord>
+		<Message>You are in the Dungeon Hall. (3,3)</Message>
+		<EventID>2</EventID>
+		<SpawnZone>1</SpawnZone>
+	</Tile>
+	<Tile>
+		<XCoord>3</XCoord>
+		<YCoord>4</YCoord>
+		<Message>You are in the Dungeon Hall. (3,4)</Message>
+		<EventID>2</EventID>
+		<SpawnZone>1</SpawnZone>
+	</Tile>
+	<Tile>
+		<XCoord>3</XCoord>
+		<YCoord>5</YCoord>
+		<Message>You are in the Dungeon Hall. (3,5)</Message>
+		<EventID>2</EventID>
+		<SpawnZone>1</SpawnZone>
+	</Tile>
+	<Tile>
+		<XCoord>3</XCoord>
+		<YCoord>6</YCoord>
+		<Message>You cannot go here. (3,6)</Message>
+		<EventID>-1</EventID>
+		<SpawnZone>1</SpawnZone>
+	</Tile>
+	<Tile>
+		<XCoord>3</XCoord>
+		<YCoord>7</YCoord>
+		<Message>You cannot go here. (3,7)</Message>
+		<EventID>-1</EventID>
+		<SpawnZone>1</SpawnZone>
+	</Tile>
+	<Tile>
+		<XCoord>3</XCoord>
+		<YCoord>8</YCoord>
+		<Message>You are in the Dungeon Hall. (3,8)</Message>
+		<EventID>2</EventID>
+		<SpawnZone>1</SpawnZone>
+	</Tile>
+	<Tile>
+		<XCoord>3</XCoord>
+		<YCoord>9</YCoord>
+		<Message>You are in the Dungeon Hall. (3,9)</Message>
+		<EventID>2</EventID>
+		<SpawnZone>1</SpawnZone>
+	</Tile>
+	<Tile>
+		<XCoord>4</XCoord>
+		<YCoord>0</YCoord>
+		<Message>You are in the Dungeon Hall. (4,0)</Message>
+		<EventID>2</EventID>
+		<SpawnZone>1</SpawnZone>
+	</Tile>
+	<Tile>
+		<XCoord>4</XCoord>
+		<YCoord>1</YCoord>
+		<Message>You are in a forgotten crypt. (4,1)</Message>
+		<EventID>1</EventID>
+		<SpawnZone>1</SpawnZone>
+	</Tile>
+	<Tile>
+		<XCoord>4</XCoord>
+		<YCoord>2</YCoord>
+		<Message>You cannot go here. (4,2)</Message>
+		<EventID>-1</EventID>
+		<SpawnZone>1</SpawnZone>
+	</Tile>
+	<Tile>
+		<XCoord>4</XCoord>
+		<YCoord>3</YCoord>
+		<Message>You are in the Dungeon Hall. (4,3)</Message>
+		<EventID>2</EventID>
+		<SpawnZone>1</SpawnZone>
+	</Tile>
+	<Tile>
+		<XCoord>4</XCoord>
+		<YCoord>4</YCoord>
+		<Message>You cannot go here. (4,4)</Message>
+		<EventID>-1</EventID>
+		<SpawnZone>1</SpawnZone>
+	</Tile>
+	<Tile>
+		<XCoord>4</XCoord>
+		<YCoord>5</YCoord>
+		<Message>You have reached a resting place. Your healing flask has been restored. (4,5)</Message>
+		<EventID>5</EventID>
+		<SpawnZone>1</SpawnZone>
+	</Tile>
+	<Tile>
+		<XCoord>4</XCoord>
+		<YCoord>6</YCoord>
+		<Message>You are in the Dungeon Hall. (4,6)</Message>
+		<EventID>2</EventID>
+		<SpawnZone>1</SpawnZone>
+	</Tile>
+	<Tile>
+		<XCoord>4</XCoord>
+		<YCoord>7</YCoord>
+		<Message>You are in the Dungeon Hall. (4,7)</Message>
+		<EventID>2</EventID>
+		<SpawnZone>1</SpawnZone>
+	</Tile>
+	<Tile>
+		<XCoord>4</XCoord>
+		<YCoord>8</YCoord>
+		<Message>You are in the Dungeon Hall. (4,8)</Message>
+		<EventID>2</EventID>
+		<SpawnZone>1</SpawnZone>
+	</Tile>
+	<Tile>
+		<XCoord>4</XCoord>
+		<YCoord>9</YCoord>
+		<Message>You are in the Dungeon Hall. (4,9)</Message>
+		<EventID>2</EventID>
+		<SpawnZone>1</SpawnZone>
+	</Tile>
+		<XCoord>5</XCoord>
+		<YCoord>0</YCoord>
+		<Message>You are in the Dungeon Hall. (5,0)</Message>
+		<EventID>2</EventID>
+		<SpawnZone>1</SpawnZone>
+	</Tile>
+	<Tile>
+		<XCoord>5</XCoord>
+		<YCoord>1</YCoord>
+		<Message>You cannot go here. (5,1)</Message>
+		<EventID>-1</EventID>
+		<SpawnZone>1</SpawnZone>
+	</Tile>
+	<Tile>
+		<XCoord>5</XCoord>
+		<YCoord>2</YCoord>
+		<Message>You cannot go here. (5,2)</Message>
+		<EventID>-1</EventID>
+		<SpawnZone>1</SpawnZone>
+	</Tile>
+	<Tile>
+		<XCoord>5</XCoord>
+		<YCoord>3</YCoord>
+		<Message>You are in the Dungeon Hall. (5,3)</Message>
+		<EventID>2</EventID>
+		<SpawnZone>1</SpawnZone>
+	</Tile>
+	<Tile>
+		<XCoord>5</XCoord>
+		<YCoord>4</YCoord>
+		<Message>You cannot go here. (5,4)</Message>
+		<EventID>-1</EventID>
+		<SpawnZone>1</SpawnZone>
+	</Tile>
+	<Tile>
+		<XCoord>5</XCoord>
+		<YCoord>5</YCoord>
+		<Message>You cannot go here. (5,5)</Message>
+		<EventID>-1</EventID>
+		<SpawnZone>1</SpawnZone>
+	</Tile>
+	<Tile>
+		<XCoord>5</XCoord>
+		<YCoord>6</YCoord>
+		<Message>You cannot go here. (5,6)</Message>
+		<EventID>-1</EventID>
+		<SpawnZone>1</SpawnZone>
+	</Tile>
+	<Tile>
+		<XCoord>5</XCoord>
+		<YCoord>7</YCoord>
+		<Message>You cannot go here. (5,7)</Message>
+		<EventID>-1</EventID>
+		<SpawnZone>1</SpawnZone>
+	</Tile>
+	<Tile>
+		<XCoord>5</XCoord>
+		<YCoord>8</YCoord>
+		<Message>You cannot go here. (5,8)</Message>
+		<EventID>-1</EventID>
+		<SpawnZone>1</SpawnZone>
+	</Tile>
+	<Tile>
+		<XCoord>5</XCoord>
+		<YCoord>9</YCoord>
+		<Message>You are in the Dungeon Hall. (5,9)</Message>
+		<EventID>2</EventID>
+		<SpawnZone>1</SpawnZone>
+	</Tile>
+	<Tile>
+		<XCoord>6</XCoord>
+		<YCoord>0</YCoord>
+		<Message>You are in an Alchemist's Lab. (6,0)</Message>
 		<EventID>3</EventID>
-		<SpawnZone>0</SpawnZone>
+		<SpawnZone>1</SpawnZone>
 	</Tile>
 	<Tile>
-		<XCoord>0</XCoord>
-		<YCoord>2</YCoord>
-		<Message>Default Message SAFE ZONE(0,2)</Message>
-		<EventID>2</EventID>
-		<SpawnZone>0</SpawnZone>
-	</Tile>
-	<Tile>
-		<XCoord>0</XCoord>
-		<YCoord>3</YCoord>
-		<Message>Default Message SAFE ZONE(0,3)</Message>
-		<EventID>2</EventID>
-		<SpawnZone>0</SpawnZone>
-	</Tile>
-	<Tile>
-		<XCoord>0</XCoord>
-		<YCoord>4</YCoord>
-		<Message>Default Message (0,4)</Message>
-		<EventID>1</EventID>
-		<SpawnZone>0</SpawnZone>
-	</Tile>
-	<Tile>
-		<XCoord>1</XCoord>
-		<YCoord>0</YCoord>
-		<Message>Default Message (1,0)</Message>
-		<EventID>1</EventID>
-		<SpawnZone>0</SpawnZone>
-	</Tile>
-	<Tile>
-		<XCoord>1</XCoord>
+		<XCoord>6</XCoord>
 		<YCoord>1</YCoord>
-		<Message>Default Message (1, 1)</Message>
-		<EventID>1</EventID>
-		<SpawnZone>0</SpawnZone>
+		<Message>You cannot go here. (6,1)</Message>
+		<EventID>-1</EventID>
+		<SpawnZone>1</SpawnZone>
 	</Tile>
 	<Tile>
-		<XCoord>1</XCoord>
+		<XCoord>6</XCoord>
 		<YCoord>2</YCoord>
-		<Message>Default Message (1, 2)</Message>
-		<EventID>2</EventID>
-		<SpawnZone>0</SpawnZone>
+		<Message>You cannot go here. (6,2)</Message>
+		<EventID>-1</EventID>
+		<SpawnZone>1</SpawnZone>
 	</Tile>
 	<Tile>
-		<XCoord>1</XCoord>
+		<XCoord>6</XCoord>
 		<YCoord>3</YCoord>
-		<Message>Default Message (1, 3)</Message>
-		<EventID>1</EventID>
-		<SpawnZone>0</SpawnZone>
+		<Message>You are in the Dungeon Hall. (5,3)</Message>
+		<EventID>2</EventID>
+		<SpawnZone>1</SpawnZone>
 	</Tile>
 	<Tile>
-		<XCoord>1</XCoord>
+		<XCoord>5</XCoord>
 		<YCoord>4</YCoord>
-		<Message>Default Message (1, 4)</Message>
+		<Message>You are in the Dungeon Hall. (5,4)</Message>
+		<EventID>2</EventID>
+		<SpawnZone>1</SpawnZone>
+	</Tile>
+	<Tile>
+		<XCoord>6</XCoord>
+		<YCoord>5</YCoord>
+		<Message>You cannot go here. (6,5)</Message>
+		<EventID>-1</EventID>
+		<SpawnZone>1</SpawnZone>
+	</Tile>
+	<Tile>
+		<XCoord>6</XCoord>
+		<YCoord>6</YCoord>
+		<Message>You are in the Dungeon Hall. (6,6)</Message>
+		<EventID>2</EventID>
+		<SpawnZone>1</SpawnZone>
+	</Tile>
+	<Tile>
+		<XCoord>6</XCoord>
+		<YCoord>7</YCoord>
+		<Message>You are in the Dungeon Hall. (6,7)</Message>
+		<EventID>2</EventID>
+		<SpawnZone>1</SpawnZone>
+	</Tile>
+	<Tile>
+		<XCoord>6</XCoord>
+		<YCoord>8</YCoord>
+		<Message>You are in the Dungeon Hall. (6,8)</Message>
+		<EventID>2</EventID>
+		<SpawnZone>1</SpawnZone>
+	</Tile>
+	<Tile>
+		<XCoord>6</XCoord>
+		<YCoord>9</YCoord>
+		<Message>You are in the Dungeon Hall. (6,9)</Message>
+		<EventID>2</EventID>
+		<SpawnZone>1</SpawnZone>
+	</Tile>
+	<Tile>
+		<XCoord>7</XCoord>
+		<YCoord>0</YCoord>
+		<Message>You are in an Alchemist's Lab. (7,0)</Message>
 		<EventID>3</EventID>
-		<SpawnZone>0</SpawnZone>
+		<SpawnZone>1</SpawnZone>
 	</Tile>
 	<Tile>
-		<XCoord>2</XCoord>
-		<YCoord>0</YCoord>
-		<Message>Default Message (2, 0)</Message>
-		<EventID>1</EventID>
-		<SpawnZone>0</SpawnZone>
-	</Tile>
-	<Tile>
-		<XCoord>2</XCoord>
+		<XCoord>7</XCoord>
 		<YCoord>1</YCoord>
-		<Message>Default Message (2, 1)</Message>
-		<EventID>1</EventID>
-		<SpawnZone>0</SpawnZone>
+		<Message>You cannot go here. (7,1)</Message>
+		<EventID>-1</EventID>
+		<SpawnZone>1</SpawnZone>
 	</Tile>
 	<Tile>
-		<XCoord>2</XCoord>
+		<XCoord>7</XCoord>
 		<YCoord>2</YCoord>
-		<Message>Default Message (2, 2)</Message>
-		<EventID>1</EventID>
-		<SpawnZone>0</SpawnZone>
+		<Message>You are in an Alchemist's Lab. (7,2)</Message>
+		<EventID>3</EventID>
+		<SpawnZone>1</SpawnZone>
 	</Tile>
 	<Tile>
-		<XCoord>2</XCoord>
+		<XCoord>7</XCoord>
 		<YCoord>3</YCoord>
-		<Message>Default Message (2, 3)</Message>
-		<EventID>1</EventID>
+		<Message>You are in an Alchemist's Lab. (7,3)</Message>
+		<EventID>3</EventID>
 		<SpawnZone>1</SpawnZone>
 	</Tile>
 	<Tile>
-		<XCoord>2</XCoord>
+		<XCoord>7</XCoord>
 		<YCoord>4</YCoord>
-		<Message>Default Message (2, 4)</Message>
-		<EventID>1</EventID>
+		<Message>You are in an Alchemist's Lab. (7,4)</Message>
+		<EventID>3</EventID>
 		<SpawnZone>1</SpawnZone>
 	</Tile>
 	<Tile>
-		<XCoord>3</XCoord>
+		<XCoord>7</XCoord>
+		<YCoord>5</YCoord>
+		<Message>You cannot go here. (7,5)</Message>
+		<EventID>-1</EventID>
+		<SpawnZone>1</SpawnZone>
+	</Tile>
+	<Tile>
+		<XCoord>7</XCoord>
+		<YCoord>6</YCoord>
+		<Message>You are in an Alchemist's Lab. (7,6)</Message>
+		<EventID>3</EventID>
+		<SpawnZone>1</SpawnZone>
+	</Tile>
+	<Tile>
+		<XCoord>7</XCoord>
+		<YCoord>7</YCoord>
+		<Message>You are in an Alchemist's Lab. (7,7)</Message>
+		<EventID>3</EventID>
+		<SpawnZone>1</SpawnZone>
+	</Tile>
+	<Tile>
+		<XCoord>7</XCoord>
+		<YCoord>8</YCoord>
+		<Message>You are in an Alchemist's Lab. (7,8)</Message>
+		<EventID>3</EventID>
+		<SpawnZone>1</SpawnZone>
+	</Tile>
+	<Tile>
+		<XCoord>7</XCoord>
+		<YCoord>9</YCoord>
+		<Message>You are in an Alchemist's Lab. (7,9)</Message>
+		<EventID>3</EventID>
+		<SpawnZone>1</SpawnZone>
+	</Tile>
+	<Tile>
+		<XCoord>7</XCoord>
 		<YCoord>0</YCoord>
-		<Message>Default Message (3, 0)</Message>
-		<EventID>1</EventID>
+		<Message>You are in an Alchemist's Lab. (7,0)</Message>
+		<EventID>3</EventID>
 		<SpawnZone>1</SpawnZone>
 	</Tile>
 	<Tile>
-		<XCoord>3</XCoord>
+		<XCoord>8</XCoord>
 		<YCoord>1</YCoord>
-		<Message>Default Message (3,1)</Message>
-		<EventID>1</EventID>
+		<Message>You cannot go here. (8,1)</Message>
+		<EventID>-1</EventID>
 		<SpawnZone>1</SpawnZone>
 	</Tile>
 	<Tile>
-		<XCoord>3</XCoord>
+		<XCoord>8</XCoord>
 		<YCoord>2</YCoord>
-		<Message>Default Message (3,2)</Message>
-		<EventID>1</EventID>
+		<Message>You are in an Alchemist's Lab. (8,2)</Message>
+		<EventID>3</EventID>
 		<SpawnZone>1</SpawnZone>
 	</Tile>
 	<Tile>
-		<XCoord>3</XCoord>
+		<XCoord>8</XCoord>
 		<YCoord>3</YCoord>
-		<Message>Default Message (3,3)</Message>
-		<EventID>1</EventID>
+		<Message>You are in an Alchemist's Lab. (8,3)</Message>
+		<EventID>3</EventID>
 		<SpawnZone>1</SpawnZone>
 	</Tile>
 	<Tile>
-		<XCoord>3</XCoord>
+		<XCoord>8</XCoord>
 		<YCoord>4</YCoord>
-		<Message>Default Message (3, 4)</Message>
-		<EventID>1</EventID>
+		<Message>You are in an Alchemist's Lab. (8,4)</Message>
+		<EventID>3</EventID>
 		<SpawnZone>1</SpawnZone>
 	</Tile>
 	<Tile>
-		<XCoord>4</XCoord>
+		<XCoord>8</XCoord>
+		<YCoord>5</YCoord>
+		<Message>You cannot go here. (8,5)</Message>
+		<EventID>-1</EventID>
+		<SpawnZone>1</SpawnZone>
+	</Tile>
+	<Tile>
+		<XCoord>8</XCoord>
+		<YCoord>6</YCoord>
+		<Message>You are in an Alchemist's Lab. (8,6)</Message>
+		<EventID>3</EventID>
+		<SpawnZone>1</SpawnZone>
+	</Tile>
+	<Tile>
+		<XCoord>8</XCoord>
+		<YCoord>7</YCoord>
+		<Message>You are in an Alchemist's Lab. (8,7)</Message>
+		<EventID>3</EventID>
+		<SpawnZone>1</SpawnZone>
+	</Tile>
+	<Tile>
+		<XCoord>8</XCoord>
+		<YCoord>8</YCoord>
+		<Message>You are in an Alchemist's Lab. (8,8)</Message>
+		<EventID>3</EventID>
+		<SpawnZone>1</SpawnZone>
+	</Tile>
+	<Tile>
+		<XCoord>8</XCoord>
+		<YCoord>9</YCoord>
+		<Message>You are in an Alchemist's Lab. (8,9)</Message>
+		<EventID>3</EventID>
+		<SpawnZone>1</SpawnZone>
+	</Tile>
+	<Tile>
+		<XCoord>9</XCoord>
 		<YCoord>0</YCoord>
-		<Message>Default Message (4, 0)</Message>
-		<EventID>1</EventID>
+		<Message>You are in an Alchemist's Lab. (9,0)</Message>
+		<EventID>3</EventID>
 		<SpawnZone>1</SpawnZone>
 	</Tile>
 	<Tile>
-		<XCoord>4</XCoord>
+		<XCoord>9</XCoord>
 		<YCoord>1</YCoord>
-		<Message>Default Message (4,1)</Message>
-		<EventID>1</EventID>
+		<Message>You are in an Alchemist's Lab. (9,1)</Message>
+		<EventID>3</EventID>
 		<SpawnZone>1</SpawnZone>
 	</Tile>
 	<Tile>
-		<XCoord>4</XCoord>
+		<XCoord>9</XCoord>
 		<YCoord>2</YCoord>
-		<Message>Default Message (4,2)</Message>
-		<EventID>1</EventID>
+		<Message>You are in an Alchemist's Lab. (9,2)</Message>
+		<EventID>3</EventID>
 		<SpawnZone>1</SpawnZone>
 	</Tile>
 	<Tile>
-		<XCoord>4</XCoord>
+		<XCoord>9</XCoord>
 		<YCoord>3</YCoord>
-		<Message>Default Message (4,3)</Message>
-		<EventID>1</EventID>
+		<Message>You are in an Alchemist's Lab. (9,3)</Message>
+		<EventID>3</EventID>
 		<SpawnZone>1</SpawnZone>
 	</Tile>
 	<Tile>
-		<XCoord>4</XCoord>
+		<XCoord>9</XCoord>
 		<YCoord>4</YCoord>
-		<Message>Default Message (4, 4)</Message>
-		<EventID>1</EventID>
+		<Message>You are in an Alchemist's Lab. (9,4)</Message>
+		<EventID>3</EventID>
+		<SpawnZone>1</SpawnZone>
+	</Tile>
+	<Tile>
+		<XCoord>9</XCoord>
+		<YCoord>5</YCoord>
+		<Message>You are in an Alchemist's Lab. (9,5)</Message>
+		<EventID>3</EventID>
+		<SpawnZone>1</SpawnZone>
+	</Tile>
+	<Tile>
+		<XCoord>9</XCoord>
+		<YCoord>6</YCoord>
+		<Message>You are in an Alchemist's Lab. (9,6)</Message>
+		<EventID>3</EventID>
+		<SpawnZone>1</SpawnZone>
+	</Tile>
+	<Tile>
+		<XCoord>9</XCoord>
+		<YCoord>7</YCoord>
+		<Message>You are in an Alchemist's Lab. (9,7)</Message>
+		<EventID>3</EventID>
+		<SpawnZone>1</SpawnZone>
+	</Tile>
+	<Tile>
+		<XCoord>9</XCoord>
+		<YCoord>8</YCoord>
+		<Message>You are in an Alchemist's Lab. (9,8)</Message>
+		<EventID>3</EventID>
+		<SpawnZone>1</SpawnZone>
+	</Tile>
+	<Tile>
+		<XCoord>9</XCoord>
+		<YCoord>9</YCoord>
+		<Message>You are in an Alchemist's Lab. (9,9)</Message>
+		<EventID>3</EventID>
 		<SpawnZone>1</SpawnZone>
 	</Tile>
 </MapTiles>

@@ -1,85 +1,176 @@
 <Items>
 	<Weapon>
-		<Name>Longsword</Name>
+		<Name>Thief's Dagger</Name>
 		<GoldValue>5</GoldValue>
-		<BaseDMG>5</BaseDMG>
-		<APDMG>2</APDMG>
+		<BaseDMG>00</BaseDMG>
+		<APDMG>80</APDMG>
+		<Evasion>20</Evasion>
+		<Rarity>1</Rarity>
+		<Description>This traditional long sword may not be fancy, but it gets the job done.</Description>
+	</Weapon>
+	<Weapon>
+		<Name>Dagger</Name>
+		<GoldValue>5</GoldValue>
+		<BaseDMG>40</BaseDMG>
+		<APDMG>40</APDMG>
+		<Evasion>20</Evasion>
+		<Rarity>1</Rarity>
+		<Description>This traditional long sword may not be fancy, but it gets the job done.</Description>
+	</Weapon>
+	<Weapon>
+		<Name>Shortsword</Name>
+		<GoldValue>5</GoldValue>
+		<BaseDMG>50</BaseDMG>
+		<APDMG>20</APDMG>
 		<Evasion>0</Evasion>
 		<Rarity>1</Rarity>
-		<Description>This is a default item description</Description>
+		<Description>This short sword may not be very strong, but it gets the job done if you work hard enough.</Description>
+	</Weapon>
+	<Weapon>
+		<Name>Longsword</Name>
+		<GoldValue>5</GoldValue>
+		<BaseDMG>60</BaseDMG>
+		<APDMG>20</APDMG>
+		<Evasion>0</Evasion>
+		<Rarity>1</Rarity>
+		<Description>This traditional long sword may not be fancy, but it gets the job done.</Description>
 	</Weapon>
 	<Weapon>
 		<Name>Claymore</Name>
 		<GoldValue>18</GoldValue>
-		<BaseDMG>10</BaseDMG>
-		<APDMG>2</APDMG>
-		<Evasion>-5</Evasion>
+		<BaseDMG>100</BaseDMG>
+		<APDMG>20</APDMG>
+		<Evasion>0</Evasion>
 		<Rarity>2</Rarity>
-		<Description>This is a default item description</Description>
+		<Description>This large sword can be weilded with one or two hands easily, a balanced and good weapon.</Description>
+	</Weapon>
+	<Weapon>
+		<Name>Enchanted Claymore</Name>
+		<GoldValue>18</GoldValue>
+		<BaseDMG>100</BaseDMG>
+		<APDMG>40</APDMG>
+		<Evasion>0</Evasion>
+		<Rarity>2</Rarity>
+		<Description>This large sword can be weilded with one or two hands easily, a balanced and good weapon. This Claymore was blessed by a maiden.</Description>
+	</Weapon>
+	<Weapon>
+		<Name>Shortbow</Name>
+		<GoldValue>10</GoldValue>
+		<BaseDMG>00</BaseDMG>
+		<APDMG>60</APDMG>
+		<Evasion>35</Evasion>
+		<Rarity>1</Rarity>
+		<Description>This short ranged bow does somewhat low damage, but is excellent for agile combat.</Description>
 	</Weapon>
 	<Weapon>
 		<Name>Longbow</Name>
 		<GoldValue>15</GoldValue>
-		<BaseDMG>0</BaseDMG>
-		<APDMG>6</APDMG>
+		<BaseDMG>00</BaseDMG>
+		<APDMG>80</APDMG>
 		<Evasion>25</Evasion>
-		<Rarity>1</Rarity>
-		<Description>This is a default item description</Description>
+		<Rarity>2</Rarity>
+		<Description>This long ranged bow does good damage and helps keep you at a safe distance.</Description>
 	</Weapon>
 	<Weapon>
 		<Name>Great Club</Name>
 		<GoldValue>20</GoldValue>
-		<BaseDMG>6</BaseDMG>
-		<APDMG>8</APDMG>
-		<Evasion>0</Evasion>
+		<BaseDMG>80</BaseDMG>
+		<APDMG>80</APDMG>
+		<Evasion>-10</Evasion>
 		<Rarity>3</Rarity>
-		<Description>This is a default item description</Description>
+		<Description>Legends say a giant uprooted a tree and widdled a handle into it to create this massive club.</Description>
 	</Weapon>
+	<Weapon>
+		<Name>Large Club</Name>
+		<GoldValue>25</GoldValue>
+		<BaseDMG>80</BaseDMG>
+		<APDMG>60</APDMG>
+		<Evasion>-5</Evasion>
+		<Rarity>3</Rarity>
+		<Description>Legends say a giant uprooted a tree and widdled a handle into it to create this massive club.</Description>
+	</Weapon>
+	<Armor>
+		<Name>Enchanted Robe</Name>
+		<GoldValue>3</GoldValue>
+		<ArmorVal>5</ArmorVal>
+		<Evasion>20</Evasion>
+		<Rarity>3</Rarity>
+		<Description>These cloth scraps barely cover your flesh, but they allow for extreme evasion.</Description>
+	</Armor>
+	<Armor>
+		<Name>Master's Garb</Name>
+		<GoldValue>3</GoldValue>
+		<ArmorVal>0</ArmorVal>
+		<Evasion>20</Evasion>
+		<Rarity>2</Rarity>
+		<Description>These cloth scraps barely cover your flesh, but they allow for extreme evasion.</Description>
+	</Armor>
+	<Armor>
+		<Name>Leather Armor</Name>
+		<GoldValue>3</GoldValue>
+		<ArmorVal>2</ArmorVal>
+		<Evasion>10</Evasion>
+		<Rarity>1</Rarity>
+		<Description>This armor is flimsy and provides little protection, but leaves your movement unhindered.</Description>
+	</Armor>
 	<Armor>
 		<Name>Hard Leather Armor</Name>
 		<GoldValue>5</GoldValue>
 		<ArmorVal>5</ArmorVal>
 		<Evasion>5</Evasion>
 		<Rarity>1</Rarity>
-		<Description>This is a default item description</Description>
+		<Description>This is more sturdy than traditional leather, but restricts movement somewhat.</Description>
+	</Armor>
+	<Armor>
+		<Name>Chainmail Armor</Name>
+		<GoldValue>10</GoldValue>
+		<ArmorVal>10</ArmorVal>
+		<Evasion>0</Evasion>
+		<Rarity>2</Rarity>
+		<Description>Armor worn by an accomplished knight, somewhat heavy and restrictive, but provides good protection.</Description>
 	</Armor>
 	<Armor>
 		<Name>Silver Knight Armor</Name>
 		<GoldValue>10</GoldValue>
-		<ArmorVal>8</ArmorVal>
-		<Evasion>-5</Evasion>
+		<ArmorVal>15</ArmorVal>
+		<Evasion>-10</Evasion>
 		<Rarity>2</Rarity>
-		<Description>This is a default item description</Description>
-	</Armor>
-	<Armor>
-		<Name>Leather Armor</Name>
-		<GoldValue>3</GoldValue>
-		<ArmorVal>3</ArmorVal>
-		<Evasion>10</Evasion>
-		<Rarity>1</Rarity>
-		<Description>This is a default item description</Description>
+		<Description>Armor worn by an accomplished knight, somewhat heavy and restrictive, but provides good protection.</Description>
 	</Armor>
 	<Armor>
 		<Name>Giant Armor</Name>
 		<GoldValue>15</GoldValue>
-		<ArmorVal>10</ArmorVal>
-		<Evasion>-10</Evasion>
+		<ArmorVal>25s</ArmorVal>
+		<Evasion>-20</Evasion>
+		<Rarity>2</Rarity>
+		<Description>Armor worn by a massive giant, this is extremely heavy and immobilizing, but provides spectacular protection.</Description>
+	</Armor>
+	<Armor>
+		<Name>Havel's Armor</Name>
+		<GoldValue>15</GoldValue>
+		<ArmorVal>50</ArmorVal>
+		<Evasion>-50</Evasion>
 		<Rarity>3</Rarity>
-		<Description>This is a default item description</Description>
+		<Description>Armor worn by Havel the Rock, a knight of unmatched strength and resolve. This armor is almost unbearably heavy, but it provides unparalleled protection.</Description>
 	</Armor>
 	<Item>
 		<Name>Silver Spoon</Name>
 		<GoldValue>2</GoldValue>
-		<Description>This is a default item description</Description>
+		<Description>A spoon made of silver, worth some gold pieces.</Description>
 	</Item>
 	<Item>
 		<Name>Silver Goblet</Name>
 		<GoldValue>3</GoldValue>
-		<Description>This is a default item description</Description>
+		<Description>A goblet made of silver, worth some gold pieces.</Description>
+	</Item>
+	<Item>
+		<Name>Gold Bracelet</Name>
+		<GoldValue>8</GoldValue>
+		<Description>A bracelet made of gold, worth some gold pieces.</Description>
 	</Item>
 	<Item>
 		<Name>Gold Goblet</Name>
 		<GoldValue>5</GoldValue>
-		<Description>This is a default item description</Description>
+		<Description>A goblet made of gold, worth some gold pieces.</Description>
 	</Item>
 </Items>
