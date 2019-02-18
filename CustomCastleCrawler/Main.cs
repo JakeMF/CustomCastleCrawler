@@ -71,21 +71,25 @@ namespace CustomCastleCrawler
         private void btnNorth_Click(object sender, EventArgs e)
         {
             popTextbox(MainGame.EvaluateInput("north"));
+            MainGame.TurnCount++;
         }
 
         private void btnSouth_Click(object sender, EventArgs e)
         {
             popTextbox(MainGame.EvaluateInput("south"));
+            MainGame.TurnCount++;
         }
 
         private void btnEast_Click(object sender, EventArgs e)
         {
             popTextbox(MainGame.EvaluateInput("east"));
+            MainGame.TurnCount++;
         }
 
         private void btnWest_Click(object sender, EventArgs e)
         {
             popTextbox(MainGame.EvaluateInput("west"));
+            MainGame.TurnCount++;
         }
 
         private void popTextbox(string output)
@@ -156,7 +160,7 @@ namespace CustomCastleCrawler
                     //Set active enemy to false to allow for reuse of the popTextbox function without entering the combat code block.
                     MainGame.ActiveEnemy = false;
                     this.Show();
-                    popTextbox("You have been defeated by a(n) " + MainGame.CurrentEnemy.Name + " your run is now over." + Environment.NewLine + "You may quit the game using the Menu -> Exit option, or by clicking the 'X' in the top right hand corner." + Environment.NewLine);
+                    popTextbox("You have been defeated by a(n) " + MainGame.CurrentEnemy.Name + " your run is now over." + Environment.NewLine + MainGame.GenerateStatistics() + Environment.NewLine + "You may quit the game using the Menu -> Exit option, or by clicking the 'X' in the top right hand corner." + Environment.NewLine);
                     
                     return;
                 }

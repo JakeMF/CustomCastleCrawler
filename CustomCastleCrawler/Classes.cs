@@ -333,11 +333,6 @@ namespace CustomCastleCrawler
             this.Value = Value;
             this.Description = Description;
         }
-        //Accessor method for name
-        public string getName()
-        {
-            return Name;
-        }
     }
 
     //Class for a weapon
@@ -424,7 +419,6 @@ namespace CustomCastleCrawler
         }
 
         //Constructor that will be used for new players
-        //ToDo: Use dynamic classes
         public Player(string Name, Weapon StartingWeapon, Armor StartingArmor)
         {
             this.Name = Name;
@@ -463,7 +457,7 @@ namespace CustomCastleCrawler
             string data;
             char delim = ',';
 
-            data = Name + delim + MaxHealth + delim + Health + delim + MaxStamina + delim + Stamina + delim + Weapon.getName() + delim + Armor.getName() + delim + Score;
+            data = Name + delim + MaxHealth + delim + Health + delim + MaxStamina + delim + Stamina + delim + Weapon.Name + delim + Armor.Name + delim + Score;
             return data;
         }
         
@@ -647,6 +641,7 @@ namespace CustomCastleCrawler
 
         private MyRandom RandomGen = new MyRandom();
         public bool PlayerDied;
+        public int TurnCount = 0;
 
         //Default Constructor
         public MainGame()
@@ -1426,7 +1421,7 @@ namespace CustomCastleCrawler
             foreach (Weapon wep in Weapons)
             {
 
-                if (name.ToLower() == (wep.getName()).ToLower())
+                if (name.ToLower() == (wep.Name).ToLower())
                 {
                     weapon = wep;
                 }
@@ -1440,7 +1435,7 @@ namespace CustomCastleCrawler
             Armor armor = new Armor();
             foreach (Armor arm in Armors)
             {
-                if (name.ToLower() == (arm.getName()).ToLower())
+                if (name.ToLower() == (arm.Name).ToLower())
                 {
                     armor = arm;
                 }
@@ -1485,6 +1480,7 @@ namespace CustomCastleCrawler
             returnString.AppendLine("Final Weapon: " + Player.Weapon.Name + " Rarity " + Player.Weapon.Rarity);
             returnString.AppendLine("Final Armor: " + Player.Armor.Name + " Rarity " + Player.Armor.Rarity);
             returnString.AppendLine(System.Environment.NewLine);
+            returnString.AppendLine("Turns Survived: " + TurnCount);
             returnString.AppendLine("Enemies Defeated: " + Player.EnemiesKilled);
             returnString.AppendLine("Points earned: " + Player.Score);
 
