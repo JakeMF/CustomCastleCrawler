@@ -2,7 +2,7 @@
 	<Enemy>
 		<Name>Skeleton Warrior</Name>
 		<Health>100</Health>
-		<BaseDMG>15</BaseDMG>
+		<BaseDMG>150</BaseDMG>
 		<APDMG>15</APDMG>
 		<Defence>10</Defence>
 		<!--Defence is a flat % of damage reduction. Ex: 10 Defence will cause an attack that normally dealt 10 damage to deal 9.-->
@@ -14,7 +14,7 @@
 	<Enemy>
 		<Name>Zombie</Name>
 		<Health>100</Health>
-		<BaseDMG>15</BaseDMG>
+		<BaseDMG>150</BaseDMG>
 		<APDMG>15</APDMG>
 		<Defence>0</Defence>
 		<Evasion>0</Evasion>
@@ -24,7 +24,7 @@
 	<Enemy>
 		<Name>Orc</Name>
 		<Health>175</Health>
-		<BaseDMG>15</BaseDMG>
+		<BaseDMG>150</BaseDMG>
 		<APDMG>15</APDMG>
 		<Defence>20</Defence>
 		<Evasion>5</Evasion>
@@ -34,7 +34,7 @@
 	<Enemy>
 		<Name>Goblin</Name>
 		<Health>90</Health>
-		<BaseDMG>15</BaseDMG>
+		<BaseDMG>150</BaseDMG>
 		<APDMG>15</APDMG>
 		<Defence>0</Defence>
 		<Evasion>20</Evasion>

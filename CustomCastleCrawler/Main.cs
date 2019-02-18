@@ -151,6 +151,16 @@ namespace CustomCastleCrawler
                 //After removing the Show() from here and the Hide() from Line #160, the ScrollToCaret is working as intended.
 
 
+                if (MainGame.PlayerDied)
+                {
+                    //Set active enemy to false to allow for reuse of the popTextbox function without entering the combat code block.
+                    MainGame.ActiveEnemy = false;
+                    this.Show();
+                    popTextbox("You have been defeated by a(n) " + MainGame.CurrentEnemy.Name + " your run is now over." + Environment.NewLine + "You may quit the game using the Menu -> Exit option, or by clicking the 'X' in the top right hand corner." + Environment.NewLine);
+                    
+                    return;
+                }
+
                 //Check if the user prematurely closed the combat form.
                 if (MainGame.ActiveEnemy)
                 {
@@ -175,6 +185,7 @@ namespace CustomCastleCrawler
                     //Populate the textbox with the results from the combat form.
                     this.Show();
                     popTextbox(MainGame.TempMiscData);
+
                 }
             }
         }

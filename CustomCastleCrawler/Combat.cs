@@ -86,9 +86,10 @@ namespace CustomCastleCrawler
             txtCombatLog.SelectionAlignment = HorizontalAlignment.Center;
             txtCombatLog.SelectionColor = Color.Black;
             txtCombatLog.ScrollToCaret();
+            
 
             //The enemy was defeated, close the combat window
-            if (!MainGame.ActiveEnemy)
+            if (!MainGame.ActiveEnemy || MainGame.PlayerDied)
             {
                 Close();
             }

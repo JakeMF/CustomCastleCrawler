@@ -648,7 +648,7 @@ namespace CustomCastleCrawler
         private List<Event> Events = new List<Event>();
 
         private MyRandom RandomGen = new MyRandom();
-        private bool PlayerDied;
+        public bool PlayerDied;
 
         //Default Constructor
         public MainGame()
@@ -898,7 +898,6 @@ namespace CustomCastleCrawler
                 {
                     save = reader.ReadLine();
                     saves.Add(cryptic.Decrypt(save));
-                    bool found = false;
                     foreach (string line in saves)
                     {
                         var splat = line.Split(',');
@@ -960,7 +959,7 @@ namespace CustomCastleCrawler
 
                                 Weapon wep = FindWeapon(weapon);
                                 Armor arm = FindArmor(armor);
-                                Player p = new Player(name, 100, cHealth, mStamina, cStamina, wep, arm, score);
+                                Player p = new Player(name, mHealth, cHealth, mStamina, cStamina, wep, arm, score);
 
                                 //Set player attributes built from load data.
                                 Player = p;
@@ -971,9 +970,6 @@ namespace CustomCastleCrawler
                                 {
                                     MessageBox.Show("Your save data has been corrupted, please start a new game.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                 }
-
-                                //Should never need to set/use this variable, but set for sanity.
-                                found = true;
 
                                 return "success";
                             }
