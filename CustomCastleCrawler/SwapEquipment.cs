@@ -68,11 +68,25 @@ namespace CustomCastleCrawler
             {
                 case "armor":
                     MainGame.SwapArmor(NewArmor);
-                    MainGame.TempMiscData = "You have found a(n) " + NewArmor.Name + " you have droppped your " + MainGame.GetPlayerArmor().Name + " for the new armor.";
+                    if (NewArmor.Name.Substring(1, 1) == "a" || NewArmor.Name.Substring(1, 1) == "e" || NewArmor.Name.Substring(1, 1) == "i" || NewArmor.Name.Substring(1, 1) == "o" || NewArmor.Name.Substring(1, 1) == "u")
+                    {
+                        MainGame.TempMiscData = "You have found an " + NewArmor.Name + " you have droppped your " + MainGame.GetPlayerArmor().Name + " for the new armor." + Environment.NewLine;
+                    }
+                    else
+                    {
+                        MainGame.TempMiscData = "You have found a " + NewArmor.Name + " you have droppped your " + MainGame.GetPlayerArmor().Name + " for the new armor." + Environment.NewLine;
+                    }
                     break;
                 case "weapon":
                     MainGame.SwapWeapon(NewWeapon);
-                    MainGame.TempMiscData = "You have found a(n) " + NewWeapon.Name + " you have droppped your " + MainGame.GetPlayerWeapon().Name + " for the new weapon.";
+                    if (NewWeapon.Name.Substring(1, 1) == "a" || NewWeapon.Name.Substring(1, 1) == "e" || NewWeapon.Name.Substring(1, 1) == "i" || NewWeapon.Name.Substring(1, 1) == "o" || NewWeapon.Name.Substring(1, 1) == "u")
+                    {
+                        MainGame.TempMiscData = "You have found an " + NewWeapon.Name + " you have droppped your " + MainGame.GetPlayerWeapon().Name + " for the new weapon." + Environment.NewLine;
+                    }
+                    else
+                    {
+                        MainGame.TempMiscData = "You have found a " + NewWeapon.Name + " you have droppped your " + MainGame.GetPlayerWeapon().Name + " for the new weapon." + Environment.NewLine;
+                    }
                     break;
                 default:
                     MessageBox.Show("There was an error changing your weapon. Please restart the game WIHTOUT SAVING.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -85,7 +99,7 @@ namespace CustomCastleCrawler
         private void btnNo_Click(object sender, EventArgs e)
         {
             //they want to keep their old equipment
-            MainGame.TempMiscData = "You have found a new piece of equipment, but you decided to keep your old gear.";
+            MainGame.TempMiscData = "You have found a new piece of equipment, but you decided to keep your old gear." + Environment.NewLine;
             Close();
         }
     }

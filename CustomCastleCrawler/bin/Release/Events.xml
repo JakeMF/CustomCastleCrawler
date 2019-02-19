@@ -1,0 +1,73 @@
+<Events>
+
+		<!--Crypt: 1, Hall: 2, Lab: 3, Safe: 5-->
+	<Event>
+		<!--This is a special event. EventID -1 will always be considered an impassable tile. Use this for obstacles.-->
+		<EventID>-1</EventID>
+		<RestLocation>0</RestLocation>
+		<EnemySpawn>0</EnemySpawn>
+		<ItemSpawn>0</ItemSpawn>
+		<NothingSpawn>0</NothingSpawn>
+		<WeaponChance>0</WeaponChance>
+		<ArmorChance>0</ArmorChance>
+		<ScoreItemChance>0</ScoreItemChance>
+		<EnemySpawnZone>0</EnemySpawnZone>
+	</Event>
+	<Event>
+		<EventID>1</EventID>
+		<!--This is a flag to determine whether or not this is a "rest" location. Your healing flask is refilled when at a rest location. This should be 0 if it's a normal tile, or 1 if it's a rest tile.-->
+		<!--If this is a rest tile, no enemies or items will be generated.-->
+		<RestLocation>0</RestLocation>
+		<!--EnemySpawn, ItemSpawn, and NothingSpawn MUST add up to 100 for your game to work properly.-->
+		<EnemySpawn>30</EnemySpawn>
+			<!--This is a percentage chance for an enemy to spawn here. This number should be 1-100. -->
+			<!--If no enemy exists with a SpawnZone that maches the curent tile's, a generic enemy will be generated.-->
+		<ItemSpawn>50</ItemSpawn>
+			<!--This is a percentage chance for an item to be found (without combat). This number should be 1-100.-->
+		<NothingSpawn>20</NothingSpawn>
+			<!--This is a percentage chance for nothing to happen, no item found nor enemy encountered. This number should be 1-100.-->
+			
+		<!--WeaponChance, ArmorChance, and ScoreItemChance: These values control what items are more likely to be found -->
+		<!-- Items are generated using a value of 1-100. These values are the maximum value in the range.-->
+		<!-- Ex: if WeaponChance='30', ArmorChance='60', and ScoreItemChance='100' -->
+		<!-- then values 1-30 will generate a weapons (30%), values 31-60 will generate armor(30%), and 61-100 will generate score items(40%).-->
+		<WeaponChance>25</WeaponChance>
+		<ArmorChance>50</ArmorChance>
+		<!-- ScoreItemChance should always be 100, if ScoreItemChance is less than 100, there will be a chance to get no item. -->
+		<ScoreItemChance>80</ScoreItemChance>
+		<EnemySpawnZone>1</EnemySpawnZone>
+	</Event>
+	<Event>
+		<EventID>2</EventID>
+		<RestLocation>0</RestLocation>
+		<EnemySpawn>50</EnemySpawn>
+		<ItemSpawn>40</ItemSpawn>
+		<NothingSpawn>10</NothingSpawn>
+		<WeaponChance>45</WeaponChance>
+		<ArmorChance>90</ArmorChance>
+		<ScoreItemChance>100</ScoreItemChance>
+		<EnemySpawnZone>2</EnemySpawnZone>
+	</Event>
+	<Event>
+		<EventID>3</EventID>
+		<RestLocation>0</RestLocation>
+		<EnemySpawn>0</EnemySpawn>
+		<ItemSpawn>30</ItemSpawn>
+		<NothingSpawn>20</NothingSpawn>
+		<WeaponChance>30</WeaponChance>
+		<ArmorChance>60</ArmorChance>
+		<ScoreItemChance>100</ScoreItemChance>
+		<EnemySpawnZone>3</EnemySpawnZone>
+	</Event>
+	<Event>
+		<EventID>5</EventID>
+		<RestLocation>1</RestLocation>
+		<EnemySpawn>0</EnemySpawn>
+		<ItemSpawn>0</ItemSpawn>
+		<NothingSpawn>0</NothingSpawn>
+		<WeaponChance>30</WeaponChance>
+		<ArmorChance>60</ArmorChance>
+		<ScoreItemChance>100</ScoreItemChance>
+		<EnemySpawnZone>0</EnemySpawnZone>
+	</Event>
+</Events>

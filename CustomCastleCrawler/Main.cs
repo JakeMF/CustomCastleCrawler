@@ -19,6 +19,7 @@ namespace CustomCastleCrawler
             this.MainGame = MainGame;
             InitializeComponent();
             popTextbox(introMessage);
+            txtNotes.Text = MainGame.TempMiscData;
         }
 
         #region Menu Buttons
@@ -30,7 +31,7 @@ namespace CustomCastleCrawler
 
         private void mnuSave_Click(object sender, EventArgs e)
         {
-            MainGame.SaveProgress();
+            MainGame.SaveProgress(txtNotes.Text);
         }
         
 
@@ -160,7 +161,17 @@ namespace CustomCastleCrawler
                     //Set active enemy to false to allow for reuse of the popTextbox function without entering the combat code block.
                     MainGame.ActiveEnemy = false;
                     this.Show();
-                    popTextbox("You have been defeated by a(n) " + MainGame.CurrentEnemy.Name + " your run is now over." + Environment.NewLine + MainGame.GenerateStatistics() + Environment.NewLine + "You may quit the game using the Menu -> Exit option, or by clicking the 'X' in the top right hand corner." + Environment.NewLine);
+
+                    //Clear textbox and output final statistics.
+                    txtMainOutput.Clear();
+                    if (MainGame.CurrentEnemy.Name.Substring(1, 1) == "a" || MainGame.CurrentEnemy.Name.Substring(1, 1) == "e" || MainGame.CurrentEnemy.Name.Substring(1, 1) == "i" || MainGame.CurrentEnemy.Name.Substring(1, 1) == "o" || MainGame.CurrentEnemy.Name.Substring(1, 1) == "u")
+                    {
+                        popTextbox("You have been defeated by an " + MainGame.CurrentEnemy.Name + " your run is now over." + Environment.NewLine + MainGame.GenerateStatistics() + Environment.NewLine + "You may quit the game using the Menu -> Exit option, or by clicking the 'X' in the top right hand corner." + Environment.NewLine);
+                    }
+                    else
+                    {
+                        popTextbox("You have been defeated by a " + MainGame.CurrentEnemy.Name + " your run is now over." + Environment.NewLine + MainGame.GenerateStatistics() + Environment.NewLine + "You may quit the game using the Menu -> Exit option, or by clicking the 'X' in the top right hand corner." + Environment.NewLine);
+                    }
                     
                     return;
                 }

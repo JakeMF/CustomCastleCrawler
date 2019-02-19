@@ -23,7 +23,7 @@ namespace CustomCastleCrawler
         {
 
             var playerName = txtName.Text;
-
+            
             if (!string.IsNullOrEmpty(playerName) && !string.IsNullOrWhiteSpace(playerName))
             {
                 var introString = MainGame.StartGame(playerName, true);

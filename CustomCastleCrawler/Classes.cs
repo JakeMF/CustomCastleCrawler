@@ -702,7 +702,9 @@ namespace CustomCastleCrawler
             {
                 //Show User Introduction text.
                 introMessage.AppendLine("Welcome back to " + GameName + " " + playerName + ".");
-                introMessage.AppendLine("You are at X:" + Coordinates.x + " Y:" + Coordinates.y + ".");
+
+                //This line is commented out now, but exists in case you wish to display the player's last position when they load an existing game.
+                //introMessage.AppendLine("You are at X:" + Coordinates.x + " Y:" + Coordinates.y + ".");
                 introMessage.AppendLine("Good luck, adventurer.'");
                 introMessage.AppendLine(Environment.NewLine);
 
@@ -837,7 +839,7 @@ namespace CustomCastleCrawler
 
         //ToDo: TESTING
         //Function that will save a player's progress in a text file.
-        public void SaveProgress()
+        public void SaveProgress(string Notes)
         {
             //TODO:
             //Change to this 
@@ -853,7 +855,7 @@ namespace CustomCastleCrawler
                 using (StreamWriter sw = new StreamWriter(path, false))
                 {
                     string saveData;
-                    saveData = Player.getSaveData() + ',' + Coordinates.x + ',' + Coordinates.y;
+                    saveData = Player.getSaveData() + ',' + Coordinates.x + ',' + Coordinates.y + ',' + Notes;
                     string saveDataEncrypted = string.Empty;
                     saveDataEncrypted = cryptic.Encrypt(saveData);
                     sw.WriteLine(saveDataEncrypted);
@@ -896,7 +898,7 @@ namespace CustomCastleCrawler
                         var splat = line.Split(',');
                         if (splat[0] == name)
                         {
-                            if (splat.Count() == 10)
+                            if (splat.Count() == 11)
                             {
                                 //name, health, weapon name, armor name, score, x, y
                                 //Integer variables to store player statistics
@@ -949,7 +951,7 @@ namespace CustomCastleCrawler
                                 {
                                     missingVals = true;
                                 }
-
+                                TempMiscData = splat[10];
                                 Weapon wep = FindWeapon(weapon);
                                 Armor arm = FindArmor(armor);
                                 Player p = new Player(name, mHealth, cHealth, mStamina, cStamina, wep, arm, score);
@@ -1129,7 +1131,8 @@ namespace CustomCastleCrawler
         {
             //get the current map tile from the map container
             //!!IMPORTANT!! Map was created (Y,X) not (X,Y) I'm dumb but remember. 5/30/18
-            MapTile currentTile = Map[Coordinates.y, Coordinates.x];
+            //I have changed it back to x,y.
+            MapTile currentTile = Map[Coordinates.x, Coordinates.y];
             if (!ActiveEnemy)
             {
                 //variable to format final return string
@@ -1144,7 +1147,8 @@ namespace CustomCastleCrawler
                 //The EventID -1 is used to mark an unpassable location.
                 if(currentEvent.EventID == -1)
                 {
-                    Coordinates = LastCoordinates;
+                    Coordinates.x = LastCoordinates.x;
+                    Coordinates.y = LastCoordinates.y;
                     return returnString.ToString();
                 }
                 if (currentEvent.RestLocation != 1)
@@ -1177,7 +1181,7 @@ namespace CustomCastleCrawler
                             string returnContents = returnString.ToString();
                             returnString.Clear();
 
-                            returnString.AppendLine("NewWeapon" + '|' + returnString.ToString());
+                            returnString.AppendLine("NewWeapon" + '|' + returnContents.ToString());
                         }
                         else if (itemGenIndex > currentEvent.WeaponChance && itemGenIndex <= currentEvent.ArmorChance)
                         {
@@ -1187,7 +1191,7 @@ namespace CustomCastleCrawler
                             string returnContents = returnString.ToString();
                             returnString.Clear();
 
-                            returnString.AppendLine("NewArmor" + '|' + returnString.ToString());
+                            returnString.AppendLine("NewArmor" + '|' + returnContents.ToString());
                         }
                         else if (itemGenIndex > currentEvent.ArmorChance && itemGenIndex <= currentEvent.ScoreItemChance)
                         {
@@ -1206,7 +1210,6 @@ namespace CustomCastleCrawler
                     returnString.AppendLine(Player.RefillEstus());
                 }
                 //set tempCoords to keep track of last tile.
-                LastCoordinates = Coordinates;
                 LastCoordinates.x = Coordinates.x;
                 LastCoordinates.y = Coordinates.y;
                 return returnString.ToString();
@@ -1520,7 +1523,15 @@ namespace CustomCastleCrawler
             {
                 //The player dodged the attack
                 returnString.AppendLine("You escaped the enemy!");
-                TempMiscData = "You have encountered a(n) " + CurrentEnemy.Name + " and successfully escaped.";
+                if (CurrentEnemy.Name.Substring(1, 1) == "a" || CurrentEnemy.Name.Substring(1, 1) == "e" || CurrentEnemy.Name.Substring(1, 1) == "i" || CurrentEnemy.Name.Substring(1, 1) == "o" || CurrentEnemy.Name.Substring(1, 1) == "u")
+                {
+                    TempMiscData = "You have encountered an " + CurrentEnemy.Name + " and successfully escaped." + Environment.NewLine + Environment.NewLine;
+                }
+                else
+                {
+                    TempMiscData = "You have encountered a " + CurrentEnemy.Name + " and successfully escaped." + Environment.NewLine + Environment.NewLine;
+                }
+                
                 ActiveEnemy = false;
             }
             else
