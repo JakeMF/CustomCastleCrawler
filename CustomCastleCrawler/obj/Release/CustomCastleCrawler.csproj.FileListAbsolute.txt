@@ -11,3 +11,4 @@ C:\Users\jacob\Documents\GitHub\CustomCastleCrawler\CustomCastleCrawler\obj\Rele
 C:\Users\jacob\Documents\GitHub\CustomCastleCrawler\CustomCastleCrawler\obj\Release\CustomCastleCrawler.csproj.CoreCompileInputs.cache
 C:\Users\jacob\Documents\GitHub\CustomCastleCrawler\CustomCastleCrawler\obj\Release\CustomCastleCrawler.exe
 C:\Users\jacob\Documents\GitHub\CustomCastleCrawler\CustomCastleCrawler\obj\Release\CustomCastleCrawler.pdb
+C:\Users\jacob\Documents\GitHub\CustomCastleCrawler\CustomCastleCrawler\obj\Release\CustomCastleCrawler.csprojAssemblyReference.cache
