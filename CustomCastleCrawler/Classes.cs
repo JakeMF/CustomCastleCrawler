@@ -15,14 +15,19 @@ namespace CustomCastleCrawler
     public sealed class Crypter
     {
         private string key;
+        
+        //Constructor with a default key value, this should NEVER be used.
         public Crypter()
         {
             key = "I'mADefaultKeyPleaseChangeMe";
         }
+
+        //Function that takes the key as a parameter, this should be used 100% of the time.
         public Crypter(string key)
         {
             this.key = key;
         }
+
         //method to encrypt a string, returns encrypted string.
         public string Encrypt(string toEncrypt)
         {
@@ -53,6 +58,7 @@ namespace CustomCastleCrawler
             //Return the encrypted data into unreadable string format
             return Convert.ToBase64String(resultArray, 0, resultArray.Length);
         }
+
         //method to decrypt a string, returns decrypted string
         public string Decrypt(string cipherString)
         {
@@ -82,10 +88,6 @@ namespace CustomCastleCrawler
         }
     }
     
-    //OLD Map Code: enum mapSize { Rows = 20, Columns = 20 };
-
-    //Class to load and store the maximum size of the map.
-    //ToDo: Ensure XML file is setup properly.
     public sealed class GameData
     {
         public int XMax { get; set; }
@@ -99,8 +101,11 @@ namespace CustomCastleCrawler
         
         public GameData()
         {
+            //Load the game's basic configurations from XML.
             LoadGameData();
         }
+
+        //Function to load game settings from the XML.
         private void LoadGameData()
         {
             XDocument xdoc = XDocument.Load("GameSettings.xml");
@@ -134,6 +139,7 @@ namespace CustomCastleCrawler
             }
         }
     }
+    
     //Simple class to store the attributes of a starting class.
     public sealed class StartingClass
     {
@@ -142,64 +148,65 @@ namespace CustomCastleCrawler
         public string ClassName;
         public string ClassDescription;
         
-        public StartingClass(string name, string armor, string weapon, string Description)
+        //constructor that takes all values as a parameter.
+        public StartingClass(string name, string armor, string weapon, string description)
         {
             ClassName = name;
             ClassWeapon = weapon;
             ClassArmor = armor;
-            ClassDescription = Description;
+            ClassDescription = description;
         }
     }
 
     //Class to represent a pair of (X,Y) coordinates
     public sealed class Coords
     {
-        public int x;
-        public int y;
+        public int X;
+        public int Y;
         private GameData MapDimensions;
 
         public Coords()
         {
-            x = 0;
-            y = 0;
+            X = 0;
+            Y = 0;
             MapDimensions = new GameData();
         }
         //Go West
-        public bool west()
+        public bool West()
         {
-            if (x > 0)
+            if (X > 0)
             {
-                --x;
+                --X;
                 return true;
             }
             return false;
         }
         //Go North
-        public bool north()
+        public bool North()
         {
-            if (y > 0)
+            if (Y > 0)
             {
-                --y;
+                --Y;
                 return true;
             }
             return false;
         }
         //Go East
-        public bool east()
+        public bool East()
         {
-            if (x + 1 < MapDimensions.YMax)
+            if (X + 1 < MapDimensions.YMax)
             {
-                ++x;
+                ++X;
                 return true;
             }
             return false;
         }
         //Go South
-        public bool south()
+        public bool South()
         {
-            if (y + 1 < MapDimensions.XMax)
+            if (Y + 1 < MapDimensions.XMax)
             {
-                ++y;
+                ++Y;
                 return true;
             }
             return false;
@@ -207,7 +214,7 @@ namespace CustomCastleCrawler
     }
 
     //Class for one tile on the map, used in multidimensional array to represent X-Y coordinate plane
-    class MapTile
+    public sealed class MapTile
     {
         public int X { get; set; }
         public int Y { get; set; }
@@ -233,26 +240,16 @@ namespace CustomCastleCrawler
         }
 
         //Constructor with all arguments
-        public MapTile(int X, int Y, string Message, int EventID)
+        public MapTile(int x, int y, string message, int eventID)
         {
-            this.X = X;
-            this.Y = Y;
-            this.Message = Message;
-            this.EventID = EventID;
+            X = X;
+            Y = Y;
+            Message = message;
+            EventID = eventID;
         }
-
-        //function to return coords as a vector with 2 elements
-        public List<int> getCoords()
-        {
-            List<int> coords = new List<int>();
-            coords.Add(X);
-            coords.Add(Y);
-
-            return coords;
-        }
-        
     }
 
+    //Class for an event
     public sealed class Event
     {
         public int EventID;
@@ -265,6 +262,7 @@ namespace CustomCastleCrawler
         public int RestLocation;
         public int EnemySpawnZone;
 
+        //Default constructor that initlizes all values.
         public Event()
         {
             EventID = -1;
@@ -277,6 +275,8 @@ namespace CustomCastleCrawler
             RestLocation = 0;
             EnemySpawnZone = 0;
         }
+
+        //Additional constructors are not needed because events should always be loaded from the XML.
     }
 
     //Class that extends C# Random()
@@ -288,6 +288,7 @@ namespace CustomCastleCrawler
         {
             myRand = new Random();
         }
+
         //roll a die with n number of sides (starts at 1)
         public int rollDie(int n)
         {
@@ -295,11 +296,13 @@ namespace CustomCastleCrawler
             num = myRand.Next(1, n);
             return num;
         }
+
         //roll a die with 10 sides, useful for % chances
         public int rollDTen()
         {
             return rollDie(10);
         }
+
         //Simulates coin toss
         public bool rollTrueFalse()
         {
@@ -326,12 +329,13 @@ namespace CustomCastleCrawler
             Value = -1; //-1 will output "This item's value is more unknown."
             Description = "";
         }
+
         //Constructor that takes parameters for all attributes
-        public Item(string Name, int Value, string Description)
+        public Item(string name, int value, string description)
         {
-            this.Name = Name;
-            this.Value = Value;
-            this.Description = Description;
+            Name = name;
+            Value = value;
+            Description = description;
         }
     }
 
@@ -342,6 +346,7 @@ namespace CustomCastleCrawler
         public int APDamage { get; set; }
         public int Evasion { get; set; }
         public int Rarity { get; set; }
+
         //Default constructor that creates your default gear.
         public Weapon()
         {
@@ -351,15 +356,16 @@ namespace CustomCastleCrawler
             APDamage = 1;
             Evasion = 0;
         }
+
         //Constructor with all values
-        public Weapon(string Name, int Value, string Description, int BDamage, int APDamage, int Evasion)
+        public Weapon(string name, int value, string description, int bDamage, int aPDamage, int evasion)
         {
-            this.Name = Name;
-            this.Value = Value;
-            this.Description = Description;
-            this.BDamage = BDamage;
-            this.APDamage = APDamage;
-            this.Evasion = Evasion;
+            Name = name;
+            Value = value;
+            Description = description;
+            BDamage = bDamage;
+            APDamage = aPDamage;
+            Evasion = evasion;
         }
 
     }
@@ -370,6 +376,7 @@ namespace CustomCastleCrawler
         public int ArmorVal { get; set; }
         public int Evasion { get; set; }
         public int Rarity { get; set; }
+
         //Default constructor that creates your default gear.
         public Armor()
         {
@@ -378,14 +385,15 @@ namespace CustomCastleCrawler
             ArmorVal = 5;
             Evasion = 0;
         }
+
         //Constructor with all values, no default constructor because gear would be useless otherwise.
-        public Armor(string Name, int Value, string Description, int ArmorVal, int Evasion)
+        public Armor(string name, int value, string description, int armorVal, int evasion)
         {
-            this.Name = Name;
-            this.Value = Value;
-            this.Description = Description;
-            this.ArmorVal = ArmorVal;
-            this.Evasion = Evasion;
+            Name = name;
+            Value = value;
+            Description = description;
+            ArmorVal = armorVal;
+            Evasion = evasion;
         }
     }
 
@@ -403,6 +411,7 @@ namespace CustomCastleCrawler
         public int EnemiesKilled = 0;
         public int Estus;
         public int MaxEstus;
+
         //Default constructor
         public Player()
         {
@@ -419,16 +428,16 @@ namespace CustomCastleCrawler
         }
 
         //Constructor that will be used for new players
-        public Player(string Name, Weapon StartingWeapon, Armor StartingArmor)
+        public Player(string name, Weapon startingWeapon, Armor startingArmor)
         {
-            this.Name = Name;
+            Name = name;
             MaxHealth = 1200;
             Health = MaxHealth;
             MaxStamina = 100;
             Stamina = MaxStamina;
 
-            Weapon = StartingWeapon;
-            Armor = StartingArmor;
+            Weapon = startingWeapon;
+            Armor = startingArmor;
             Score = 0;
 
             MaxEstus = 5;
@@ -436,16 +445,16 @@ namespace CustomCastleCrawler
         }
 
         //Constructor that will be used to load a saved game
-        public Player(string Name, int MaxHealth, int Health, int MaxStamina, int Stamina, Weapon Weapon, Armor Armor, int Score)
+        public Player(string name, int maxHealth, int health, int maxStamina, int stamina, Weapon weapon, Armor armor, int score)
         {
-            this.Name = Name;
-            this.MaxHealth = MaxHealth;
-            this.Health = Health;
-            this.MaxStamina = MaxStamina;
-            this.Stamina = Stamina;
-            this.Weapon = Weapon;
-            this.Armor = Armor;
-            this.Score = Score;
+            Name = name;
+            MaxHealth = maxHealth;
+            Health = health;
+            MaxStamina = maxStamina;
+            Stamina = stamina;
+            Weapon = weapon;
+            Armor = armor;
+            Score = score;
             //Players get 5 heals by default, like in Dark Souls 1. 
             MaxEstus = 5;
             Estus = MaxEstus;
@@ -456,14 +465,15 @@ namespace CustomCastleCrawler
         {
             string data;
             char delim = ',';
-
-            data = Name + delim + MaxHealth + delim + Health + delim + MaxStamina + delim + Stamina + delim + Weapon.Name + delim + Armor.Name + delim + Score;
-            return data;
+            
+            //Return player values separated by delimiter
+            return Name + delim + MaxHealth + delim + Health + delim + MaxStamina + delim + Stamina + delim + Weapon.Name + delim + Armor.Name + delim + Score;
         }
         
         //function to get the players evasion
         public int GetEvasion()
         {
+            //A player's evasion is modified by their weapon and armor, with a base percentage of 20.
             int Evasion = Weapon.Evasion + Armor.Evasion + 20;
             if (Evasion > 0)
             {
@@ -478,6 +488,7 @@ namespace CustomCastleCrawler
         //function that causes the player to take damage. Can be used to simply return health if 0 is passed.
         public int Injure(int dmg)
         {
+            //Subtract damaged amount from current health.
             Health -= dmg;
             return Health;
         }
@@ -496,6 +507,7 @@ namespace CustomCastleCrawler
             } 
         }
 
+        //Function to refil the player's healing item.
         public string RefillEstus()
         {
             Estus = MaxEstus;
@@ -503,10 +515,10 @@ namespace CustomCastleCrawler
         }
         
         //Function to perform a stamin draining action. Returns true if action could be completed with current stam, false if not enough stam.
-        public bool PerformAction(int StaminaCost)
+        public bool PerformAction(int staminaCost)
         {
             int tempStam = Stamina;
-            Stamina -= StaminaCost;
+            Stamina -= staminaCost;
 
             if(Stamina >= 0)
             {
@@ -519,9 +531,10 @@ namespace CustomCastleCrawler
             }
         }
 
-        public int RegenStamina(int Regen)
+        //Function to regen the player's stamina by a specified amount.
+        public int RegenStamina(int regen)
         {
-            Stamina += Regen;
+            Stamina += regen;
 
             if(Stamina > MaxStamina)
             {
@@ -531,6 +544,7 @@ namespace CustomCastleCrawler
             return Stamina;
         }
 
+        //Function to return the player's health and stamina as a pipe separated string.
         public string GetHealthAndStamina()
         {
             return Health + "/" + MaxHealth + "|" + Stamina + "/" + MaxStamina;
@@ -567,20 +581,22 @@ namespace CustomCastleCrawler
             Defence = 10;
             Evasion = 5;
         }
+
         //Constructor that takes parameters for all attributes
-        public Enemy(string Name, int MaxHealth, int Score, int Damage, int ApDamage, double Defence, int Evasion = 2)
+        public Enemy(string name, int maxHealth, int score, int damage, int apDamage, double defence, int evasion = 2)
         {
-            this.Name = Name;
-            this.MaxHealth = MaxHealth;
-            CurrentHealth = MaxHealth;
+            Name = name;
+            MaxHealth = maxHealth;
+            CurrentHealth = maxHealth;
 
-            this.Damage = Damage;
-            this.ApDamage = ApDamage;
+            Damage = damage;
+            ApDamage = apDamage;
 
-            this.Defence = Defence;
-            this.Evasion = Evasion;
-            this.Score = Score;
+            Defence = defence;
+            Evasion = evasion;
+            Score = score;
         }
+
         //Constructor to create a new enemy based on an enemy object.
         public Enemy(Enemy ene)
         {
@@ -603,6 +619,7 @@ namespace CustomCastleCrawler
             return CurrentHealth;
         }
 
+        //Function to get the enemy's health 
         public string GetHealth()
         {
             return CurrentHealth + "/" + MaxHealth;
@@ -610,7 +627,7 @@ namespace CustomCastleCrawler
     }
 
     //Class that is the game object itself, is implemented in the main "runner" 
-    public class MainGame
+    public sealed class MainGame
     {
         private string GameName;
         public string PlayerName { get; set; }
@@ -658,12 +675,12 @@ namespace CustomCastleCrawler
             ActiveEnemy = false;
 
             //Setup Coords at Starting Position
-            Coordinates.x = GameConfigurations.StartingX;
-            Coordinates.y = GameConfigurations.StartingY;
+            Coordinates.X = GameConfigurations.StartingX;
+            Coordinates.Y = GameConfigurations.StartingY;
 
             //ToDo:Check if need to x and y
-            LastCoordinates.x = Coordinates.x;
-            LastCoordinates.y = Coordinates.y;
+            LastCoordinates.X = Coordinates.Y;
+            LastCoordinates.Y = Coordinates.Y;
 
             //Load Game Data From XML Files
             PopulateEnemies();
@@ -839,38 +856,43 @@ namespace CustomCastleCrawler
 
         //ToDo: TESTING
         //Function that will save a player's progress in a text file.
-        public void SaveProgress(string Notes)
+        public void SaveProgress(string notes)
         {
-            //TODO:
-            //Change to this 
-            //File.WriteAllText(path, saveDataEncrypted);
-            //From AddressBook Project.
-            //Add estus kindle level.
-            //NEEDS TESTING
+            //Ensure SaveData folder is created.
             System.IO.Directory.CreateDirectory("SaveData/");
             try
             {
+                //Initialize encryption class with the key parameter.
                 Crypter cryptic = new Crypter(EncryptionKey);
                 string path = "SaveData/" + Player.Name.ToLower() + ".txt";
                 using (StreamWriter sw = new StreamWriter(path, false))
                 {
+                    //Get the player's data as a string.
                     string saveData;
-                    saveData = Player.getSaveData() + ',' + Coordinates.x + ',' + Coordinates.y + ',' + Notes;
+                    saveData = Player.getSaveData() + ',' + Coordinates.X + ',' + Coordinates.Y + ',' + notes;
                     string saveDataEncrypted = string.Empty;
+                    
+                    //Encrypt save data to prevent cheating.
                     saveDataEncrypted = cryptic.Encrypt(saveData);
+                    
+                    //Write data to a text file.
                     sw.WriteLine(saveDataEncrypted);
                     MessageBox.Show("Game saved successfully.", "Save", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
+            //Catch errors for logging
             catch (Exception ex)
-            {
+            { 
+                //Ensure log file directory exists.
                 System.IO.Directory.CreateDirectory("LogFiles/");
+                //Log error
                 string logTitle = "Log instance from: " + DateTime.Now.Month + '/' + DateTime.Now.Day + '/' + DateTime.Now.Year;
                 string path = "LogFiles/errorLog.txt";
                 using (StreamWriter sw = File.AppendText(path))
                 {
                     sw.WriteLine(logTitle + Environment.NewLine + ex.Message + Environment.NewLine + "Stack Trace:" + Environment.NewLine + ex.StackTrace + Environment.NewLine);
                 }
+                //Inform the user they encountered an error.
                 MessageBox.Show("Save could not be Completed, error notes saved to log file.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
@@ -959,8 +981,8 @@ namespace CustomCastleCrawler
 
                                 //Set player attributes built from load data.
                                 Player = p;
-                                Coordinates.x = x;
-                                Coordinates.y = y;
+                                Coordinates.X = x;
+                                Coordinates.X = y;
 
                                 if(missingVals)
                                 {
@@ -1015,13 +1037,17 @@ namespace CustomCastleCrawler
             return "fail";
         }
 
+        //Function to allow a player to select their starting class.
         public string SelectClass(string playerName, string playerClass)
         {
+            //Get class information from the XML using LINQ
             StartingClass selectedClass = GameConfigurations.Classes.First(s => s.ClassName == playerClass);
-
+            
+            //Get player equipment from Find[Equipment]() functions.
             Weapon selectedWeapon = FindWeapon(selectedClass.ClassWeapon);
             Armor selectedArmor = FindArmor(selectedClass.ClassArmor);
 
+            //Create the player object with the starting gear.
             Player = new Player(playerName, selectedWeapon, selectedArmor);
 
             return "You have selected the " + selectedClass.ClassName + " class.";
@@ -1039,7 +1065,7 @@ namespace CustomCastleCrawler
                 if (!ActiveEnemy)
                 {
                     //moving north
-                    if(Coordinates.north())
+                    if(Coordinates.North())
                     {
                         //Moved successfully
                         returnString.AppendLine(genMessage());
@@ -1060,7 +1086,7 @@ namespace CustomCastleCrawler
                 if (!ActiveEnemy)
                 {
                     //moving south
-                    if(Coordinates.south())
+                    if(Coordinates.South())
                     {
                         //Moved successfully
                         returnString.AppendLine(genMessage());
@@ -1081,7 +1107,7 @@ namespace CustomCastleCrawler
                 if (!ActiveEnemy)
                 {
                     //moving east
-                    if(Coordinates.east())
+                    if(Coordinates.East())
                     {
                         //Moved successfully
                         returnString.AppendLine(genMessage());
@@ -1102,7 +1128,7 @@ namespace CustomCastleCrawler
                 if (!ActiveEnemy)
                 {
                     //moving west
-                    if(Coordinates.west())
+                    if(Coordinates.West())
                     {
                         //Moved successfully
                         returnString.AppendLine(genMessage());
@@ -1133,7 +1159,7 @@ namespace CustomCastleCrawler
             //get the current map tile from the map container
             //!!IMPORTANT!! Map was created (Y,X) not (X,Y) I'm dumb but remember. 5/30/18
             //I have changed it back to x,y.
-            MapTile currentTile = Map[Coordinates.x, Coordinates.y];
+            MapTile currentTile = Map[Coordinates.X, Coordinates.Y];
             if (!ActiveEnemy)
             {
                 //variable to format final return string
@@ -1148,8 +1174,8 @@ namespace CustomCastleCrawler
                 //The EventID -1 is used to mark an unpassable location.
                 if(currentEvent.EventID == -1)
                 {
-                    Coordinates.x = LastCoordinates.x;
-                    Coordinates.y = LastCoordinates.y;
+                    Coordinates.X = LastCoordinates.X;
+                    Coordinates.Y = LastCoordinates.Y;
                     return returnString.ToString();
                 }
                 if (currentEvent.RestLocation != 1)
@@ -1208,11 +1234,12 @@ namespace CustomCastleCrawler
                 }
                 else
                 {
+                    //If this is a rest location then refil the player's heals.
                     returnString.AppendLine(Player.RefillEstus());
                 }
                 //set tempCoords to keep track of last tile.
-                LastCoordinates.x = Coordinates.x;
-                LastCoordinates.y = Coordinates.y;
+                LastCoordinates.X = Coordinates.X;
+                LastCoordinates.Y = Coordinates.Y;
                 return returnString.ToString();
             }
 
@@ -1233,17 +1260,17 @@ namespace CustomCastleCrawler
             {
                 case 1:
                 case 2:
+                case 3:
                     //a common weapon was found
                     weapons = from wep in Weapons where wep.Rarity == 1 select wep;
                     index = RandomGen.rollDie(weapons.Count());
                     return Weapons[index - 1];
-                case 3:
                 case 4:
+                case 5:
                     //An uncommon weapon was found
                     weapons = from wep in Weapons where wep.Rarity == 2 select wep;
                     index = RandomGen.rollDie(weapons.Count());
                     return Weapons[index - 1];
-                case 5:
                 case 6:
                     //A rare weapon was found.
                     weapons = from wep in Weapons where wep.Rarity == 3 select wep;
@@ -1268,17 +1295,17 @@ namespace CustomCastleCrawler
             {
                 case 1:
                 case 2:
+                case 3:
                     //Common armor was found
                     armors = from arm in Armors where arm.Rarity == 1 select arm;
                     index = RandomGen.rollDie(armors.Count());
                     return Armors[index - 1];
-                case 3:
                 case 4:
+                case 5:
                     //Uncommon armor was found
                     armors = from arm in Armors where arm.Rarity == 2 select arm;
                     index = RandomGen.rollDie(armors.Count());
                     return Armors[index - 1];
-                case 5:
                 case 6:
                     //Rare armor was found.
                     armors = from arm in Armors where arm.Rarity == 3 select arm;
@@ -1337,6 +1364,7 @@ namespace CustomCastleCrawler
 
             if (action == "block")
             {
+                //Player is blocking, so they take half damage the attack and regen some stamina.
                 playerBlocking = true;
                 enemyBaseDamage /= 2;
                 enemyAPDamage /= 2;
@@ -1393,6 +1421,7 @@ namespace CustomCastleCrawler
                     //Check if enemy died
                     int enemyHP = 0;
                     enemyHP = CurrentEnemy.Injure(enemyDamageTaken);
+                    //if the enemy has less than 1 HP, they are dead.
                     if (!(enemyHP < 1))
                     {
                         returnString.AppendLine("You have traded blows with the enemy.");
@@ -1424,7 +1453,7 @@ namespace CustomCastleCrawler
             Weapon weapon = new Weapon();
             foreach (Weapon wep in Weapons)
             {
-
+                //If the name of the weapon matches, return the found weapon object
                 if (name.ToLower() == (wep.Name).ToLower())
                 {
                     weapon = wep;
@@ -1439,6 +1468,7 @@ namespace CustomCastleCrawler
             Armor armor = new Armor();
             foreach (Armor arm in Armors)
             {
+                //If the name of the armor matches, return the found armor object
                 if (name.ToLower() == (arm.Name).ToLower())
                 {
                     armor = arm;
@@ -1475,38 +1505,44 @@ namespace CustomCastleCrawler
             return returnString.ToString();
         }
 
+        //Function to get a printout of the player's statistics
         public string GenerateStatistics()
         {
             var returnString = new StringBuilder();
 
             returnString.AppendLine(Player.Name);
             returnString.AppendLine(System.Environment.NewLine);
+            //Add player's gear
             returnString.AppendLine("Final Weapon: " + Player.Weapon.Name + " Rarity " + Player.Weapon.Rarity);
             returnString.AppendLine("Final Armor: " + Player.Armor.Name + " Rarity " + Player.Armor.Rarity);
             returnString.AppendLine(System.Environment.NewLine);
+            //Add player's combat statistics
             returnString.AppendLine("Turns Survived: " + TurnCount);
             returnString.AppendLine("Enemies Defeated: " + Player.EnemiesKilled);
             returnString.AppendLine("Points earned: " + Player.Score);
 
             return returnString.ToString();
-
         }
 
+        //Function to switch a player's current weapon with a new one.
         public void SwapWeapon(Weapon newWeapon)
         {
             Player.Weapon = newWeapon;
         }
 
+        //Function to switch a player's current armor set with a new one.
         public void SwapArmor(Armor newArmor)
         {
             Player.Armor = newArmor;
         }
-
+        
+        //Function to heal the player and to return the results of the heal.
         public string healPlayer()
         {
             return Player.GetHealthAndStamina() + "|" + CurrentEnemy.GetHealth() + "|" + Player.DrinkEstus();
         }
 
+        //Function to attempt escaping from combat and return the results.
         public string EscapeAttempt()
         {
             var returnString = new StringBuilder();
@@ -1524,6 +1560,8 @@ namespace CustomCastleCrawler
             {
                 //The player dodged the attack
                 returnString.AppendLine("You escaped the enemy!");
+                
+                //Check if the enemy's name starts with a vowel so that you can use a or an properly
                 if (CurrentEnemy.Name.Substring(1, 1) == "a" || CurrentEnemy.Name.Substring(1, 1) == "e" || CurrentEnemy.Name.Substring(1, 1) == "i" || CurrentEnemy.Name.Substring(1, 1) == "o" || CurrentEnemy.Name.Substring(1, 1) == "u")
                 {
                     TempMiscData = "You have encountered an " + CurrentEnemy.Name + " and successfully escaped." + Environment.NewLine + Environment.NewLine;
@@ -1533,6 +1571,7 @@ namespace CustomCastleCrawler
                     TempMiscData = "You have encountered a " + CurrentEnemy.Name + " and successfully escaped." + Environment.NewLine + Environment.NewLine;
                 }
                 
+                //You escaped correctly, there is no longer an active enemy.
                 ActiveEnemy = false;
             }
             else
@@ -1554,16 +1593,19 @@ namespace CustomCastleCrawler
             return Player.GetHealthAndStamina() + "|" + CurrentEnemy.GetHealth() + "|" + returnString.ToString();
         }
 
+        //Function to return the player's current weapon.
         public Weapon GetPlayerWeapon()
         {
             return Player.Weapon;
         }
 
+        //Function to return the player's current armor
         public Armor GetPlayerArmor()
         {
             return Player.Armor;
         }
 
+        //Function to return a pipe separated string with the player's health and stamina. 
         public string GetPlayerHealthAndStamina()
         {
             return Player.GetHealthAndStamina();

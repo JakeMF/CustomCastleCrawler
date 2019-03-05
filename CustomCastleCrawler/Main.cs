@@ -12,14 +12,13 @@ namespace CustomCastleCrawler
     public partial class frmMain : Form
     {
         public MainGame MainGame;
-
-        public frmStartup startupForm { get; set; }
-        public frmMain(MainGame MainGame, string introMessage)
+        
+        public frmMain(MainGame mainGame, string introMessage)
         {
-            this.MainGame = MainGame;
+            MainGame = mainGame;
             InitializeComponent();
             popTextbox(introMessage);
-            txtNotes.Text = MainGame.TempMiscData;
+            txtNotes.Text = mainGame.TempMiscData;
         }
 
         #region Menu Buttons
