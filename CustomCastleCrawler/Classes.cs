@@ -851,7 +851,7 @@ namespace CustomCastleCrawler
             try
             {
                 Crypter cryptic = new Crypter(EncryptionKey);
-                string path = "SaveData/" + Player.Name + ".txt";
+                string path = "SaveData/" + Player.Name.ToLower() + ".txt";
                 using (StreamWriter sw = new StreamWriter(path, false))
                 {
                     string saveData;
@@ -881,6 +881,7 @@ namespace CustomCastleCrawler
         public string LoadProgress(string name, bool secondPass)
         {
             //NEEDS TESTING
+            name = name.ToLower();
             Crypter cryptic = new Crypter(EncryptionKey);
             string path = "SaveData/" + name + ".txt";
             if (File.Exists(path))
@@ -896,7 +897,7 @@ namespace CustomCastleCrawler
                     foreach (string line in saves)
                     {
                         var splat = line.Split(',');
-                        if (splat[0] == name)
+                        if (splat[0].ToLower() == name.ToLower())
                         {
                             if (splat.Count() == 11)
                             {

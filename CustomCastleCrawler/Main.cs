@@ -172,7 +172,9 @@ namespace CustomCastleCrawler
                     {
                         popTextbox("You have been defeated by a " + MainGame.CurrentEnemy.Name + " your run is now over." + Environment.NewLine + MainGame.GenerateStatistics() + Environment.NewLine + "You may quit the game using the Menu -> Exit option, or by clicking the 'X' in the top right hand corner." + Environment.NewLine);
                     }
-                    
+
+                    DisableFormControls();
+
                     return;
                 }
 
@@ -235,6 +237,14 @@ namespace CustomCastleCrawler
             txtMainOutput.SelectionStart = txtMainOutput.TextLength;
             txtMainOutput.ScrollToCaret();
             txtMainOutput.Refresh();
+        }
+
+        private void DisableFormControls()
+        {
+            btnEast.Enabled = false;
+            btnWest.Enabled = false;
+            btnNorth.Enabled = false;
+            btnSouth.Enabled = false;
         }
     }
 }
