@@ -501,6 +501,7 @@
             this.Controls.Add(this.btnYes);
             this.Controls.Add(this.pnlWeapon);
             this.Font = new System.Drawing.Font("Britannic Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmSwapEquipment";
             this.Text = "Do you want to switch equipment?";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
