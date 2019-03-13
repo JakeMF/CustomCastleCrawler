@@ -1,5 +1,4 @@
 <Settings>
-	<BaseMaxHeals>5</BaseMaxHeals>
 	<StartingPosition>
 		<DefaultX>5</DefaultX>
 		<DefaultY>4</DefaultY>
@@ -9,6 +8,7 @@
 		<YMax>10</YMax>
 	</MapSize>
 	<FlavorSettings>
+		<BaseMaxHeals>5</BaseMaxHeals>
 		<GameName>Oolacile Adventures</GameName>
 		<!--The game automatically adds 'Welcome to [Game Name] [Player Name].-->
 		<GameFlavorText>You can use the four arrows to move North, South, East, and West. You may encounter enemies, find treasure, or discover secrets. If you encounter an enemy, you will be taken into another menu for the combat phase. Explore, fight, and gain power; it is all that will keep you alive.</GameFlavorText>

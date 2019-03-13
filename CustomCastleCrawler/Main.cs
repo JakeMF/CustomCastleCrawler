@@ -245,5 +245,16 @@ namespace CustomCastleCrawler
             btnNorth.Enabled = false;
             btnSouth.Enabled = false;
         }
+
+        private void mnuHelp_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+
+            using (frmHelp frmHelp = new frmHelp())
+            {
+                frmHelp.ShowDialog();
+            }
+            this.Show();
+        }
     }
 }

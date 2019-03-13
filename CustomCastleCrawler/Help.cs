@@ -15,5 +15,10 @@ namespace CustomCastleCrawler
         {
             InitializeComponent();
         }
+        
+        private void mnuExit_Click_1(object sender, EventArgs e)
+        {
+            Close();
+        }
     }
 }

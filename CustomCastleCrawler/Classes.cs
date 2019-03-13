@@ -122,11 +122,13 @@ namespace CustomCastleCrawler
             {
                 StartingX = Convert.ToInt16(elem.Element("DefaultX").Value);
                 StartingY = Convert.ToInt16(elem.Element("DefaultY").Value);
+                MaxEstus = Convert.ToInt16(elem.Element("BaseMaxHeals").Value);
             }
             //Basic Settings
             foreach (var elem in xdoc.Root.Elements("FlavorSettings"))
             {
                 GameName = elem.Element("GameName").Value;
+                GameFlavorText = elem.Element("GameFlavorText").Value;
                 GameFlavorText = elem.Element("GameFlavorText").Value;
             }
             //Class Settings
@@ -292,6 +294,9 @@ namespace CustomCastleCrawler
         //roll a die with n number of sides (starts at 1)
         public int rollDie(int n)
         {
+            // Incrementing parameter 'n' by 1 because the .Next function's max range is exclusive.
+            n++;
+
             int num = 0;
             num = myRand.Next(1, n);
             return num;
@@ -412,6 +417,9 @@ namespace CustomCastleCrawler
         public int Estus;
         public int MaxEstus;
 
+        //Load game data to grab max estus.
+        private GameData gameData = new GameData();
+
         //Default constructor
         public Player()
         {
@@ -423,8 +431,8 @@ namespace CustomCastleCrawler
             Weapon = new Weapon();
             Armor = new Armor();
             Score = 0;
-            MaxEstus = 5;
-            Estus = MaxEstus;
+            MaxEstus = gameData.MaxEstus;
+            Estus = gameData.MaxEstus;
         }
 
         //Constructor that will be used for new players
@@ -493,9 +501,10 @@ namespace CustomCastleCrawler
             return Health;
         }
 
+        //Function to use one heal, this checks available heals and either heals the user or informs them that they do not have any heals yet.
         public string DrinkEstus()
         {
-            if(Estus > 0 && Estus < MaxEstus)
+            if(Estus > 0 && Estus <= MaxEstus)
             {
                 Estus--;
                 Health = MaxHealth;
@@ -567,6 +576,7 @@ namespace CustomCastleCrawler
         public int Evasion { get; set; }
         public int Score { get; set; }
         public int SpawnZone { get; set; }
+
         //Default constructor
         public Enemy()
         {

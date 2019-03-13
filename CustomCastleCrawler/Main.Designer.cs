@@ -33,8 +33,6 @@
             this.mnuExit = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuClearConsole = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuHelp = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuExploration = new System.Windows.Forms.ToolStripMenuItem();
-            this.combatToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuBar.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -183,14 +181,14 @@
             // mnuSave
             // 
             this.mnuSave.Name = "mnuSave";
-            this.mnuSave.Size = new System.Drawing.Size(100, 22);
+            this.mnuSave.Size = new System.Drawing.Size(180, 22);
             this.mnuSave.Text = "&Save";
             this.mnuSave.Click += new System.EventHandler(this.mnuSave_Click);
             // 
             // mnuExit
             // 
             this.mnuExit.Name = "mnuExit";
-            this.mnuExit.Size = new System.Drawing.Size(100, 22);
+            this.mnuExit.Size = new System.Drawing.Size(180, 22);
             this.mnuExit.Text = "E&xit";
             this.mnuExit.Click += new System.EventHandler(this.mnuExit_Click);
             // 
@@ -204,27 +202,11 @@
             // 
             // mnuHelp
             // 
-            this.mnuHelp.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuExploration,
-            this.combatToolStripMenuItem});
             this.mnuHelp.Font = new System.Drawing.Font("Britannic Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.mnuHelp.Name = "mnuHelp";
             this.mnuHelp.Size = new System.Drawing.Size(45, 20);
             this.mnuHelp.Text = "&Help";
-            // 
-            // mnuExploration
-            // 
-            this.mnuExploration.Name = "mnuExploration";
-            this.mnuExploration.Size = new System.Drawing.Size(140, 22);
-            this.mnuExploration.Text = "&Exploration";
-            this.mnuExploration.Click += new System.EventHandler(this.mnuExploration_Click);
-            // 
-            // combatToolStripMenuItem
-            // 
-            this.combatToolStripMenuItem.Name = "combatToolStripMenuItem";
-            this.combatToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
-            this.combatToolStripMenuItem.Text = "&Combat";
-            this.combatToolStripMenuItem.Click += new System.EventHandler(this.combatToolStripMenuItem_Click);
+            this.mnuHelp.Click += new System.EventHandler(this.mnuHelp_Click);
             // 
             // frmMain
             // 
@@ -274,7 +256,5 @@
         private System.Windows.Forms.ToolStripMenuItem mnuExit;
         private System.Windows.Forms.ToolStripMenuItem mnuClearConsole;
         private System.Windows.Forms.ToolStripMenuItem mnuHelp;
-        private System.Windows.Forms.ToolStripMenuItem mnuExploration;
-        private System.Windows.Forms.ToolStripMenuItem combatToolStripMenuItem;
     }
 }
