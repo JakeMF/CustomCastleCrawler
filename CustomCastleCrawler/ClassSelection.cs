@@ -20,11 +20,14 @@ namespace CustomCastleCrawler
 
             InitializeComponent();
             
+            //store the intro message to be passed to the main form later.
             IntroMessage = introMessage;
 
             //Load class names and descriptions from XML.
             var gameData = new GameData();
 
+            //Set class name and descriptions to those pulled from XML.
+            //Note: The names here are based on the startup classes I chose, which may or may not have any bearing on the real classes.
             lblKnight.Text = gameData.Classes[0].ClassName;
             txtKnight.Text = gameData.Classes[0].ClassDescription;
 
@@ -73,7 +76,7 @@ namespace CustomCastleCrawler
         {
             string classDescription = MainGame.SelectClass(MainGame.PlayerName, lblArcher.Text);
 
-            //Open Class Choice Form
+            //Open Main Form
             this.Hide();
 
             using (frmMain mainScren = new frmMain(MainGame, IntroMessage))
@@ -87,7 +90,7 @@ namespace CustomCastleCrawler
         {
             string classDescription = MainGame.SelectClass(MainGame.PlayerName, lblGiant.Text);
 
-            //Open Class Choice Form
+            //Open Main Form
             this.Hide();
 
             using (frmMain mainScren = new frmMain(MainGame, IntroMessage))

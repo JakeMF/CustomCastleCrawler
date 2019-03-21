@@ -222,7 +222,6 @@ namespace CustomCastleCrawler
         public int Y { get; set; }
         public string Message { get; set; }
         public int EventID { get; set; }
-        public int SpawnZone { get; set; }
         //Default Constructor
         public MapTile()
         {
@@ -754,8 +753,7 @@ namespace CustomCastleCrawler
                         X = (int)elem.Element("XCoord"),
                         Y = (int)elem.Element("YCoord"),
                         Message = (string)elem.Element("Message"),
-                        EventID = (int)elem.Element("EventID"),
-                        SpawnZone = (int)elem.Element("SpawnZone")
+                        EventID = (int)elem.Element("EventID")
                     }).ToList();
             foreach(MapTile currentTile in tiles)
             {
@@ -1215,6 +1213,9 @@ namespace CustomCastleCrawler
                             //Index was between 0 and weapon max, a weapon was found.
                             TempWeapon = GetNewWeapon();
 
+                            //Add the found items value to the player's score, whether they equip it or not.
+                            Player.Score += TempWeapon.Value;
+
                             string returnContents = returnString.ToString();
                             returnString.Clear();
 
@@ -1224,6 +1225,9 @@ namespace CustomCastleCrawler
                         {
                             //index was between weapon max and armor max, armor was found.
                             TempArmor = GetNewArmor();
+
+                            //Add the found items value to the player's score, whether they equip it or not.
+                            Player.Score += TempArmor.Value;
 
                             string returnContents = returnString.ToString();
                             returnString.Clear();

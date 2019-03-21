@@ -1,0 +1,52 @@
+<Events>
+	<Event>
+													<!--This is a special event. EventID -1 will always be considered an impassable tile. Use this for obstacles.-->
+		<EventID>-1</EventID>						<!--This is merely a placeholder event to show that EventID -1 is considered impassable, but you can remove this without affecting the function of the game.-->
+		<RestLocation>0</RestLocation>
+		<EnemySpawn>0</EnemySpawn>
+		<ItemSpawn>0</ItemSpawn>
+		<NothingSpawn>0</NothingSpawn>
+		<WeaponChance>0</WeaponChance>
+		<ArmorChance>0</ArmorChance>
+		<ScoreItemChance>0</ScoreItemChance>
+		<EnemySpawnZone>0</EnemySpawnZone>
+	</Event>
+	
+	<!--Define your events below.-->
+	<Event>
+		<EventID>1</EventID>						<!--This is the ID that corresponds to this event. EventID's MUST be unique for the game to function properly.-->
+													<!--This ID corresponds with the "EventID" field of Tile objects to determine which event is generated when you land on that tile.-->
+		
+		<RestLocation>0</RestLocation>				<!--This is a flag to determine whether or not this is a "rest" location. Your healing flask is refilled when at a rest location. This should be 0 if it's a normal tile, or 1 if it's a rest tile.-->
+													<!--If this is a rest tile, no enemies or items will be generated.-->
+													
+		<!--EnemySpawn, ItemSpawn, and NothingSpawn MUST add up to 100 for your game to work properly.-->
+		
+		<EnemySpawn>30</EnemySpawn>					<!--This is a percentage chance for an enemy to spawn here. This number should be 1-100. -->
+													<!--If no enemy exists with a SpawnZone that maches the curent tile's, a generic enemy will be generated.-->
+													
+		<ItemSpawn>50</ItemSpawn>					<!--This is a percentage chance for an item to be found (without combat). This number should be 1-100.-->
+			
+		<NothingSpawn>20</NothingSpawn>				<!--This is a percentage chance for nothing to happen, no item found nor enemy encountered. This number should be 1-100.-->
+			
+			
+		<!--WeaponChance, ArmorChance, and ScoreItemChance: These values control what items are more likely to be found -->
+		<!-- Items are generated using a value of 1-100. These values are the maximum value in the range.-->
+		<!-- Ex: if WeaponChance='30', ArmorChance='60', and ScoreItemChance='100' -->
+		<!-- then values 1-30 will generate a weapons (30%), values 31-60 will generate armor(30%), and 61-100 will generate score items(40%).-->
+		
+		<WeaponChance>25</WeaponChance>				<!--In this case, there is a 25% chance to generate a weapon.-->
+		<ArmorChance>50</ArmorChance>				<!--In this case, there is a 25% chance to generate an armor set.-->
+		
+		<ScoreItemChance>80</ScoreItemChance>		<!--ScoreItemChance should always be 100, if ScoreItemChance is less than 100, there will be a chance to get no item. -->
+													<!--In this case, there is a 30% chance to generate a score item.-->
+													
+													<!--Because the ScoreItemChance is 80, there is a 20% chance (100-80) that no item will be generated when finding an item.-->
+													<!--In the case where you find an item, but no item is generated, this will be treated like a "NothingSpawn" case, where nothing happens.-->
+		
+		<EnemySpawnZone>1</EnemySpawnZone>			<!--This is the ID that corresponds to the "SpawnZone" field for enemies.-->
+													<!--When the enemy's SpawnZone matches the EnemySpawnZone the enemy is in the pool of enemies to be generated during that event.-->
+	</Event>
+	
+	<!--Define your events above.-->
+</Events>

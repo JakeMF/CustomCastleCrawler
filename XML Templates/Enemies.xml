@@ -1,0 +1,17 @@
+<Enemies>
+	<!--Define your enemies below.-->
+	
+	<Enemy>
+		<Name>Skeleton Warrior</Name> 	<!--This is the name of the enemy, it will be displayed when you encounter it.-->
+		<Health>600</Health> 			<!--This is the enemy's health, the amount of damage they can sustain before dying.-->
+		<BaseDMG>100</BaseDMG>			<!--This is the enemy's base damage, this damage will be reduced by the target's armor.-->
+		<APDMG>25</APDMG>				<!--This is the enemy's armor piercing (AP) damage, this damage is not affected by armor; instead, it is always applied directly.-->
+		<Defence>10</Defence>			<!--Defence is a flat % of damage reduction on base damage. Ex: 10 Defence will cause an attack with 10 base damage to deal 9 damage instead.-->
+		<Evasion>5</Evasion>			<!--Evasion is a flat % chance to avoid all damage from an attack.-->
+		<Points>20</Points>				<!--This is the number of points you gain upon defeating this enemy.-->
+		<SpawnZone>1</SpawnZone>		<!--This is the location where the enemy will spawn, this corresponds with "EnemySpawnZone" of events. --> 
+										<!--When the event's EnemySpawnZone matches the SpawnZone the enemy is in the pool of enemies to be generated for that event.-->
+	</Enemy>
+	
+	<!--Define your enemies above.-->
+</Enemies>

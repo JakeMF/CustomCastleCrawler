@@ -1,0 +1,40 @@
+<Items>
+													<!--These are the weapons you will use to damage enemies, they provide your Base and AP damage and often modify evasion.-->
+	<Weapon>
+		<Name>Thief's Dagger</Name>					<!--This is the name of the weapon, it will be displayed when the weapon is found and, if equipped, whenever you look at your equipment.-->
+		<GoldValue>5</GoldValue>					<!--This is the gold value of the weapon, this value is added to your score upon finding the weapon.-->
+		<BaseDMG>0</BaseDMG>						<!--This is the base damage of the weapon, this damage will be reduced by the target's armor.-->
+		<APDMG>80</APDMG>							<!--This is the armor piercing (AP) damage of the weapon, this damage is not affected by armor; instead, it is always applied directly.-->
+		<Evasion>20</Evasion>						<!--This is the evasion modifier for the weapon, this value is added to your character's evasion stat.-->
+													<!--In the case where a weapon should make it harder for the player to evade (such as a bulky Zweihander) then you may use a negative value to decrease evasion chance.-->
+		<Rarity>1</Rarity>							<!--This is the rarity of the weapon, there are 3 rarity level, the higher the rarity the less likely the weapon is to spawn.-->
+													<!--When generating weapons there is a 50% chance of a level 1, 34% chance of a level 2, and a 17% chance of a level 3.-->
+													
+		<Description>This traditional long sword may not be fancy, but it gets the job done.</Description>
+													<!--This is the weapon's description, it is displayed when the weapon is found. This is merely flavor text, it has no effect on gameplay.-->
+	</Weapon>
+	
+													<!--These are the armor sets, they give the player protection against base damage and often modify evasion.-->
+	<Armor>
+		<Name>Enchanted Robe</Name>					<!--This is the name of the armor, it will be displayed when the armor is found and, if equipped, whenever you look at your equipment.-->
+		<GoldValue>3</GoldValue>					<!--This is the gold value of the armor, this value is added to your score upon finding the armor.-->
+		<ArmorVal>5</ArmorVal>						<!--This is the armor value of the armor set, this is a flat percentage of damage reduction from BaseDMG.-->
+													<!--Ex: If you were wearing this armor with an ArmorVal of 5, an attack with 100 BaseDMG would only deal 95 damage.-->
+													
+		<Evasion>20</Evasion>						<!--This is the evasion modifier for the armor set, this value is added to your character's evasion stat.-->
+													<!--In the case where a weapon should make it harder for the player to evade (such as bulky platemail) then you may use a negative value to decrease evasion chance.-->
+		<Rarity>3</Rarity>							<!--This is the rarity of the armor set, there are 3 rarity level, the higher the rarity the less likely the weapon is to spawn.-->
+													<!--When generating armor there is a 50% chance of a level 1, 34% chance of a level 2, and a 17% chance of a level 3.-->
+													
+		<Description>These cloth scraps barely cover your flesh, but they allow for extreme evasion.</Description>
+													<!--This is the armor set's description, it is displayed when the armor set is found. This is merely flavor text, it has no effect on gameplay.-->
+	</Armor>
+	
+													<!--These are "Score Items" they simply add to your score when found, they cannot be equipped and do not affect gameplay in any other way.-->
+	<Item>
+		<Name>Silver Spoon</Name>					<!--This is the name of the weapon, it will be displayed when the item is found.-->
+		<GoldValue>2</GoldValue>					<!--This is the gold value of the armor, this value is added to your score upon finding the item.-->
+		<Description>A spoon made of silver, worth some gold pieces.</Description>
+													<!--This is the armor set's description, it is displayed when the item is found. This is merely flavor text, it has no effect on gameplay.-->
+	</Item>
+</Items>

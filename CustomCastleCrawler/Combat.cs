@@ -17,7 +17,11 @@ namespace CustomCastleCrawler
             this.MainGame = MainGame;
 
             InitializeComponent();
+
+            //Ensure the textbox is scrolled down to the most recent message.
             txtCombatLog.SelectionAlignment = HorizontalAlignment.Center;
+
+            //Change the text color to black because the default color on a disabled textbox is a gray which is much harder to read.
             txtCombatLog.SelectionColor = Color.Black;
 
             //Populate default player health and stamina values
@@ -49,6 +53,7 @@ namespace CustomCastleCrawler
             //Call attack function
             string combatResults = MainGame.BattleEnemy("attack");
 
+            //populate the textbox with the results.
             popCombatResults(combatResults);
         }
 
@@ -56,39 +61,53 @@ namespace CustomCastleCrawler
         {
             //call block function
             string combatResults = MainGame.BattleEnemy("block");
-            
+
+            //populate the textbox with the results.
             popCombatResults(combatResults);
         }
 
         private void btnHeal_Click(object sender, EventArgs e)
         {
+            //Get the results of the player's attempt to heal.
             string healResults = MainGame.healPlayer();
 
+            //populate the textbox with the results.
             popCombatResults(healResults);
         }
 
         private void btnEscape_Click(object sender, EventArgs e)
         {
+            //Get the results of the player's attempt to escape.
             string escapeResults = MainGame.EscapeAttempt();
 
+            //populate the textbox with the results.
             popCombatResults(escapeResults);
         }
 
         private void popCombatResults(string results)
         {
+            //Split the string to separate player/enemy health and stamina values from the text message of the combat.
             var resArray = results.Split('|');
 
+            //Fill in player and enemy stat lables.
             lblPlayerHealth.Text = resArray.Length > 0 ? resArray[0] : "Er/Er";
             lblPlayerStamina.Text = resArray.Length > 1 ? resArray[1] : "Er/Er";
             lblEnemyHealth.Text = resArray.Length > 2 ? resArray[2] : "Er/Er";
+
+            //Fill in combat log.
             txtCombatLog.SelectedText = resArray.Length > 3 ? resArray[3] + Environment.NewLine: "Error retrieving combat information. Please restart game WITHOUT SAVING.";
 
+            //Ensure that the text is centered
             txtCombatLog.SelectionAlignment = HorizontalAlignment.Center;
+
+            //Change the text color to black because the default color on a disabled textbox is a gray which is much harder to read.
             txtCombatLog.SelectionColor = Color.Black;
+
+            //Ensure the textbox is scrolled down to the most recent message.
             txtCombatLog.ScrollToCaret();
             
 
-            //The enemy was defeated, close the combat window
+            //The enemy was defeated or the player was killed, close the combat window
             if (!MainGame.ActiveEnemy || MainGame.PlayerDied)
             {
                 Close();

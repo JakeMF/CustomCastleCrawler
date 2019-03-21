@@ -1,0 +1,20 @@
+<MapTiles>
+	<!--Define your map tiles below.-->
+	
+	<!--NOTE: This map operates on a 0 based index, meaning that the first X and Y values are 0.-->
+	<!--For Example: If your map has a maximum size of (10,10), then your NorthWest most coordinate would be (0,0) and your SouthEast most coordinate would be (9,9).-->
+	
+	<Tile>
+		<XCoord>0</XCoord>										<!--This is the X coordinate for the file. This controls where this tile is located on your map.-->
+		<YCoord>0</YCoord>										<!--This is the Y coordinate for the file. This controls where this tile is located on your map.-->
+		<Message>You are in a long forgotten crypt</Message>	<!--This is the flavor message displayed when you land on the tile, this has little impact on gameplay,-->
+																<!--but it is useful to provide lore/backstory to your world, or to give help the player orient themselves on your map.-->
+		
+		<EventID>1</EventID>									<!--This ID corresponds with the "EventID" field of Event objects to determine which event is generated when you land on this tile.-->
+		
+		<SpawnZone>0</SpawnZone>								<!--This controls which enemies this tile has a chance to generate. When the event's EnemySpawnZone matches the SpawnZone --> 
+																<!--the enemy is in the pool of enemies to be generated for that event.-->
+	</Tile>
+	
+	<!--Define your map tiles above.-->
+</MapTiles>

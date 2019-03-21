@@ -11,25 +11,34 @@ namespace CustomCastleCrawler
 {
     public partial class frmMain : Form
     {
+        //This variable holds the game object, which will be passed to other Forms as a parameter.
         public MainGame MainGame;
         
         public frmMain(MainGame mainGame, string introMessage)
         {
+            //First initialize the game object, then the form.
             MainGame = mainGame;
             InitializeComponent();
+            
+            //Populate the textbox with the introduction message.
             popTextbox(introMessage);
+
+            //This populates the notes with any notes from past playthroughs.
+            //If starting a new game, mainGame.TempMiscData will be blank.
             txtNotes.Text = mainGame.TempMiscData;
         }
-
+        
         #region Menu Buttons
 
         private void mnuExit_Click(object sender, EventArgs e)
         {
+            //Close the application.
             Application.Exit();
         }
 
         private void mnuSave_Click(object sender, EventArgs e)
         {
+            //Execute the save function, pass the player's notes as a parameter to be saved.
             MainGame.SaveProgress(txtNotes.Text);
         }
         
@@ -39,58 +48,87 @@ namespace CustomCastleCrawler
             txtMainOutput.Clear();
         }
 
-        private void mnuExploration_Click(object sender, EventArgs e)
-        {
 
-            //Open Help Form
+        private void mnuHelp_Click(object sender, EventArgs e)
+        {
+            //Hide the main form
             this.Hide();
 
-            using (frmHelp helpScreen = new frmHelp())
+            //When the close the help form, show the main form again.
+            using (frmHelp frmHelp = new frmHelp())
             {
-                helpScreen.ShowDialog();
-            }
-            this.Show();
-        }
-
-        private void combatToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-            //Open Help Form
-            this.Hide();
-
-            using (frmHelp helpScreen = new frmHelp())
-            {
-                helpScreen.ShowDialog();
+                frmHelp.ShowDialog();
             }
             this.Show();
         }
 
         #endregion
-
+        
         #region Movement Buttons 
         private void btnNorth_Click(object sender, EventArgs e)
         {
+            //Populate the textbox with the results from moving North.
             popTextbox(MainGame.EvaluateInput("north"));
+            
+            //Keep track of the number of turns the player has taken.
             MainGame.TurnCount++;
         }
 
         private void btnSouth_Click(object sender, EventArgs e)
         {
+            //Populate the textbox with the results from moving South.
             popTextbox(MainGame.EvaluateInput("south"));
             MainGame.TurnCount++;
         }
 
         private void btnEast_Click(object sender, EventArgs e)
         {
+            //Populate the textbox with the results from moving East.
             popTextbox(MainGame.EvaluateInput("east"));
+
+            //Keep track of the number of turns the player has taken.
             MainGame.TurnCount++;
         }
 
         private void btnWest_Click(object sender, EventArgs e)
         {
+            //Populate the textbox with the results from moving West.
             popTextbox(MainGame.EvaluateInput("west"));
+
+            //Keep track of the number of turns the player has taken.
             MainGame.TurnCount++;
         }
+
+        #endregion
+
+        #region Action Buttons
+
+        private void btn_Equip_Click(object sender, EventArgs e)
+        {
+            //Generate the string player's equipment list to be displayed.
+            string output = MainGame.GenerateEquipmentList();
+            
+            //Clear the textbox before populating with the equipment list for readability.
+            txtMainOutput.Clear();
+
+            //ToDo: Test that this functions the same using the poptextbox function
+            popTextbox(output);
+
+        }
+
+        private void btnStats_Click(object sender, EventArgs e)
+        {
+            //Generate the palyer's statistics to be displayed.
+            string output = MainGame.GenerateStatistics();
+
+            //Clear the textbox before populating with the player's statistics for readability.
+            txtMainOutput.Clear();
+            
+            //Populate the textbox
+            popTextbox(output);
+        }
+
+        #endregion
 
         private void popTextbox(string output)
         {
@@ -134,9 +172,16 @@ namespace CustomCastleCrawler
                 }
             }
 
+            //Ensure the text is centered.
             txtMainOutput.SelectionAlignment = HorizontalAlignment.Center;
+
+            //Change the text color to black because the default color on a disabled textbox is a gray which is much harder to read.
             txtMainOutput.SelectionColor = Color.Black;
+
+            //Populate the textbox.
             txtMainOutput.SelectedText = output;
+
+            //Ensure the textbox is scrolled down to the most recent message.
             txtMainOutput.ScrollToCaret();
 
             //Check to see if there is an active enemy. If so, open the combat form.
@@ -205,56 +250,29 @@ namespace CustomCastleCrawler
                 }
             }
         }
-        #endregion
-
-        #region Action Buttons
-
-        private void btn_Equip_Click(object sender, EventArgs e)
-        {
-            string output = MainGame.GenerateEquipmentList();
-
-            txtMainOutput.Clear();
-            txtMainOutput.SelectionAlignment = HorizontalAlignment.Center;
-            txtMainOutput.SelectedText = output;
-
-        }
-
-        private void btnStats_Click(object sender, EventArgs e)
-        {
-            string output = MainGame.GenerateStatistics();
-
-            txtMainOutput.Clear();
-            txtMainOutput.SelectionAlignment = HorizontalAlignment.Center;
-            txtMainOutput.SelectedText = output;
-        }
-        
-        #endregion
 
         private void txtMainOutput_TextChanged(object sender, EventArgs e)
         {
+            //When text is added to the textbox, ensure it takes focus.
             txtMainOutput.Focus();
             txtMainOutput.SelectionStart = txtMainOutput.TextLength;
+            
+            //Ensure that the textbox is scrolled down to the most recent message.
             txtMainOutput.ScrollToCaret();
+
+            //Force textbox to redraw, this fixed some minor display formatting issues.
             txtMainOutput.Refresh();
         }
 
         private void DisableFormControls()
         {
+            //Disable all movement controls so that the player can no longer 'play' the game. 
+            //This function will be called when the player dies.
             btnEast.Enabled = false;
             btnWest.Enabled = false;
             btnNorth.Enabled = false;
             btnSouth.Enabled = false;
         }
 
-        private void mnuHelp_Click(object sender, EventArgs e)
-        {
-            this.Hide();
-
-            using (frmHelp frmHelp = new frmHelp())
-            {
-                frmHelp.ShowDialog();
-            }
-            this.Show();
-        }
     }
 }

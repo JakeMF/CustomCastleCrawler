@@ -39,6 +39,7 @@ namespace CustomCastleCrawler
             }
             else
             {
+                //If the player cleared out the name field, give them an error message.
                 MessageBox.Show("Please Enter a Valid Name");
             }
         }
@@ -47,6 +48,7 @@ namespace CustomCastleCrawler
         {
             string playerName = txtName.Text;
             string introString;
+
             if (!string.IsNullOrEmpty(playerName) && !string.IsNullOrWhiteSpace(playerName))
             {
                 //Run Load Game method. This will in turn build the game.
@@ -58,10 +60,12 @@ namespace CustomCastleCrawler
                 }
                 else if (results == "tryagain")
                 {
+                    //They want to try again, exit this method to be called again.
                     return;
                 }
                 else
                 {
+                    //The player did not want to attempt to load the game again, so just start a new game.
                     introString = MainGame.StartGame(playerName, true);
                 }
 

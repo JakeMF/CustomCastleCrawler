@@ -16,6 +16,7 @@ namespace CustomCastleCrawler
             InitializeComponent();
         }
         
+        //If the click the exit button, close the form, returing to the main form.
         private void mnuExit_Click_1(object sender, EventArgs e)
         {
             Close();
