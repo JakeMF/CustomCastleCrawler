@@ -118,7 +118,7 @@ namespace CustomCastleCrawler
 
         private void btnStats_Click(object sender, EventArgs e)
         {
-            //Generate the palyer's statistics to be displayed.
+            //Generate the player's statistics to be displayed.
             string output = MainGame.GenerateStatistics();
 
             //Clear the textbox before populating with the player's statistics for readability.

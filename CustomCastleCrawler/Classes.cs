@@ -14,18 +14,18 @@ namespace CustomCastleCrawler
     //Encrypter
     public sealed class Crypter
     {
-        private string key;
+        private string Key;
         
         //Constructor with a default key value, this should NEVER be used.
         public Crypter()
         {
-            key = "I'mADefaultKeyPleaseChangeMe";
+            Key = "I'mADefaultKeyPleaseChangeMe";
         }
 
         //Function that takes the key as a parameter, this should be used 100% of the time.
         public Crypter(string key)
         {
-            this.key = key;
+            this.Key = key;
         }
 
         //method to encrypt a string, returns encrypted string.
@@ -34,7 +34,7 @@ namespace CustomCastleCrawler
             byte[] keyArray;
             byte[] toEncryptArray = UTF8Encoding.UTF8.GetBytes(toEncrypt);
 
-            keyArray = UTF8Encoding.UTF8.GetBytes(key);
+            keyArray = UTF8Encoding.UTF8.GetBytes(Key);
 
             TripleDESCryptoServiceProvider tdes = new TripleDESCryptoServiceProvider();
             foreach (KeySizes d in tdes.LegalKeySizes)
@@ -66,7 +66,7 @@ namespace CustomCastleCrawler
             //get the byte code of the string
             byte[] toEncryptArray = Convert.FromBase64String(cipherString);
 
-            keyArray = UTF8Encoding.UTF8.GetBytes(key);
+            keyArray = UTF8Encoding.UTF8.GetBytes(Key);
 
             TripleDESCryptoServiceProvider tdes = new TripleDESCryptoServiceProvider();
             //set the secret key for the tripleDES algorithm
@@ -283,11 +283,11 @@ namespace CustomCastleCrawler
     //Class that extends C# Random()
     public sealed class MyRandom
     {
-        private Random myRand;
+        private Random MyRand;
         //Default constructor.
         public MyRandom()
         {
-            myRand = new Random();
+            MyRand = new Random();
         }
 
         //roll a die with n number of sides (starts at 1)
@@ -297,7 +297,7 @@ namespace CustomCastleCrawler
             n++;
 
             int num = 0;
-            num = myRand.Next(1, n);
+            num = MyRand.Next(1, n);
             return num;
         }
 
@@ -390,7 +390,7 @@ namespace CustomCastleCrawler
             Evasion = 0;
         }
 
-        //Constructor with all values, no default constructor because gear would be useless otherwise.
+        //Constructor with all values.
         public Armor(string name, int value, string description, int armorVal, int evasion)
         {
             Name = name;
@@ -413,8 +413,8 @@ namespace CustomCastleCrawler
         public Armor Armor { get; set; }
         public int Score { get; set; }
         public int EnemiesKilled = 0;
-        public int Estus;
         public int MaxEstus;
+        public int Estus;
 
         //Load game data to grab max estus.
         private GameData gameData = new GameData();
@@ -592,7 +592,7 @@ namespace CustomCastleCrawler
         }
 
         //Constructor that takes parameters for all attributes
-        public Enemy(string name, int maxHealth, int score, int damage, int apDamage, double defence, int evasion = 2)
+        public Enemy(string name, int maxHealth, int score, int damage, int apDamage, double defence, int evasion = 5)
         {
             Name = name;
             MaxHealth = maxHealth;
@@ -696,12 +696,9 @@ namespace CustomCastleCrawler
             PopulateItems();
             PopulateMap();
             PopulateEvents();
-
-            //Start Running Game
-            //StartGame();
+            
         }
-
-        //ToDo rework to fit new load methods
+        
         //Function that creates introduction string.
         public string StartGame(string playerName, bool newGame)
         {
@@ -739,7 +736,7 @@ namespace CustomCastleCrawler
         }
 
         //Function load the game's map from XML and store it in the array of MapTile objects
-        void PopulateMap()
+        private void PopulateMap()
         {
             //Load XML document containing items.
             XDocument xdoc = XDocument.Load("Map.xml");
@@ -762,7 +759,7 @@ namespace CustomCastleCrawler
         }
 
         //Function to load the game's Events from XML and store it in a list of Event objects.
-        void PopulateEvents()
+        private void PopulateEvents()
         {
             //Load XML document containing items.
             XDocument xdoc = XDocument.Load("Events.xml");
@@ -788,7 +785,7 @@ namespace CustomCastleCrawler
         }
 
         //Function load the game's items from XML and store them in the appropriate lists
-        void PopulateItems()
+        private void PopulateItems()
         {
             //Load XML document containing items.
             XDocument xdoc = XDocument.Load("Items.xml");
@@ -838,7 +835,7 @@ namespace CustomCastleCrawler
         }
 
         //Function load the game's enemies from XML and store them in a List of Enemy objects
-        void PopulateEnemies()
+        private void PopulateEnemies()
         {
             //Load XML document containing enemies.
             XDocument xdoc = XDocument.Load("Enemies.xml");
@@ -872,7 +869,7 @@ namespace CustomCastleCrawler
             {
                 //Initialize encryption class with the key parameter.
                 Crypter cryptic = new Crypter(EncryptionKey);
-                string path = "SaveData/" + Player.Name.ToLower() + ".txt";
+                string path = "SaveData/" + PlayerName.ToLower() + ".txt";
                 using (StreamWriter sw = new StreamWriter(path, false))
                 {
                     //Get the player's data as a string.
@@ -1162,11 +1159,9 @@ namespace CustomCastleCrawler
         }
 
         //Function to generate the message output to the console.
-        string genMessage()
+        private string genMessage()
         {
             //get the current map tile from the map container
-            //!!IMPORTANT!! Map was created (Y,X) not (X,Y) I'm dumb but remember. 5/30/18
-            //I have changed it back to x,y.
             MapTile currentTile = Map[Coordinates.X, Coordinates.Y];
             if (!ActiveEnemy)
             {
@@ -1262,7 +1257,7 @@ namespace CustomCastleCrawler
         }
 
         //function to generate a weapon
-        Weapon GetNewWeapon()
+        private Weapon GetNewWeapon()
         {
             //Declare variables for weapon generation
             IEnumerable<Weapon> weapons;
@@ -1297,7 +1292,7 @@ namespace CustomCastleCrawler
         }
 
         //function to generate armor
-        Armor GetNewArmor()
+        private Armor GetNewArmor()
         {
             //Declare variables for armor generation
             IEnumerable<Armor> armors;
@@ -1331,7 +1326,7 @@ namespace CustomCastleCrawler
             }
         }
 
-        string GetNewScoreItem()
+        private string GetNewScoreItem()
         {
             //Get random value to determine what item was found
             var index = RandomGen.rollDie(Items.Count() - 1);
@@ -1461,7 +1456,7 @@ namespace CustomCastleCrawler
         }
 
         //function to find a weapon based on its name
-        Weapon FindWeapon(string weaponText)
+        private Weapon FindWeapon(string weaponText)
         {
             var name = weaponText;
             Weapon weapon = new Weapon();
@@ -1477,7 +1472,7 @@ namespace CustomCastleCrawler
         }
 
         //Function to find a set of armor based on its name
-        Armor FindArmor(string name)
+        private Armor FindArmor(string name)
         {
             Armor armor = new Armor();
             foreach (Armor arm in Armors)
@@ -1524,7 +1519,7 @@ namespace CustomCastleCrawler
         {
             var returnString = new StringBuilder();
 
-            returnString.AppendLine(Player.Name);
+            returnString.AppendLine(PlayerName);
             returnString.AppendLine(System.Environment.NewLine);
             //Add player's gear
             returnString.AppendLine("Final Weapon: " + Player.Weapon.Name + " Rarity " + Player.Weapon.Rarity);
