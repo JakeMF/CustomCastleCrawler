@@ -2,7 +2,7 @@
 	<!--Define your enemies below.-->
 	
 	<Enemy>
-		<Name>Skeleton Warrior</Name> 	<!--This is the name of the enemy, it will be displayed when you encounter it.-->
+		<Name>skeleton </Name> 	<!--This is the name of the enemy, it will be displayed when you encounter it.-->
 		<Health>600</Health> 			<!--This is the enemy's health, the amount of damage they can sustain before dying.-->
 		<BaseDMG>100</BaseDMG>			<!--This is the enemy's base damage, this damage will be reduced by the target's armor.-->
 		<APDMG>25</APDMG>				<!--This is the enemy's armor piercing (AP) damage, this damage is not affected by armor; instead, it is always applied directly.-->
@@ -12,6 +12,56 @@
 		<SpawnZone>1</SpawnZone>		<!--This is the location where the enemy will spawn, this corresponds with "EnemySpawnZone" of events. --> 
 										<!--When the event's EnemySpawnZone matches the SpawnZone the enemy is in the pool of enemies to be generated for that event.-->
 	</Enemy>
-	
+	<Enemy>
+		<Name>Ogar</Name> 
+		<Health>1000</Health>
+		<BaseDMG>100</BaseDMG>
+		<APDMG>25</APDMG>
+		<Defence>25</Defence>
+		<Envasion>10</Evasion>
+		<Points>50</Points>
+		<SpawnZone>2</Spawnzone>
+	</Enemy>
+	<Enemy>
+		<Name>Troll</Troll>
+		<Health>600</Health>
+		<BaseDMG>75</BaseDMG>
+		<APDMG>50</APDMG>
+		<Defence>25</Defence>
+		<Envasion>25</Evasion>
+		<Points>25</Points>
+		<Spawnzone>2</Spawnzone>
+	</Enemy>
+	<Enemy>
+		<Name>Thief</Name>
+		<Health>200</Health>
+		<BaseDMG>50</BaseDMG>
+		<APDMG>25</APDMG>
+		<Defence>50</Defence>
+		<Envasion>10</Evasion>
+		<Points>10</Points>
+		<Spawnzone>4</Spawnzone>
+	</Enemy>
+	<Enemy>
+		<Name>Nymph</Name>
+		<Health>100</Health>
+		<BaseDMG>10</BaseDMG>
+		<APDMG>0</APDMG>
+		<Defence>10</Defence>
+		<Evasion>10</Evasion>
+		<Points>25</Points>
+		<Spawnzone>1</Spawnzone>
+	</Enemy>
+	<Enemy>
+		<Name>Thief</Name>
+		<Health>200</Health>
+		<BaseDMG>50</BaseDMG>
+		<APDMG>25</APDMG>
+		<Defence>50</Defence>
+		<Envasion>10</Evasion>
+		<Points>10</Points>
+		<Spawnzone>3</Spawnzone>
+	</Enemy>
 	<!--Define your enemies above.-->
-</Enemies>
+</Enemies> 
+

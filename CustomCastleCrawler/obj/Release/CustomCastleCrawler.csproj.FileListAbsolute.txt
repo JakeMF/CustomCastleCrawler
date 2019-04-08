@@ -12,3 +12,17 @@ C:\Users\jacob\Documents\GitHub\CustomCastleCrawler\CustomCastleCrawler\obj\Rele
 C:\Users\jacob\Documents\GitHub\CustomCastleCrawler\CustomCastleCrawler\obj\Release\CustomCastleCrawler.exe
 C:\Users\jacob\Documents\GitHub\CustomCastleCrawler\CustomCastleCrawler\obj\Release\CustomCastleCrawler.pdb
 C:\Users\jacob\Documents\GitHub\CustomCastleCrawler\CustomCastleCrawler\obj\Release\CustomCastleCrawler.csprojAssemblyReference.cache
+C:\Users\Jake\Documents\GitHub\CustomCastleCrawler\CustomCastleCrawler\bin\Release\CustomCastleCrawler.exe
+C:\Users\Jake\Documents\GitHub\CustomCastleCrawler\CustomCastleCrawler\bin\Release\CustomCastleCrawler.pdb
+C:\Users\Jake\Documents\GitHub\CustomCastleCrawler\CustomCastleCrawler\obj\Release\CustomCastleCrawler.frmClassSelection.resources
+C:\Users\Jake\Documents\GitHub\CustomCastleCrawler\CustomCastleCrawler\obj\Release\CustomCastleCrawler.frmCombat.resources
+C:\Users\Jake\Documents\GitHub\CustomCastleCrawler\CustomCastleCrawler\obj\Release\CustomCastleCrawler.frmHelp.resources
+C:\Users\Jake\Documents\GitHub\CustomCastleCrawler\CustomCastleCrawler\obj\Release\CustomCastleCrawler.frmMain.resources
+C:\Users\Jake\Documents\GitHub\CustomCastleCrawler\CustomCastleCrawler\obj\Release\CustomCastleCrawler.Properties.Resources.resources
+C:\Users\Jake\Documents\GitHub\CustomCastleCrawler\CustomCastleCrawler\obj\Release\CustomCastleCrawler.frmStartup.resources
+C:\Users\Jake\Documents\GitHub\CustomCastleCrawler\CustomCastleCrawler\obj\Release\CustomCastleCrawler.frmSwapEquipment.resources
+C:\Users\Jake\Documents\GitHub\CustomCastleCrawler\CustomCastleCrawler\obj\Release\CustomCastleCrawler.csproj.GenerateResource.Cache
+C:\Users\Jake\Documents\GitHub\CustomCastleCrawler\CustomCastleCrawler\obj\Release\CustomCastleCrawler.csproj.CoreCompileInputs.cache
+C:\Users\Jake\Documents\GitHub\CustomCastleCrawler\CustomCastleCrawler\obj\Release\CustomCastleCrawler.exe
+C:\Users\Jake\Documents\GitHub\CustomCastleCrawler\CustomCastleCrawler\obj\Release\CustomCastleCrawler.pdb
+C:\Users\Jake\Documents\GitHub\CustomCastleCrawler\CustomCastleCrawler\obj\Release\CustomCastleCrawler.csprojResolveAssemblyReference.cache

@@ -688,7 +688,7 @@ namespace CustomCastleCrawler
             Coordinates.Y = GameConfigurations.StartingY;
 
             //ToDo:Check if need to x and y
-            LastCoordinates.X = Coordinates.Y;
+            LastCoordinates.X = Coordinates.X;
             LastCoordinates.Y = Coordinates.Y;
 
             //Load Game Data From XML Files
@@ -994,6 +994,7 @@ namespace CustomCastleCrawler
                                     MessageBox.Show("Your save data has been corrupted, please start a new game.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                 }
 
+                                reader.Close();
                                 return "success";
                             }
                             else
@@ -1001,6 +1002,7 @@ namespace CustomCastleCrawler
                                 //if there are not enough values in the array, the data is either from a version with different save data or has been manually modified.
                                 MessageBox.Show("Your save data has been corrupted, your data cannot be loaded.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
+                                reader.Close();
                                 return "fail";
                             }
                         }

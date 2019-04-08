@@ -7,9 +7,9 @@
 		<XMax>10</XMax>								<!--This is the maximum number of tiles on the X axis.-->
 		<YMax>10</YMax>								<!--This is the maximum number of tiles on the Y axis.-->
 													<!--NOTE: The game's map starts at a 0 index, so with an X and Y max of '10' your NorthWest most coordinate would be (0,0) and your SouthEast most coordinate would be (9,9).-->
+		<BaseMaxHeals>5</BaseMaxHeals>				<!--This is the number of maximum number of heals you start with, if there are 'RestLocation' events you may refill your heals.-->
 	</MapSize>
 	<FlavorSettings>
-		<BaseMaxHeals>5</BaseMaxHeals>				<!--This is the number of maximum number of heals you start with, if there are 'RestLocation' events you may refill your heals.-->
 													<!--If you do not wish to provide the player with any heals, you can set this to 0 however the "Heal" button will still be in the game, it will simply never work.-->
 													
 		<GameName>Oolacile Adventures</GameName>	<!--This is the name of your game, it will be displayed when you start a new game and in the top right hand corner of the main game window.-->
