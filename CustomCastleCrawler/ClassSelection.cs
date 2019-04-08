@@ -19,7 +19,10 @@ namespace CustomCastleCrawler
             this.MainGame = MainGame;
 
             InitializeComponent();
-            
+
+            //Set the form's text on the title bar to the game's name.
+            this.Text = MainGame.GameConfigurations.GameName;
+
             //store the intro message to be passed to the main form later.
             IntroMessage = introMessage;
 

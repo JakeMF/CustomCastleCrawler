@@ -1,8 +1,8 @@
 <Settings>
-	<BaseMaxHeals>5</BaseMaxHeals>
 	<StartingPosition>
 		<DefaultX>5</DefaultX>
 		<DefaultY>4</DefaultY>
+		<BaseMaxHeals>5</BaseMaxHeals>
 	</StartingPosition>
 	<MapSize>
 		<XMax>10</XMax>

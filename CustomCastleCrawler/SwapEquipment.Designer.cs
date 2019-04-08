@@ -90,6 +90,7 @@
             // 
             this.btnNo.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnNo.BackgroundImage")));
             this.btnNo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnNo.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnNo.FlatAppearance.BorderSize = 0;
             this.btnNo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnNo.Location = new System.Drawing.Point(124, 232);
@@ -493,8 +494,10 @@
             // 
             // frmSwapEquipment
             // 
+            this.AcceptButton = this.btnYes;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.btnNo;
             this.ClientSize = new System.Drawing.Size(626, 363);
             this.Controls.Add(this.pnlArmor);
             this.Controls.Add(this.btnNo);

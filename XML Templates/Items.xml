@@ -2,7 +2,7 @@
 													<!--These are the weapons you will use to damage enemies, they provide your Base and AP damage and often modify evasion.-->
 	<Weapon>
 		<Name>Thief's Dagger</Name>					<!--This is the name of the weapon, it will be displayed when the weapon is found and, if equipped, whenever you look at your equipment.-->
-		<GoldValue>5</GoldValue>					<!--This is the gold value of the weapon, this value is added to your score upon finding the weapon.-->
+		<ScoreValue>5</ScoreValue>					<!--This is the gold value of the weapon, this value is added to your score upon finding the weapon.-->
 		<BaseDMG>0</BaseDMG>						<!--This is the base damage of the weapon, this damage will be reduced by the target's armor.-->
 		<APDMG>80</APDMG>							<!--This is the armor piercing (AP) damage of the weapon, this damage is not affected by armor; instead, it is always applied directly.-->
 		<Evasion>20</Evasion>						<!--This is the evasion modifier for the weapon, this value is added to your character's evasion stat.-->
@@ -17,7 +17,7 @@
 													<!--These are the armor sets, they give the player protection against base damage and often modify evasion.-->
 	<Armor>
 		<Name>Enchanted Robe</Name>					<!--This is the name of the armor, it will be displayed when the armor is found and, if equipped, whenever you look at your equipment.-->
-		<GoldValue>3</GoldValue>					<!--This is the gold value of the armor, this value is added to your score upon finding the armor.-->
+		<ScoreValue>3</ScoreValue>					<!--This is the gold value of the armor, this value is added to your score upon finding the armor.-->
 		<ArmorVal>5</ArmorVal>						<!--This is the armor value of the armor set, this is a flat percentage of damage reduction from BaseDMG.-->
 													<!--Ex: If you were wearing this armor with an ArmorVal of 5, an attack with 100 BaseDMG would only deal 95 damage.-->
 													
@@ -33,13 +33,13 @@
 													<!--These are "Score Items" they simply add to your score when found, they cannot be equipped and do not affect gameplay in any other way.-->
 	<Item>
 		<Name>Silver Spoon</Name>					<!--This is the name of the weapon, it will be displayed when the item is found.-->
-		<GoldValue>2</GoldValue>					<!--This is the gold value of the armor, this value is added to your score upon finding the item.-->
+		<ScoreValue>2</ScoreValue>					<!--This is the gold value of the armor, this value is added to your score upon finding the item.-->
 		<Description>A spoon made of silver, worth some gold pieces.</Description>
 													<!--This is the armor set's description, it is displayed when the item is found. This is merely flavor text, it has no effect on gameplay.-->
 	</Item>
 	<Armor>
 		<Name>Cloak</Name>
-		<GoldValue>25</GoldValue>
+		<ScoreValue>25</ScoreValue>
 		<ArmorVal>0</ArmorVAl>
 		<Evasion>100</Evasion>
 		<Rarity>3</Rarity>
@@ -47,7 +47,7 @@
 	</Armor>
 	<Armor>
 		<Name>KnightsArmor</Name>
-		<GoldValue>50</GoldValue>
+		<ScoreValue>50</ScoreValue>
 		<ArmorVal>50</ArmorVal>
 		<Evasion>10</Evasion>
 		<Rarity>3</Rarity>
@@ -55,7 +55,7 @@
 	</Armor>
 	<Weapon>
 		<Name>Crossbow</Name>
-		<GoldValue>75</GoldValue>
+		<ScoreValue>75</ScoreValue>
 		<BaseDMG>100</BaseDMG>
 		<APDMG>75</APDMG>
 		<Evasion>25</Evasion>
@@ -64,7 +64,7 @@
 	</Weapon>
 	<Weapon>
 		<Name>staff</Name>
-		<GoldValue>100</GoldValue>
+		<ScoreValue>100</ScoreValue>
 		<BaseDMG>75</BaseDMG>
 		<APDMG>25</APDMG>
 		<Evasion>25</Evasion>
@@ -73,7 +73,7 @@
 	</Weapon>
 	<Weapon>
 		<Name>Longsword</Name>
-		<GoldValue>25</GoldValue>
+		<ScoreValue>25</ScoreValue>
 		<BaseDMG>25</BaseDMG>
 		<APDMG>25</APDMG>
 		<Evasion>0</Evasion>
@@ -82,21 +82,21 @@
 	</Weapon>
 	<Armor>
 		<Name>Cape</Name>
-		<GoldValue>5</GoldValue>
+		<ScoreValue>5</ScoreValue>
 		<ArmorValue>0</ArmorVal>
 		<Evasion>0</Evasion>
 		<Rarity>1</Rarity>
 		<Description>Just encough to keep warm on a cold night.</Description>
 	<Armor>
 		<Name>ChainMail</Name>
-		<GoldValue>25</GoldValue>
+		<ScoreValue>25</ScoreValue>
 		<ArmorVal>50</ArmorVal>
 		<Evasion>10</Evasion>
 		<Rarity>2</Rarity>
 		<Description> This armor is heavy and makes it difficult to escape your enemy.</Description>
 	<Weapon>
 		<Name>Saber</Name>
-		<GoldValue>50</GoldValue>
+		<ScoreValue>50</ScoreValue>
 		<BaseDMG>70</BaseDMG>
 		<APDMG>40</APDMG>
 		<Evasion>10</Evasion>
@@ -104,7 +104,7 @@
 		<Description>A rare find this weapon does maximum damage</Description>
 	<Weapon>
 		<Name>Mace</Name>
-		<GoldValue>75</GoldValue>
+		<ScoreValue>75</ScoreValue>
 		<BaseDMG>75</BaseDMG>
 		<APDMG>50</APDMG>
 		<Evasion>25</Evasion>
@@ -113,7 +113,7 @@
 	</Weapon>
 	<Armor>
 		<Name>LeatherArmor</Name>
-		<GoldValue>20</GoldValue>
+		<ScoreValue>20</ScoreValue>
 		<ArmorVal>25</ArmorVal>
 		<Evasion>20</Evasion>
 		<Rarity>1</Rarity>
@@ -121,7 +121,7 @@
 	</Armor>
 	<Item>
 		<Name>Health</Name>
-		<GoldValue>10<GoldValue>
+		<ScoreValue>10<ScoreValue>
 		<Description>Heals you after being wounded by the enemy<Description>
 	</Item>
 </Items>

@@ -1,7 +1,7 @@
 <Items>
 	<Weapon>
 		<Name>Thief's Dagger</Name>
-		<GoldValue>5</GoldValue>
+		<ScoreValue>5</ScoreValue>
 		<BaseDMG>0</BaseDMG>
 		<APDMG>80</APDMG>
 		<Evasion>20</Evasion>
@@ -10,7 +10,7 @@
 	</Weapon>
 	<Weapon>
 		<Name>Dagger</Name>
-		<GoldValue>5</GoldValue>
+		<ScoreValue>5</ScoreValue>
 		<BaseDMG>40</BaseDMG>
 		<APDMG>40</APDMG>
 		<Evasion>20</Evasion>
@@ -19,7 +19,7 @@
 	</Weapon>
 	<Weapon>
 		<Name>Shortsword</Name>
-		<GoldValue>5</GoldValue>
+		<ScoreValue>5</ScoreValue>
 		<BaseDMG>50</BaseDMG>
 		<APDMG>20</APDMG>
 		<Evasion>0</Evasion>
@@ -28,7 +28,7 @@
 	</Weapon>
 	<Weapon>
 		<Name>Longsword</Name>
-		<GoldValue>5</GoldValue>
+		<ScoreValue>5</ScoreValue>
 		<BaseDMG>60</BaseDMG>
 		<APDMG>20</APDMG>
 		<Evasion>0</Evasion>
@@ -37,7 +37,7 @@
 	</Weapon>
 	<Weapon>
 		<Name>Claymore</Name>
-		<GoldValue>18</GoldValue>
+		<ScoreValue>18</ScoreValue>
 		<BaseDMG>100</BaseDMG>
 		<APDMG>20</APDMG>
 		<Evasion>0</Evasion>
@@ -46,7 +46,7 @@
 	</Weapon>
 	<Weapon>
 		<Name>Enchanted Claymore</Name>
-		<GoldValue>18</GoldValue>
+		<ScoreValue>18</ScoreValue>
 		<BaseDMG>100</BaseDMG>
 		<APDMG>40</APDMG>
 		<Evasion>0</Evasion>
@@ -55,7 +55,7 @@
 	</Weapon>
 	<Weapon>
 		<Name>Shortbow</Name>
-		<GoldValue>10</GoldValue>
+		<ScoreValue>10</ScoreValue>
 		<BaseDMG>00</BaseDMG>
 		<APDMG>60</APDMG>
 		<Evasion>35</Evasion>
@@ -64,7 +64,7 @@
 	</Weapon>
 	<Weapon>
 		<Name>Longbow</Name>
-		<GoldValue>15</GoldValue>
+		<ScoreValue>15</ScoreValue>
 		<BaseDMG>00</BaseDMG>
 		<APDMG>80</APDMG>
 		<Evasion>25</Evasion>
@@ -73,7 +73,7 @@
 	</Weapon>
 	<Weapon>
 		<Name>Great Club</Name>
-		<GoldValue>20</GoldValue>
+		<ScoreValue>20</ScoreValue>
 		<BaseDMG>80</BaseDMG>
 		<APDMG>80</APDMG>
 		<Evasion>-10</Evasion>
@@ -82,7 +82,7 @@
 	</Weapon>
 	<Weapon>
 		<Name>Large Club</Name>
-		<GoldValue>25</GoldValue>
+		<ScoreValue>25</ScoreValue>
 		<BaseDMG>80</BaseDMG>
 		<APDMG>60</APDMG>
 		<Evasion>-5</Evasion>
@@ -91,7 +91,7 @@
 	</Weapon>
 	<Armor>
 		<Name>Enchanted Robe</Name>
-		<GoldValue>3</GoldValue>
+		<ScoreValue>3</ScoreValue>
 		<ArmorVal>5</ArmorVal>
 		<Evasion>20</Evasion>
 		<Rarity>3</Rarity>
@@ -99,7 +99,7 @@
 	</Armor>
 	<Armor>
 		<Name>Master's Garb</Name>
-		<GoldValue>3</GoldValue>
+		<ScoreValue>3</ScoreValue>
 		<ArmorVal>0</ArmorVal>
 		<Evasion>20</Evasion>
 		<Rarity>2</Rarity>
@@ -107,7 +107,7 @@
 	</Armor>
 	<Armor>
 		<Name>Leather Armor</Name>
-		<GoldValue>3</GoldValue>
+		<ScoreValue>3</ScoreValue>
 		<ArmorVal>2</ArmorVal>
 		<Evasion>10</Evasion>
 		<Rarity>1</Rarity>
@@ -115,7 +115,7 @@
 	</Armor>
 	<Armor>
 		<Name>Hard Leather Armor</Name>
-		<GoldValue>5</GoldValue>
+		<ScoreValue>5</ScoreValue>
 		<ArmorVal>5</ArmorVal>
 		<Evasion>5</Evasion>
 		<Rarity>1</Rarity>
@@ -123,7 +123,7 @@
 	</Armor>
 	<Armor>
 		<Name>Chainmail Armor</Name>
-		<GoldValue>10</GoldValue>
+		<ScoreValue>10</ScoreValue>
 		<ArmorVal>10</ArmorVal>
 		<Evasion>0</Evasion>
 		<Rarity>2</Rarity>
@@ -131,7 +131,7 @@
 	</Armor>
 	<Armor>
 		<Name>Silver Knight Armor</Name>
-		<GoldValue>10</GoldValue>
+		<ScoreValue>10</ScoreValue>
 		<ArmorVal>15</ArmorVal>
 		<Evasion>-10</Evasion>
 		<Rarity>2</Rarity>
@@ -139,7 +139,7 @@
 	</Armor>
 	<Armor>
 		<Name>Giant Armor</Name>
-		<GoldValue>15</GoldValue>
+		<ScoreValue>15</ScoreValue>
 		<ArmorVal>25</ArmorVal>
 		<Evasion>-20</Evasion>
 		<Rarity>2</Rarity>
@@ -147,7 +147,7 @@
 	</Armor>
 	<Armor>
 		<Name>Havel's Armor</Name>
-		<GoldValue>15</GoldValue>
+		<ScoreValue>15</ScoreValue>
 		<ArmorVal>50</ArmorVal>
 		<Evasion>-50</Evasion>
 		<Rarity>3</Rarity>
@@ -155,22 +155,22 @@
 	</Armor>
 	<Item>
 		<Name>Silver Spoon</Name>
-		<GoldValue>2</GoldValue>
+		<ScoreValue>2</ScoreValue>
 		<Description>A spoon made of silver, worth some gold pieces.</Description>
 	</Item>
 	<Item>
 		<Name>Silver Goblet</Name>
-		<GoldValue>3</GoldValue>
+		<ScoreValue>3</ScoreValue>
 		<Description>A goblet made of silver, worth some gold pieces.</Description>
 	</Item>
 	<Item>
 		<Name>Gold Bracelet</Name>
-		<GoldValue>8</GoldValue>
+		<ScoreValue>8</ScoreValue>
 		<Description>A bracelet made of gold, worth some gold pieces.</Description>
 	</Item>
 	<Item>
 		<Name>Gold Goblet</Name>
-		<GoldValue>5</GoldValue>
+		<ScoreValue>5</ScoreValue>
 		<Description>A goblet made of gold, worth some gold pieces.</Description>
 	</Item>
 </Items>

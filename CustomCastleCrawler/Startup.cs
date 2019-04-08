@@ -12,11 +12,15 @@ namespace CustomCastleCrawler
     public partial class frmStartup : Form
     {
         //Initialize MainGame class 
-        public MainGame MainGame = new MainGame();
+        public MainGame MainGame;
 
         public frmStartup()
         {
             InitializeComponent();
+            MainGame = new MainGame();
+
+            //Set the form's text on the title bar to the game's name.
+            this.Text = MainGame.GameConfigurations.GameName;
         }
 
         private void btnNew_Click(object sender, EventArgs e)

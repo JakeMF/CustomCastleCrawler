@@ -19,7 +19,10 @@ namespace CustomCastleCrawler
             //First initialize the game object, then the form.
             MainGame = mainGame;
             InitializeComponent();
-            
+
+            //Set the form's text on the title bar to the game's name.
+            this.Text = MainGame.GameConfigurations.GameName;
+
             //Populate the textbox with the introduction message.
             popTextbox(introMessage);
 
@@ -63,25 +66,53 @@ namespace CustomCastleCrawler
         }
 
         #endregion
-        
+
         #region Movement Buttons 
-        private void btnNorth_Click(object sender, EventArgs e)
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            //Determine which key the user pressed
+            switch (keyData)
+            {
+                //When pressing the arrow keys, go to the cooresponding direction.
+                case Keys.Up:
+                    North();
+                    return true;
+
+                case Keys.Down:
+                    South();
+                    return true;
+
+                case Keys.Right:
+                    East();
+                    return true;
+
+                case Keys.Left:
+                    West();
+                    return true;
+            }
+            return false;
+        }
+
+        private void North()
         {
             //Populate the textbox with the results from moving North.
             popTextbox(MainGame.EvaluateInput("north"));
-            
+
             //Keep track of the number of turns the player has taken.
             MainGame.TurnCount++;
         }
 
-        private void btnSouth_Click(object sender, EventArgs e)
+        private void South()
         {
             //Populate the textbox with the results from moving South.
             popTextbox(MainGame.EvaluateInput("south"));
+
+            //Keep track of the number of turns the player has taken.
             MainGame.TurnCount++;
         }
 
-        private void btnEast_Click(object sender, EventArgs e)
+        private void East()
         {
             //Populate the textbox with the results from moving East.
             popTextbox(MainGame.EvaluateInput("east"));
@@ -89,14 +120,38 @@ namespace CustomCastleCrawler
             //Keep track of the number of turns the player has taken.
             MainGame.TurnCount++;
         }
-
-        private void btnWest_Click(object sender, EventArgs e)
+        
+        private void West()
         {
             //Populate the textbox with the results from moving West.
             popTextbox(MainGame.EvaluateInput("west"));
 
             //Keep track of the number of turns the player has taken.
             MainGame.TurnCount++;
+        }
+
+        private void btnNorth_Click(object sender, EventArgs e)
+        {
+            //Use function to go North
+            North();
+        }
+
+        private void btnSouth_Click(object sender, EventArgs e)
+        {
+            //Use function to go South
+            South();
+        }
+
+        private void btnEast_Click(object sender, EventArgs e)
+        {
+            //Use function to go East
+            East();
+        }
+
+        private void btnWest_Click(object sender, EventArgs e)
+        {
+            //Use function to go West
+            West();
         }
 
         #endregion

@@ -17,6 +17,9 @@ namespace CustomCastleCrawler
             this.MainGame = MainGame;
 
             InitializeComponent();
+            
+            //Set the form's text on the title bar to the game's name.
+            this.Text = MainGame.GameConfigurations.GameName;
 
             //Ensure the textbox is scrolled down to the most recent message.
             txtCombatLog.SelectionAlignment = HorizontalAlignment.Center;

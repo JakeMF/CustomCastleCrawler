@@ -655,7 +655,7 @@ namespace CustomCastleCrawler
         public string TempMiscData;
 
         //Load map size
-        private GameData GameConfigurations = new GameData();
+        public GameData GameConfigurations;
         //multi_array of MapTiles for the map
         private MapTile[,] Map;
 
@@ -672,8 +672,9 @@ namespace CustomCastleCrawler
         //Default Constructor
         public MainGame()
         {
-            //Set Default Values
-
+            //Load Game Settings
+            GameConfigurations = new GameData();
+            
             //Load map size
             Map = new MapTile[GameConfigurations.XMax, GameConfigurations.YMax];
 
@@ -797,7 +798,7 @@ namespace CustomCastleCrawler
                     select new Weapon
                     {
                         Name = (string)elem.Element("Name"),
-                        Value = (int)elem.Element("GoldValue"),
+                        Value = (int)elem.Element("ScoreValue"),
                         BDamage = (int)elem.Element("BaseDMG"),
                         APDamage = (int)elem.Element("APDMG"),
                         Evasion = (int)elem.Element("Evasion"),
@@ -813,7 +814,7 @@ namespace CustomCastleCrawler
                     select new Armor
                     {
                         Name = (string)elem.Element("Name"),
-                        Value = (int)elem.Element("GoldValue"),
+                        Value = (int)elem.Element("ScoreValue"),
                         ArmorVal = (int)elem.Element("ArmorVal"),
                         Evasion = (int)elem.Element("Evasion"),
                         Rarity = (int)elem.Element("Rarity"),
@@ -828,7 +829,7 @@ namespace CustomCastleCrawler
                     select new Item
                     {
                         Name = (string)elem.Element("Name"),
-                        Value = (int)elem.Element("GoldValue"),
+                        Value = (int)elem.Element("ScoreValue"),
                         Description = (string)elem.Element("Description")
                     }).ToList();
             Items = items;
@@ -1075,7 +1076,7 @@ namespace CustomCastleCrawler
                     if(Coordinates.North())
                     {
                         //Moved successfully
-                        returnString.AppendLine(genMessage());
+                        returnString.AppendLine(GenMessage());
                     }
                     else
                     {
@@ -1096,7 +1097,7 @@ namespace CustomCastleCrawler
                     if(Coordinates.South())
                     {
                         //Moved successfully
-                        returnString.AppendLine(genMessage());
+                        returnString.AppendLine(GenMessage());
                     }
                     else
                     {
@@ -1117,7 +1118,7 @@ namespace CustomCastleCrawler
                     if(Coordinates.East())
                     {
                         //Moved successfully
-                        returnString.AppendLine(genMessage());
+                        returnString.AppendLine(GenMessage());
                     }
                     else
                     {
@@ -1138,7 +1139,7 @@ namespace CustomCastleCrawler
                     if(Coordinates.West())
                     {
                         //Moved successfully
-                        returnString.AppendLine(genMessage());
+                        returnString.AppendLine(GenMessage());
                     }
                     else
                     {
@@ -1161,7 +1162,7 @@ namespace CustomCastleCrawler
         }
 
         //Function to generate the message output to the console.
-        private string genMessage()
+        private string GenMessage()
         {
             //get the current map tile from the map container
             MapTile currentTile = Map[Coordinates.X, Coordinates.Y];
@@ -1550,7 +1551,10 @@ namespace CustomCastleCrawler
         //Function to heal the player and to return the results of the heal.
         public string healPlayer()
         {
-            return Player.GetHealthAndStamina() + "|" + CurrentEnemy.GetHealth() + "|" + Player.DrinkEstus();
+            //Get text output from heal attempt.
+            var healText = Player.DrinkEstus();
+
+            return Player.GetHealthAndStamina() + "|" + CurrentEnemy.GetHealth() + "|" + healText;
         }
 
         //Function to attempt escaping from combat and return the results.
