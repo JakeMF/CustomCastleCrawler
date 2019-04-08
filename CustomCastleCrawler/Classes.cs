@@ -1566,7 +1566,7 @@ namespace CustomCastleCrawler
             decimal playerEvasion = Player.GetEvasion();
 
             //Player's evasion factors into escape chance on a factor of 0.5 with a base 50% chance to escape. 
-            //If palyer has negative evasion (meaning they never evade attacks), this will lower their overall escape change.
+            //If player has negative evasion (meaning they never evade attacks), this will lower their overall escape change.
             //If player has 50 evasion (meaning they evade half of all attacks), they will have a 75% chance to evade.
             //If player has -50 evasion, they will have a 25% chance to evade.
             var escapeChance = 50 - Math.Ceiling(playerEvasion / 2);
