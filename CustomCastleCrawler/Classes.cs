@@ -1187,7 +1187,7 @@ namespace CustomCastleCrawler
                 {
                     //Check for enemy encounter first.
                     //If EnemySpawn is greater than a random val 1-100 then an enemy was encountered.
-                    if (currentEvent.EnemySpawn > RandomGen.rollDie(99))
+                    if (currentEvent.EnemySpawn > RandomGen.rollDie(100))
                     {
                         //An Enemy was encountered
                         ActiveEnemy = true;
@@ -1196,15 +1196,15 @@ namespace CustomCastleCrawler
                         var enemyQuery = from enem in Enemies where enem.SpawnZone == currentEvent.EnemySpawnZone select enem;
 
                         //Randomly pick an enemy from that list.
-                        var index = RandomGen.rollDie(enemyQuery.Count() - 2);
+                        var index = RandomGen.rollDie(enemyQuery.Count() - 1);
                         CurrentEnemy = new Enemy(enemyQuery.ElementAt(index));
 
                         returnString.AppendLine(CurrentEnemy.Name + " has attacked you!");
                     }
-                    else if (currentEvent.ItemSpawn > RandomGen.rollDie(99))
+                    else if (currentEvent.ItemSpawn > RandomGen.rollDie(100))
                     {
                         //An item was found, determine what type of item.
-                        var itemGenIndex = RandomGen.rollDie(99);
+                        var itemGenIndex = RandomGen.rollDie(100);
                         if (itemGenIndex <= currentEvent.WeaponChance)
                         {
                             //Index was between 0 and weapon max, a weapon was found.
@@ -1274,18 +1274,18 @@ namespace CustomCastleCrawler
                 case 3:
                     //a common weapon was found
                     weapons = from wep in Weapons where wep.Rarity == 1 select wep;
-                    index = RandomGen.rollDie(weapons.Count() - 1);
+                    index = RandomGen.rollDie(weapons.Count());
                     return Weapons[index - 1];
                 case 4:
                 case 5:
                     //An uncommon weapon was found
                     weapons = from wep in Weapons where wep.Rarity == 2 select wep;
-                    index = RandomGen.rollDie(weapons.Count() - 1);
+                    index = RandomGen.rollDie(weapons.Count());
                     return Weapons[index - 1];
                 case 6:
                     //A rare weapon was found.
                     weapons = from wep in Weapons where wep.Rarity == 3 select wep;
-                    index = RandomGen.rollDie(weapons.Count() - 1);
+                    index = RandomGen.rollDie(weapons.Count());
                     return Weapons[index - 1];
                 default:
                     //Should never reach this point...
@@ -1309,18 +1309,18 @@ namespace CustomCastleCrawler
                 case 3:
                     //Common armor was found
                     armors = from arm in Armors where arm.Rarity == 1 select arm;
-                    index = RandomGen.rollDie(armors.Count() - 1);
+                    index = RandomGen.rollDie(armors.Count());
                     return Armors[index - 1];
                 case 4:
                 case 5:
                     //Uncommon armor was found
                     armors = from arm in Armors where arm.Rarity == 2 select arm;
-                    index = RandomGen.rollDie(armors.Count() - 1);
+                    index = RandomGen.rollDie(armors.Count());
                     return Armors[index - 1];
                 case 6:
                     //Rare armor was found.
                     armors = from arm in Armors where arm.Rarity == 3 select arm;
-                    index = RandomGen.rollDie(armors.Count() - 1);
+                    index = RandomGen.rollDie(armors.Count());
                     return Armors[index - 1];
                 default:
                     //Should never reach this point...
@@ -1331,7 +1331,7 @@ namespace CustomCastleCrawler
         private string GetNewScoreItem()
         {
             //Get random value to determine what item was found
-            var index = RandomGen.rollDie(Items.Count() - 2);
+            var index = RandomGen.rollDie(Items.Count() - 1);
 
             Item item = Items.ElementAt(index);
             //Add item value to the player's score
@@ -1403,7 +1403,7 @@ namespace CustomCastleCrawler
             enemyDamageTaken += playerAPDamage;
 
 
-            if (playerEvasion > RandomGen.rollDie(99))
+            if (playerEvasion > RandomGen.rollDie(100))
             {
                 //The player dodged the attack
                 returnString.AppendLine("You dodged the " + CurrentEnemy.Name + "'s attack!");
@@ -1423,7 +1423,7 @@ namespace CustomCastleCrawler
             //Do not perform any enemy dodge checks or damaging if the player was blocking.
             if (!playerBlocking)
             {
-                if (enemyDodgeChance > RandomGen.rollDie(99))
+                if (enemyDodgeChance > RandomGen.rollDie(100))
                 {
                     returnString.AppendLine("The " + CurrentEnemy.Name + " has dodged your attack!");
                 }
@@ -1570,7 +1570,7 @@ namespace CustomCastleCrawler
             //If player has -50 evasion, they will have a 25% chance to evade.
             var escapeChance = 50 - Math.Ceiling(playerEvasion / 2);
 
-            if (playerEvasion > RandomGen.rollDie(99))
+            if (playerEvasion > RandomGen.rollDie(100))
             {
                 //The player dodged the attack
                 returnString.AppendLine("You escaped the enemy!");
