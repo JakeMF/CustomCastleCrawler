@@ -101,7 +101,8 @@
 		<ArmorChance>25</ArmorChance>
 		<ScoreItemChance>80</ScoreItemChance>
 		<EnemySpawnZone>2</EnemySpawnZone>
-	</Event><Event>
+	</Event>
+	<Event>
 		<EventID>7</EventID>
 		<RestLocation>1</RestLocation>
 		<EnemySpawn>20</EnemySpawn>

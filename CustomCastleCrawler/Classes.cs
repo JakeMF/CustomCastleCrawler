@@ -1196,7 +1196,7 @@ namespace CustomCastleCrawler
                         var enemyQuery = from enem in Enemies where enem.SpawnZone == currentEvent.EnemySpawnZone select enem;
 
                         //Randomly pick an enemy from that list.
-                        var index = RandomGen.rollDie(enemyQuery.Count() - 1);
+                        var index = RandomGen.rollDie(enemyQuery.Count()) - 1;
                         CurrentEnemy = new Enemy(enemyQuery.ElementAt(index));
 
                         returnString.AppendLine(CurrentEnemy.Name + " has attacked you!");

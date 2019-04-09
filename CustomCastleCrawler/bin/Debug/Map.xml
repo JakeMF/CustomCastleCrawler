@@ -338,7 +338,7 @@
 		<XCoord>2</XCoord>
 		<YCoord>7</YCoord>
 		<Message>You&apos;re in the enchanted forest</Message>
-		<EventID>6</EventID>
+		<EventID>7</EventID>
 		<SpawnZone>2</SpawnZone>
 	</Tile>
 	<Tile>

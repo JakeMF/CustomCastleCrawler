@@ -5,7 +5,7 @@
 		<BaseMaxHeals>5</BaseMaxHeals>		
 	</StartingPosition>
 	<MapSize>
-		<XMax>13</XMax>
+		<XMax>14</XMax>
 		<YMax>20</YMax>
 	</MapSize>
 	<FlavorSettings>
