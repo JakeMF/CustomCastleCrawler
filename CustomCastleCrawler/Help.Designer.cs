@@ -56,7 +56,7 @@
             // 
             this.lblMovement.AutoSize = true;
             this.lblMovement.Font = new System.Drawing.Font("Britannic Bold", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMovement.Location = new System.Drawing.Point(84, 327);
+            this.lblMovement.Location = new System.Drawing.Point(84, 314);
             this.lblMovement.Name = "lblMovement";
             this.lblMovement.Size = new System.Drawing.Size(93, 21);
             this.lblMovement.TabIndex = 0;
@@ -66,50 +66,56 @@
             // 
             this.lblM1.AutoSize = true;
             this.lblM1.Font = new System.Drawing.Font("Britannic Bold", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblM1.Location = new System.Drawing.Point(11, 545);
+            this.lblM1.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+            this.lblM1.Location = new System.Drawing.Point(12, 533);
             this.lblM1.Name = "lblM1";
-            this.lblM1.Size = new System.Drawing.Size(295, 16);
+            this.lblM1.Size = new System.Drawing.Size(259, 32);
             this.lblM1.TabIndex = 1;
-            this.lblM1.Text = "Move around the map using the arrow keys. ";
+            this.lblM1.Text = "You can also move around the map by \r\nusing your keyboard\'s arrow keys.";
+            this.lblM1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // btnWest
             // 
-            this.btnWest.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnWest.BackgroundImage")));
             this.btnWest.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnWest.Font = new System.Drawing.Font("Britannic Bold", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnWest.Location = new System.Drawing.Point(3, 51);
             this.btnWest.Name = "btnWest";
             this.btnWest.Size = new System.Drawing.Size(50, 50);
             this.btnWest.TabIndex = 21;
+            this.btnWest.Text = "W";
             this.btnWest.UseVisualStyleBackColor = true;
             // 
             // btnSouth
             // 
-            this.btnSouth.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnSouth.BackgroundImage")));
             this.btnSouth.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnSouth.Font = new System.Drawing.Font("Britannic Bold", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSouth.Location = new System.Drawing.Point(53, 101);
             this.btnSouth.Name = "btnSouth";
             this.btnSouth.Size = new System.Drawing.Size(50, 50);
             this.btnSouth.TabIndex = 20;
+            this.btnSouth.Text = "S";
             this.btnSouth.UseVisualStyleBackColor = true;
             // 
             // btnEast
             // 
-            this.btnEast.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnEast.BackgroundImage")));
             this.btnEast.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnEast.Font = new System.Drawing.Font("Britannic Bold", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnEast.Location = new System.Drawing.Point(103, 51);
             this.btnEast.Name = "btnEast";
             this.btnEast.Size = new System.Drawing.Size(50, 50);
             this.btnEast.TabIndex = 19;
+            this.btnEast.Text = "E";
             this.btnEast.UseVisualStyleBackColor = true;
             // 
             // btnNorth
             // 
-            this.btnNorth.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnNorth.BackgroundImage")));
             this.btnNorth.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnNorth.Font = new System.Drawing.Font("Britannic Bold", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnNorth.Location = new System.Drawing.Point(53, 1);
             this.btnNorth.Name = "btnNorth";
             this.btnNorth.Size = new System.Drawing.Size(50, 50);
             this.btnNorth.TabIndex = 18;
+            this.btnNorth.Text = "N";
             this.btnNorth.UseVisualStyleBackColor = true;
             // 
             // panel1
@@ -118,7 +124,7 @@
             this.panel1.Controls.Add(this.btnNorth);
             this.panel1.Controls.Add(this.btnSouth);
             this.panel1.Controls.Add(this.btnEast);
-            this.panel1.Location = new System.Drawing.Point(54, 366);
+            this.panel1.Location = new System.Drawing.Point(54, 353);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(157, 152);
             this.panel1.TabIndex = 22;
@@ -127,7 +133,7 @@
             // 
             this.lblNorth.AutoSize = true;
             this.lblNorth.Font = new System.Drawing.Font("Britannic Bold", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNorth.Location = new System.Drawing.Point(112, 349);
+            this.lblNorth.Location = new System.Drawing.Point(112, 336);
             this.lblNorth.Name = "lblNorth";
             this.lblNorth.Size = new System.Drawing.Size(44, 16);
             this.lblNorth.TabIndex = 23;
@@ -137,7 +143,7 @@
             // 
             this.lblSouth.AutoSize = true;
             this.lblSouth.Font = new System.Drawing.Font("Britannic Bold", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSouth.Location = new System.Drawing.Point(112, 521);
+            this.lblSouth.Location = new System.Drawing.Point(112, 508);
             this.lblSouth.Name = "lblSouth";
             this.lblSouth.Size = new System.Drawing.Size(46, 16);
             this.lblSouth.TabIndex = 24;
@@ -147,7 +153,7 @@
             // 
             this.lblEast.AutoSize = true;
             this.lblEast.Font = new System.Drawing.Font("Britannic Bold", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblEast.Location = new System.Drawing.Point(217, 435);
+            this.lblEast.Location = new System.Drawing.Point(217, 422);
             this.lblEast.Name = "lblEast";
             this.lblEast.Size = new System.Drawing.Size(36, 16);
             this.lblEast.TabIndex = 25;
@@ -157,7 +163,7 @@
             // 
             this.lblWest.AutoSize = true;
             this.lblWest.Font = new System.Drawing.Font("Britannic Bold", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblWest.Location = new System.Drawing.Point(15, 435);
+            this.lblWest.Location = new System.Drawing.Point(15, 422);
             this.lblWest.Name = "lblWest";
             this.lblWest.Size = new System.Drawing.Size(39, 16);
             this.lblWest.TabIndex = 26;

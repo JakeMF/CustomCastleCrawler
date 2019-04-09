@@ -47,61 +47,7 @@
 		<EnemySpawnZone>1</EnemySpawnZone>			<!--This is the ID that corresponds to the "SpawnZone" field for enemies.-->
 													<!--When the enemy's SpawnZone matches the EnemySpawnZone the enemy is in the pool of enemies to be generated during that event.-->
 	</Event>
-	<Event>
-		<EventID>2</EventID>
-		<RestLocation>0</RestLocation>
-		<EnemySpawn>50</EnemySpawn>
-		<ItemSpawn>25</ItemSpawn>
-		<NothingSpawn>25</NothingSpawn>
-		<WeaponChance>25</WeaponChance>
-		<ArmorChance>40</ArmorChance>
-		<ScoreItemChance>50</ScoreItemChance>
-		<EnemySpawnZone>2</EnemySpawnZone>
-	</Event>
-	<Event>
-		<EventID>3</EventID>
-		<RestLocation>0</RestLocation>
-		<EnemySpawn>25</EnemySpawn>
-		<ItemSpawn>50</ItemSpawn>
-		<NothingSpawn>25</NothingSpawn>
-		<WeaponChance>25</WeaponChance>
-		<ArmorChance>40</ArmorChance>
-		<ScoreItemChance>50</ScoreItemChance>
-		<EnemySpawnZone>1</EnemySpawnZone>
-	</Event>
-	<Event>
-		<EventID>4</EventID>
-		<RestLocation>0</RestLocation>
-		<EnemySpawn>30</EnemySpawn>
-		<ItemSpawn>50</ItemSpawn>
-		<NothingSpawn>20</NothingSpawn>
-		<WeaponChance>25</WeaponChance>
-		<ArmorChance>40</ArmorChance>
-		<ScoreItemChance>80</ScoreItemChance>
-		<EnemySpawnZone>3</EnemySpawnZone>
-	</Event>
-	<Event>
-		<EventID>5</EventID>
-		<RestLocation>0</RestLocation>
-		<EnemySpawn>50</EnemySpawn>
-		<ItemSpawn>25</ItemSpawn>
-		<NothingSpawn>25</NothingSpawn>
-		<WeaponChance>50</WeaponChance>
-		<ArmorChance>50</ArmorChance>
-		<ScoreItemChance>50</ScoreItemChance>
-		<EnemySpawnZone>4<EnemySpawnZone>
-	</Event>
-	<Event>
-		<EventID>6</EventID>
-		<RestLocation>0</RestLocation>
-		<EnemySpawn>20</EnemySpawn>
-		<ItemSpawn>60</ItemSpawn>
-		<NothingSpawn>20</NothingSpawn>
-		<WeaponChance>50</WeaponChance>
-		<ArmorChance>25</ArmorChance>
-		<ScoreItemChance>80</ScoreItemChance>
-		<EnemySpawnZone>2</EnemySpawnZone>
-	</Event>
+
 	<!--Define your events above.-->
 </Events>
 

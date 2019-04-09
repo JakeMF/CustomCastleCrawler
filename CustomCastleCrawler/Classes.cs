@@ -97,6 +97,10 @@ namespace CustomCastleCrawler
         public int StartingX { get; set; }
         public int StartingY { get; set; }
         public int MaxEstus { get; set; }
+        public int PlayerMaxHealth { get; set; }
+        public int PlayerMaxStamina { get; set; }
+        public bool Debug { get; set; }
+
         public List<StartingClass> Classes = new List<StartingClass>();
         
         public GameData()
@@ -122,8 +126,16 @@ namespace CustomCastleCrawler
             {
                 StartingX = Convert.ToInt16(elem.Element("DefaultX").Value);
                 StartingY = Convert.ToInt16(elem.Element("DefaultY").Value);
-                MaxEstus = Convert.ToInt16(elem.Element("BaseMaxHeals").Value);
             }
+
+            foreach (var elem in xdoc.Root.Elements("BalanceSettings"))
+            {
+                MaxEstus = Convert.ToInt16(elem.Element("BaseMaxHeals").Value);
+                Debug = Convert.ToBoolean(elem.Element("Debug").Value);
+                PlayerMaxHealth = Convert.ToInt16(elem.Element("PlayerMaxHealth").Value);
+                PlayerMaxStamina = Convert.ToInt16(elem.Element("PlayerMaxStamina").Value);
+            }
+            
             //Basic Settings
             foreach (var elem in xdoc.Root.Elements("FlavorSettings"))
             {
@@ -416,37 +428,43 @@ namespace CustomCastleCrawler
         public int Estus;
 
         //Load game data to grab max estus.
-        private GameData gameData = new GameData();
+        private GameData GameData;
 
         //Default constructor
         public Player()
         {
+            //Load game settings
+            GameData = new GameData();
+
             Name = "Nameless Hollow";
-            MaxHealth = 1200;
+            MaxHealth = GameData.PlayerMaxHealth;
             Health = MaxHealth;
             MaxStamina = 100;
             Stamina = MaxStamina;
             Weapon = new Weapon();
             Armor = new Armor();
             Score = 0;
-            MaxEstus = gameData.MaxEstus;
-            Estus = gameData.MaxEstus;
+            MaxEstus = GameData.MaxEstus;
+            Estus = MaxEstus;
         }
 
         //Constructor that will be used for new players
         public Player(string name, Weapon startingWeapon, Armor startingArmor)
         {
+            //Load game settings
+            GameData = new GameData();
+
             Name = name;
-            MaxHealth = 1200;
+            MaxHealth = GameData.PlayerMaxHealth;
             Health = MaxHealth;
-            MaxStamina = 100;
+            MaxStamina = GameData.PlayerMaxStamina;
             Stamina = MaxStamina;
 
             Weapon = startingWeapon;
             Armor = startingArmor;
             Score = 0;
 
-            MaxEstus = 5;
+            MaxEstus = GameData.MaxEstus;
             Estus = MaxEstus;
         }
 
@@ -738,50 +756,72 @@ namespace CustomCastleCrawler
         //Function load the game's map from XML and store it in the array of MapTile objects
         private void PopulateMap()
         {
-            //Load XML document containing items.
-            XDocument xdoc = XDocument.Load("Map.xml");
-
-            //Populate list with tile objects to store in array later
-            List<MapTile> tiles =
-                (
-                    from elem in xdoc.Root.Elements("Tile")
-                    select new MapTile
-                    {
-                        X = (int)elem.Element("XCoord"),
-                        Y = (int)elem.Element("YCoord"),
-                        Message = (string)elem.Element("Message"),
-                        EventID = (int)elem.Element("EventID")
-                    }).ToList();
-            foreach(MapTile currentTile in tiles)
+            try
             {
-                Map[currentTile.X, currentTile.Y] = currentTile;
+                //Load XML document containing items.
+                XDocument xdoc = XDocument.Load("Map.xml");
+
+                //Populate list with tile objects to store in array later
+                List<MapTile> tiles =
+                    (
+                        from elem in xdoc.Root.Elements("Tile")
+                        select new MapTile
+                        {
+                            X = (int)elem.Element("XCoord"),
+                            Y = (int)elem.Element("YCoord"),
+                            Message = (string)elem.Element("Message"),
+                            EventID = (int)elem.Element("EventID")
+                        }).ToList();
+
+                    foreach (MapTile currentTile in tiles)
+                    {
+                        Map[currentTile.X, currentTile.Y] = currentTile;
+                    }
+            }
+            catch (Exception ex)
+            {
+                LogError(ex, "PopulateMap()", true);
+                MessageBox.Show("There was a problem loading your Map, ensure your data is formatted properly.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                //Quit the application because their data was not loaded properly, the game will not work properly.
+                Application.Exit();
             }
         }
 
         //Function to load the game's Events from XML and store it in a list of Event objects.
         private void PopulateEvents()
         {
-            //Load XML document containing items.
-            XDocument xdoc = XDocument.Load("Events.xml");
+            try
+            {
+                //Load XML document containing items.
+                XDocument xdoc = XDocument.Load("Events.xml");
 
-            //Populate list with event objects to store in array later
-            List<Event> events =
-                (
-                    from childElem in xdoc.Root.Elements("Event")
-                    select new Event
-                    {
-                        EventID = (int)childElem.Element("EventID"),
-                        RestLocation = (int)childElem.Element("RestLocation"),
-                        EnemySpawn = (int)childElem.Element("EnemySpawn"),
-                        ItemSpawn = (int)childElem.Element("ItemSpawn"),
-                        NothingSpawn = (int)childElem.Element("NothingSpawn"),
-                        WeaponChance = (int)childElem.Element("WeaponChance"),
-                        ArmorChance = (int)childElem.Element("ArmorChance"),
-                        ScoreItemChance = (int)childElem.Element("ScoreItemChance"),
-                        EnemySpawnZone = (int)childElem.Element("EnemySpawnZone")
-                    }).ToList();
-            Events = events;
+                //Populate list with event objects to store in array later
+                List<Event> events =
+                    (
+                        from childElem in xdoc.Root.Elements("Event")
+                        select new Event
+                        {
+                            EventID = (int)childElem.Element("EventID"),
+                            RestLocation = (int)childElem.Element("RestLocation"),
+                            EnemySpawn = (int)childElem.Element("EnemySpawn"),
+                            ItemSpawn = (int)childElem.Element("ItemSpawn"),
+                            NothingSpawn = (int)childElem.Element("NothingSpawn"),
+                            WeaponChance = (int)childElem.Element("WeaponChance"),
+                            ArmorChance = (int)childElem.Element("ArmorChance"),
+                            ScoreItemChance = (int)childElem.Element("ScoreItemChance"),
+                            EnemySpawnZone = (int)childElem.Element("EnemySpawnZone")
+                        }).ToList();
+                Events = events;
+            }
+            catch (Exception ex)
+            {
+                LogError(ex, "PopulateEvents()", true);
+                MessageBox.Show("There was a problem loading your Events, ensure your data is formatted properly.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
+                //Quit the application because their data was not loaded properly, the game will not work properly.
+                Application.Exit();
+            }
         }
 
         //Function load the game's items from XML and store them in the appropriate lists
@@ -789,40 +829,64 @@ namespace CustomCastleCrawler
         {
             //Load XML document containing items.
             XDocument xdoc = XDocument.Load("Items.xml");
-
+            try
+            { 
             //Populate Weapons
-            List<Weapon> weapons =
-                (
-                    from elem in xdoc.Root.Elements("Weapon")
-                    select new Weapon
-                    {
-                        Name = (string)elem.Element("Name"),
-                        Value = (int)elem.Element("ScoreValue"),
-                        BDamage = (int)elem.Element("BaseDMG"),
-                        APDamage = (int)elem.Element("APDMG"),
-                        Evasion = (int)elem.Element("Evasion"),
-                        Rarity = (int)elem.Element("Rarity"),
-                        Description = (string)elem.Element("Description")
-                    }).ToList();
-            Weapons = weapons;
+                List<Weapon> weapons =
+                    (
+                        from elem in xdoc.Root.Elements("Weapon")
+                        select new Weapon
+                        {
+                            Name = (string)elem.Element("Name"),
+                            Value = (int)elem.Element("ScoreValue"),
+                            BDamage = (int)elem.Element("BaseDMG"),
+                            APDamage = (int)elem.Element("APDMG"),
+                            Evasion = (int)elem.Element("Evasion"),
+                            Rarity = (int)elem.Element("Rarity"),
+                            Description = (string)elem.Element("Description")
+                        }).ToList();
+                Weapons = weapons;
+            }
+            catch (Exception ex)
+            {
+                LogError(ex, "PopulateItems()", true);
+                MessageBox.Show("There was a problem loading your Weapons, ensure your data is formatted properly.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-            //Populate Armor
-            List<Armor> armors =
-                (
-                    from elem in xdoc.Root.Elements("Armor")
-                    select new Armor
-                    {
-                        Name = (string)elem.Element("Name"),
-                        Value = (int)elem.Element("ScoreValue"),
-                        ArmorVal = (int)elem.Element("ArmorVal"),
-                        Evasion = (int)elem.Element("Evasion"),
-                        Rarity = (int)elem.Element("Rarity"),
-                        Description = (string)elem.Element("Description")
-                    }).ToList();
-            Armors = armors;
+                //Quit the application because their data was not loaded properly, the game will not work properly.
+                Application.Exit();
+            }
 
-            //Populate Items
-            List<Item> items =
+            try
+            {
+                //Populate Armor
+                List<Armor> armors =
+                    (
+                        from elem in xdoc.Root.Elements("Armor")
+                        select new Armor
+                        {
+                            Name = (string)elem.Element("Name"),
+                            Value = (int)elem.Element("ScoreValue"),
+                            ArmorVal = (int)elem.Element("ArmorVal"),
+                            Evasion = (int)elem.Element("Evasion"),
+                            Rarity = (int)elem.Element("Rarity"),
+                            Description = (string)elem.Element("Description")
+                        }).ToList();
+                Armors = armors;
+
+            }
+            catch (Exception ex)
+            {
+                LogError(ex, "PopulateItems()", true);
+                MessageBox.Show("There was a problem loading your Armor, ensure your data is formatted properly.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                //Quit the application because their data was not loaded properly, the game will not work properly.
+                Application.Exit();
+            }
+
+            try
+            { 
+                //Populate Items
+                List<Item> items =
                 (
                     from elem in xdoc.Root.Elements("Item")
                     select new Item
@@ -831,33 +895,53 @@ namespace CustomCastleCrawler
                         Value = (int)elem.Element("ScoreValue"),
                         Description = (string)elem.Element("Description")
                     }).ToList();
-            Items = items;
+                Items = items;
+            }
+            catch (Exception ex)
+            {
+                LogError(ex, "PopulateItems()", true);
+                MessageBox.Show("There was a problem loading your Score Items, ensure your data is formatted properly.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                //Quit the application because their data was not loaded properly, the game will not work properly.
+                Application.Exit();
+            }
         }
 
         //Function load the game's enemies from XML and store them in a List of Enemy objects
         private void PopulateEnemies()
         {
-            //Load XML document containing enemies.
-            XDocument xdoc = XDocument.Load("Enemies.xml");
+            try
+            {
+                //Load XML document containing enemies.
+                XDocument xdoc = XDocument.Load("Enemies.xml");
 
-            //Populate Enemies
-            List<Enemy> enemies =
-                (
-                    from elem in xdoc.Root.Elements("Enemy")
-                    select new Enemy
-                    {
-                        Name = (string)elem.Element("Name"),
-                        MaxHealth = (int)elem.Element("Health"),
-                        CurrentHealth = (int)elem.Element("Health"),
-                        Damage = (int)elem.Element("BaseDMG"),
-                        ApDamage = (int)elem.Element("APDMG"),
-                        Defence = (int)elem.Element("Defence"),
-                        Evasion = (int)elem.Element("Evasion"),
-                        Score = (int)elem.Element("Points"),
-                        SpawnZone = (int)elem.Element("SpawnZone")
-                    }).ToList();
-            Enemies = enemies;
-        }
+                //Populate Enemies
+                List<Enemy> enemies =
+                    (
+                        from elem in xdoc.Root.Elements("Enemy")
+                        select new Enemy
+                        {
+                            Name = (string)elem.Element("Name"),
+                            MaxHealth = (int)elem.Element("Health"),
+                            CurrentHealth = (int)elem.Element("Health"),
+                            Damage = (int)elem.Element("BaseDMG"),
+                            ApDamage = (int)elem.Element("APDMG"),
+                            Defence = (int)elem.Element("Defence"),
+                            Evasion = (int)elem.Element("Evasion"),
+                            Score = (int)elem.Element("Points"),
+                            SpawnZone = (int)elem.Element("SpawnZone")
+                        }).ToList();
+                Enemies = enemies;
+            }
+            catch (Exception ex)
+            {
+                LogError(ex, "PopulateEnemies()", true);
+                MessageBox.Show("There was a problem loading your Enemies, ensure your data is formatted properly.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                //Quit the application because their data was not loaded properly, the game will not work properly.
+                Application.Exit();
+            }
+}
 
         //ToDo: TESTING
         //Function that will save a player's progress in a text file.
@@ -887,18 +971,8 @@ namespace CustomCastleCrawler
             }
             //Catch errors for logging
             catch (Exception ex)
-            { 
-                //Ensure log file directory exists.
-                System.IO.Directory.CreateDirectory("LogFiles/");
-                //Log error
-                string logTitle = "Log instance from: " + DateTime.Now.Month + '/' + DateTime.Now.Day + '/' + DateTime.Now.Year;
-                string path = "LogFiles/errorLog.txt";
-                using (StreamWriter sw = File.AppendText(path))
-                {
-                    sw.WriteLine(logTitle + Environment.NewLine + ex.Message + Environment.NewLine + "Stack Trace:" + Environment.NewLine + ex.StackTrace + Environment.NewLine);
-                }
-                //Inform the user they encountered an error.
-                MessageBox.Show("Save could not be Completed, error notes saved to log file.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            {
+                LogError(ex, "SaveProgress()");
             }
 
         }
@@ -907,139 +981,146 @@ namespace CustomCastleCrawler
         //Function that will load a player's save from a text file.
         public string LoadProgress(string name, bool secondPass)
         {
-            //NEEDS TESTING
-            name = name.ToLower();
-            Crypter cryptic = new Crypter(EncryptionKey);
-            string path = "SaveData/" + name + ".txt";
-            if (File.Exists(path))
+            try
             {
-                List<string> saves = new List<string>();
-                string save;
-
-                var reader = new StreamReader(File.OpenRead(path));
-                while (!reader.EndOfStream)
+                //NEEDS TESTING
+                name = name.ToLower();
+                Crypter cryptic = new Crypter(EncryptionKey);
+                string path = "SaveData/" + name + ".txt";
+                if (File.Exists(path))
                 {
-                    save = reader.ReadLine();
-                    saves.Add(cryptic.Decrypt(save));
-                    foreach (string line in saves)
+                    List<string> saves = new List<string>();
+                    string save;
+
+                    var reader = new StreamReader(File.OpenRead(path));
+                    while (!reader.EndOfStream)
                     {
-                        var splat = line.Split(',');
-                        if (splat[0].ToLower() == name.ToLower())
+                        save = reader.ReadLine();
+                        saves.Add(cryptic.Decrypt(save));
+                        foreach (string line in saves)
                         {
-                            if (splat.Count() == 11)
+                            var splat = line.Split(',');
+                            if (splat[0].ToLower() == name.ToLower())
                             {
-                                //name, health, weapon name, armor name, score, x, y
-                                //Integer variables to store player statistics
-                                int mHealth;
-                                int cHealth;
-                                int mStamina;
-                                int cStamina;
-                                int score;
-                                //Integer variables to store coordinates
-                                int y;
-                                int x;
-                                //boolean to determine whether or not there were any missing values.
-                                bool missingVals = false;
-
-                                //convert the string values into integers, if the conversion fails then the save file must have been corrupted.
-                                if (!int.TryParse(splat[1], out mHealth))
+                                if (splat.Count() == 11)
                                 {
-                                    missingVals = true;
-                                }
+                                    //name, health, weapon name, armor name, score, x, y
+                                    //Integer variables to store player statistics
+                                    int mHealth;
+                                    int cHealth;
+                                    int mStamina;
+                                    int cStamina;
+                                    int score;
+                                    //Integer variables to store coordinates
+                                    int y;
+                                    int x;
+                                    //boolean to determine whether or not there were any missing values.
+                                    bool missingVals = false;
 
-                                if (!int.TryParse(splat[2], out cHealth))
+                                    //convert the string values into integers, if the conversion fails then the save file must have been corrupted.
+                                    if (!int.TryParse(splat[1], out mHealth))
+                                    {
+                                        missingVals = true;
+                                    }
+
+                                    if (!int.TryParse(splat[2], out cHealth))
+                                    {
+                                        missingVals = true;
+                                    }
+
+                                    if (!int.TryParse(splat[3], out mStamina))
+                                    {
+                                        missingVals = true;
+                                    }
+
+                                    if (!int.TryParse(splat[4], out cStamina))
+                                    {
+                                        missingVals = true;
+                                    }
+
+                                    string weapon = splat[5];
+                                    string armor = splat[6];
+
+                                    if (!int.TryParse(splat[7], out score))
+                                    {
+                                        missingVals = true;
+                                    }
+
+                                    //Check if user's location was properly loaded, if not inform them that their save has been corrupted, but still let them play with partial load.
+                                    if (!int.TryParse(splat[8], out x))
+                                    {
+                                        missingVals = true;
+                                    }
+                                    if (!int.TryParse(splat[9], out y))
+                                    {
+                                        missingVals = true;
+                                    }
+                                    TempMiscData = splat[10];
+                                    Weapon wep = FindWeapon(weapon);
+                                    Armor arm = FindArmor(armor);
+                                    Player p = new Player(name, mHealth, cHealth, mStamina, cStamina, wep, arm, score);
+
+                                    //Set player attributes built from load data.
+                                    Player = p;
+                                    Coordinates.X = x;
+                                    Coordinates.X = y;
+
+                                    if (missingVals)
+                                    {
+                                        MessageBox.Show("Your save data has been corrupted, please start a new game.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    }
+
+                                    reader.Close();
+                                    return "success";
+                                }
+                                else
                                 {
-                                    missingVals = true;
+                                    //if there are not enough values in the array, the data is either from a version with different save data or has been manually modified.
+                                    MessageBox.Show("Your save data has been corrupted, your data cannot be loaded.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                                    reader.Close();
+                                    return "fail";
                                 }
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Your save file could not be located. Make sure it is located in [AppDirectory]\\SaveData\\[CharacterName].txt", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-                                if (!int.TryParse(splat[3], out mStamina))
-                                {
-                                    missingVals = true;
-                                }
+                    if (!secondPass)
+                    {
+                        DialogResult result1 = MessageBox.Show("Your save could not be found, would you like to try again?", GameName, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
 
-                                if (!int.TryParse(splat[4], out cStamina))
-                                {
-                                    missingVals = true;
-                                }
+                        if (result1 == DialogResult.Yes)
+                        {
+                            //User wants to try again, allow for one more try.
+                            return "tryagain";
+                        }
+                        else if (result1 == DialogResult.No)
+                        {
+                            //If game could not be loaded ask if they want to start a new game.
+                            DialogResult result2 = MessageBox.Show("Would you like to start a new game?", GameName, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
 
-                                string weapon = splat[5];
-                                string armor = splat[6];
-
-                                if (!int.TryParse(splat[7], out score))
-                                {
-                                    missingVals = true;
-                                }
-
-                                //Check if user's location was properly loaded, if not inform them that their save has been corrupted, but still let them play with partial load.
-                                if (!int.TryParse(splat[8], out x))
-                                {
-                                    missingVals = true;
-                                }
-                                if (!int.TryParse(splat[9], out y))
-                                {
-                                    missingVals = true;
-                                }
-                                TempMiscData = splat[10];
-                                Weapon wep = FindWeapon(weapon);
-                                Armor arm = FindArmor(armor);
-                                Player p = new Player(name, mHealth, cHealth, mStamina, cStamina, wep, arm, score);
-
-                                //Set player attributes built from load data.
-                                Player = p;
-                                Coordinates.X = x;
-                                Coordinates.X = y;
-
-                                if(missingVals)
-                                {
-                                    MessageBox.Show("Your save data has been corrupted, please start a new game.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                }
-
-                                reader.Close();
-                                return "success";
+                            //If they don't want to start a new game, close the program.
+                            if (result2 == DialogResult.No)
+                            {
+                                Form currentForm = Form.ActiveForm;
+                                currentForm.Close();
                             }
                             else
                             {
-                                //if there are not enough values in the array, the data is either from a version with different save data or has been manually modified.
-                                MessageBox.Show("Your save data has been corrupted, your data cannot be loaded.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-                                reader.Close();
                                 return "fail";
                             }
                         }
                     }
+
                 }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Your save file could not be located. Make sure it is located in [AppDirectory]\\SaveData\\[CharacterName].txt", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                
-                if (!secondPass)
-                {
-                    DialogResult result1 = MessageBox.Show("Your save could not be found, would you like to try again?", GameName, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
-
-                    if (result1 == DialogResult.Yes)
-                    {
-                        //User wants to try again, allow for one more try.
-                        return "tryagain";
-                    }
-                    else if (result1 == DialogResult.No)
-                    {
-                        //If game could not be loaded ask if they want to start a new game.
-                        DialogResult result2 = MessageBox.Show("Would you like to start a new game?", GameName, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
-
-                        //If they don't want to start a new game, close the program.
-                        if (result2 == DialogResult.No)
-                        {
-                            Form currentForm = Form.ActiveForm;
-                            currentForm.Close();
-                        }
-                        else
-                        {
-                            return "fail";
-                        }
-                    }
-                }
-                
+                LogError(ex, "LoadProgress()");
             }
             return "fail";
         }
@@ -1163,99 +1244,128 @@ namespace CustomCastleCrawler
         //Function to generate the message output to the console.
         private string GenMessage()
         {
-            //get the current map tile from the map container
-            MapTile currentTile = Map[Coordinates.X, Coordinates.Y];
-            if (!ActiveEnemy)
+            try
             {
-                //variable to format final return string
-                var returnString = new StringBuilder();
-                returnString.AppendLine(currentTile.Message);
-
-                //LINQ Query to grab the current event.
-                var eventQuery = from eve in Events where eve.EventID == currentTile.EventID select eve;
-                //If the user followed setup instructions correctly, there should only ever be one Event for each EventID
-                Event currentEvent = eventQuery.First();
-
-                //The EventID -1 is used to mark an unpassable location.
-                if(currentEvent.EventID == -1)
+                //get the current map tile from the map container
+                MapTile currentTile = Map[Coordinates.X, Coordinates.Y];
+                if (!ActiveEnemy)
                 {
-                    Coordinates.X = LastCoordinates.X;
-                    Coordinates.Y = LastCoordinates.Y;
-                    return returnString.ToString();
-                }
-                if (currentEvent.RestLocation != 1)
-                {
-                    //Check for enemy encounter first.
-                    //If EnemySpawn is greater than a random val 1-100 then an enemy was encountered.
-                    if (currentEvent.EnemySpawn > RandomGen.rollDie(100))
+                    //variable to format final return string
+                    var returnString = new StringBuilder();
+                    if (!GameConfigurations.Debug)
                     {
-                        //An Enemy was encountered
-                        ActiveEnemy = true;
-
-                        //LINQ Query to grab all enemies that can spawn in this zone.
-                        var enemyQuery = from enem in Enemies where enem.SpawnZone == currentEvent.EnemySpawnZone select enem;
-
-                        //Randomly pick an enemy from that list.
-                        var index = RandomGen.rollDie(enemyQuery.Count()) - 1;
-                        CurrentEnemy = new Enemy(enemyQuery.ElementAt(index));
-
-                        returnString.AppendLine(CurrentEnemy.Name + " has attacked you!");
+                        returnString.AppendLine(currentTile.Message);
                     }
-                    else if (currentEvent.ItemSpawn > RandomGen.rollDie(100))
+                    else
                     {
-                        //An item was found, determine what type of item.
-                        var itemGenIndex = RandomGen.rollDie(100);
-                        if (itemGenIndex <= currentEvent.WeaponChance)
+                        returnString.AppendLine(string.Format("{0} ({1},{2})", currentTile.Message, Coordinates.X, Coordinates.Y));
+                    }
+                    //LINQ Query to grab the current event.
+                    var eventQuery = from eve in Events where eve.EventID == currentTile.EventID select eve;
+                    //If the user followed setup instructions correctly, there should only ever be one Event for each EventID
+                    Event currentEvent = eventQuery.First();
+
+                    //The EventID -1 is used to mark an unpassable location.
+                    if (currentEvent.EventID == -1)
+                    {
+                        Coordinates.X = LastCoordinates.X;
+                        Coordinates.Y = LastCoordinates.Y;
+                        return returnString.ToString();
+                    }
+                    if (currentEvent.RestLocation != 1)
+                    {
+                        //Check for enemy encounter first.
+                        //If EnemySpawn is greater than a random val 1-100 then an enemy was encountered.
+                        if (currentEvent.EnemySpawn > RandomGen.rollDie(100))
                         {
-                            //Index was between 0 and weapon max, a weapon was found.
-                            TempWeapon = GetNewWeapon();
+                            //An Enemy was encountered
+                            ActiveEnemy = true;
 
-                            //Add the found items value to the player's score, whether they equip it or not.
-                            Player.Score += TempWeapon.Value;
+                            //LINQ Query to grab all enemies that can spawn in this zone.
+                            var enemyQuery = from enem in Enemies where enem.SpawnZone == currentEvent.EnemySpawnZone select enem;
 
-                            string returnContents = returnString.ToString();
-                            returnString.Clear();
+                            //Randomly pick an enemy from that list.
+                            var index = RandomGen.rollDie(enemyQuery.Count()) - 1;
+                            
+                            if(index < 0)
+                            {
+                                index = 0;
+                            }
 
-                            returnString.AppendLine("NewWeapon" + '|' + returnContents.ToString());
+                            if (enemyQuery.Any())
+                            {
+                                CurrentEnemy = new Enemy(enemyQuery.ElementAt(index));
+                            }
+                            else
+                            {
+                                MessageBox.Show(string.Format("Enemy generation failed, no enemies in spawn zone. {0}Current Tile: ({1},{2}) EventID: {3} EnemySpawnZone: {4}{5}Ensure there is at least one enemy with a matching SpawnZone",
+                                    Environment.NewLine, Coordinates.X, Coordinates.Y, currentEvent.EventID, currentEvent.EnemySpawnZone, Environment.NewLine), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
+
+                            returnString.AppendLine(CurrentEnemy.Name + " has attacked you!");
                         }
-                        else if (itemGenIndex > currentEvent.WeaponChance && itemGenIndex <= currentEvent.ArmorChance)
+                        else if (currentEvent.ItemSpawn > RandomGen.rollDie(100))
                         {
-                            //index was between weapon max and armor max, armor was found.
-                            TempArmor = GetNewArmor();
+                            //An item was found, determine what type of item.
+                            var itemGenIndex = RandomGen.rollDie(100);
+                            if (itemGenIndex <= currentEvent.WeaponChance)
+                            {
+                                //Index was between 0 and weapon max, a weapon was found.
+                                TempWeapon = GetNewWeapon();
 
-                            //Add the found items value to the player's score, whether they equip it or not.
-                            Player.Score += TempArmor.Value;
+                                //Add the found items value to the player's score, whether they equip it or not.
+                                Player.Score += TempWeapon.Value;
 
-                            string returnContents = returnString.ToString();
-                            returnString.Clear();
+                                string returnContents = returnString.ToString();
+                                returnString.Clear();
 
-                            returnString.AppendLine("NewArmor" + '|' + returnContents.ToString());
+                                returnString.AppendLine("NewWeapon" + '|' + returnContents.ToString());
+                            }
+                            else if (itemGenIndex > currentEvent.WeaponChance && itemGenIndex <= currentEvent.ArmorChance)
+                            {
+                                //index was between weapon max and armor max, armor was found.
+                                TempArmor = GetNewArmor();
+
+                                //Add the found items value to the player's score, whether they equip it or not.
+                                Player.Score += TempArmor.Value;
+
+                                string returnContents = returnString.ToString();
+                                returnString.Clear();
+
+                                returnString.AppendLine("NewArmor" + '|' + returnContents.ToString());
+                            }
+                            else if (itemGenIndex > currentEvent.ArmorChance && itemGenIndex <= currentEvent.ScoreItemChance)
+                            {
+                                //index was between armor max and score item max, a score item was found.
+                                returnString.AppendLine(GetNewScoreItem());
+                            }
                         }
-                        else if (itemGenIndex > currentEvent.ArmorChance && itemGenIndex <= currentEvent.ScoreItemChance)
+                        else
                         {
-                            //index was between armor max and score item max, a score item was found.
-                            returnString.AppendLine(GetNewScoreItem());
+                            //Nothing Happened, return default tile message
+                            return returnString.ToString();
                         }
                     }
                     else
                     {
-                        //Nothing Happened, return default tile message
-                        return returnString.ToString();
+                        //If this is a rest location then refil the player's heals.
+                        returnString.AppendLine(Player.RefillEstus());
                     }
+                    //set tempCoords to keep track of last tile.
+                    LastCoordinates.X = Coordinates.X;
+                    LastCoordinates.Y = Coordinates.Y;
+                    return returnString.ToString();
                 }
-                else
-                {
-                    //If this is a rest location then refil the player's heals.
-                    returnString.AppendLine(Player.RefillEstus());
-                }
-                //set tempCoords to keep track of last tile.
-                LastCoordinates.X = Coordinates.X;
-                LastCoordinates.Y = Coordinates.Y;
-                return returnString.ToString();
-            }
 
-            //If the method didn't return for a normal reason, just return the tile message.
-            return currentTile.Message;
+                //If the method didn't return for a normal reason, just return the tile message.
+                return currentTile.Message;
+            }
+            catch (Exception ex)
+            {
+                LogError(ex, "GenMessage()");
+                SaveProgress("Notes lost during last crash :(");
+                return "Error! Your progress has been saved, please restart your game.";
+            }
         }
 
         //function to generate a weapon
@@ -1272,21 +1382,47 @@ namespace CustomCastleCrawler
                 case 1:
                 case 2:
                 case 3:
+
                     //a common weapon was found
                     weapons = from wep in Weapons where wep.Rarity == 1 select wep;
-                    index = RandomGen.rollDie(weapons.Count());
-                    return Weapons[index - 1];
+                    if (weapons.Any())
+                    {
+                        index = RandomGen.rollDie(weapons.Count());
+                        return Weapons[index - 1];
+                    }
+                    else
+                    {
+                        MessageBox.Show("Weapon Generation Failed, no weapon found with rarity: 1", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return new Weapon();
+                    }
                 case 4:
                 case 5:
+
                     //An uncommon weapon was found
                     weapons = from wep in Weapons where wep.Rarity == 2 select wep;
-                    index = RandomGen.rollDie(weapons.Count());
-                    return Weapons[index - 1];
+                    if (weapons.Any())
+                    {
+                        index = RandomGen.rollDie(weapons.Count());
+                        return Weapons[index - 1];
+                    }
+                    else
+                    {
+                        MessageBox.Show("Weapon Generation Failed, no weapon found with rarity: 2", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return new Weapon();
+                    }
                 case 6:
                     //A rare weapon was found.
                     weapons = from wep in Weapons where wep.Rarity == 3 select wep;
-                    index = RandomGen.rollDie(weapons.Count());
-                    return Weapons[index - 1];
+                    if (weapons.Any())
+                    {
+                        index = RandomGen.rollDie(weapons.Count());
+                        return Weapons[index - 1];
+                    }
+                    else
+                    {
+                        MessageBox.Show("Weapon Generation Failed, no weapon found with rarity: 3", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return new Weapon();
+                    }
                 default:
                     //Should never reach this point...
                     return new Weapon();
@@ -1309,19 +1445,43 @@ namespace CustomCastleCrawler
                 case 3:
                     //Common armor was found
                     armors = from arm in Armors where arm.Rarity == 1 select arm;
-                    index = RandomGen.rollDie(armors.Count());
-                    return Armors[index - 1];
+                    if (armors.Any())
+                    {
+                        index = RandomGen.rollDie(armors.Count());
+                        return Armors[index - 1];
+                    }
+                    else
+                    {
+                        MessageBox.Show("Armor Generation Failed, no armor found with rarity: 1", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return new Armor();
+                    }
                 case 4:
                 case 5:
                     //Uncommon armor was found
                     armors = from arm in Armors where arm.Rarity == 2 select arm;
-                    index = RandomGen.rollDie(armors.Count());
-                    return Armors[index - 1];
+                    if (armors.Any())
+                    {
+                        index = RandomGen.rollDie(armors.Count());
+                        return Armors[index - 1];
+                    }
+                    else
+                    {
+                        MessageBox.Show("Armor Generation Failed, no armor found with rarity: 2", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return new Armor();
+                    }
                 case 6:
                     //Rare armor was found.
                     armors = from arm in Armors where arm.Rarity == 3 select arm;
-                    index = RandomGen.rollDie(armors.Count());
-                    return Armors[index - 1];
+                    if (armors.Any())
+                    {
+                        index = RandomGen.rollDie(armors.Count());
+                        return Armors[index - 1];
+                    }
+                    else
+                    {
+                        MessageBox.Show("Armor Generation Failed, no armor found with rarity: 2", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return new Armor();
+                    }
                 default:
                     //Should never reach this point...
                     return new Armor();
@@ -1330,6 +1490,8 @@ namespace CustomCastleCrawler
 
         private string GetNewScoreItem()
         {
+            var returnString = new StringBuilder();
+
             //Get random value to determine what item was found
             var index = RandomGen.rollDie(Items.Count() - 1);
 
@@ -1338,7 +1500,20 @@ namespace CustomCastleCrawler
             Player.Score += item.Value;
 
             //tell the player what they found.
-            return "You have found one " + item.Name + ".\n" + item.Description + "\n" + item.Value + " points have been added to your score.";
+            //Check if the item's name starts with a vowel so that you can use a or an properly
+            if (item.Name.Substring(1, 1) == "a" || item.Name.Substring(1, 1) == "e" || item.Name.Substring(1, 1) == "i" || item.Name.Substring(1, 1) == "o" || item.Name.Substring(1, 1) == "u")
+            {
+                returnString.AppendLine(string.Format("You have found an {0}", item.Name));
+            }
+            else
+            {
+                returnString.AppendLine(string.Format("You have found a {0}", item.Name));
+            }
+
+            returnString.AppendLine(item.Description);
+            returnString.AppendLine(item.Value + " points have been added to your score.");
+
+            return returnString.ToString();
         }
 
         //function to initiate a round of combat with the current enemy.
@@ -1624,5 +1799,36 @@ namespace CustomCastleCrawler
         {
             return Player.GetHealthAndStamina();
         }
+
+        public void LogError(Exception exception, string function, bool xmlError = false)
+        {
+            //Ensure log file directory exists.
+            System.IO.Directory.CreateDirectory("LogFiles/");
+            var path = "LogFiles/errorLog.txt";
+            if (xmlError)
+            {
+                path = "LogFiles/XMLErrorLog.txt";
+            }
+
+            //Log error
+            var returnString = new StringBuilder();
+
+            returnString.AppendLine(string.Format("{0} - {1} error at: {2}", DateTime.Now, GameConfigurations.GameName, function));
+            returnString.AppendLine(exception.Message);
+            returnString.AppendLine(exception.StackTrace);
+            returnString.AppendLine();
+
+            using (StreamWriter sw = File.AppendText(path))
+            {
+                sw.WriteLine(returnString);
+            }
+
+            //Inform the user they encountered an error.
+            if (!xmlError)
+            {
+                MessageBox.Show("An error was encountered, results written to log file found at " + path + ".", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
     }
 }

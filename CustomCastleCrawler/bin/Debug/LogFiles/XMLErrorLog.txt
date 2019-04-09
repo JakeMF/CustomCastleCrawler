@@ -1,0 +1,12 @@
+4/9/2019 11:09:29 AM - The adventure error at: PopulateMap()
+Input string was not in a correct format.
+   at System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   at System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+   at System.Xml.Linq.XElement.op_Explicit(XElement element)
+   at CustomCastleCrawler.MainGame.<>c.<PopulateMap>b__32_0(XElement elem) in C:\Users\jacob\Documents\GitHub\CustomCastleCrawler\CustomCastleCrawler\Classes.cs:line 770
+   at System.Linq.Enumerable.WhereSelectEnumerableIterator`2.MoveNext()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at CustomCastleCrawler.MainGame.PopulateMap() in C:\Users\jacob\Documents\GitHub\CustomCastleCrawler\CustomCastleCrawler\Classes.cs:line 767
+
+

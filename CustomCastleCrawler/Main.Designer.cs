@@ -114,45 +114,49 @@
             // 
             // btnWest
             // 
-            this.btnWest.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnWest.BackgroundImage")));
             this.btnWest.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnWest.Font = new System.Drawing.Font("Britannic Bold", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnWest.Location = new System.Drawing.Point(13, 473);
             this.btnWest.Name = "btnWest";
             this.btnWest.Size = new System.Drawing.Size(75, 75);
             this.btnWest.TabIndex = 17;
+            this.btnWest.Text = "W";
             this.btnWest.UseVisualStyleBackColor = true;
             this.btnWest.Click += new System.EventHandler(this.btnWest_Click);
             // 
             // btnSouth
             // 
-            this.btnSouth.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnSouth.BackgroundImage")));
             this.btnSouth.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnSouth.Font = new System.Drawing.Font("Britannic Bold", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSouth.Location = new System.Drawing.Point(94, 554);
             this.btnSouth.Name = "btnSouth";
             this.btnSouth.Size = new System.Drawing.Size(75, 75);
             this.btnSouth.TabIndex = 16;
+            this.btnSouth.Text = "S";
             this.btnSouth.UseVisualStyleBackColor = true;
             this.btnSouth.Click += new System.EventHandler(this.btnSouth_Click);
             // 
             // btnEast
             // 
-            this.btnEast.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnEast.BackgroundImage")));
             this.btnEast.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnEast.Font = new System.Drawing.Font("Britannic Bold", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnEast.Location = new System.Drawing.Point(175, 473);
             this.btnEast.Name = "btnEast";
             this.btnEast.Size = new System.Drawing.Size(75, 75);
             this.btnEast.TabIndex = 15;
+            this.btnEast.Text = "E";
             this.btnEast.UseVisualStyleBackColor = true;
             this.btnEast.Click += new System.EventHandler(this.btnEast_Click);
             // 
             // btnNorth
             // 
-            this.btnNorth.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnNorth.BackgroundImage")));
             this.btnNorth.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnNorth.Font = new System.Drawing.Font("Britannic Bold", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnNorth.Location = new System.Drawing.Point(94, 392);
             this.btnNorth.Name = "btnNorth";
             this.btnNorth.Size = new System.Drawing.Size(75, 75);
             this.btnNorth.TabIndex = 14;
+            this.btnNorth.Text = "N";
             this.btnNorth.UseVisualStyleBackColor = true;
             this.btnNorth.Click += new System.EventHandler(this.btnNorth_Click);
             // 
@@ -181,14 +185,14 @@
             // mnuSave
             // 
             this.mnuSave.Name = "mnuSave";
-            this.mnuSave.Size = new System.Drawing.Size(180, 22);
+            this.mnuSave.Size = new System.Drawing.Size(100, 22);
             this.mnuSave.Text = "&Save";
             this.mnuSave.Click += new System.EventHandler(this.mnuSave_Click);
             // 
             // mnuExit
             // 
             this.mnuExit.Name = "mnuExit";
-            this.mnuExit.Size = new System.Drawing.Size(180, 22);
+            this.mnuExit.Size = new System.Drawing.Size(100, 22);
             this.mnuExit.Text = "E&xit";
             this.mnuExit.Click += new System.EventHandler(this.mnuExit_Click);
             // 

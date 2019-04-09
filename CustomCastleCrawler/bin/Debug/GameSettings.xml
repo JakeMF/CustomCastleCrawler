@@ -2,7 +2,8 @@
 	<StartingPosition>
 		<DefaultX>1</DefaultX>				
 		<DefaultY>7</DefaultY>
-		<BaseMaxHeals>5</BaseMaxHeals>		
+		<BaseMaxHeals>5</BaseMaxHeals>
+		<Debug>false</Debug>
 	</StartingPosition>
 	<MapSize>
 		<XMax>14</XMax>
