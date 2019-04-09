@@ -207,7 +207,7 @@ namespace CustomCastleCrawler
         //Go East
         public bool East()
         {
-            if (X + 1 < MapDimensions.YMax)
+            if (X + 1 < MapDimensions.XMax)
             {
                 ++X;
                 return true;
@@ -217,7 +217,7 @@ namespace CustomCastleCrawler
         //Go South
         public bool South()
         {
-            if (Y + 1 < MapDimensions.XMax)
+            if (Y + 1 < MapDimensions.YMax)
             {
                 ++Y;
                 return true;

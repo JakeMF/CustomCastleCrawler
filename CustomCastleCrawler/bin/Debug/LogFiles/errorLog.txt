@@ -1,0 +1,5 @@
+4/9/2019 5:21:48 PM - The adventure error at: GenMessage()
+Object reference not set to an instance of an object.
+   at CustomCastleCrawler.MainGame.GenMessage() in C:\Users\jacob\Documents\GitHub\CustomCastleCrawler\CustomCastleCrawler\Classes.cs:line 1261
+
+
