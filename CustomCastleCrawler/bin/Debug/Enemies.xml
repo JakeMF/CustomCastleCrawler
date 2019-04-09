@@ -1,65 +1,56 @@
 <Enemies>
-		<!--Crypt: 1, Hall: 2, Lab: 3-->
+	<!--Define your enemies below.-->
+	
 	<Enemy>
-		<Name>Skeleton Warrior</Name>
-		<Health>600</Health>
+		<Name>Ogar</Name> 
+		<Health>1000</Health>
 		<BaseDMG>100</BaseDMG>
 		<APDMG>25</APDMG>
-		<Defence>10</Defence>
-		<!--Defence is a flat % of damage reduction. Ex: 10 Defence will cause an attack that normally dealt 10 damage to deal 9.-->
-		<Evasion>5</Evasion>
-		<!--Evasion is a flat % chance to avoid all damage from an attack.-->
-		<Points>20</Points>
-		<SpawnZone>1</SpawnZone>
+		<Defence>25</Defence>
+		<Evasion>10</Evasion>
+		<Points>50</Points>
+		<SpawnZone>2</SpawnZone>
 	</Enemy>
 	<Enemy>
-		<Name>Zombie</Name>
-		<Health>800</Health>
-		<BaseDMG>50</BaseDMG>
-		<APDMG>0</APDMG>
-		<Defence>0</Defence>
-		<Evasion>0</Evasion>
-		<Points>5</Points>
-		<SpawnZone>1</SpawnZone>
-	</Enemy>
-	<Enemy>
-		<Name>Orc</Name>
-		<Health>1750</Health>
-		<BaseDMG>100</BaseDMG>
+		<Name>Troll</Name>
+		<Health>600</Health>
+		<BaseDMG>75</BaseDMG>
 		<APDMG>50</APDMG>
-		<Defence>20</Defence>
-		<Evasion>5</Evasion>
-		<Points>35</Points>
-		<SpawnZone>2</SpawnZone>
-	</Enemy>
-	<Enemy>
-		<Name>Goblin</Name>
-		<Health>200</Health>
-		<BaseDMG>40</BaseDMG>
-		<APDMG>20</APDMG>
-		<Defence>0</Defence>
-		<Evasion>20</Evasion>
-		<Points>15</Points>
-		<SpawnZone>2</SpawnZone>
-	</Enemy>
-	<Enemy>
-		<Name>Alchemist</Name>
-		<Health>400</Health>
-		<BaseDMG>20</BaseDMG>
-		<APDMG>30</APDMG>
-		<Defence>0</Defence>
+		<Defence>25</Defence>
 		<Evasion>25</Evasion>
-		<Points>40</Points>
-		<SpawnZone>3</SpawnZone>
+		<Points>25</Points>
+		<SpawnZone>2</SpawnZone>
 	</Enemy>
 	<Enemy>
-		<Name>Abomination of the Flesh</Name>
-		<Health>1000</Health>
-		<BaseDMG>40</BaseDMG>
-		<APDMG>60</APDMG>
+		<Name>Thief</Name>
+		<Health>1200</Health>
+		<BaseDMG>50</BaseDMG>
+		<APDMG>25</APDMG>
+		<Defence>50</Defence>
+		<Evasion>10</Evasion>
+		<Points>10</Points>
+		<SpawnZone>4</SpawnZone>
+	</Enemy>
+	<Enemy>
+		<Name>Nymph</Name>
+		<Health>800</Health>
+		<BaseDMG>10</BaseDMG>
+		<APDMG>0</APDMG>
 		<Defence>10</Defence>
-		<Evasion>00</Evasion>
-		<Points>100</Points>
+		<Evasion>10</Evasion>
+		<Points>25</Points>
+		<SpawnZone>1</SpawnZone>
+	</Enemy>
+	<Enemy>
+		<Name>Thief</Name>
+		<Health>700</Health>
+		<BaseDMG>50</BaseDMG>
+		<APDMG>25</APDMG>
+		<Defence>50</Defence>
+		<Evasion>10</Evasion>
+		<Points>10</Points>
 		<SpawnZone>3</SpawnZone>
 	</Enemy>
-</Enemies>
+	<!--Define your enemies above.-->
+</Enemies> 
+

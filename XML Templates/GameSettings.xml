@@ -1,53 +1,43 @@
 <Settings>
 	<StartingPosition>
-		<DefaultX>5</DefaultX>						<!--This is the X coordinate for the game's starting position.-->
-		<DefaultY>4</DefaultY>						<!--This is the Y coordinate for the game's starting position.-->
+		<DefaultX>1</DefaultX>				
+		<DefaultY>7</DefaultY>
+		<BaseMaxHeals>5</BaseMaxHeals>		
 	</StartingPosition>
 	<MapSize>
-		<XMax>10</XMax>								<!--This is the maximum number of tiles on the X axis.-->
-		<YMax>10</YMax>								<!--This is the maximum number of tiles on the Y axis.-->
-													<!--NOTE: The game's map starts at a 0 index, so with an X and Y max of '10' your NorthWest most coordinate would be (0,0) and your SouthEast most coordinate would be (9,9).-->
-		<BaseMaxHeals>5</BaseMaxHeals>				<!--This is the number of maximum number of heals you start with, if there are 'RestLocation' events you may refill your heals.-->
+		<XMax>13</XMax>
+		<YMax>20</YMax>
 	</MapSize>
 	<FlavorSettings>
-													<!--If you do not wish to provide the player with any heals, you can set this to 0 however the "Heal" button will still be in the game, it will simply never work.-->
-													
-		<GameName>Oolacile Adventures</GameName>	<!--This is the name of your game, it will be displayed when you start a new game and in the top right hand corner of the main game window.-->
-		
-													<!--This is the flavor text that is shown when you start a new game. It can be lore and backstory, or simply instructions; the choice is yours.-->
-													<!--The game automatically adds 'Welcome to [Game Name] [Player Name] to the front of your flavor text.-->
+		<GameName>The adventure</GameName>	
 		<GameFlavorText>You can use the four arrows to move North, South, East, and West. You may encounter enemies, find treasure, or discover secrets. If you encounter an enemy, you will be taken into another menu for the combat phase. Explore, fight, and gain power; it is all that will keep you alive.</GameFlavorText>
 	</FlavorSettings>
 	
 	<!--There MUST BE 4 classes here, additional classes will be ignored. Having less than 4 classes will cause the game to be unplayable.-->
 	<Classes>
-		<!--Define your starting classes below.-->
 		<Class>
-			<Name>Soldier</Name>					<!--This is the name of the class, displayed on the button to select the class.-->
-			<Armor>Hard Leather Armor</Armor>		<!--This is the starting armor of the class, this name MUST match the name of an armor set.-->
-			<Weapon>Longsword</Weapon>				<!--This is the starting weapon of the class, this name MUST match the name of a weapon.-->
-			
-			<ClassDescription>A light melee focused class. Dodges easily, but does little damage.</ClassDescription>	<!--This is the description of the class that will be displayed when choosing your starting class.-->
-																														<!--You may make this as specific or vague as possible, I recommend giving a general description of the class's playstyle.-->
+			<Name>Explorer</Name>
+			<Armor>Cape</Armor>
+			<Weapon>Staff</Weapon>
+			<ClassDescription>A nomad type of class</ClassDescription>
 		</Class>
 		<Class>
 			<Name>Knight</Name>
-			<Armor>Silver Knight Armor</Armor>
-			<Weapon>Claymore</Weapon>
-			<ClassDescription>A medium melee focused class. Dodges with difficulty, but does good damage.</ClassDescription>
+			<Armor>ChainMail</Armor>
+			<Weapon>Longsword</Weapon>
+			<ClassDescription>A soilder for the king</ClassDescription>
 		</Class>
 		<Class>
-			<Name>Archer</Name>
-			<Armor>Leather Armor</Armor>
-			<Weapon>Longbow</Weapon>
-			<ClassDescription>An archery focused class. Dodges extremely easily, but does very little damage.</ClassDescription>
+			   <Name>Mystic</Name>
+			<Armor>Cloak</Armor>
+			<Weapon>Staff</Weapon>
+			<ClassDescription>Searchering for enlightenment</ClassDescription>
 		</Class>
 		<Class>
-			<Name>Giant</Name>
-			<Armor>Giant Armor</Armor>
-			<Weapon>Great Club</Weapon>
-			<ClassDescription>A very heavy melee focused class. Almost never dodges, but does lots of damage.</ClassDescription>
+			<Name>Begger</Name>
+			<Armor>Cape</Armor>
+			<Weapon>Crossbow</Weapon>
+			<ClassDescription>A bagabond in serch of riches</ClassDescription>
 		</Class>
-		<!--Define your starting classes above.-->
 	</Classes>
 </Settings>

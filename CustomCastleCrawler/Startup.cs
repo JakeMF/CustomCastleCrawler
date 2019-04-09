@@ -17,6 +17,7 @@ namespace CustomCastleCrawler
         public frmStartup()
         {
             InitializeComponent();
+
             MainGame = new MainGame();
 
             //Set the form's text on the title bar to the game's name.
