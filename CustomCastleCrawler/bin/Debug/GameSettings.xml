@@ -4,10 +4,11 @@
 		<DefaultY>7</DefaultY>
 	</StartingPosition>
 	<BalanceSettings>
-		<BaseMaxHeals>5</BaseMaxHeals>
-		<Debug>true</Debug>
-		<PlayerMaxHealth>1200</PlayerMaxHealth>
-		<PlayerMaxStamina>100</PlayerMaxStamina>
+		<BaseMaxHeals>5</BaseMaxHeals>				<!--This is the number of maximum number of heals you start with, if there are 'RestLocation' events you may refill your heals.-->
+		<Debug>true</Debug>						<!--This is used to help you when testing your application, if this is set to "true" your current coordinate will be printed along with your tile's message.-->
+													<!--If it is set to "false" the game will play normally-->
+		<PlayerMaxHealth>1200</PlayerHealth>		<!--This determines the player's maximum health.-->
+		<PlayerMaxStamina>100</PlayerMaxStamina>	<!--This determines the player's maximum stamina.-->
 	</BalanceSettings>
 	<MapSize>
 		<XMax>14</XMax>
