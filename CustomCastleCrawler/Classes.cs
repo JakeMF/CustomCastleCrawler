@@ -1370,12 +1370,17 @@ namespace CustomCastleCrawler
                     //LINQ Query to grab the current event.
                     var eventQuery = from eve in Events where eve.EventID == currentTile.EventID select eve;
                     //If the user followed setup instructions correctly, there should only ever be one Event for each EventID
-                    if(!eventQuery.Any())
+                    Event currentEvent;
+                    if (!eventQuery.Any())
                     {
                         MessageBox.Show(string.Format("No matching EventID found for ({0},{1}). EventID: {2}{3}Choosing random event.", currentTile.X, currentTile.Y, currentTile.EventID, Environment.NewLine), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         SaveProgress("");
+                        currentEvent = Events[RandomGen.rollDie(Events.Count - 1)];
                     }
-                    Event currentEvent = eventQuery.First();
+                    else
+                    {
+                        currentEvent = eventQuery.First();
+                    }
 
                     //The EventID -1 is used to mark an unpassable location.
                     if (currentEvent.EventID == -1)
