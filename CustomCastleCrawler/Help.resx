@@ -120,7 +120,8 @@
   <data name="lblAStam.Text" xml:space="preserve">
     <value>Attacking requires 10 stamina, if you do not have 10 stamina, you are not able to attack. 
 You regenerate 5 stamina at the end of each turn, regardless of whether you attacked or blocked.
-Blocking reduces damage received by 50% and regenerates and additional 20 stamina.
+Blocking reduces damage received by 50% and regenerates and additional 20 stamina. 
+You regenerate 50% of your maximum stamina outside of combat.
 
 The player and the enemy have a chance to dodge incoming attacks, player dodge chance
 is 20% by default, then modified the the evasion stat on Weapons and Armor.

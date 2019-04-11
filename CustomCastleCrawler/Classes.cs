@@ -112,43 +112,72 @@ namespace CustomCastleCrawler
         //Function to load game settings from the XML.
         private void LoadGameData()
         {
-            XDocument xdoc = XDocument.Load("GameSettings.xml");
-            //Populate list with tile objects to store in array later
+            try
+            {
+                XDocument xdoc = XDocument.Load("GameSettings.xml");
+                //Populate list with tile objects to store in array later
 
-            //Map Size Settings
-            foreach (var elem in xdoc.Root.Elements("MapSize"))
-            {
-                XMax = Convert.ToInt16(elem.Element("XMax").Value);
-                YMax = Convert.ToInt16(elem.Element("YMax").Value);
-            }
-            //Starting Position
-            foreach (var elem in xdoc.Root.Elements("StartingPosition"))
-            {
-                StartingX = Convert.ToInt16(elem.Element("DefaultX").Value);
-                StartingY = Convert.ToInt16(elem.Element("DefaultY").Value);
-            }
-
-            foreach (var elem in xdoc.Root.Elements("BalanceSettings"))
-            {
-                MaxEstus = Convert.ToInt16(elem.Element("BaseMaxHeals").Value);
-                Debug = Convert.ToBoolean(elem.Element("Debug").Value);
-                PlayerMaxHealth = Convert.ToInt16(elem.Element("PlayerMaxHealth").Value);
-                PlayerMaxStamina = Convert.ToInt16(elem.Element("PlayerMaxStamina").Value);
-            }
-            
-            //Basic Settings
-            foreach (var elem in xdoc.Root.Elements("FlavorSettings"))
-            {
-                GameName = elem.Element("GameName").Value;
-                GameFlavorText = elem.Element("GameFlavorText").Value;
-            }
-            //Class Settings
-            foreach (var elem in xdoc.Root.Elements("Classes"))
-            {
-                foreach (var childElem in elem.Elements("Class"))
+                //Map Size Settings
+                foreach (var elem in xdoc.Root.Elements("MapSize"))
                 {
-                    Classes.Add(new StartingClass(childElem.Element("Name").Value, childElem.Element("Armor").Value, childElem.Element("Weapon").Value, childElem.Element("ClassDescription").Value));
+                    XMax = Convert.ToInt16(elem.Element("XMax").Value);
+                    YMax = Convert.ToInt16(elem.Element("YMax").Value);
                 }
+                //Starting Position
+                foreach (var elem in xdoc.Root.Elements("StartingPosition"))
+                {
+                    StartingX = Convert.ToInt16(elem.Element("DefaultX").Value);
+                    StartingY = Convert.ToInt16(elem.Element("DefaultY").Value);
+                }
+                //Balance Settings
+                foreach (var elem in xdoc.Root.Elements("BalanceSettings"))
+                {
+                    MaxEstus = Convert.ToInt16(elem.Element("BaseMaxHeals").Value);
+                    Debug = Convert.ToBoolean(elem.Element("Debug").Value);
+                    PlayerMaxHealth = !string.IsNullOrEmpty(elem.Element("PlayerMaxHealth").Value) ? Convert.ToInt16(elem.Element("PlayerMaxHealth").Value) : 1200;
+                    //If the max stamina is left blank, set it to 100.
+                    PlayerMaxStamina = !string.IsNullOrEmpty(elem.Element("PlayerMaxStamina").Value) ? Convert.ToInt16(elem.Element("PlayerMaxStamina").Value) : 100;
+                }
+                //Flavor Settings
+                foreach (var elem in xdoc.Root.Elements("FlavorSettings"))
+                {
+                    GameName = elem.Element("GameName").Value;
+                    GameFlavorText = elem.Element("GameFlavorText").Value;
+                }
+                //Class Settings
+                foreach (var elem in xdoc.Root.Elements("Classes"))
+                {
+                    foreach (var childElem in elem.Elements("Class"))
+                    {
+                        Classes.Add(new StartingClass(childElem.Element("Name").Value, childElem.Element("Armor").Value, childElem.Element("Weapon").Value, childElem.Element("ClassDescription").Value));
+                    }
+                }
+            }
+            catch (Exception exception)
+            {
+                //Ensure log file directory exists.
+                System.IO.Directory.CreateDirectory("LogFiles/");
+
+                //Set file path
+                var path = "LogFiles/XMLErrorLog.txt";
+
+                //Log error
+                var returnString = new StringBuilder();
+
+                returnString.AppendLine(string.Format("{0} - {1} error at: {2}", DateTime.Now, GameName, "LoadGameData()"));
+                returnString.AppendLine(exception.Message);
+                returnString.AppendLine(exception.StackTrace);
+                returnString.AppendLine();
+
+                using (StreamWriter sw = File.AppendText(path))
+                {
+                    sw.WriteLine(returnString);
+                }
+
+                MessageBox.Show("There was a problem loading your Game Settings, ensure your data is formatted properly.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                //Quit the application because their data was not loaded properly, the game will not work properly.
+                Environment.Exit(0);
             }
         }
     }
@@ -340,9 +369,9 @@ namespace CustomCastleCrawler
         //Basic Constructor
         public Item()
         {
-            Name = "This Item's name was lost long ago.";
-            Value = -1; //-1 will output "This item's value is more unknown."
-            Description = "";
+            Name = "Gold Ring.";
+            Value = 2; 
+            Description = "A simple gold band.";
         }
 
         //Constructor that takes parameters for all attributes
@@ -366,9 +395,9 @@ namespace CustomCastleCrawler
         public Weapon()
         {
             Name = "Wooden Sword";
-            Value = 0;
+            Value = 2;
             BDamage = 5;
-            APDamage = 1;
+            APDamage = 0;
             Evasion = 0;
         }
 
@@ -395,9 +424,9 @@ namespace CustomCastleCrawler
         //Default constructor that creates your default gear.
         public Armor()
         {
-            Name = "Chainmail";
-            Value = 0;
-            ArmorVal = 5;
+            Name = "Rusted Chainmail";
+            Value = 2;
+            ArmorVal = 2;
             Evasion = 0;
         }
 
@@ -726,14 +755,14 @@ namespace CustomCastleCrawler
             if (newGame)
             {
                 //Show User Introduction text.
-                introMessage.AppendLine("Welcome to " + GameName + " " + playerName + ".");
+                introMessage.AppendLine("Welcome to " + GameName + ", " + playerName + ".");
 
                 //Add Custom Flavor Text
                 introMessage.AppendLine(GameConfigurations.GameFlavorText);
                 introMessage.AppendLine(Environment.NewLine);
 
                 //Add Instructions
-                introMessage.Append("You can move around the map by using the four arrow buttons 'north', 'south', 'east', and 'west'.");
+                introMessage.Append("You can move around the map by using the 'North', 'South', 'East', and 'West' buttons.");
                 introMessage.Append("If you encounter an enemy, attack them by pressing the Sword icon, or surrender yourself to the enemy by pressing the Flag icon.");
                 introMessage.Append("If you wish to quit the game, use the 'Quit' button located in the Menu Bar. You can also simply click the 'X' to close the window.'");
                 introMessage.Append("If you wish to view more detailed information about Game mechanics, click the 'help' buttons located in the Menu Bar.");
@@ -747,6 +776,23 @@ namespace CustomCastleCrawler
                 //This line is commented out now, but exists in case you wish to display the player's last position when they load an existing game.
                 //introMessage.AppendLine("You are at X:" + Coordinates.x + " Y:" + Coordinates.y + ".");
                 introMessage.AppendLine("Good luck, adventurer.'");
+                introMessage.AppendLine(Environment.NewLine);
+
+            }
+
+            //if debug mode is on then skip the normal intro and give them information about the data loaded.
+            if (GameConfigurations.Debug)
+            {
+                introMessage.Clear();
+                introMessage.AppendLine("Debug mode is on, normal intro skipped.");
+                introMessage.AppendLine(string.Format("Number of Map Tiles: {0}", Map.Length));
+                introMessage.AppendLine(string.Format("Number of Events: {0}", Events.Count));
+                introMessage.AppendLine(string.Format("Number of Enemies: {0}", Enemies.Count));
+                introMessage.AppendLine(string.Format("Number of Weapons: {0}", Weapons.Count));
+                introMessage.AppendLine(string.Format("Number of Armor sets: {0}", Armors.Count));
+                introMessage.AppendLine(string.Format("Number of Score Items: {0}", Items.Count));
+                introMessage.AppendLine();
+                introMessage.AppendLine(string.Format("Starting Position: ({0},{1})", GameConfigurations.StartingX, GameConfigurations.StartingY));
                 introMessage.AppendLine(Environment.NewLine);
 
             }
@@ -772,11 +818,31 @@ namespace CustomCastleCrawler
                             Message = (string)elem.Element("Message"),
                             EventID = (int)elem.Element("EventID")
                         }).ToList();
+                if (tiles.Any())
+                {
+                    var expectedTileCount = GameConfigurations.XMax * GameConfigurations.XMax;
+                    if (tiles.Count < expectedTileCount)
+                    {
+                        //there were less tiles in the map than there should be. Inform the user before quitting the game.
 
+                        MessageBox.Show(string.Format("There are less tiles in your map than required. You have {0} tiles, you need to have {1}.", tiles.Count, expectedTileCount), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                        //Quit the application because their data was not loaded properly, the game will not work properly.
+                        Environment.Exit(0);
+                    }
                     foreach (MapTile currentTile in tiles)
                     {
                         Map[currentTile.X, currentTile.Y] = currentTile;
                     }
+                }
+                else
+                {
+                    //There was no map, because this is integral to gameplay inform the user and force quit the game.
+                    MessageBox.Show("There were no tiles found in your map Your game must have map tiles to function.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                    //Quit the application because their data was not loaded properly, the game will not work properly.
+                    Environment.Exit(0);
+                }
             }
             catch (Exception ex)
             {
@@ -784,7 +850,7 @@ namespace CustomCastleCrawler
                 MessageBox.Show("There was a problem loading your Map, ensure your data is formatted properly.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                 //Quit the application because their data was not loaded properly, the game will not work properly.
-                Application.Exit();
+                Environment.Exit(0);
             }
         }
 
@@ -813,6 +879,15 @@ namespace CustomCastleCrawler
                             EnemySpawnZone = (int)childElem.Element("EnemySpawnZone")
                         }).ToList();
                 Events = events;
+
+                //There were no events, because this is integral to gameplay inform the user and force quit the game.
+                if (!Events.Any())
+                {
+                    MessageBox.Show("There were no Events found. Your game must have Events to work.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                    //Quit the application because their data was not loaded properly, the game will not work properly.
+                    Environment.Exit(0);
+                }
             }
             catch (Exception ex)
             {
@@ -820,7 +895,7 @@ namespace CustomCastleCrawler
                 MessageBox.Show("There was a problem loading your Events, ensure your data is formatted properly.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                 //Quit the application because their data was not loaded properly, the game will not work properly.
-                Application.Exit();
+                Environment.Exit(0);
             }
         }
 
@@ -846,6 +921,16 @@ namespace CustomCastleCrawler
                             Description = (string)elem.Element("Description")
                         }).ToList();
                 Weapons = weapons;
+
+                //There were no weapons, because this is integral to gameplay even without combat (starting class initialization) inform the user and force quit the game.
+                if (!Weapons.Any())
+                {
+                    MessageBox.Show("There were no Weapons found. Your game must have Weapons to work properly.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                    //Quit the application because their data was not loaded properly, the game will not work properly.
+                    Environment.Exit(0);
+                }
+
             }
             catch (Exception ex)
             {
@@ -853,7 +938,7 @@ namespace CustomCastleCrawler
                 MessageBox.Show("There was a problem loading your Weapons, ensure your data is formatted properly.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                 //Quit the application because their data was not loaded properly, the game will not work properly.
-                Application.Exit();
+                Environment.Exit(0);
             }
 
             try
@@ -873,6 +958,14 @@ namespace CustomCastleCrawler
                         }).ToList();
                 Armors = armors;
 
+                //There was no armor, because this is integral to gameplay even without combat (starting class initialization) inform the user and force quit the game.
+                if (!Armors.Any())
+                {
+                    MessageBox.Show("There was no Armor found. Your game must have Armor to work properly.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                    //Quit the application because their data was not loaded properly, the game will not work properly.
+                    Environment.Exit(0);
+                }
             }
             catch (Exception ex)
             {
@@ -880,7 +973,7 @@ namespace CustomCastleCrawler
                 MessageBox.Show("There was a problem loading your Armor, ensure your data is formatted properly.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                 //Quit the application because their data was not loaded properly, the game will not work properly.
-                Application.Exit();
+                Environment.Exit(0);
             }
 
             try
@@ -896,6 +989,14 @@ namespace CustomCastleCrawler
                         Description = (string)elem.Element("Description")
                     }).ToList();
                 Items = items;
+
+                //There were no score items, but because they are not integral to gameplay simply add a default item to ensure the game will function.
+                if (!Items.Any())
+                {
+                    MessageBox.Show("There were no Score Items found. Adding a default score item.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                    Items.Add(new Item());
+                }
             }
             catch (Exception ex)
             {
@@ -903,7 +1004,7 @@ namespace CustomCastleCrawler
                 MessageBox.Show("There was a problem loading your Score Items, ensure your data is formatted properly.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                 //Quit the application because their data was not loaded properly, the game will not work properly.
-                Application.Exit();
+                Environment.Exit(0);
             }
         }
 
@@ -932,6 +1033,12 @@ namespace CustomCastleCrawler
                             SpawnZone = (int)elem.Element("SpawnZone")
                         }).ToList();
                 Enemies = enemies;
+
+                //There were no enemies, but because you could make a game without enemies do not force close the game, simply inform the user.
+                if (!Enemies.Any())
+                {
+                    MessageBox.Show("There were no Enemies found, if this was not intended you should close the game and check your data.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
             }
             catch (Exception ex)
             {
@@ -939,7 +1046,7 @@ namespace CustomCastleCrawler
                 MessageBox.Show("There was a problem loading your Enemies, ensure your data is formatted properly.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                 //Quit the application because their data was not loaded properly, the game will not work properly.
-                Application.Exit();
+                Environment.Exit(0);
             }
 }
 
@@ -1265,11 +1372,6 @@ namespace CustomCastleCrawler
                     //If the user followed setup instructions correctly, there should only ever be one Event for each EventID
                     if(!eventQuery.Any())
                     {
-                        if(!Events.Any())
-                        {
-                            MessageBox.Show("Error: No Events found. Quitting game.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            Application.Exit();
-                        }
                         MessageBox.Show(string.Format("No matching EventID found for ({0},{1}). EventID: {2}{3}Choosing random event.", currentTile.X, currentTile.Y, currentTile.EventID, Environment.NewLine), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         SaveProgress("");
                     }
@@ -1311,7 +1413,7 @@ namespace CustomCastleCrawler
                                 //If there are no enemies period then inform the user they shouldn't have an event spawn an enemy and just return the message.
                                 if (!Enemies.Any())
                                 {
-                                    MessageBox.Show(string.Format("EventID: {0) is spawning an enemy but your game has no enemies.", currentEvent.EventID), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    MessageBox.Show(string.Format("EventID: {0} is spawning an enemy but your game has no enemies.", currentEvent.EventID), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                     return returnString.ToString();
                                 }
                                 //Inform the user here were no enemies with the matching SpawnZone.
@@ -1445,7 +1547,7 @@ namespace CustomCastleCrawler
                         return new Weapon();
                     }
                 default:
-                    //Should never reach this point...
+                    //Should never reach this point, but if it does then return a default weapon.
                     return new Weapon();
             }
         }
@@ -1504,7 +1606,7 @@ namespace CustomCastleCrawler
                         return new Armor();
                     }
                 default:
-                    //Should never reach this point...
+                    //Should never reach this point, but if it does return a default armor.
                     return new Armor();
             }
         }
@@ -1518,21 +1620,32 @@ namespace CustomCastleCrawler
 
             Item item = Items.ElementAt(index);
             //Add item value to the player's score
+            if(item.Value < 1)
+            {
+                item.Value = 0;
+            }
             Player.Score += item.Value;
 
             //tell the player what they found.
             //Check if the item's name starts with a vowel so that you can use a or an properly
             if (item.Name.Substring(0, 1) == "a" || item.Name.Substring(0, 1) == "e" || item.Name.Substring(0, 1) == "i" || item.Name.Substring(0, 1) == "o" || item.Name.Substring(0, 1) == "u")
             {
-                returnString.AppendLine(string.Format("You have found an {0}", item.Name));
+                returnString.AppendLine(string.Format("You have found an {0}.", item.Name));
             }
             else
             {
-                returnString.AppendLine(string.Format("You have found a {0}", item.Name));
+                returnString.AppendLine(string.Format("You have found a {0}.", item.Name));
             }
 
             returnString.AppendLine(item.Description);
-            returnString.AppendLine(item.Value + " points have been added to your score.");
+            if (item.Value > 1 || item.Value == 0)
+            {
+                returnString.AppendLine(item.Value + " points have been added to your score.");
+            }
+            else
+            {
+                returnString.AppendLine(item.Value + " point have been added to your score.");
+            }
 
             return returnString.ToString();
         }
@@ -1540,117 +1653,129 @@ namespace CustomCastleCrawler
         //function to initiate a round of combat with the current enemy.
         public string BattleEnemy(string action)
         {
-            //Stringbuilder to return
-            var returnString = new StringBuilder();
-
-            //Get Data for player and enemy: Attack Ratings, Defense Ratings, Evasion.
-
-            //enemy data
-            int enemyBaseDamage = CurrentEnemy.Damage;
-            int enemyAPDamage = CurrentEnemy.ApDamage;
-
-            //Turn values into doubles for multiplication
-            double enemyPhysicalDef = CurrentEnemy.Defence / 100;
-
-            int enemyDodgeChance = CurrentEnemy.Evasion;
-
-            //player data
-            int playerBaseDamage = Player.Weapon.BDamage;
-            int playerAPDamage = Player.Weapon.APDamage;
-
-            //Turn values into doubles for multiplication
-            double playerDefence = Player.Armor.ArmorVal / 100;
-
-            int playerEvasion = Player.GetEvasion();
-
-            int playerDamageTaken = 0;
-            int enemyDamageTaken = 0;
-
-            //Boolean to store whether or not this attack was a block.
-            bool playerBlocking = false;
-
-            if (action == "block")
+            try
             {
-                //Player is blocking, so they take half damage the attack and regen some stamina.
-                playerBlocking = true;
-                enemyBaseDamage /= 2;
-                enemyAPDamage /= 2;
-                returnString.AppendLine("You have blocked the enemy's attack, you will take half damage and regain some stamina.");
-                Player.RegenStamina(20);
-            }
-            else
-            {
-                if(!Player.PerformAction(10))
+                //Stringbuilder to return
+                var returnString = new StringBuilder();
+
+                //Get Data for player and enemy: Attack Ratings, Defense Ratings, Evasion.
+
+                //enemy data
+                int enemyBaseDamage = CurrentEnemy.Damage;
+                int enemyAPDamage = CurrentEnemy.ApDamage;
+
+                //Turn values into doubles for multiplication
+                double enemyPhysicalDef = CurrentEnemy.Defence / 100;
+
+                int enemyDodgeChance = CurrentEnemy.Evasion;
+
+                //player data
+                int playerBaseDamage = Player.Weapon.BDamage;
+                int playerAPDamage = Player.Weapon.APDamage;
+
+                //Turn values into doubles for multiplication
+                double playerDefence = Player.Armor.ArmorVal / 100;
+
+                int playerEvasion = Player.GetEvasion();
+
+                int playerDamageTaken = 0;
+                int enemyDamageTaken = 0;
+
+                //Boolean to store whether or not this attack was a block.
+                bool playerBlocking = false;
+
+                if (action == "block")
                 {
-                    returnString.AppendLine("You do not have enough stamina to attack. Block to regen some stamina.");
-
-                    //return pipe separated value to populate controls.
-                    return Player.GetHealthAndStamina() + "|" + CurrentEnemy.GetHealth() + "|" + returnString.ToString();
-                }
-            }
-            
-            //Calculate damage enemy deals
-            playerDamageTaken += (enemyBaseDamage - Convert.ToInt32(Math.Ceiling((enemyBaseDamage * playerDefence))));
-            playerDamageTaken += enemyAPDamage;
-
-
-            //Calculate damage player deals
-            enemyDamageTaken += (playerBaseDamage - Convert.ToInt32(Math.Ceiling((playerBaseDamage * enemyPhysicalDef))));
-            enemyDamageTaken += playerAPDamage;
-
-
-            if (playerEvasion > RandomGen.rollDie(100))
-            {
-                //The player dodged the attack
-                returnString.AppendLine("You dodged the " + CurrentEnemy.Name + "'s attack!");
-            }
-            else
-            {
-                //Check if player died
-                int playerHealthLeft = Player.Injure(playerDamageTaken);
-                if (playerHealthLeft < 1)
-                {
-                    PlayerDied = true;
-                    //EXIT GAME
-                }
-                
-            }
-
-            //Do not perform any enemy dodge checks or damaging if the player was blocking.
-            if (!playerBlocking)
-            {
-                if (enemyDodgeChance > RandomGen.rollDie(100))
-                {
-                    returnString.AppendLine("The " + CurrentEnemy.Name + " has dodged your attack!");
+                    //Player is blocking, so they take half damage the attack and regen some stamina.
+                    playerBlocking = true;
+                    enemyBaseDamage /= 2;
+                    enemyAPDamage /= 2;
+                    returnString.AppendLine("You have blocked the enemy's attack, you will take half damage and regain some stamina.");
+                    Player.RegenStamina(20);
                 }
                 else
                 {
-                    //Check if enemy died
-                    int enemyHP = 0;
-                    enemyHP = CurrentEnemy.Injure(enemyDamageTaken);
-                    //if the enemy has less than 1 HP, they are dead.
-                    if (!(enemyHP < 1))
+                    if (!Player.PerformAction(10))
                     {
-                        returnString.AppendLine("You have traded blows with the enemy.");
-                        returnString.AppendLine("The enemy remains with " + enemyHP + " health.");
+                        returnString.AppendLine("You do not have enough stamina to attack. Block to regen some stamina.");
+
+                        //return pipe separated value to populate controls.
+                        return Player.GetHealthAndStamina() + "|" + CurrentEnemy.GetHealth() + "|" + returnString.ToString();
+                    }
+                }
+
+                //Calculate damage enemy deals
+                playerDamageTaken += (enemyBaseDamage - Convert.ToInt32(Math.Ceiling((enemyBaseDamage * playerDefence))));
+                playerDamageTaken += enemyAPDamage;
+
+
+                //Calculate damage player deals
+                enemyDamageTaken += (playerBaseDamage - Convert.ToInt32(Math.Ceiling((playerBaseDamage * enemyPhysicalDef))));
+                enemyDamageTaken += playerAPDamage;
+
+
+                if (playerEvasion > RandomGen.rollDie(100))
+                {
+                    //The player dodged the attack
+                    returnString.AppendLine("You dodged the " + CurrentEnemy.Name + "'s attack!");
+                }
+                else
+                {
+                    //Check if player died
+                    int playerHealthLeft = Player.Injure(playerDamageTaken);
+                    if (playerHealthLeft < 1)
+                    {
+                        PlayerDied = true;
+                        //EXIT GAME
+                    }
+
+                }
+
+                //Do not perform any enemy dodge checks or damaging if the player was blocking.
+                if (!playerBlocking)
+                {
+                    if (enemyDodgeChance > RandomGen.rollDie(100))
+                    {
+                        returnString.AppendLine("The " + CurrentEnemy.Name + " has dodged your attack!");
                     }
                     else
                     {
-                        //Add to player's score and kill count
-                        Player.Score += CurrentEnemy.Score;
-                        Player.EnemiesKilled++;
+                        //Check if enemy died
+                        int enemyHP = 0;
+                        enemyHP = CurrentEnemy.Injure(enemyDamageTaken);
+                        //if the enemy has less than 1 HP, they are dead.
+                        if (!(enemyHP < 1))
+                        {
+                            returnString.AppendLine("You have traded blows with the enemy.");
+                            returnString.AppendLine("The enemy remains with " + enemyHP + " health.");
+                        }
+                        else
+                        {
+                            //Add to player's score and kill count
+                            Player.Score += CurrentEnemy.Score;
+                            Player.EnemiesKilled++;
 
-                        //Set temp data for population on main screen. 
-                        TempMiscData = "You have defeated the " + CurrentEnemy.Name + ", " + CurrentEnemy.Score + " was added to your kill score." + Environment.NewLine;
-                        ActiveEnemy = false;
+                            //Set temp data for population on main screen. 
+                            TempMiscData = "You have defeated the " + CurrentEnemy.Name + ", " + CurrentEnemy.Score + " was added to your kill score." + Environment.NewLine;
+                            ActiveEnemy = false;
+
+                            //Regen half of the player's stamina outside of combat
+                            Player.RegenStamina(GameConfigurations.PlayerMaxStamina / 2);
+                        }
                     }
                 }
+
+                //Regen 5 stam per turn.
+                Player.RegenStamina(5);
+
+                return Player.GetHealthAndStamina() + "|" + CurrentEnemy.GetHealth() + "|" + returnString.ToString();
             }
-
-            //Regen 5 stam per turn.
-            Player.RegenStamina(5);
-
-            return Player.GetHealthAndStamina() + "|"  + CurrentEnemy.GetHealth() + "|" + returnString.ToString();
+            catch(Exception ex)
+            {
+                LogError(ex, "BattleEnemy()");
+                SaveProgress("Notes lost during crash");
+                return Player.GetHealthAndStamina() + "|" + CurrentEnemy.GetHealth() + "|" + "Error occured during combat, saving game. Please restart the game.";
+            }
         }
 
         //function to find a weapon based on its name
@@ -1699,7 +1824,7 @@ namespace CustomCastleCrawler
             returnString.AppendLine("DMG: " + currentWeapon.BDamage + "    APDMG: " + currentWeapon.APDamage);
 
             //Whitespace is important too
-            returnString.AppendLine(System.Environment.NewLine);
+            returnString.AppendLine(Environment.NewLine);
 
             //Armor
             returnString.AppendLine("Armor");
@@ -1718,11 +1843,13 @@ namespace CustomCastleCrawler
             var returnString = new StringBuilder();
 
             returnString.AppendLine(PlayerName);
-            returnString.AppendLine(System.Environment.NewLine);
+            returnString.AppendLine(Environment.NewLine);
+
             //Add player's gear
             returnString.AppendLine("Final Weapon: " + Player.Weapon.Name + " Rarity " + Player.Weapon.Rarity);
             returnString.AppendLine("Final Armor: " + Player.Armor.Name + " Rarity " + Player.Armor.Rarity);
-            returnString.AppendLine(System.Environment.NewLine);
+            returnString.AppendLine(Environment.NewLine);
+
             //Add player's combat statistics
             returnString.AppendLine("Turns Survived: " + TurnCount);
             returnString.AppendLine("Enemies Defeated: " + Player.EnemiesKilled);
@@ -1755,52 +1882,61 @@ namespace CustomCastleCrawler
         //Function to attempt escaping from combat and return the results.
         public string EscapeAttempt()
         {
-            var returnString = new StringBuilder();
-
-            //Get player's evasion to factor into escape chance.
-            decimal playerEvasion = Player.GetEvasion();
-
-            //Player's evasion factors into escape chance on a factor of 0.5 with a base 50% chance to escape. 
-            //If player has negative evasion (meaning they never evade attacks), this will lower their overall escape change.
-            //If player has 50 evasion (meaning they evade half of all attacks), they will have a 75% chance to evade.
-            //If player has -50 evasion, they will have a 25% chance to evade.
-            var escapeChance = 50 - Math.Ceiling(playerEvasion / 2);
-
-            if (playerEvasion > RandomGen.rollDie(100))
+            try
             {
-                //The player dodged the attack
-                returnString.AppendLine("You escaped the enemy!");
-                
-                //Check if the enemy's name starts with a vowel so that you can use a or an properly
-                if (CurrentEnemy.Name.Substring(0, 1) == "a" || CurrentEnemy.Name.Substring(0, 1) == "e" || CurrentEnemy.Name.Substring(0, 1) == "i" || CurrentEnemy.Name.Substring(0, 1) == "o" || CurrentEnemy.Name.Substring(0, 1) == "u")
+                var returnString = new StringBuilder();
+
+                //Get player's evasion to factor into escape chance.
+                decimal playerEvasion = Player.GetEvasion();
+
+                //Player's evasion factors into escape chance on a factor of 0.5 with a base 50% chance to escape. 
+                //If player has negative evasion (meaning they never evade attacks), this will lower their overall escape change.
+                //If player has 50 evasion (meaning they evade half of all attacks), they will have a 75% chance to evade.
+                //If player has -50 evasion, they will have a 25% chance to evade.
+                var escapeChance = 50 - Math.Ceiling(playerEvasion / 2);
+
+                if (playerEvasion > RandomGen.rollDie(100))
                 {
-                    TempMiscData = "You have encountered an " + CurrentEnemy.Name + " and successfully escaped." + Environment.NewLine + Environment.NewLine;
+                    //The player dodged the attack
+                    returnString.AppendLine("You escaped the enemy!");
+
+                    //Check if the enemy's name starts with a vowel so that you can use a or an properly
+                    if (CurrentEnemy.Name.Substring(0, 1) == "a" || CurrentEnemy.Name.Substring(0, 1) == "e" || CurrentEnemy.Name.Substring(0, 1) == "i" || CurrentEnemy.Name.Substring(0, 1) == "o" || CurrentEnemy.Name.Substring(0, 1) == "u")
+                    {
+                        TempMiscData = "You have encountered an " + CurrentEnemy.Name + " and successfully escaped." + Environment.NewLine + Environment.NewLine;
+                    }
+                    else
+                    {
+                        TempMiscData = "You have encountered a " + CurrentEnemy.Name + " and successfully escaped." + Environment.NewLine + Environment.NewLine;
+                    }
+
+                    //You escaped correctly, there is no longer an active enemy.
+                    ActiveEnemy = false;
                 }
                 else
                 {
-                    TempMiscData = "You have encountered a " + CurrentEnemy.Name + " and successfully escaped." + Environment.NewLine + Environment.NewLine;
+                    returnString.AppendLine("You failed to escape the enemy!");
+                    //If player failed to dodge, then they took damage.
+                    var playerDamageTaken = (CurrentEnemy.Damage - Convert.ToInt32(Math.Ceiling((decimal)(CurrentEnemy.Damage * (Player.Armor.ArmorVal / 100)))));
+                    playerDamageTaken += CurrentEnemy.ApDamage;
+
+                    //Check if player died
+                    int playerHealthLeft = Player.Injure(playerDamageTaken);
+                    if (playerHealthLeft < 1)
+                    {
+                        PlayerDied = true;
+                        //EXIT GAME
+                    }
                 }
-                
-                //You escaped correctly, there is no longer an active enemy.
-                ActiveEnemy = false;
+
+                return Player.GetHealthAndStamina() + "|" + CurrentEnemy.GetHealth() + "|" + returnString.ToString();
             }
-            else
+
+            catch (Exception ex)
             {
-                returnString.AppendLine("You failed to escape the enemy!");
-                //If player failed to dodge, then they took damage.
-                var playerDamageTaken = (CurrentEnemy.Damage - Convert.ToInt32(Math.Ceiling((decimal)(CurrentEnemy.Damage * (Player.Armor.ArmorVal / 100)))));
-                playerDamageTaken += CurrentEnemy.ApDamage;
-
-                //Check if player died
-                int playerHealthLeft = Player.Injure(playerDamageTaken);
-                if (playerHealthLeft < 1)
-                {
-                    PlayerDied = true;
-                    //EXIT GAME
-                }
+                LogError(ex, "BattleEnemy()");
+                return Player.GetHealthAndStamina() + "|" + CurrentEnemy.GetHealth() + "|" + "There was an error while attmpting to escape. You may continue to play, but escape attempts may fail.";
             }
-
-            return Player.GetHealthAndStamina() + "|" + CurrentEnemy.GetHealth() + "|" + returnString.ToString();
         }
 
         //Function to return the player's current weapon.
@@ -1821,7 +1957,8 @@ namespace CustomCastleCrawler
             return Player.GetHealthAndStamina();
         }
 
-        public void LogError(Exception exception, string function, bool xmlError = false)
+        //Function to log errors found in the application. Logs differently depending on what type of error.
+        private void LogError(Exception exception, string function, bool xmlError = false)
         {
             //Ensure log file directory exists.
             System.IO.Directory.CreateDirectory("LogFiles/");

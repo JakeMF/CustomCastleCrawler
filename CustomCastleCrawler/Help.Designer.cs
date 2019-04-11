@@ -185,7 +185,7 @@
             this.lblAStam.Font = new System.Drawing.Font("Britannic Bold", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblAStam.Location = new System.Drawing.Point(73, 95);
             this.lblAStam.Name = "lblAStam";
-            this.lblAStam.Size = new System.Drawing.Size(638, 160);
+            this.lblAStam.Size = new System.Drawing.Size(638, 176);
             this.lblAStam.TabIndex = 29;
             this.lblAStam.Text = resources.GetString("lblAStam.Text");
             this.lblAStam.TextAlign = System.Drawing.ContentAlignment.TopCenter;
