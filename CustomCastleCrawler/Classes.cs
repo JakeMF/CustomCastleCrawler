@@ -1234,7 +1234,7 @@ namespace CustomCastleCrawler
             }
             else
             {
-                MessageBox.Show("ERROR: Unknown Input. | Method: EvaluateInput | Line: 1105", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("ERROR: Unknown Input. | Method: EvaluateInput", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                 returnString.AppendLine("Error Evaluating Input. Please restart application.");
             }
@@ -1263,6 +1263,16 @@ namespace CustomCastleCrawler
                     //LINQ Query to grab the current event.
                     var eventQuery = from eve in Events where eve.EventID == currentTile.EventID select eve;
                     //If the user followed setup instructions correctly, there should only ever be one Event for each EventID
+                    if(!eventQuery.Any())
+                    {
+                        if(!Events.Any())
+                        {
+                            MessageBox.Show("Error: No Events found. Quitting game.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            Application.Exit();
+                        }
+                        MessageBox.Show(string.Format("No matching EventID found for ({0},{1}). EventID: {2}{3}Choosing random event.", currentTile.X, currentTile.Y, currentTile.EventID, Environment.NewLine), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        SaveProgress("");
+                    }
                     Event currentEvent = eventQuery.First();
 
                     //The EventID -1 is used to mark an unpassable location.
@@ -1298,8 +1308,19 @@ namespace CustomCastleCrawler
                             }
                             else
                             {
-                                MessageBox.Show(string.Format("Enemy generation failed, no enemies in spawn zone. {0}Current Tile: ({1},{2}) EventID: {3} EnemySpawnZone: {4}{5}Ensure there is at least one enemy with a matching SpawnZone",
-                                    Environment.NewLine, Coordinates.X, Coordinates.Y, currentEvent.EventID, currentEvent.EnemySpawnZone, Environment.NewLine), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                //If there are no enemies period then inform the user they shouldn't have an event spawn an enemy and just return the message.
+                                if (!Enemies.Any())
+                                {
+                                    MessageBox.Show(string.Format("EventID: {0) is spawning an enemy but your game has no enemies.", currentEvent.EventID), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    return returnString.ToString();
+                                }
+                                //Inform the user here were no enemies with the matching SpawnZone.
+                                MessageBox.Show(string.Format("Enemy generation failed, no enemies in spawn zone. {0}Current Tile: ({1},{2}) EventID: {3} EnemySpawnZone: {4}{5}Ensure there is at least one enemy with a matching SpawnZone." +
+                                    "{6}Generating random enemy.", Environment.NewLine, Coordinates.X, Coordinates.Y, currentEvent.EventID, currentEvent.EnemySpawnZone, Environment.NewLine, Environment.NewLine), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                
+
+                                //There were no enemies with the matching SpawnZone so pick a random enemy.
+                                CurrentEnemy = new Enemy(Enemies[RandomGen.rollDie(Enemies.Count - 1)]);
                             }
 
                             returnString.AppendLine(CurrentEnemy.Name + " has attacked you!");
@@ -1501,7 +1522,7 @@ namespace CustomCastleCrawler
 
             //tell the player what they found.
             //Check if the item's name starts with a vowel so that you can use a or an properly
-            if (item.Name.Substring(1, 1) == "a" || item.Name.Substring(1, 1) == "e" || item.Name.Substring(1, 1) == "i" || item.Name.Substring(1, 1) == "o" || item.Name.Substring(1, 1) == "u")
+            if (item.Name.Substring(0, 1) == "a" || item.Name.Substring(0, 1) == "e" || item.Name.Substring(0, 1) == "i" || item.Name.Substring(0, 1) == "o" || item.Name.Substring(0, 1) == "u")
             {
                 returnString.AppendLine(string.Format("You have found an {0}", item.Name));
             }
@@ -1751,7 +1772,7 @@ namespace CustomCastleCrawler
                 returnString.AppendLine("You escaped the enemy!");
                 
                 //Check if the enemy's name starts with a vowel so that you can use a or an properly
-                if (CurrentEnemy.Name.Substring(1, 1) == "a" || CurrentEnemy.Name.Substring(1, 1) == "e" || CurrentEnemy.Name.Substring(1, 1) == "i" || CurrentEnemy.Name.Substring(1, 1) == "o" || CurrentEnemy.Name.Substring(1, 1) == "u")
+                if (CurrentEnemy.Name.Substring(0, 1) == "a" || CurrentEnemy.Name.Substring(0, 1) == "e" || CurrentEnemy.Name.Substring(0, 1) == "i" || CurrentEnemy.Name.Substring(0, 1) == "o" || CurrentEnemy.Name.Substring(0, 1) == "u")
                 {
                     TempMiscData = "You have encountered an " + CurrentEnemy.Name + " and successfully escaped." + Environment.NewLine + Environment.NewLine;
                 }

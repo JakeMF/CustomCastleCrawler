@@ -1,49 +1,49 @@
 <Settings>
 	<StartingPosition>
-		<DefaultX>1</DefaultX>				
-		<DefaultY>7</DefaultY>
+		<DefaultX>5</DefaultX>
+		<DefaultY>4</DefaultY>
 	</StartingPosition>
 	<BalanceSettings>
 		<BaseMaxHeals>5</BaseMaxHeals>				<!--This is the number of maximum number of heals you start with, if there are 'RestLocation' events you may refill your heals.-->
-		<Debug>true</Debug>							<!--This is used to help you when testing your application, if this is set to "true" your current coordinate will be printed along with your tile's message.-->
+		<Debug>false</Debug>							<!--This is used to help you when testing your application, if this is set to "true" your current coordinate will be printed along with your tile's message.-->
 													<!--If it is set to "false" the game will play normally-->
 		<PlayerMaxHealth>1200</PlayerMaxHealth>		<!--This determines the player's maximum health.-->
 		<PlayerMaxStamina>100</PlayerMaxStamina>	<!--This determines the player's maximum stamina.-->
 	</BalanceSettings>
 	<MapSize>
-		<XMax>13</XMax>
-		<YMax>20</YMax>
+		<XMax>10</XMax>
+		<YMax>10</YMax>
 	</MapSize>
 	<FlavorSettings>
-		<GameName>The adventure</GameName>	
-		<GameFlavorText>You can use the four arrows to move North, South, East, and West. You may encounter enemies, find treasure, or discover secrets. If you encounter an enemy, you will be taken into another menu for the combat phase. Explore, fight, and gain power; it is all that will keep you alive.</GameFlavorText>
+		<GameName>Oolacile Adventures</GameName>
+		<!--The game automatically adds 'Welcome to [Game Name] [Player Name].-->
+		<GameFlavorText>You may encounter enemies, find treasure, or discover secrets. If you encounter an enemy, you will be taken into another menu for the combat phase. Explore, fight, and gain power; it is all that will keep you alive.</GameFlavorText>
 	</FlavorSettings>
-	
 	<!--There MUST BE 4 classes here, additional classes will be ignored. Having less than 4 classes will cause the game to be unplayable.-->
 	<Classes>
 		<Class>
-			<Name>Explorer</Name>
-			<Armor>Cape</Armor>
-			<Weapon>Staff</Weapon>
-			<ClassDescription>A nomad type of class</ClassDescription>
+			<Name>Soldier</Name>
+			<Armor>Hard Leather Armor</Armor>
+			<Weapon>Longsword</Weapon>
+			<ClassDescription>A light melee focused class. Dodges easily, but does little damage.</ClassDescription>
 		</Class>
 		<Class>
 			<Name>Knight</Name>
-			<Armor>ChainMail</Armor>
-			<Weapon>Longsword</Weapon>
-			<ClassDescription>A soilder for the king</ClassDescription>
+			<Armor>Silver Knight Armor</Armor>
+			<Weapon>Claymore</Weapon>
+			<ClassDescription>A medium melee focused class. Dodges with difficulty, but does good damage.</ClassDescription>
 		</Class>
 		<Class>
-			   <Name>Mystic</Name>
-			<Armor>Cloak</Armor>
-			<Weapon>Staff</Weapon>
-			<ClassDescription>Searchering for enlightenment</ClassDescription>
+			<Name>Archer</Name>
+			<Armor>Leather Armor</Armor>
+			<Weapon>Longbow</Weapon>
+			<ClassDescription>An archery focused class. Dodges extremely easily, but does very little damage.</ClassDescription>
 		</Class>
 		<Class>
-			<Name>Begger</Name>
-			<Armor>Cape</Armor>
-			<Weapon>Crossbow</Weapon>
-			<ClassDescription>A bagabond in serch of riches</ClassDescription>
+			<Name>Giant</Name>
+			<Armor>Giant Armor</Armor>
+			<Weapon>Great Club</Weapon>
+			<ClassDescription>A very heavy melee focused class. Almost never dodges, but does lots of damage.</ClassDescription>
 		</Class>
 	</Classes>
 </Settings>

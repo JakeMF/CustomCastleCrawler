@@ -25,6 +25,9 @@ namespace CustomCastleCrawler
             this.MainGame = MainGame;
             this.NewWeapon = NewWeapon;
 
+            //Set the window's title to the game name.
+            this.Text = MainGame.GameConfigurations.GameName;
+
             //This is a Weapon swap, show weapon controls.
             pnlArmor.Visible = false;
             pnlWeapon.Visible = true;
@@ -57,6 +60,9 @@ namespace CustomCastleCrawler
 
             this.MainGame = MainGame;
             this.NewArmor = NewArmor;
+
+            //Set the window's title to the game name.
+            this.Text = MainGame.GameConfigurations.GameName;
 
             //This is an armor swap, show armor controls.
             pnlWeapon.Visible = false;

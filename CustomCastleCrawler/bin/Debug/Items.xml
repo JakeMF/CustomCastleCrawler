@@ -1,112 +1,176 @@
 <Items>
-    <Armor>
-		<Name>Cloak</Name>
-		<ScoreValue>25</ScoreValue>
-		<ArmorVal>0</ArmorVal>
-		<Evasion>100</Evasion>
-		<Rarity>3</Rarity>
-		<Description>This cloke is said to be sewn from magical thread and have the power to escape a invaders.</Description>
-	</Armor>
-	<Armor>
-		<Name>KnightsArmor</Name>
-		<ScoreValue>50</ScoreValue>
-		<ArmorVal>50</ArmorVal>
-		<Evasion>10</Evasion>
-		<Rarity>3</Rarity>
-		<Description>Forged from a secret guild using unknown alloys.</Description>
-	</Armor>
 	<Weapon>
-		<Name>Crossbow</Name>
-		<ScoreValue>75</ScoreValue>
-		<BaseDMG>100</BaseDMG>
-		<APDMG>75</APDMG>
-		<Evasion>25</Evasion>
-		<Rarity>2</Rarity>
-		<Description>A simple bow.</Description>
+		<Name>Thief's Dagger</Name>
+		<ScoreValue>5</ScoreValue>
+		<BaseDMG>0</BaseDMG>
+		<APDMG>80</APDMG>
+		<Evasion>20</Evasion>
+		<Rarity>1</Rarity>
+		<Description>This traditional long sword may not be fancy, but it gets the job done.</Description>
 	</Weapon>
 	<Weapon>
-		<Name>staff</Name>
-		<ScoreValue>100</ScoreValue>
-		<BaseDMG>75</BaseDMG>
-		<APDMG>25</APDMG>
-		<Evasion>25</Evasion>
-		<Rarity>2</Rarity>
-		<Description>It is said a great lightening storm sheared branches from the Tree Of Life. These branches were widdled by monks into staffs.</Description>
+		<Name>Dagger</Name>
+		<ScoreValue>5</ScoreValue>
+		<BaseDMG>40</BaseDMG>
+		<APDMG>40</APDMG>
+		<Evasion>20</Evasion>
+		<Rarity>1</Rarity>
+		<Description>This traditional long sword may not be fancy, but it gets the job done.</Description>
+	</Weapon>
+	<Weapon>
+		<Name>Shortsword</Name>
+		<ScoreValue>5</ScoreValue>
+		<BaseDMG>50</BaseDMG>
+		<APDMG>20</APDMG>
+		<Evasion>0</Evasion>
+		<Rarity>1</Rarity>
+		<Description>This short sword may not be very strong, but it gets the job done if you work hard enough.</Description>
 	</Weapon>
 	<Weapon>
 		<Name>Longsword</Name>
-		<ScoreValue>25</ScoreValue>
-		<BaseDMG>25</BaseDMG>
-		<APDMG>25</APDMG>
-		<Evasion>0</Evasion>
-		<Rarity>1</Rarity>
-		<Description>One of a cash of weapons taken after a seige.</Description>
-	</Weapon>
-	<Armor>
-		<Name>Cape</Name>
 		<ScoreValue>5</ScoreValue>
-		<ArmorVal>0</ArmorVal>
+		<BaseDMG>60</BaseDMG>
+		<APDMG>20</APDMG>
 		<Evasion>0</Evasion>
 		<Rarity>1</Rarity>
-		<Description>Just encough to keep warm on a cold night.</Description>
-	</Armor>
-	<Armor>
-		<Name>ChainMail</Name>
-		<ScoreValue>25</ScoreValue>
-		<ArmorVal>50</ArmorVal>
-		<Evasion>10</Evasion>
-		<Rarity>2</Rarity>
-		<Description> This armor is heavy and makes it difficult to escape your enemy.</Description>
-	</Armor>
+		<Description>This traditional long sword may not be fancy, but it gets the job done.</Description>
+	</Weapon>
 	<Weapon>
-		<Name>Saber</Name>
-		<ScoreValue>50</ScoreValue>
-		<BaseDMG>70</BaseDMG>
+		<Name>Claymore</Name>
+		<ScoreValue>18</ScoreValue>
+		<BaseDMG>100</BaseDMG>
+		<APDMG>20</APDMG>
+		<Evasion>0</Evasion>
+		<Rarity>2</Rarity>
+		<Description>This large sword can be weilded with one or two hands easily, a balanced and good weapon.</Description>
+	</Weapon>
+	<Weapon>
+		<Name>Enchanted Claymore</Name>
+		<ScoreValue>18</ScoreValue>
+		<BaseDMG>100</BaseDMG>
 		<APDMG>40</APDMG>
-		<Evasion>10</Evasion>
+		<Evasion>0</Evasion>
 		<Rarity>2</Rarity>
-		<Description>A rare find this weapon does maximum damage</Description>
+		<Description>This large sword can be weilded with one or two hands easily, a balanced and good weapon. This Claymore was blessed by a maiden.</Description>
 	</Weapon>
 	<Weapon>
-		<Name>Mace</Name>
-		<ScoreValue>75</ScoreValue>
-		<BaseDMG>75</BaseDMG>
-		<APDMG>50</APDMG>
+		<Name>Shortbow</Name>
+		<ScoreValue>10</ScoreValue>
+		<BaseDMG>00</BaseDMG>
+		<APDMG>60</APDMG>
+		<Evasion>35</Evasion>
+		<Rarity>1</Rarity>
+		<Description>This short ranged bow does somewhat low damage, but is excellent for agile combat.</Description>
+	</Weapon>
+	<Weapon>
+		<Name>Longbow</Name>
+		<ScoreValue>15</ScoreValue>
+		<BaseDMG>00</BaseDMG>
+		<APDMG>80</APDMG>
 		<Evasion>25</Evasion>
+		<Rarity>2</Rarity>
+		<Description>This long ranged bow does good damage and helps keep you at a safe distance.</Description>
+	</Weapon>
+	<Weapon>
+		<Name>Great Club</Name>
+		<ScoreValue>20</ScoreValue>
+		<BaseDMG>80</BaseDMG>
+		<APDMG>80</APDMG>
+		<Evasion>-10</Evasion>
 		<Rarity>3</Rarity>
-		<Description>A crude weapon with a hanndle made of wood wrapped in leather, the heavy head has percing spikes.</Description>
+		<Description>Legends say a giant uprooted a tree and widdled a handle into it to create this massive club.</Description>
+	</Weapon>
+	<Weapon>
+		<Name>Large Club</Name>
+		<ScoreValue>25</ScoreValue>
+		<BaseDMG>80</BaseDMG>
+		<APDMG>60</APDMG>
+		<Evasion>-5</Evasion>
+		<Rarity>3</Rarity>
+		<Description>Legends say a giant uprooted a tree and widdled a handle into it to create this massive club.</Description>
 	</Weapon>
 	<Armor>
-		<Name>LeatherArmor</Name>
-		<ScoreValue>20</ScoreValue>
-		<ArmorVal>25</ArmorVal>
+		<Name>Enchanted Robe</Name>
+		<ScoreValue>3</ScoreValue>
+		<ArmorVal>5</ArmorVal>
 		<Evasion>20</Evasion>
+		<Rarity>3</Rarity>
+		<Description>These cloth scraps barely cover your flesh, but they allow for extreme evasion.</Description>
+	</Armor>
+	<Armor>
+		<Name>Master's Garb</Name>
+		<ScoreValue>3</ScoreValue>
+		<ArmorVal>0</ArmorVal>
+		<Evasion>20</Evasion>
+		<Rarity>2</Rarity>
+		<Description>These cloth scraps barely cover your flesh, but they allow for extreme evasion.</Description>
+	</Armor>
+	<Armor>
+		<Name>Leather Armor</Name>
+		<ScoreValue>3</ScoreValue>
+		<ArmorVal>2</ArmorVal>
+		<Evasion>10</Evasion>
 		<Rarity>1</Rarity>
-		<Description>Sewn together fron the animals you have hunted over the years. Serves two protection from the elements and in battle.</Description>
+		<Description>This armor is flimsy and provides little protection, but leaves your movement unhindered.</Description>
+	</Armor>
+	<Armor>
+		<Name>Hard Leather Armor</Name>
+		<ScoreValue>5</ScoreValue>
+		<ArmorVal>5</ArmorVal>
+		<Evasion>5</Evasion>
+		<Rarity>1</Rarity>
+		<Description>This is more sturdy than traditional leather, but restricts movement somewhat.</Description>
+	</Armor>
+	<Armor>
+		<Name>Chainmail Armor</Name>
+		<ScoreValue>10</ScoreValue>
+		<ArmorVal>10</ArmorVal>
+		<Evasion>0</Evasion>
+		<Rarity>2</Rarity>
+		<Description>Armor worn by an accomplished knight, somewhat heavy and restrictive, but provides good protection.</Description>
+	</Armor>
+	<Armor>
+		<Name>Silver Knight Armor</Name>
+		<ScoreValue>10</ScoreValue>
+		<ArmorVal>15</ArmorVal>
+		<Evasion>-10</Evasion>
+		<Rarity>2</Rarity>
+		<Description>Armor worn by an accomplished knight, somewhat heavy and restrictive, but provides good protection.</Description>
+	</Armor>
+	<Armor>
+		<Name>Giant Armor</Name>
+		<ScoreValue>15</ScoreValue>
+		<ArmorVal>25</ArmorVal>
+		<Evasion>-20</Evasion>
+		<Rarity>2</Rarity>
+		<Description>Armor worn by a massive giant, this is extremely heavy and immobilizing, but provides spectacular protection.</Description>
+	</Armor>
+	<Armor>
+		<Name>Havel's Armor</Name>
+		<ScoreValue>15</ScoreValue>
+		<ArmorVal>50</ArmorVal>
+		<Evasion>-50</Evasion>
+		<Rarity>3</Rarity>
+		<Description>Armor worn by Havel the Rock, a knight of unmatched strength and resolve. This armor is almost unbearably heavy, but it provides unparalleled protection.</Description>
 	</Armor>
 	<Item>
-		<Name>Silver</Name>			
-		<ScoreValue>2</ScoreValue>			
-		<Description>pieces of silver.</Description>
+		<Name>Silver Spoon</Name>
+		<ScoreValue>2</ScoreValue>
+		<Description>A spoon made of silver, worth some gold pieces.</Description>
 	</Item>
 	<Item>
-		<Name>Jems</Name>			
-		<ScoreValue>4</ScoreValue>			
-		<Description>A leather pouch filled with rubies</Description>
+		<Name>Silver Goblet</Name>
+		<ScoreValue>3</ScoreValue>
+		<Description>A goblet made of silver, worth some gold pieces.</Description>
 	</Item>
 	<Item>
-		<Name>Gold </Name>			
-		<ScoreValue>3</ScoreValue>			
-		<Description>You found a gold nugget.</Description>
+		<Name>Gold Bracelet</Name>
+		<ScoreValue>8</ScoreValue>
+		<Description>A bracelet made of gold, worth some gold pieces.</Description>
 	</Item>
 	<Item>
-		<Name>Treasure chest</Name>			
-		<ScoreValue>0</ScoreValue>			
-		<Description>It was empty</Description>
-	</Item>
-	<Item>
-		<Name>Treasure chest</Name>			
-		<ScoreValue>2</ScoreValue>			
-		<Description>Contained some old jewelery.</Description>
+		<Name>Gold Goblet</Name>
+		<ScoreValue>5</ScoreValue>
+		<Description>A goblet made of gold, worth some gold pieces.</Description>
 	</Item>
 </Items>

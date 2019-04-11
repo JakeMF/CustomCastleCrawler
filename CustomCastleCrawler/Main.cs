@@ -263,7 +263,7 @@ namespace CustomCastleCrawler
 
                     //Clear textbox and output final statistics.
                     txtMainOutput.Clear();
-                    if (MainGame.CurrentEnemy.Name.Substring(1, 1) == "a" || MainGame.CurrentEnemy.Name.Substring(1, 1) == "e" || MainGame.CurrentEnemy.Name.Substring(1, 1) == "i" || MainGame.CurrentEnemy.Name.Substring(1, 1) == "o" || MainGame.CurrentEnemy.Name.Substring(1, 1) == "u")
+                    if (MainGame.CurrentEnemy.Name.Substring(0, 1) == "a" || MainGame.CurrentEnemy.Name.Substring(0, 1) == "e" || MainGame.CurrentEnemy.Name.Substring(0, 1) == "i" || MainGame.CurrentEnemy.Name.Substring(0, 1) == "o" || MainGame.CurrentEnemy.Name.Substring(0, 1) == "u")
                     {
                         popTextbox("You have been defeated by an " + MainGame.CurrentEnemy.Name + " your run is now over." + Environment.NewLine + MainGame.GenerateStatistics() + Environment.NewLine + "You may quit the game using the Menu -> Exit option, or by clicking the 'X' in the top right hand corner." + Environment.NewLine);
                     }

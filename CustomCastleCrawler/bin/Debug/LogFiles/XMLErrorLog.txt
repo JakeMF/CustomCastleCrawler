@@ -10,3 +10,15 @@ Input string was not in a correct format.
    at CustomCastleCrawler.MainGame.PopulateMap() in C:\Users\jacob\Documents\GitHub\CustomCastleCrawler\CustomCastleCrawler\Classes.cs:line 767
 
 
+4/10/2019 9:36:00 PM - Oolacile Adventures error at: PopulateMap()
+'<' is an unexpected token. The expected token is '>'. Line 260, position 2.
+   at System.Xml.XmlTextReaderImpl.Throw(Exception e)
+   at System.Xml.XmlTextReaderImpl.ParseEndElement()
+   at System.Xml.XmlTextReaderImpl.ParseElementContent()
+   at System.Xml.Linq.XContainer.ReadContentFrom(XmlReader r)
+   at System.Xml.Linq.XContainer.ReadContentFrom(XmlReader r, LoadOptions o)
+   at System.Xml.Linq.XDocument.Load(XmlReader reader, LoadOptions options)
+   at System.Xml.Linq.XDocument.Load(String uri, LoadOptions options)
+   at CustomCastleCrawler.MainGame.PopulateMap() in C:\Users\Jake\Documents\GitHub\CustomCastleCrawler\CustomCastleCrawler\Classes.cs:line 762
+
+

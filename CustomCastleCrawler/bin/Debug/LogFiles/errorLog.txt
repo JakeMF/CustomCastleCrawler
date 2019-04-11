@@ -3,3 +3,20 @@ Object reference not set to an instance of an object.
    at CustomCastleCrawler.MainGame.GenMessage() in C:\Users\jacob\Documents\GitHub\CustomCastleCrawler\CustomCastleCrawler\Classes.cs:line 1261
 
 
+4/10/2019 4:25:41 PM - The adventure error at: GenMessage()
+Sequence contains no elements
+   at System.Linq.Enumerable.First[TSource](IEnumerable`1 source)
+   at CustomCastleCrawler.MainGame.GenMessage() in C:\Users\Jake\Documents\GitHub\CustomCastleCrawler\CustomCastleCrawler\Classes.cs:line 1266
+
+
+4/10/2019 4:40:50 PM - The adventure error at: GenMessage()
+Sequence contains no elements
+   at System.Linq.Enumerable.First[TSource](IEnumerable`1 source)
+   at CustomCastleCrawler.MainGame.GenMessage() in C:\Users\Jake\Documents\GitHub\CustomCastleCrawler\CustomCastleCrawler\Classes.cs:line 1266
+
+
+4/10/2019 4:58:31 PM - The adventure error at: GenMessage()
+Index was outside the bounds of the array.
+   at CustomCastleCrawler.MainGame.GenMessage() in C:\Users\Jake\Documents\GitHub\CustomCastleCrawler\CustomCastleCrawler\Classes.cs:line 1250
+
+
